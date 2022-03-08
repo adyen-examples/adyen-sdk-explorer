@@ -1,0 +1,6 @@
+MVP:
+1. Configuration of component - Version, Drop-in, Card, etc...
+2. Configuration of intial call (session, paymentMethods)
+3. Payment Method configuration JSON object passthrough
+4. CSS override box
+5. "API Explorer" box - API Call and component configuration
