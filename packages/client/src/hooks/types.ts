@@ -1,13 +1,5 @@
 import { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
 
-export interface PaymentMethodsRequest {
-  merchantAccount: string;
-  amount: PaymentAmount;
-  channel: string;
-  countryCode: string;
-  shopperLocale: string;
-}
-
 export type InitializationRequest = {
   merchantAccount: string;
   amount: PaymentAmount;
