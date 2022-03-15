@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../store';
+
 import type { ConfigurationState } from '../types';
 
 const initialState: ConfigurationState = {
@@ -24,7 +24,5 @@ export const configurationSlice = createSlice({
 });
 
 export const { updateConfigurationInfo, clearConfigurationInfo } = configurationSlice.actions;
-
-export const selectConfigurationState = (state: RootState) => state.configuration;
 
 export default configurationSlice.reducer;

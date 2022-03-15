@@ -1,4 +1,5 @@
-import { selectUserState } from './reducers/user';
-import { selectConfigurationState } from './reducers/configuration';
+import type { RootState } from '../store';
 
-export default { selectUserState, selectConfigurationState };
+export const selectUserState = (state: RootState) => state.user;
+
+export const selectConfigurationState = (state: RootState) => state.configuration;
