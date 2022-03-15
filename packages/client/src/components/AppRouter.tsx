@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { PaymentsFormProps } from '../types';
+import { PaymentsFormProps } from './types';
 import { PaymentsForm, ComponentBase } from '.';
 
 const ApplicationRouter = ({ options, onSubmit, onChange }: PaymentsFormProps) => {
