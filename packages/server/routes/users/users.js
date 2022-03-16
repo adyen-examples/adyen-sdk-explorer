@@ -1,6 +1,6 @@
 const express = require('express');
 const { jwtAuth } = require('../auth');
-const { runValidation } = require('../helpers/users');
+const { runUserValidation } = require('../helpers');
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.get('/:id', jwtAuth, async (req, res) => {
       });
     }
 
-    const { username, adyenKey, merchantAccounts, configurations } = user.apiRepr();
+    const { username, adyenKey, merchantAccounts, configurations } = existingUser.apiRepr();
     res.status(201).send({
       username,
       adyenKey: adyenKey.substr(adyenKey.length - 5),
@@ -32,7 +32,7 @@ router.get('/:id', jwtAuth, async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const invalidEntry = await runValidation(req.body);
+    const invalidEntry = await runUserValidation(req.body);
     if (invalidEntry) {
       return res.status(422).json({
         code: 422,
@@ -42,18 +42,15 @@ router.post('/', async (req, res) => {
       });
     }
 
-    const { username, password } = req.body;
-
+    const { username, password, email } = req.body;
     const hashedPassword = await User.hashPassword(password);
 
-    const createdUser = await User.create({ username, password: hashedPassword });
-    const { id, adyenKey, merchantAccounts, configurations } = createdUser.apiRepr();
-    return res.send(200).json({
+    const createdUser = await User.create({ username, password: hashedPassword, email });
+    const { id } = createdUser.apiRepr();
+    return res.status(200).json({
       id,
       username,
-      adyenKey: adyenKey.substr(adyenKey.length - 5),
-      merchantAccounts,
-      configurations
+      email
     });
   } catch (err) {
     console.error('USER CREATION ERROR', err);
@@ -78,7 +75,7 @@ router.put('/:id', jwtAuth, async (req, res) => {
     });
 
     const { adyenKey, merchantAccounts } = await User.findOneAndUpdate({ _id: req.params.id }, { $set: toUpdate }, { new: true }).exec();
-    res.send(200).json({ adyenKey: adyenKey.substr(adyenKey.length - 5), merchantAccounts });
+    res.status(200).json({ adyenKey: adyenKey.substr(adyenKey.length - 5), merchantAccounts });
   } catch (err) {
     console.error('USER UPDATE ERROR', err);
     res.status(500).json({ message: 'Internal server error' });

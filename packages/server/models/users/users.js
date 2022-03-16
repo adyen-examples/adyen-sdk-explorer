@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+require('mongoose-type-email');
 
 mongoose.Promise = global.Promise;
 
@@ -13,26 +14,37 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  email: {
+    type: mongoose.SchemaTypes.Email,
+    required: true
+  },
   adyenKey: { type: String, required: false },
   merchantAccounts: [{ type: String, required: false }],
   configurations: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.SchemaTypes.ObjectId,
       ref: 'Configuration',
       required: false
     }
   ]
 });
 
-UserSchema.methods.apiRepr = () => ({
-  id: this._id,
-  username: this.username || '',
-  adyenKey: this.adyenKey || null,
-  merchantAccounts: this.merchantAccounts || [],
-  configurations: this.configurations || []
-});
+// arrow functions not possible here, since they close over lexically enclosing context (i.e: this remains this)
 
-UserSchema.methods.validatePassword = password => bcrypt.compare(password, this.password);
+UserSchema.methods.apiRepr = function () {
+  return {
+    id: this._id,
+    username: this.username || '',
+    email: this.email || '',
+    adyenKey: this.adyenKey || null,
+    merchantAccounts: this.merchantAccounts || [],
+    configurations: this.configurations || []
+  };
+};
+
+UserSchema.methods.validatePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 UserSchema.statics.hashPassword = password => bcrypt.hash(password, 10);
 

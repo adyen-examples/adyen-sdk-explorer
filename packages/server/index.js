@@ -1,12 +1,13 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
+const passport = require('passport');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const { dbConnect, mongoOptions } = require('./db-mongoose');
-const { PORT, DATABASE_URL, TEST_DATABASE_URL } = require('./config');
-const { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter } = require('./routes');
+const { PORT, DATABASE_URL } = require('./config');
+const { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } = require('./routes');
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,9 @@ app.use(express.static(root));
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root });
 });
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
