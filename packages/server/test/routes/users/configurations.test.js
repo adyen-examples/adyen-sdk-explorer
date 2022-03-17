@@ -22,8 +22,6 @@ const tearDownDb = () => {
 describe('Configurations API', () => {
   const configFields = ['id', 'owner', 'name', 'version', 'configuration'];
 
-  let authToken, userId;
-
   before(() => {
     return runServer(TEST_DATABASE_URL);
   });
@@ -44,7 +42,7 @@ describe('Configurations API', () => {
   });
 
   it('Should reject request for config with wrong auth token', async () => {
-    const { mockConfig } = await createMockConfigurations();
+    const { mockConfig, userId } = await createMockConfigurations();
     let agent = chai.request.agent(app);
     return agent
       .get(`/configurations/${userId}/${mockConfig.body.id}`)
