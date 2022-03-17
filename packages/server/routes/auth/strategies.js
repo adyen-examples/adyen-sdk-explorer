@@ -1,38 +1,36 @@
 const { Strategy: LocalStrategy } = require('passport-local');
-
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
 const { User } = require('../../models');
 const { JWT_SECRET } = require('../../config');
 
-const localStrategy = new LocalStrategy((username, password, callback) => {
-  let user;
-  User.findOne({ username: username })
-    .then(_user => {
-      user = _user;
-      if (!user) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password'
-        });
-      }
-      return user.validatePassword(password);
-    })
-    .then(isValid => {
-      if (!isValid) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password'
-        });
-      }
-      return callback(null, user);
-    })
-    .catch(err => {
-      if (err.reason === 'LoginError') {
-        return callback(null, false, err);
-      }
-      return callback(err, false);
-    });
+const localStrategy = new LocalStrategy(async (username, password, callback) => {
+  try {
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return Promise.reject({
+        reason: 'LoginError',
+        message: 'Incorrect username or password'
+      });
+    }
+
+    const isValid = await user.validatePassword(password);
+
+    if (!isValid) {
+      return Promise.reject({
+        reason: 'LoginError',
+        message: 'Incorrect username or password'
+      });
+    }
+
+    return callback(null, user);
+  } catch (err) {
+    if (err.reason === 'LoginError') {
+      return callback(null, false, err);
+    }
+    return callback(err, false);
+  }
 });
 
 const jwtStrategy = new JwtStrategy(

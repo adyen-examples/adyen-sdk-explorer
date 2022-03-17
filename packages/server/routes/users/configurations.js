@@ -1,13 +1,13 @@
 const express = require('express');
 
-const { jwtAuth } = require('../auth');
+const { jwtAuth, isAuthorizedForAction } = require('../auth');
 const { User, Configuration } = require('../../models');
 
 const router = express.Router();
 
-router.get('/user/:userId', jwtAuth, async (req, res) => {
+router.get('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
   try {
-    const existingUser = await User.find({ _id: owner });
+    const existingUser = await User.find({ _id: req.params.userId });
     if (!existingUser || !existingUser.length) {
       return res.status(422).json({
         code: 422,
@@ -34,9 +34,8 @@ router.get('/user/:userId', jwtAuth, async (req, res) => {
   }
 });
 
-router.get('/:id', jwtAuth, async (req, res) => {
+router.get('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req, res) => {
   try {
-    console.log('SEARCHING FOR', req.params.id);
     const existingConfiguration = await Configuration.find({ _id: req.params.id });
     if (!existingConfiguration || !existingConfiguration.length) {
       return res.status(404).json({
@@ -47,23 +46,14 @@ router.get('/:id', jwtAuth, async (req, res) => {
       });
     }
 
-    console.log('EXISTING CONFIG', existingConfiguration);
-
-    const { id, owner, name, version, configuration } = existingConfiguration.apiRepr();
-    res.status(201).json({
-      id,
-      owner,
-      name,
-      version,
-      configuration
-    });
+    res.status(201).json(existingConfiguration[0].apiRepr());
   } catch (err) {
     console.error('ERROR GETTING CONFIGURATION', err);
     res.status(500).json({ code: 500, message: 'Internal server error' });
   }
 });
 
-router.post('/', jwtAuth, async (req, res) => {
+router.post('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
   try {
     const { owner, name, version, configuration } = req.body;
 
@@ -85,7 +75,7 @@ router.post('/', jwtAuth, async (req, res) => {
   }
 });
 
-router.put('/:id', jwtAuth, async (req, res) => {
+router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req, res) => {
   if (!(req.params.id === req.body.id)) {
     const message = `Request patch id (${req.params.id} and request body id (${req.body.id}) must match)`;
     console.error(message);

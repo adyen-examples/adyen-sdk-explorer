@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
 
 const root = path.join(__dirname, '../client', 'build');
 app.use(express.static(root));
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile('index.html', { root });
 });
 
@@ -59,7 +59,7 @@ const closeServer = () => {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
       console.log('Closing server');
-      server.close(err => {
+      return server.close(err => {
         if (err) {
           return reject(err);
         }

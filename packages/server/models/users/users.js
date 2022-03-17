@@ -22,7 +22,7 @@ const UserSchema = mongoose.Schema({
   merchantAccounts: [{ type: String, required: false }],
   configurations: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Configuration',
       required: false
     }

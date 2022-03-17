@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
 const { TEST_DATABASE_URL } = require('../../../config');
 const { app, runServer, closeServer } = require('../../../index');
-const { testUserData, testConfigData } = require('../../structures').userTestData;
+const { testUserData, testConfigData, wrongAuthToken } = require('../../structures').userTestData;
 
 const assert = chai.assert;
 
@@ -19,41 +19,36 @@ const tearDownDb = () => {
   });
 };
 
-describe('payments', () => {
+const createMockUser = () => {
+  return chai
+    .request(app)
+    .post('/users/')
+    .send(testUserData)
+    .then(res => res.body.id)
+    .catch(err => console.log(err));
+};
+
+const logUserIn = () => {
+  return chai
+    .request(app)
+    .post('/auth/login')
+    .send({ username: testUserData.username, password: testUserData.password })
+    .then(res => res.body.authToken)
+    .catch(err => console.log(err));
+};
+
+describe.only('payments', async done => {
   const configFields = ['id', 'owner', 'name', 'version', 'configuration'];
-  let authToken;
 
-  const createMockUser = () => {
-    console.info('creating mock user');
-    return chai
-      .request(app)
-      .post('/users/')
-      .send(testUserData)
-      .then(res => res.body.id)
-      .catch(err => console.log(err));
-  };
-
-  const logUserIn = () => {
-    console.info('logging in');
-    return chai
-      .request(app)
-      .post('/auth/login')
-      .send({ username: testUserData.username, password: testUserData.password })
-      .then(res => {
-        authToken = res.body.authToken;
-        return authToken;
-      })
-      .catch(err => console.log(err));
-  };
+  let authToken, userId;
 
   const createMockConfigurations = async () => {
-    console.info('creating mock configurations');
-    const owner = await createMockUser();
-    await logUserIn();
-    testConfigData.owner = owner;
+    userId = await createMockUser();
+    authToken = await logUserIn();
+    testConfigData.owner = userId;
     return chai
       .request(app)
-      .post('/configurations/')
+      .post(`/configurations/${userId}`)
       .set('Authorization', `Bearer ${authToken}`)
       .send(testConfigData)
       .then(res => res)
@@ -79,19 +74,31 @@ describe('payments', () => {
     assert.equal(hasKeys, true);
   });
 
-  it.only('Should send back a configuration by id', async () => {
+  it('Should reject request for config with wrong auth token', async () => {
     const mockConfig = await createMockConfigurations();
     let agent = chai.request.agent(app);
     return agent
-      .get(`/configurations/${mockConfig.body.id}`)
+      .get(`/configurations/${userId}/${mockConfig.body.id}`)
+      .set('Authorization', `Bearer ${wrongAuthToken}`)
+      .then(res => {
+        assert.equal(res.status, 401);
+        return res;
+      });
+  });
+
+  it('Should send back a configuration by id', async () => {
+    const mockConfig = await createMockConfigurations();
+    let agent = chai.request.agent(app);
+    return agent
+      .get(`/configurations/${userId}/${mockConfig.body.id}`)
       .set('Authorization', `Bearer ${authToken}`)
       .then(res => {
         const hasKeys = configFields.reduce((acc, x) => acc && res.body.hasOwnProperty(x));
-        console.log(res.body);
         assert.equal(typeof res.body, 'object', 'failed res body');
         assert.equal(res.body.id, mockConfig.body.id, 'failed id check');
         assert.equal(hasKeys, true, 'failed key compare');
         return res;
       });
   });
+  done();
 });
