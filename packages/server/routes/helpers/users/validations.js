@@ -37,9 +37,9 @@ const checkSizedFields = reqBody => {
     : checkForExistingUser(reqBody);
 };
 
-const checkPasswordForInvalidChars = ({ password }) => {
+const checkPasswordForInvalidChars = reqBody => {
   const invalidChars = /[ ]/g;
-  return invalidChars.test(password)
+  return invalidChars.test(reqBody.password)
     ? {
         message: 'Password contains invalid characters',
         location: 'Password'
@@ -47,25 +47,24 @@ const checkPasswordForInvalidChars = ({ password }) => {
     : checkSizedFields(reqBody);
 };
 
-const checkUsernameForInvalidChars = ({ username }) => {
+const checkUsernameForInvalidChars = reqBody => {
   const invalidChars = /[^A-Za-z0-9]+/g;
-  return invalidChars.test(username)
+  return invalidChars.test(reqBody.username)
     ? {
         message: 'Username can only contain numbers and letters',
-        location: username
+        location: reqBody.username
       }
     : checkPasswordForInvalidChars(reqBody);
 };
 
 const checkFieldTypes = reqBody => {
-  const stringFields = ['username', 'password', 'adyenKey', 'merchantAccount'];
+  const stringFields = ['username', 'password'];
   const nonStringField = stringFields.find(field => field in reqBody && typeof reqBody[field] !== 'string');
-  const nonStringMerchantAccount = reqBody.merchantAccount.find(field => typeof field !== 'string');
 
-  return nonStringField || nonStringMerchantAccount
+  return nonStringField
     ? {
         message: 'Incorrect field type: expected string',
-        location: nonStringField || nonStringMerchantAccount
+        location: nonStringField
       }
     : checkUsernameForInvalidChars(reqBody);
 };
