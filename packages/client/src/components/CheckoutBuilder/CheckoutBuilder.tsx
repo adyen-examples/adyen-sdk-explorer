@@ -37,6 +37,7 @@ const getStepContent = (step: number) => {
 
 const theme = createTheme();
 
+// Every step component should update the state of the checkout builder and pass it down
 const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: PaymentsFormProps) => {
   // unused props
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
