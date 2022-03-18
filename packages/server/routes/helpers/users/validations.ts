@@ -1,4 +1,5 @@
-const { User } = require('../../../models');
+import isEmail from 'validator/lib/isEmail';
+import { User } from '../../../models';
 
 const checkForExistingUser = async ({ username }) => {
   try {
@@ -37,6 +38,15 @@ const checkSizedFields = reqBody => {
     : checkForExistingUser(reqBody);
 };
 
+const checkEmail = reqBody => {
+  return isEmail(reqBody.email)
+    ? checkSizedFields(reqBody)
+    : {
+        message: 'Invalid Email address',
+        location: 'reqBody.email'
+      };
+};
+
 const checkPasswordForInvalidChars = reqBody => {
   const invalidChars = /[ ]/g;
   return invalidChars.test(reqBody.password)
@@ -44,7 +54,7 @@ const checkPasswordForInvalidChars = reqBody => {
         message: 'Password contains invalid characters',
         location: 'Password'
       }
-    : checkSizedFields(reqBody);
+    : checkEmail(reqBody);
 };
 
 const checkUsernameForInvalidChars = reqBody => {
@@ -58,7 +68,7 @@ const checkUsernameForInvalidChars = reqBody => {
 };
 
 const checkFieldTypes = reqBody => {
-  const stringFields = ['username', 'password'];
+  const stringFields = ['username', 'password', 'email'];
   const nonStringField = stringFields.find(field => field in reqBody && typeof reqBody[field] !== 'string');
 
   return nonStringField
@@ -70,7 +80,7 @@ const checkFieldTypes = reqBody => {
 };
 
 const checkRequiredFields = reqBody => {
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['username', 'password', 'email'];
   const missingField = requiredFields.find(field => !(field in reqBody));
 
   return missingField
@@ -81,6 +91,4 @@ const checkRequiredFields = reqBody => {
     : checkFieldTypes(reqBody);
 };
 
-const runUserValidation = reqBody => checkRequiredFields(reqBody);
-
-module.exports = { runUserValidation };
+export const runUserValidation = reqBody => checkRequiredFields(reqBody);

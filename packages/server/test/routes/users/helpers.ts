@@ -1,11 +1,11 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const { app } = require('../../../index');
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import { app } from '../../../index';
 const { testUserData, testConfigData } = require('../../structures').userTestData;
 
 chai.use(chaiHttp);
 
-const createMockUser = () => {
+export const createMockUser = (): any => {
   return chai
     .request(app)
     .post('/users')
@@ -14,7 +14,7 @@ const createMockUser = () => {
     .catch(err => console.log(err));
 };
 
-const logUserIn = () => {
+export const logUserIn = (): any => {
   return chai
     .request(app)
     .post('/auth/login')
@@ -23,7 +23,7 @@ const logUserIn = () => {
     .catch(err => console.log(err));
 };
 
-const createMockConfigurations = async () => {
+export const createMockConfigurations = async (): Promise<any> => {
   const user = await createMockUser();
   const authToken = await logUserIn();
   const userId = user.body.id;
@@ -36,5 +36,3 @@ const createMockConfigurations = async () => {
     .then(res => ({ mockConfig: res, authToken, userId }))
     .catch(err => console.log(err));
 };
-
-module.exports = { logUserIn, createMockUser, createMockConfigurations };

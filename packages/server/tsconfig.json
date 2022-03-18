@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "types": ["mocha"],
+    "target": "es6",
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

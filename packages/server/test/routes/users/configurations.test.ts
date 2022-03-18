@@ -1,10 +1,10 @@
-const chai = require('chai');
-const mongoose = require('mongoose');
-const chaiHttp = require('chai-http');
+import chai from 'chai';
+import mongoose from 'mongoose';
+import chaiHttp from 'chai-http';
 const { wrongAuthToken } = require('../../structures').userTestData;
-const { TEST_DATABASE_URL } = require('../../../config');
-const { createMockConfigurations } = require('./helpers');
-const { app, runServer, closeServer } = require('../../../index');
+import { TEST_DATABASE_URL } from '../../../config';
+import { createMockConfigurations } from './helpers';
+import { app, runServer, closeServer } from '../../../index';
 
 const assert = chai.assert;
 
@@ -37,8 +37,8 @@ describe('Configurations API', () => {
   it('Should create a configuration on POST', async () => {
     const { mockConfig } = await createMockConfigurations();
     const hasKeys = configFields.reduce((acc, x) => acc && mockConfig.body.hasOwnProperty(x));
-    assert.equal(mockConfig.status, 200);
-    assert.equal(hasKeys, true);
+    assert.equal(mockConfig.status, 200, 'failed status check');
+    assert.isTrue(hasKeys, 'failed key compare');
   });
 
   it('Should reject request for config with wrong auth token', async () => {
@@ -48,7 +48,7 @@ describe('Configurations API', () => {
       .get(`/configurations/${userId}/${mockConfig.body.id}`)
       .set('Authorization', `Bearer ${wrongAuthToken}`)
       .then(res => {
-        assert.equal(res.status, 401);
+        assert.equal(res.status, 401, 'failed status check');
         return res;
       });
   });
@@ -61,10 +61,10 @@ describe('Configurations API', () => {
       .set('Authorization', `Bearer ${authToken}`)
       .then(res => {
         const hasKeys = configFields.reduce((acc, x) => acc && res.body.hasOwnProperty(x));
-        assert.equal(res.status, 201);
+        assert.equal(res.status, 201, 'failed status check');
         assert.equal(typeof res.body, 'object', 'failed res body');
         assert.equal(res.body.id, mockConfig.body.id, 'failed id check');
-        assert.equal(hasKeys, true, 'failed key compare');
+        assert.isTrue(hasKeys, 'failed key compare');
         return res;
       });
   });
