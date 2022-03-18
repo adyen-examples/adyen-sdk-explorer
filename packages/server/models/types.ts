@@ -7,8 +7,8 @@ export interface UserDocument extends Document {
   password: string;
   email: string;
   adyenKey?: string;
-  merchantAccounts?: [string];
-  configurations?: [Types.ObjectId];
+  merchantAccounts?: string[];
+  configurations?: Types.ObjectId[];
 }
 
 export interface ConfigurationDocument extends Document {

@@ -4,15 +4,15 @@ import request from 'request-promise';
 import { errorHandler } from '../helpers';
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
 
-import type { InitializationRequest } from './types';
-import { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
+import type { InitializationRequest, RequestOptions } from './types';
+import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
 
 const router = Router();
 
 router.post('/sessionStart', async (req, res) => {
   const { version, apiKey, payload }: InitializationRequest = req.body;
   try {
-    const options = {
+    const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/${version}/sessions`,
       headers: {
         'Content-type': 'application/json',
