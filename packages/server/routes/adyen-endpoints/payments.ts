@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import request from 'request-promise';
 import { errorHandler } from '../helpers';
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
@@ -8,7 +8,7 @@ import type { PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/type
 
 const router = Router();
 
-router.post('/getPaymentMethods', async (req, res) => {
+router.post('/getPaymentMethods', async (req: Request, res: Response) => {
   const { version, apiKey, payload }: InitializationRequest = req.body;
   try {
     const options: RequestOptions = {
@@ -23,12 +23,12 @@ router.post('/getPaymentMethods', async (req, res) => {
 
     const response: PaymentMethodsResponseInterface = await request(options);
     res.send(201).json(response);
-  } catch (err) {
+  } catch (err: any) {
     errorHandler('/getPaymentMethods', 500, err.message, res);
   }
 });
 
-router.post('/makePayment', async (req, res) => {
+router.post('/makePayment', async (req: Request, res: Response) => {
   const { version, apiKey, payload } = req.body;
   try {
     const options: RequestOptions = {
@@ -43,12 +43,12 @@ router.post('/makePayment', async (req, res) => {
 
     const response = await request(options);
     res.send(201).json(response);
-  } catch (err) {
+  } catch (err: any) {
     errorHandler('/makePayment', 500, err.message, res);
   }
 });
 
-router.post('/additionalDetails', async (req, res) => {
+router.post('/additionalDetails', async (req: Request, res: Response) => {
   const { version, apiKey, payload } = req.body;
   try {
     const options: RequestOptions = {
@@ -63,7 +63,7 @@ router.post('/additionalDetails', async (req, res) => {
 
     const response = await request(options);
     res.send(201).json(response);
-  } catch (err) {
+  } catch (err: any) {
     errorHandler('/additionalDetails', 500, err.message, res);
   }
 });

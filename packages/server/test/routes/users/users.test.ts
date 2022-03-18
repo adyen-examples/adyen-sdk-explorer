@@ -1,14 +1,16 @@
 import chai from 'chai';
 import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
-const { wrongAuthToken } = require('../../structures').userTestData;
+import { userTestData } from '../../structures';
 import { TEST_DATABASE_URL } from '../../../config';
-import { createMockUser, logUserIn } from './helpers';
+import { userHelpers } from '../../helpers';
 import { app, runServer, closeServer } from '../../../index';
 
 const assert = chai.assert;
 
 chai.use(chaiHttp);
+
+const { createMockUser, logUserIn } = userHelpers;
 
 const tearDownDb = () => {
   return new Promise((resolve, reject) => {
@@ -63,7 +65,7 @@ describe('Users API', () => {
     const authToken = await logUserIn();
     const mockPayload = {
       id: mockUser.body.id,
-      adyenKey: wrongAuthToken,
+      adyenKey: userTestData.wrongAuthToken,
       merchantAccounts: ['TestMerchant1', 'TestMerchant2']
     };
 

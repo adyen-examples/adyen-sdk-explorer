@@ -23,6 +23,4 @@ export const configurationSlice = createSlice({
   }
 });
 
-export const { updateConfigurationInfo, clearConfigurationInfo } = configurationSlice.actions;
-
-export default configurationSlice.reducer;
+export const { actions, reducer } = configurationSlice;

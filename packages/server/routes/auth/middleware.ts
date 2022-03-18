@@ -1,5 +1,6 @@
+import { Request, Response, NextFunction } from 'express';
+import { ParamsDictionary } from 'express-serve-static-core';
 import jwt_decode from 'jwt-decode';
-import { Types } from 'mongoose';
 
 type TokenData = {
   user: {
@@ -12,8 +13,16 @@ type TokenData = {
   };
 };
 
-export const isAuthorizedForAction = (req, res, next) => {
-  const userToken: string = req.headers.authorization.split(' ')[1];
+type AuthorizedParams = {
+  userId: string;
+};
+
+interface AuthorizationRequest<T extends ParamsDictionary> extends Request {
+  params: T;
+}
+
+export const isAuthorizedForAction = (req: AuthorizationRequest<AuthorizedParams>, res: Response, next: NextFunction) => {
+  const userToken: string = req.headers.authorization ? req.headers.authorization.split(' ')[1] : '';
   const { userId }: { userId: string } = req.params;
   const tokenData: TokenData = jwt_decode(userToken);
   return tokenData.user._id === userId

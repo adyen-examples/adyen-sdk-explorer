@@ -1,9 +1,10 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { useCheckout } from './checkout/useCheckout';
-import { useInitializeCheckout } from './checkout/useInitializeCheckout';
 import type { RootState, AppDispatch } from '../store';
 
-const useAppDispatch = () => useDispatch<AppDispatch>();
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export type { InitializationRequest, EditableCheckoutConfigFields, CheckoutConfig, PaymentAmount, PaymentMethodsResponseInterface } from './types';
 
-export { useCheckout, useInitializeCheckout, useAppDispatch, useAppSelector };
+export { useCheckout } from './checkout/useCheckout';
+export { useInitializeCheckout } from './checkout/useInitializeCheckout';
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

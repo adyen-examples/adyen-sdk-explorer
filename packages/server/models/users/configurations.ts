@@ -1,10 +1,12 @@
-import { Schema, SchemaTypes, model } from 'mongoose';
+import { Schema, SchemaTypes, Model, model } from 'mongoose';
 
 import { ConfigurationDocument } from '../types';
 
 export interface Configuration extends ConfigurationDocument {
   apiRepr(): ConfigurationDocument;
 }
+
+export interface ConfigurationModel extends Model<Configuration> {}
 
 export const ConfigurationSchema: Schema = new Schema({
   owner: { type: SchemaTypes.ObjectId, ref: 'User', required: true },
@@ -25,6 +27,6 @@ ConfigurationSchema.method('apiRepr', function () {
   };
 });
 
-export const Configuration = model<Configuration>('Configuration', ConfigurationSchema);
+export const Configuration: ConfigurationModel = model<Configuration, ConfigurationModel>('Configuration', ConfigurationSchema);
 
 export default Configuration;

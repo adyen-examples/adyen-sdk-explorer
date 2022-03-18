@@ -1,18 +1,18 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import request from 'request-promise';
 
 import { errorHandler } from '../helpers';
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
 
-import type { InitializationRequest } from './types';
-import { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
+import type { InitializationRequest, RequestOptions } from './types';
+import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
 
 const router = Router();
 
-router.post('/sessionStart', async (req, res) => {
+router.post('/sessionStart', async (req: Request, res: Response) => {
   const { version, apiKey, payload }: InitializationRequest = req.body;
   try {
-    const options = {
+    const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/${version}/sessions`,
       headers: {
         'Content-type': 'application/json',
@@ -24,7 +24,7 @@ router.post('/sessionStart', async (req, res) => {
 
     const response: CheckoutSessionSetupResponse = await request(options);
     res.send(201).json(response);
-  } catch (err) {
+  } catch (err: any) {
     errorHandler('/sessionStart', 500, err.message, res);
   }
 });

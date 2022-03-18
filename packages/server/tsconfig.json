@@ -4,6 +4,7 @@
     "types": ["mocha"],
     "target": "es6",
     "rootDir": "./",
+    "strict": true,
     "esModuleInterop": true,
     "resolveJsonModule": true
   }

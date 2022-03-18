@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { jwtAuth, isAuthorizedForAction } from '../auth';
-import { runUserValidation } from '../helpers';
-
-const router = Router();
 
 import { User } from '../../models';
+import { runUserValidation } from '../helpers';
+
+import { jwtAuth, isAuthorizedForAction } from '../auth';
+
+import type { UserToUpdate } from './types';
+
+const router = Router();
 
 router.post('/', async (req, res) => {
   try {
@@ -69,8 +72,8 @@ router.put('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
   }
 
   try {
-    const toUpdate = {};
-    const updateableFields = ['adyenKey', 'merchantAccounts', 'configurations'];
+    const toUpdate: UserToUpdate = {};
+    const updateableFields = ['adyenKey' as const, 'merchantAccounts' as const, 'configurations' as const];
 
     updateableFields.forEach(field => {
       if (field in req.body) {
@@ -78,13 +81,12 @@ router.put('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
       }
     });
 
-    const { adyenKey, merchantAccounts, configurations } = await User.findOneAndUpdate(
-      { _id: req.body.id },
-      { $set: toUpdate },
-      { new: true }
-    ).exec();
+    const foundUser = await User.findOneAndUpdate({ _id: req.body.id }, { $set: toUpdate }, { new: true }).exec();
 
-    res.status(200).json({ id: req.body.id, adyenKey: adyenKey.substr(adyenKey.length - 5), merchantAccounts, configurations });
+    if (foundUser) {
+      const { adyenKey, merchantAccounts, configurations } = foundUser;
+      res.status(200).json({ id: req.body.id, adyenKey: adyenKey ? adyenKey.substring(adyenKey.length - 5) : '', merchantAccounts, configurations });
+    }
   } catch (err) {
     console.error('USER UPDATE ERROR', err);
     res.status(500).json({ message: 'Internal server error' });

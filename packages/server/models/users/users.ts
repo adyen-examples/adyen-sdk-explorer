@@ -50,11 +50,11 @@ UserSchema.method('apiRepr', function () {
   };
 });
 
-UserSchema.method('validatePassword', function (password: string): boolean {
+UserSchema.method('validatePassword', function (password: string): Promise<boolean> {
   return compare(password, this.password);
 });
 
-UserSchema.static('hashPassword', (password: string): string => hash(password, 10));
+UserSchema.static('hashPassword', (password: string): Promise<string> => hash(password, 10));
 
 export const User: UserModel = model<User, UserModel>('User', UserSchema);
 

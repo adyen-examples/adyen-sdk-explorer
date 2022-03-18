@@ -1,14 +1,16 @@
 import chai from 'chai';
 import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
-const { wrongAuthToken } = require('../../structures').userTestData;
+import { userTestData } from '../../structures';
 import { TEST_DATABASE_URL } from '../../../config';
-import { createMockConfigurations } from './helpers';
+import { userHelpers } from '../../helpers';
 import { app, runServer, closeServer } from '../../../index';
 
 const assert = chai.assert;
 
 chai.use(chaiHttp);
+
+const { createMockConfigurations } = userHelpers;
 
 const tearDownDb = () => {
   return new Promise((resolve, reject) => {
@@ -46,7 +48,7 @@ describe('Configurations API', () => {
     let agent = chai.request.agent(app);
     return agent
       .get(`/configurations/${userId}/${mockConfig.body.id}`)
-      .set('Authorization', `Bearer ${wrongAuthToken}`)
+      .set('Authorization', `Bearer ${userTestData.wrongAuthToken}`)
       .then(res => {
         assert.equal(res.status, 401, 'failed status check');
         return res;
