@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import * as selectors from './selectors';
-import reducers from './reducers';
+export * as actions from './actions';
+export * as selectors from './selectors';
+export { userReducer, configurationReducer } from './reducers';
 
-export { actions, selectors, reducers };
+export type { ConfigurationState, UserState } from './types';

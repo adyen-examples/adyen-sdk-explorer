@@ -1,4 +1,4 @@
-import { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
+import type { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
 
 export type InitializationRequest = {
   merchantAccount: string;
@@ -39,3 +39,5 @@ export interface CheckoutConfig extends EditableCheckoutConfigFields {
   onError?: (error: any, element?: any) => void;
   onPaymentCompleted?: (result: any, element: any) => void;
 }
+
+export { PaymentAmount, PaymentMethodsResponseInterface };
