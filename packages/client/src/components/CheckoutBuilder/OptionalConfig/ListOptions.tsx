@@ -1,5 +1,4 @@
 import Checkbox from '@mui/material/Checkbox';
-import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -24,28 +23,24 @@ const ListOptions = (props: any) => {
     updateEnabledOptions(all);
   };
   return (
-    <React.Fragment>
-      <Typography variant="h6">Global Parameters</Typography>
-      <Divider />
+    <Grid container rowSpacing={2}>
       {options &&
         options.map((g: any, i: any) => (
-          <Grid container spacing={3}>
-            <Grid item xs={11}>
-              <Checkbox
-                checked={enabledOptions.hasOwnProperty(g.name)}
-                onChange={handleToggle(g.name)}
-                inputProps={{ 'aria-label': 'controlled' }}
-                size="small"
-              />
-              <Typography variant="overline">{g.name}</Typography>
-              <Typography variant="subtitle2">{g.description}</Typography>
-              {enabledOptions.hasOwnProperty(g.name) && (
-                <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} defaultValue={''} fullWidth />
-              )}
-            </Grid>
+          <Grid item xs={11}>
+            <Checkbox
+              checked={enabledOptions.hasOwnProperty(g.name)}
+              onChange={handleToggle(g.name)}
+              inputProps={{ 'aria-label': 'controlled' }}
+              size="small"
+            />
+            <Typography variant="overline">{g.name}</Typography>
+            <Typography variant="subtitle2">{g.description}</Typography>
+            {enabledOptions.hasOwnProperty(g.name) && (
+              <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} defaultValue={''} fullWidth />
+            )}
           </Grid>
         ))}
-    </React.Fragment>
+    </Grid>
   );
 };
 
