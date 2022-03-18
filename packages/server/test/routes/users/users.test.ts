@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import { userTestData } from '../../structures';
 import { TEST_DATABASE_URL } from '../../../config';
-import { userHelpers } from '../helpers';
+import { userHelpers } from '../../helpers';
 import { app, runServer, closeServer } from '../../../index';
 
 const assert = chai.assert;
