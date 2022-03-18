@@ -1,14 +1,17 @@
-const express = require('express');
-const request = require('request-promise');
-const { errorHandler } = require('../helpers');
-const { ADYEN_API_KEY, ADYEN_BASE_URL } = require('../../config');
+import { Router } from 'express';
+import request from 'request-promise';
+import { errorHandler } from '../helpers';
+import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
 
-const router = express.Router();
+import type { InitializationRequest, RequestOptions } from './types';
+import type { PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
+
+const router = Router();
 
 router.post('/getPaymentMethods', async (req, res) => {
-  const { version, apiKey, payload } = req.body;
+  const { version, apiKey, payload }: InitializationRequest = req.body;
   try {
-    const options = {
+    const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/${version}/paymentMethods`,
       headers: {
         'Content-type': 'application/json',
@@ -18,7 +21,7 @@ router.post('/getPaymentMethods', async (req, res) => {
       json: true
     };
 
-    const response = await request(options);
+    const response: PaymentMethodsResponseInterface = await request(options);
     res.send(201).json(response);
   } catch (err) {
     errorHandler('/getPaymentMethods', 500, err.message, res);
@@ -28,7 +31,7 @@ router.post('/getPaymentMethods', async (req, res) => {
 router.post('/makePayment', async (req, res) => {
   const { version, apiKey, payload } = req.body;
   try {
-    const options = {
+    const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/${version}/payments`,
       headers: {
         'Content-type': 'application/json',
@@ -48,7 +51,7 @@ router.post('/makePayment', async (req, res) => {
 router.post('/additionalDetails', async (req, res) => {
   const { version, apiKey, payload } = req.body;
   try {
-    const options = {
+    const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/${version}/payments/details`,
       headers: {
         'Content-type': 'application/json',
@@ -65,4 +68,4 @@ router.post('/additionalDetails', async (req, res) => {
   }
 });
 
-module.exports = { router };
+export { router };

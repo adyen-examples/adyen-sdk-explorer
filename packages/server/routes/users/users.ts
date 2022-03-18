@@ -1,10 +1,10 @@
-const express = require('express');
-const { jwtAuth, isAuthorizedForAction } = require('../auth');
-const { runUserValidation } = require('../helpers');
+import { Router } from 'express';
+import { jwtAuth, isAuthorizedForAction } from '../auth';
+import { runUserValidation } from '../helpers';
 
-const router = express.Router();
+const router = Router();
 
-const { User } = require('../../models');
+import { User } from '../../models';
 
 router.post('/', async (req, res) => {
   try {
@@ -91,4 +91,4 @@ router.put('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
   }
 });
 
-module.exports = { router };
+export { router };

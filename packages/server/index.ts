@@ -1,15 +1,15 @@
-require('dotenv').config();
-const path = require('path');
-const express = require('express');
-const passport = require('passport');
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
+import path from 'path';
+import express from 'express';
 
-const { dbConnect, mongoOptions } = require('./db-mongoose');
-const { PORT, DATABASE_URL } = require('./config');
-const { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } = require('./routes');
+import passport from 'passport';
+import mongoose, { ConnectOptions } from 'mongoose';
+import cookieParser from 'cookie-parser';
 
-const app = express();
+import { dbConnect, mongoOptions } from './db-mongoose';
+import { PORT, DATABASE_URL } from './config';
+import { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
+
+export const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
@@ -36,9 +36,9 @@ app.use('/configurations', configurationRouter);
 
 let server;
 
-const runServer = (databaseUrl = DATABASE_URL, port = PORT) => {
-  return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, mongoOptions, err => {
+export const runServer = (databaseUrl = DATABASE_URL, port = PORT) => {
+  return new Promise<void>((resolve, reject) => {
+    mongoose.connect(databaseUrl, mongoOptions as ConnectOptions, err => {
       if (err) {
         return reject(err);
       }
@@ -55,9 +55,9 @@ const runServer = (databaseUrl = DATABASE_URL, port = PORT) => {
   });
 };
 
-const closeServer = () => {
+export const closeServer = () => {
   return mongoose.disconnect().then(() => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       console.log('Closing server');
       return server.close(err => {
         if (err) {
@@ -70,8 +70,6 @@ const closeServer = () => {
 };
 
 if (require.main === module) {
-  dbConnect();
+  dbConnect(DATABASE_URL);
   runServer();
 }
-
-module.exports = { app, runServer, closeServer };

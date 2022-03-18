@@ -1,10 +1,10 @@
-const { Strategy: LocalStrategy } = require('passport-local');
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
-const { User } = require('../../models');
-const { JWT_SECRET } = require('../../config');
+import { User } from '../../models';
+import { JWT_SECRET } from '../../config';
 
-const localStrategy = new LocalStrategy(async (username, password, callback) => {
+export const localStrategy = new LocalStrategy(async (username, password, callback) => {
   try {
     const user = await User.findOne({ username: username });
 
@@ -33,7 +33,7 @@ const localStrategy = new LocalStrategy(async (username, password, callback) => 
   }
 });
 
-const jwtStrategy = new JwtStrategy(
+export const jwtStrategy = new JwtStrategy(
   {
     secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
@@ -43,5 +43,3 @@ const jwtStrategy = new JwtStrategy(
     done(null, payload.user);
   }
 );
-
-module.exports = { localStrategy, jwtStrategy };

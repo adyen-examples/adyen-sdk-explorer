@@ -1,9 +1,9 @@
-const express = require('express');
+import { Router } from 'express';
 
-const { jwtAuth, isAuthorizedForAction } = require('../auth');
-const { User, Configuration } = require('../../models');
+import { jwtAuth, isAuthorizedForAction } from '../auth';
+import { User, Configuration } from '../../models';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
   try {
@@ -13,7 +13,7 @@ router.get('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
         code: 422,
         reason: 'Not found',
         message: 'User does not exist',
-        location: owner
+        location: req.params.userId
       });
     }
 
@@ -23,7 +23,7 @@ router.get('/:userId', jwtAuth, isAuthorizedForAction, async (req, res) => {
         code: 422,
         reason: 'Not found',
         message: 'No related configurations',
-        location: owner
+        location: req.params.userId
       });
     }
 
@@ -91,12 +91,16 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req, res) => {
       }
     });
 
-    const { adyenKey, merchantAccounts } = await Configuration.findOneAndUpdate({ _id: req.params.id }, { $set: toUpdate }, { new: true }).exec();
-    res.send(200).json({ adyenKey: adyenKey.substr(adyenKey.length - 5), merchantAccounts });
+    const { owner, name, version, configuration } = await Configuration.findOneAndUpdate(
+      { _id: req.body.id },
+      { $set: toUpdate },
+      { new: true }
+    ).exec();
+    res.send(200).json({ id: req.body.id, owner, name, version, configuration });
   } catch (err) {
     console.error('CONFIGURATIONS UPDATE ERROR', err);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-module.exports = { router };
+export { router };
