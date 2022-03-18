@@ -7,7 +7,7 @@ export const mongoOptions = {
   useUnifiedTopology: true
 };
 
-export const dbConnect = url => {
+export const dbConnect = (url: string) => {
   return mongoose.connect(url, mongoOptions as ConnectOptions).catch(err => {
     console.error('Mongoose failed to connect');
     console.error(err);

@@ -34,7 +34,7 @@ app.use('/sessions', sessionsRouter);
 app.use('/payments', paymentsRouter);
 app.use('/configurations', configurationRouter);
 
-let server;
+let server: any;
 
 export const runServer = (databaseUrl = DATABASE_URL, port = PORT) => {
   return new Promise<void>((resolve, reject) => {
@@ -59,7 +59,7 @@ export const closeServer = () => {
   return mongoose.disconnect().then(() => {
     return new Promise<void>((resolve, reject) => {
       console.log('Closing server');
-      return server.close(err => {
+      return server.close((err: any) => {
         if (err) {
           return reject(err);
         }

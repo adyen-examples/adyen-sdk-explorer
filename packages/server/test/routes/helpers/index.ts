@@ -1,1 +1,1 @@
-export * as userHelpers from './users';
+export * as userHelpers from './helpers';

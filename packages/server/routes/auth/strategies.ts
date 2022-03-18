@@ -25,7 +25,7 @@ export const localStrategy = new LocalStrategy(async (username, password, callba
     }
 
     return callback(null, user);
-  } catch (err) {
+  } catch (err: any) {
     if (err.reason === 'LoginError') {
       return callback(null, false, err);
     }

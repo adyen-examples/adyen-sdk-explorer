@@ -1,9 +1,11 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { app } from '../../../index';
-const { testUserData, testConfigData } = require('../../structures').userTestData;
+import { userTestData } from '../../structures';
 
 chai.use(chaiHttp);
+
+const { testUserData, testConfigData } = userTestData;
 
 export const createMockUser = (): any => {
   return chai

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import request from 'request-promise';
 
 import { errorHandler } from '../helpers';
@@ -9,7 +9,7 @@ import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/t
 
 const router = Router();
 
-router.post('/sessionStart', async (req, res) => {
+router.post('/sessionStart', async (req: Request, res: Response) => {
   const { version, apiKey, payload }: InitializationRequest = req.body;
   try {
     const options: RequestOptions = {
@@ -24,7 +24,7 @@ router.post('/sessionStart', async (req, res) => {
 
     const response: CheckoutSessionSetupResponse = await request(options);
     res.send(201).json(response);
-  } catch (err) {
+  } catch (err: any) {
     errorHandler('/sessionStart', 500, err.message, res);
   }
 });
