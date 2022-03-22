@@ -10,35 +10,53 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useState, useEffect } from 'react';
+import { CheckoutBuilderProps } from '../../../types';
 
-const ProfileForm = () => {
-  const [values, setValues] = useState({
-    profileName: '',
-    dropin: '',
-    checkout: '',
-    product: ''
-  });
+const myState = {
+  profile: {
+    name: '',
+    product: '',
+    checkout_version: '',
+    dropin_version: '',
+    optionalConfiguration: [
+      {
+        layer: '',
+        enabledConfig: {}
+      }
+    ],
+    apiConfiguration: [
+      {
+        api: '',
+        enabledConfig: {}
+      },
+      {
+        api: '',
+        enabledConfig: {}
+      }
+    ]
+  }
+}
 
-  const { profileName, dropin, checkout, product } = values;
-  //Need to figure out how to combine these two event handlers for typescript
+
+const ProfileForm = (props: CheckoutBuilderProps) => {
+  const {configuration, setConfiguration} = props;
+  const {name, product, checkout_version, dropin_version} = configuration;
+
   const handleChange = (name: string) => (e: SelectChangeEvent) => {
-    setValues({ ...values, [name]: e.target.value });
+    setConfiguration({ ...configuration, [name]: e.target.value });
   };
 
   const handleTextChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [name]: e.target.value });
+    console.log('logging object before setting state',{ ...configuration, [name]: e.target.value });
+    setConfiguration({ ...configuration, [name]: e.target.value });
   };
-
-  React.useEffect(() => {
-    console.log(values);
-  });
 
   return (
     <React.Fragment>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
-            Create Profile
+            Create Configuration Profile
           </Typography>
         </Grid>
         <Grid item xs={12} sx={{ mt: -3 }}>
@@ -47,7 +65,7 @@ const ProfileForm = () => {
             name="profileName"
             label="Profile name"
             variant="standard"
-            onChange={handleTextChange('profileName')}
+            onChange={handleTextChange('name')}
             sx={{ width: '50%' }}
           />
         </Grid>
@@ -81,8 +99,8 @@ const ProfileForm = () => {
             <Select
               labelId="dropin-version-select-label"
               id="dropin-version-select"
-              value={dropin}
-              onChange={handleChange('dropin')}
+              value={dropin_version}
+              onChange={handleChange('dropin_version')}
               label="Dropin Version *"
             >
               <MenuItem value="">
@@ -101,9 +119,9 @@ const ProfileForm = () => {
             <Select
               labelId="checkout-version-select-label"
               id="checkout-version-select"
-              value={checkout}
+              value={checkout_version}
               label="Checkout Version *"
-              onChange={handleChange('checkout')}
+              onChange={handleChange('checkout_version')}
             >
               <MenuItem value="">
                 <em>None</em>
