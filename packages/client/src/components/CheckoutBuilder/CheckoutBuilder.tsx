@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useState } from 'react';
 import { PaymentsFormProps } from '../../types';
-import OptionalConfig from './OptionalConfig/OptionalConfig';
-import ProfileForm from './ProfileForm/ProfileForm';
-import ReviewForm from './ReviewForm/ReviewForm';
+import OptionalConfig from './OptionalConfig';
+import ProfileForm from './ProfileForm';
+import ReviewForm from './ReviewForm';
 import { CheckoutBuilderProps } from '../../types';
 
 const theme = createTheme();

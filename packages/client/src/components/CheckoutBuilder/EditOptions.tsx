@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { payload } from '../../../helpers/payloadSamples';
+import { payload } from '../../helpers/payloadSamples';
 import Editor from './Editor';
 import ListOptions from './ListOptions';
 

@@ -28,23 +28,25 @@ const ListOptions = (props: any) => {
     all.optionalConfiguration[optionsType][t] = e.target.value;
     setConfiguration(all);
   };
+
   return (
     <Grid container rowSpacing={2}>
       {configList &&
         configList.map((g: any, i: any) => (
-          <Grid item xs={11}>
-            <Checkbox
-              checked={thisConfiguration.hasOwnProperty(g.name)}
-              onChange={handleToggle(g.name)}
-              inputProps={{ 'aria-label': 'controlled' }}
-              size="small"
-            />
-            <Typography variant="overline">{g.name}</Typography>
-            <Typography variant="subtitle2">{g.description}</Typography>
-            {thisConfiguration.hasOwnProperty(g.name) && (
-              <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} defaultValue={''} fullWidth />
-            )}
-          </Grid>
+            <Grid item xs={11}>
+              <Checkbox
+                checked={thisConfiguration.hasOwnProperty(g.name)}
+                onChange={handleToggle(g.name)}
+                inputProps={{ 'aria-label': 'controlled' }}
+                size="small"
+              />
+              <Typography variant="overline">{g.name}</Typography>
+              <Typography variant="subtitle2">{g.description}</Typography>
+              {thisConfiguration.hasOwnProperty(g.name) && (
+                <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} defaultValue={""} value={thisConfiguration[g.name]} fullWidth />
+              )}
+            </Grid>
+
         ))}
     </Grid>
   );

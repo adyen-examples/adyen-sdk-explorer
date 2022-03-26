@@ -1,7 +1,7 @@
 import * as React from 'react';
 import EditOptions from './EditOptions';
-import { CheckoutBuilderProps } from '../../../types';
-import { payload } from '../../../helpers/payloadSamples';
+import { CheckoutBuilderProps } from '../../types';
+import { payload } from '../../helpers/payloadSamples';
 import { useEffect, useState } from 'react';
 
 const OptionalConfig = (props: CheckoutBuilderProps) => {
@@ -11,7 +11,8 @@ const OptionalConfig = (props: CheckoutBuilderProps) => {
 
   useEffect(() => {
     // need a hook to fetch the payload, need a function to process the payload and create new object
-    if (Object.keys(optionalConfiguration).length === 0 && typeof optionalConfiguration === 'object') {
+
+    if (typeof optionalConfiguration === 'object') {
       addConfigurationList(payload);
     }
   }, []);
@@ -20,15 +21,17 @@ const OptionalConfig = (props: CheckoutBuilderProps) => {
     // You will add this to a class that instatiates a configuration profile
     //For now just get the configDictionary, it will not be a hook
 
-    const updateOptionalConfigurations: any = {};
+    let updateOptionalConfigurations: any = {};
     for (const property in payload) {
-      updateOptionalConfigurations[property] = new Array();
+      if (!optionalConfiguration[property]) {
+        updateOptionalConfigurations[property] = new Object();
+      }
     }
-
+    updateOptionalConfigurations = {...updateOptionalConfigurations, ...optionalConfiguration}
     setConfiguration({ ...configuration, optionalConfiguration: updateOptionalConfigurations });
     setConfigDictionary(payload);
   };
-  if (Object.keys(configDictionary).length > 0 && typeof(configDictionary) === 'object') {
+  if (Object.keys(configDictionary).length > 0 && typeof configDictionary === 'object') {
     return (
       <React.Fragment>
         {Object.keys(configDictionary).map((category: any, i: any) => (

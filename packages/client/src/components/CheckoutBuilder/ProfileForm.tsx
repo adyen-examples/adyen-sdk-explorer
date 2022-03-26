@@ -10,44 +10,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useState, useEffect } from 'react';
-import { CheckoutBuilderProps } from '../../../types';
-
-const myState = {
-  profile: {
-    name: '',
-    product: '',
-    checkout_version: '',
-    dropin_version: '',
-    optionalConfiguration: [
-      {
-        layer: '',
-        enabledConfig: {}
-      }
-    ],
-    apiConfiguration: [
-      {
-        api: '',
-        enabledConfig: {}
-      },
-      {
-        api: '',
-        enabledConfig: {}
-      }
-    ]
-  }
-}
-
+import { CheckoutBuilderProps } from '../../types';
 
 const ProfileForm = (props: CheckoutBuilderProps) => {
-  const {configuration, setConfiguration} = props;
-  const {name, product, checkout_version, dropin_version} = configuration;
+  const { configuration, setConfiguration } = props;
+  const { name, product, checkout_version, dropin_version } = configuration;
 
   const handleChange = (name: string) => (e: SelectChangeEvent) => {
     setConfiguration({ ...configuration, [name]: e.target.value });
   };
 
   const handleTextChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('logging object before setting state',{ ...configuration, [name]: e.target.value });
+    console.log('logging object before setting state', { ...configuration, [name]: e.target.value });
     setConfiguration({ ...configuration, [name]: e.target.value });
   };
 
@@ -56,7 +30,7 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
-            Create Configuration Profile
+            Create Profile
           </Typography>
         </Grid>
         <Grid item xs={12} sx={{ mt: -3 }}>
@@ -72,6 +46,13 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
             Choose Product
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="overline" gutterBottom>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
+            ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
+            dapibus.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -90,7 +71,14 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
-            Choose Library
+            Choose Dropin LIbrary
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="overline" gutterBottom>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
+            ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
+            dapibus.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -112,6 +100,18 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            Choose Checkout LIbrary
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="overline" gutterBottom>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
+            ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
+            dapibus.
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl required sx={{ width: 1 }}>
