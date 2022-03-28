@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaymentsFormProps } from '../types';
 
-const PaymentsForm = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: PaymentsFormProps) => {
+const PaymentsForm = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
