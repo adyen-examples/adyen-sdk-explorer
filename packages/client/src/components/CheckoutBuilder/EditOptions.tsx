@@ -1,15 +1,12 @@
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { payload } from '../../helpers/payloadSamples';
 import Editor from './Editor';
 import ListOptions from './ListOptions';
 
 const EditOptions = (props: any) => {
   const { configDictionary, configuration, setConfiguration } = props;
-  const { optionalConfiguration } = configuration;
   
   return (
     <React.Fragment>

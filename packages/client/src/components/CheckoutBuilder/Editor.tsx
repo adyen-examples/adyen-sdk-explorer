@@ -1,23 +1,16 @@
+import * as React from 'react';
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../helpers/jsonEditor';
-import * as React from 'react';
 
 const Editor = (props: any) => {
   const { configDictionary, configuration, setConfiguration } = props;
-  const { optionalConfiguration } = configuration;
   const optionsType = Object.keys(configDictionary)[0];
-  const state = optionalConfiguration[optionsType];
-  
-  // We dont need advanced global state, just create a warning that you are passing an advanced config
-  // Need to add an edit button
+  const state = configuration[optionsType];
+
   const handleChange = (e: any) => {
-    //you should be able to pass the name of the api. I think to do that we need to know the definition
-    //this will need to handle sending over the entire object
     if (!e.error) {    
-    const updateOptionalConfiguration = {...optionalConfiguration, [optionsType]:{...e.jsObject}};
-    const all = {...configuration, 'optionalConfiguration': {...updateOptionalConfiguration}};
-    
-      setConfiguration(all);
+    const updateOptionalConfiguration = {...configuration, [optionsType]:{...e.jsObject}};
+      setConfiguration(updateOptionalConfiguration);
     }
   };
   return (<JSONInput onChange={handleChange} placeholder={{...state}} colors={dark_vscode_tribute} locale={localeEn} height="400px" width="100%" />);

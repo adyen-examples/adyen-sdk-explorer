@@ -1,18 +1,15 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
-import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import { CheckoutBuilderProps } from '../../types';
 
-const ProfileForm = (props: CheckoutBuilderProps) => {
+const ProfileForm = (props: any) => {
   const { configuration, setConfiguration } = props;
   const { name, product, checkout_version, dropin_version } = configuration;
 
@@ -39,6 +36,7 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
             name="profileName"
             label="Profile name"
             variant="standard"
+            value={configuration.name}
             onChange={handleTextChange('name')}
             sx={{ width: '50%' }}
           />
@@ -59,19 +57,14 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
           <FormControl required sx={{ width: 1 }}>
             <InputLabel id="dropin-select-required-label">Product</InputLabel>
             <Select labelId="product-select-label" id="product-select" value={product} onChange={handleChange('product')} label="Product *">
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'dropin'}>dropin</MenuItem>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
-            Choose Dropin LIbrary
+            Choose Web Components LIbrary
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -91,12 +84,7 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
               onChange={handleChange('dropin_version')}
               label="Dropin Version *"
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'v5.11.0'}>v5.11.0</MenuItem>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -123,12 +111,7 @@ const ProfileForm = (props: CheckoutBuilderProps) => {
               label="Checkout Version *"
               onChange={handleChange('checkout_version')}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'v68'}>v68</MenuItem>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>

@@ -1,42 +1,37 @@
 import * as React from 'react';
-import EditOptions from './EditOptions';
-import { CheckoutBuilderProps } from '../../types';
-import { payload } from '../../helpers/payloadSamples';
 import { useEffect, useState } from 'react';
+import { getSessions_Response } from '../../helpers/payloadSamples';
+import { CheckoutBuilderProps } from '../../types';
+import EditOptions from './EditOptions';
 
-const ApiConfig = (props: CheckoutBuilderProps) => {
+const ApiConfig = (props: any) => {
   const { configuration, setConfiguration } = props;
-  const { optionalConfiguration } = configuration;
+  const { apiConfiguration } = configuration;
   const [configDictionary, setConfigDictionary]: any = useState({});
 
   useEffect(() => {
-    // need a hook to fetch the payload, need a function to process the payload and create new object
-
-    if (typeof optionalConfiguration === 'object') {
-      addConfigurationList(payload);
+    if (typeof configuration === 'object') {
+      addConfigurationList(getSessions_Response);
     }
   }, []);
 
-  const addConfigurationList = (payload: any) => {
-    // You will add this to a class that instatiates a configuration profile
-    //For now just get the configDictionary, it will not be a hook
-
+  const addConfigurationList = (data: any) => {
     let updateOptionalConfigurations: any = {};
-    for (const property in payload) {
-      if (!optionalConfiguration[property]) {
+    for (const property in data) {
+      if (!configuration[property]) {
         updateOptionalConfigurations[property] = new Object();
       }
     }
-    updateOptionalConfigurations = {...updateOptionalConfigurations, ...optionalConfiguration}
-    setConfiguration({ ...configuration, optionalConfiguration: updateOptionalConfigurations });
-    setConfigDictionary(payload);
+    updateOptionalConfigurations = {...configuration, ...updateOptionalConfigurations}
+    setConfiguration(updateOptionalConfigurations);
+    setConfigDictionary(data);
   };
   if (Object.keys(configDictionary).length > 0 && typeof configDictionary === 'object') {
     return (
       <React.Fragment>
         {Object.keys(configDictionary).map((category: any, i: any) => (
           <EditOptions
-            configDictionary={{ [category]: configDictionary[category] }}
+            configDictionary={{[category]:configDictionary[category]}}
             configuration={configuration}
             setConfiguration={setConfiguration}
           />

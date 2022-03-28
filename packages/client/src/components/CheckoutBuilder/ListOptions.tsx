@@ -7,25 +7,35 @@ import { useEffect, useState } from 'react';
 
 const ListOptions = (props: any) => {
   const { configDictionary, configuration, setConfiguration } = props;
+
+  //Here we will create a getter function for the configuration class that gets the config object from the dictionary provided
   const optionsType = Object.keys(configDictionary)[0];
   const configList = configDictionary[optionsType];
-  const { optionalConfiguration } = configuration;
-  const thisConfiguration = optionalConfiguration[optionsType];
+
+  // const { optionalConfiguration } = configuration;
+  // const thisConfiguration = optionalConfiguration[optionsType];
+
+
+  const thisConfiguration = configuration[optionsType];
+
+  console.log('List options: configuration', configuration);
+  
 
   const handleToggle = (t: any) => () => {
     const all: any = { ...configuration };
-
-    if (all.optionalConfiguration[optionsType].hasOwnProperty(t)) {
-      delete all.optionalConfiguration[optionsType][t];
+    console.log('all',all);
+    
+    if (all[optionsType].hasOwnProperty(t)) {
+      delete all[optionsType][t];
     } else {
-      all.optionalConfiguration[optionsType][t] = '';
+      all[optionsType][t] = '';
     }
     setConfiguration(all);
   };
 
   const handleInput = (t: any) => (e: any) => {
     const all: any = { ...configuration };
-    all.optionalConfiguration[optionsType][t] = e.target.value;
+    all[optionsType][t] = e.target.value;
     setConfiguration(all);
   };
 

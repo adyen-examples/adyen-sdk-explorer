@@ -10,10 +10,10 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useState } from 'react';
 import { PaymentsFormProps } from '../../types';
+import ApiConfig from './ApiConfig';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
 import ReviewForm from './ReviewForm';
-import { CheckoutBuilderProps } from '../../types';
 
 const theme = createTheme();
 
@@ -26,9 +26,7 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
     name: '',
     product: '',
     checkout_version: '',
-    dropin_version: '',
-    optionalConfiguration: {},
-    apiConfiguration: {}
+    dropin_version: ''
   });
 
   const steps = ['Profile', 'Optional Configuration', 'API Configuration', 'Review your config'];
@@ -40,7 +38,7 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
       case 1:
         return <OptionalConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
       case 2:
-        return <ReviewForm />;
+        return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration}/>;
       case 3:
         return <ReviewForm />;
       default:
