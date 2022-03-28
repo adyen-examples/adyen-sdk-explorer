@@ -7,7 +7,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { CheckoutBuilderProps } from '../../types';
 
 const ProfileForm = (props: any) => {
   const { configuration, setConfiguration } = props;

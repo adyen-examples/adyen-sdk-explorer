@@ -9,7 +9,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useState } from 'react';
-import { PaymentsFormProps } from '../../types';
 import ApiConfig from './ApiConfig';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
@@ -20,7 +19,7 @@ const theme = createTheme();
 //Create init config class
 
 
-const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: PaymentsFormProps) => {
+const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
   const [activeStep, setActiveStep] = useState(0);
   const [configuration, setConfiguration] = useState({
     name: '',

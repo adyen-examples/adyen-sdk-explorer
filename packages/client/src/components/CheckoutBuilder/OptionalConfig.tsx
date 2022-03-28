@@ -1,8 +1,7 @@
 import * as React from 'react';
-import EditOptions from './EditOptions';
-import { CheckoutBuilderProps } from '../../types';
-import { getClientConfiguration_Response } from '../../helpers/payloadSamples';
 import { useEffect, useState } from 'react';
+import { getClientConfiguration_Response } from '../../helpers/payloadSamples';
+import EditOptions from './EditOptions';
 
 const OptionalConfig = (props: any) => {
   const { configuration, setConfiguration } = props;
