@@ -40,7 +40,7 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
       case 2:
         return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration}/>;
       case 3:
-        return <ReviewForm />;
+        return <ReviewForm configuration={{ ...configuration }}/>;
       default:
         throw new Error('Unknown step');
     }
