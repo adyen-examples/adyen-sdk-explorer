@@ -8,11 +8,12 @@ import Stepper from '@mui/material/Stepper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ApiConfig from './ApiConfig';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
 import ReviewForm from './ReviewForm';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -45,19 +46,22 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('configuration from base',configuration);
   });
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit();
-  };
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   onSubmit();
+  // };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-  };
-
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   onChange(e);
+  // };
+  const test: any = useNavigate();
   const handleNext = () => {
+    if(activeStep === steps.length - 1){
+      test('dropin',{state: {configuration}});
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -96,7 +100,7 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
                     </Button>
                   )}
                   <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Build Checkout' : 'Next'}
                   </Button>
                 </Box>
               </React.Fragment>

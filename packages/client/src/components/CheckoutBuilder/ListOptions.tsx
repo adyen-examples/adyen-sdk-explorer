@@ -10,10 +10,7 @@ const ListOptions = (props: any) => {
   const optionsType = Object.keys(configDictionary)[0];
   const configList = configDictionary[optionsType];
   const thisConfiguration = configuration[optionsType];
-
-  console.log('List options: configuration', configuration);
   
-
   const handleToggle = (t: any) => () => {
     const all: any = { ...configuration };
     console.log('all',all);
