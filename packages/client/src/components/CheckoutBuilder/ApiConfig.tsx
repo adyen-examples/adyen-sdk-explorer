@@ -34,6 +34,7 @@ const ApiConfig = (props: any) => {
             configDictionary={{[category]:configDictionary[category]}}
             configuration={configuration}
             setConfiguration={setConfiguration}
+            key={i}
           />
         ))}
       </React.Fragment>

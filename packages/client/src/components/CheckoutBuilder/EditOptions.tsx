@@ -7,10 +7,10 @@ import ListOptions from './ListOptions';
 
 const EditOptions = (props: any) => {
   const { configDictionary, configuration, setConfiguration } = props;
-  
+  const optionsType = Object.keys(configDictionary)[0];
   return (
     <React.Fragment>
-      <Typography variant="h6">Global Parameters</Typography>
+      <Typography variant="h6">{optionsType}</Typography>
       <Divider />
       <Grid mt={2} container>
         <Grid item xs={7}>
