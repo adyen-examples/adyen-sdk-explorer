@@ -5,6 +5,9 @@ import { jwtAuth, isAuthorizedForAction } from '../auth';
 
 import type { ConfigToUpdate } from './types';
 
+// TEMPORARY MOCK DB FOR INITIALIZING
+import { globalConfig, localConfig, sessionsConfig } from '../../temp';
+
 const router = Router();
 
 router.get('/:userId', jwtAuth, isAuthorizedForAction, async (req: Request, res: Response) => {
@@ -101,6 +104,14 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
     res.status(500).json({ message: 'Internal server error' });
   } catch (err) {
     console.error('CONFIGURATIONS UPDATE ERROR', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+router.get('/', (req, res) => {
+  try {
+    return res.send(201).json({ globalConfig, localConfig, sessionsConfig });
+  } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
