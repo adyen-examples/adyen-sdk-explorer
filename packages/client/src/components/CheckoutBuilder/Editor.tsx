@@ -1,4 +1,3 @@
-import * as React from 'react';
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../helpers/jsonEditor';
 
@@ -8,12 +7,12 @@ const Editor = (props: any) => {
   const state = configuration[optionsType];
 
   const handleChange = (e: any) => {
-    if (!e.error) {    
-    const updateOptionalConfiguration = {...configuration, [optionsType]:{...e.jsObject}};
+    if (!e.error) {
+      const updateOptionalConfiguration = { ...configuration, [optionsType]: { ...e.jsObject } };
       setConfiguration(updateOptionalConfiguration);
     }
   };
-  return (<JSONInput onChange={handleChange} placeholder={{...state}} colors={dark_vscode_tribute} locale={localeEn} height="400px" width="100%" />);
+  return <JSONInput onChange={handleChange} placeholder={{ ...state }} colors={dark_vscode_tribute} locale={localeEn} height="400px" width="100%" />;
 };
 
 export default Editor;

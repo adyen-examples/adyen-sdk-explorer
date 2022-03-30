@@ -1,12 +1,17 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import { selectors } from '../../app';
 import { getClientConfiguration_Response } from '../../helpers/payloadSamples';
 import EditOptions from './EditOptions';
 
+import type { RootState } from '../../store';
+
 const OptionalConfig = (props: any) => {
   const { configuration, setConfiguration } = props;
-  const { optionalConfiguration } = configuration;
-  const [configDictionary, setConfigDictionary]: any = useState({});
+  const descriptors = useSelector((state: RootState) => state.descriptor);
+  const configDictionary = ['global', 'local'];
+
+  console.log(descriptors);
 
   useEffect(() => {
     if (typeof configuration === 'object') {
@@ -21,26 +26,25 @@ const OptionalConfig = (props: any) => {
         updateOptionalConfigurations[property] = new Object();
       }
     }
-    updateOptionalConfigurations = {...configuration, ...updateOptionalConfigurations};
+    updateOptionalConfigurations = { ...configuration, ...updateOptionalConfigurations };
     setConfiguration(updateOptionalConfigurations);
-    setConfigDictionary(payload);
   };
-  if (Object.keys(configDictionary).length > 0 && typeof configDictionary === 'object') {
+  if (configDictionary.length > 0) {
     return (
-      <React.Fragment>
-        {Object.keys(configDictionary).map((category: any, i: any) => (
+      <Fragment>
+        {configDictionary.map((category: string, i: number) => (
           <EditOptions
-            configDictionary={{ [category]: configDictionary[category] }}
+            configDictionary={{ [category]: descriptors[category] }}
             configuration={configuration}
             setConfiguration={setConfiguration}
             key={i}
           />
         ))}
-      </React.Fragment>
+      </Fragment>
     );
   }
 
-  return <React.Fragment>Loading...</React.Fragment>;
+  return <Fragment>Loading...</Fragment>;
 };
 
 export default OptionalConfig;
