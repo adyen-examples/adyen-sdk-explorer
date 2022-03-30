@@ -1,7 +1,28 @@
 import isEmail from 'validator/lib/isEmail';
-import { User } from '../../../models';
+import { User, UserDocument } from '../../../models';
 
-const checkForExistingUser = async ({ username }) => {
+type SizedFields = {
+  username: {
+    min: number;
+    max: number;
+    [key: string]: number;
+  };
+  password: {
+    min: number;
+    max: number;
+    [key: string]: number;
+  };
+  [key: string]: any;
+};
+
+type ReqBody = {
+  username: string;
+  password: string;
+  email: string;
+  [key: string]: string;
+};
+
+const checkForExistingUser = async ({ username }: ReqBody) => {
   try {
     const existingUser = await User.find({ username });
     return existingUser && existingUser.length
@@ -15,8 +36,8 @@ const checkForExistingUser = async ({ username }) => {
   }
 };
 
-const checkSizedFields = reqBody => {
-  const sizedFields = {
+const checkSizedFields = (reqBody: ReqBody) => {
+  const sizedFields: SizedFields = {
     username: {
       min: 5,
       max: 15
@@ -32,13 +53,15 @@ const checkSizedFields = reqBody => {
     ? {
         message: tooSmallField
           ? `Must be at least ${sizedFields[tooSmallField].min} characters long`
-          : `Cannot exceed ${sizedFields[tooLargeField].max} characters`,
+          : tooLargeField
+          ? `Cannot exceed ${sizedFields[tooLargeField].max} characters`
+          : '',
         location: tooSmallField || tooLargeField
       }
     : checkForExistingUser(reqBody);
 };
 
-const checkEmail = reqBody => {
+const checkEmail = (reqBody: ReqBody) => {
   return isEmail(reqBody.email)
     ? checkSizedFields(reqBody)
     : {
@@ -47,7 +70,7 @@ const checkEmail = reqBody => {
       };
 };
 
-const checkPasswordForInvalidChars = reqBody => {
+const checkPasswordForInvalidChars = (reqBody: ReqBody) => {
   const invalidChars = /[ ]/g;
   return invalidChars.test(reqBody.password)
     ? {
@@ -57,7 +80,7 @@ const checkPasswordForInvalidChars = reqBody => {
     : checkEmail(reqBody);
 };
 
-const checkUsernameForInvalidChars = reqBody => {
+const checkUsernameForInvalidChars = (reqBody: ReqBody) => {
   const invalidChars = /[^A-Za-z0-9]+/g;
   return invalidChars.test(reqBody.username)
     ? {
@@ -67,7 +90,7 @@ const checkUsernameForInvalidChars = reqBody => {
     : checkPasswordForInvalidChars(reqBody);
 };
 
-const checkFieldTypes = reqBody => {
+const checkFieldTypes = (reqBody: ReqBody) => {
   const stringFields = ['username', 'password', 'email'];
   const nonStringField = stringFields.find(field => field in reqBody && typeof reqBody[field] !== 'string');
 
@@ -79,7 +102,7 @@ const checkFieldTypes = reqBody => {
     : checkUsernameForInvalidChars(reqBody);
 };
 
-const checkRequiredFields = reqBody => {
+const checkRequiredFields = (reqBody: ReqBody) => {
   const requiredFields = ['username', 'password', 'email'];
   const missingField = requiredFields.find(field => !(field in reqBody));
 
@@ -91,4 +114,4 @@ const checkRequiredFields = reqBody => {
     : checkFieldTypes(reqBody);
 };
 
-export const runUserValidation = reqBody => checkRequiredFields(reqBody);
+export const runUserValidation = (reqBody: ReqBody) => checkRequiredFields(reqBody);
