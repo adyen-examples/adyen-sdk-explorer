@@ -1,26 +1,19 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Stepper from '@mui/material/Stepper';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Container, Paper, Step, StepLabel, Stepper, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { useApi } from '../../hooks';
 import ApiConfig from './ApiConfig';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
 import ReviewForm from './ReviewForm';
-import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 //Create init config class
 
-
 const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
+  const test: any = useNavigate();
+  const { state, error, data } = useApi('http://localhost:8080/configurations', 'GET');
   const [activeStep, setActiveStep] = useState(0);
   const [configuration, setConfiguration] = useState({
     name: '',
@@ -34,33 +27,21 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <ProfileForm configuration={{...configuration}} setConfiguration={setConfiguration} />;
+        return <ProfileForm configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
       case 1:
         return <OptionalConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
       case 2:
-        return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration}/>;
+        return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
       case 3:
-        return <ReviewForm configuration={{ ...configuration }}/>;
+        return <ReviewForm configuration={{ ...configuration }} />;
       default:
         throw new Error('Unknown step');
     }
   };
 
-  useEffect(() => {
-    console.log('configuration from base',configuration);
-  });
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   onSubmit();
-  // };
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   onChange(e);
-  // };
-  const test: any = useNavigate();
   const handleNext = () => {
-    if(activeStep === steps.length - 1){
-      test('dropin',{state: {configuration}});
+    if (activeStep === steps.length - 1) {
+      test('dropin', { state: { configuration } });
     }
     setActiveStep(activeStep + 1);
   };
@@ -83,15 +64,15 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
+          <Fragment>
             {activeStep === steps.length ? (
-              <React.Fragment>
+              <Fragment>
                 <Typography variant="h5" gutterBottom>
                   Your Checkout is being generated...
                 </Typography>
-              </React.Fragment>
+              </Fragment>
             ) : (
-              <React.Fragment>
+              <Fragment>
                 {getStepContent(activeStep)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
@@ -103,9 +84,9 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
                     {activeStep === steps.length - 1 ? 'Build Checkout' : 'Next'}
                   </Button>
                 </Box>
-              </React.Fragment>
+              </Fragment>
             )}
-          </React.Fragment>
+          </Fragment>
         </Paper>
       </Container>
     </ThemeProvider>

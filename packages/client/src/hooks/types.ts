@@ -40,4 +40,15 @@ export interface CheckoutConfig extends EditableCheckoutConfigFields {
   onPaymentCompleted?: (result: any, element: any) => void;
 }
 
+export type RequestOptions = {
+  method: string;
+  headers: {
+    'Content-type': string;
+    Authorization?: string;
+  };
+  body?: string;
+};
+
+export type AllowedMethods = 'GET' | 'POST' | 'PUT';
+
 export { PaymentAmount, PaymentMethodsResponseInterface };

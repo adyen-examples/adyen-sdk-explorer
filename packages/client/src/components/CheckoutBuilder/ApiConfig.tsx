@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
+import { selectors } from '../../app';
 import { getSessions_Response } from '../../helpers/payloadSamples';
 import EditOptions from './EditOptions';
 
 const ApiConfig = (props: any) => {
   const { configuration, setConfiguration } = props;
-  const { apiConfiguration } = configuration;
   const [configDictionary, setConfigDictionary]: any = useState({});
 
   useEffect(() => {
@@ -21,26 +20,26 @@ const ApiConfig = (props: any) => {
         updateOptionalConfigurations[property] = new Object();
       }
     }
-    updateOptionalConfigurations = {...configuration, ...updateOptionalConfigurations}
+    updateOptionalConfigurations = { ...configuration, ...updateOptionalConfigurations };
     setConfiguration(updateOptionalConfigurations);
     setConfigDictionary(data);
   };
   if (Object.keys(configDictionary).length > 0 && typeof configDictionary === 'object') {
     return (
-      <React.Fragment>
+      <Fragment>
         {Object.keys(configDictionary).map((category: any, i: any) => (
           <EditOptions
-            configDictionary={{[category]:configDictionary[category]}}
+            configDictionary={{ [category]: configDictionary[category] }}
             configuration={configuration}
             setConfiguration={setConfiguration}
             key={i}
           />
         ))}
-      </React.Fragment>
+      </Fragment>
     );
   }
 
-  return <React.Fragment>Loading...</React.Fragment>;
+  return <Fragment>Loading...</Fragment>;
 };
 
 export default ApiConfig;

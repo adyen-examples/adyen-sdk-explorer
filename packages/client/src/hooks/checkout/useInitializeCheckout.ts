@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMemoCompare } from '../helpers/useMemoCompare';
 import { compareFormData } from '../../helpers';
-import type { InitializationRequest } from '../types';
+import type { InitializationRequest, RequestOptions } from '../types';
 
 export const useInitializeCheckout = (options: InitializationRequest, component?: string, endpoint?: string) => {
   const [checkoutResponse, setCheckoutResponse] = useState<any>(null);
@@ -10,7 +10,7 @@ export const useInitializeCheckout = (options: InitializationRequest, component?
   const opts = useMemoCompare(options, compareFormData);
 
   useEffect(() => {
-    const requestOptions = {
+    const requestOptions: RequestOptions = {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

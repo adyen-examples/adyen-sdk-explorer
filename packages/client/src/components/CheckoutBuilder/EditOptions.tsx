@@ -1,7 +1,5 @@
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { Fragment } from 'react';
+import { Divider, Grid, Typography } from '@mui/material';
 import Editor from './Editor';
 import ListOptions from './ListOptions';
 
@@ -9,7 +7,7 @@ const EditOptions = (props: any) => {
   const { configDictionary, configuration, setConfiguration } = props;
   const optionsType = Object.keys(configDictionary)[0];
   return (
-    <React.Fragment>
+    <Fragment>
       <Typography variant="h6">{optionsType}</Typography>
       <Divider />
       <Grid mt={2} container>
@@ -24,7 +22,7 @@ const EditOptions = (props: any) => {
           </Grid>
         </Grid>
       </Grid>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

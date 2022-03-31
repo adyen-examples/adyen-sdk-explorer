@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import request from 'request-promise';
 
-import { errorHandler } from '../helpers';
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
 
 import type { InitializationRequest, RequestOptions } from './types';
@@ -25,7 +24,7 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
     const response: CheckoutSessionSetupResponse = await request(options);
     res.send(201).json(response);
   } catch (err: any) {
-    errorHandler('/sessionStart', 500, err.message, res);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 

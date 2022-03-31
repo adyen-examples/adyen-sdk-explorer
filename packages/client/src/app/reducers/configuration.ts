@@ -15,7 +15,7 @@ export const configurationSlice = createSlice({
   initialState,
   reducers: {
     updateConfigurationInfo: (state, action: PayloadAction<ConfigurationState>) => {
-      state = action.payload;
+      state = { ...initialState, ...action.payload };
     },
     clearConfigurationInfo: state => {
       state = initialState;

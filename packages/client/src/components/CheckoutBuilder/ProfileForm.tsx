@@ -1,16 +1,9 @@
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { Fragment } from 'react';
+import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 
 const ProfileForm = (props: any) => {
   const { configuration, setConfiguration } = props;
-  const { name, product, checkout_version, dropin_version } = configuration;
+  const { product, checkout_version, dropin_version } = configuration;
 
   const handleChange = (name: string) => (e: SelectChangeEvent) => {
     setConfiguration({ ...configuration, [name]: e.target.value });
@@ -22,7 +15,7 @@ const ProfileForm = (props: any) => {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
@@ -116,7 +109,7 @@ const ProfileForm = (props: any) => {
           </FormControl>
         </Grid>
       </Grid>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
