@@ -13,3 +13,15 @@ export type PaymentsFormProps = {
   onSubmit: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type BaseConfigurationProps = {
+  name: string;
+  product: 'dropin' | 'card';
+  componentLibrary: 'v5.11.0';
+  checkoutLibrary: 'v68'
+}
+
+export type Configurations = 'globalConfigOptions' | 'localConfigOptions' | 'sessions' | 'paymentMethods' | 'payments' | 'paymentDetails';
+
+// export type SessionConfiguration
+
