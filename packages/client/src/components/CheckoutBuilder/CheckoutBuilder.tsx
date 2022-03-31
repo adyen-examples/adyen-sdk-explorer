@@ -12,8 +12,8 @@ const theme = createTheme();
 //Create init config class
 
 const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
+  useApi('http://localhost:8080/configurations', 'GET');
   const test: any = useNavigate();
-  const { state, error, data } = useApi('http://localhost:8080/configurations', 'GET');
   const [activeStep, setActiveStep] = useState(0);
   const [configuration, setConfiguration] = useState({
     name: '',

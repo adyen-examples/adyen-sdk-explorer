@@ -1,32 +1,31 @@
 import { Checkbox, Grid, TextField, Typography } from '@mui/material';
 
 const ListOptions = (props: any) => {
-  const { configDictionary, configuration, setConfiguration } = props;
+  const { configDictionary } = props;
   const optionsType = Object.keys(configDictionary)[0];
   const configList = configDictionary[optionsType];
-  const thisConfiguration = configuration[optionsType];
 
-  const handleToggle = (t: any) => () => {
-    const all: any = { ...configuration };
-    console.log('all', all);
+  // const handleToggle = (t: any) => () => {
+  //   const all: any = { ...configuration };
+  //   console.log('all', all);
 
-    if (all[optionsType].hasOwnProperty(t)) {
-      delete all[optionsType][t];
-    } else {
-      all[optionsType][t] = '';
-    }
-    setConfiguration(all);
-  };
+  //   if (all[optionsType].hasOwnProperty(t)) {
+  //     delete all[optionsType][t];
+  //   } else {
+  //     all[optionsType][t] = '';
+  //   }
+  //   setConfiguration(all);
+  // };
 
-  const handleInput = (t: any) => (e: any) => {
-    const all: any = { ...configuration };
-    all[optionsType][t] = e.target.value;
-    setConfiguration(all);
-  };
+  // const handleInput = (t: any) => (e: any) => {
+  //   const all: any = { ...configuration };
+  //   all[optionsType][t] = e.target.value;
+  //   setConfiguration(all);
+  // };
 
   return (
     <Grid container rowSpacing={2}>
-      {configList &&
+      {/* {configList &&
         configList.map((g: any, i: any) => (
           <Grid item xs={11} key={i}>
             <Checkbox
@@ -41,7 +40,7 @@ const ListOptions = (props: any) => {
               <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} value={thisConfiguration[g.name]} fullWidth />
             )}
           </Grid>
-        ))}
+        ))} */}
     </Grid>
   );
 

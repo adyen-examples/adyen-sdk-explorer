@@ -14,6 +14,13 @@ export type UserState = {
   configurations: [ConfigurationState] | [];
 };
 
+export type ProfileOnDeckState = {
+  name: string;
+  product: string;
+  checkoutVersion: string;
+  dropinVersion: string;
+};
+
 export type GlobalOnDeckState = {
   showPayButton: boolean;
   openFirstPaymentMethod: boolean;
@@ -34,6 +41,7 @@ export type SessionsOnDeckState = {
 };
 
 export type OnDeckState = {
+  profile: ProfileOnDeckState | {};
   global: GlobalOnDeckState | {};
   local: LocalOnDeckState | {};
   sessions: SessionsOnDeckState | {};

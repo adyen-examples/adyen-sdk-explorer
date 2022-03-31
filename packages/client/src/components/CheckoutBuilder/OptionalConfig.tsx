@@ -11,34 +11,11 @@ const OptionalConfig = (props: any) => {
   const descriptors = useSelector((state: RootState) => state.descriptor);
   const configDictionary = ['global', 'local'];
 
-  console.log(descriptors);
-
-  useEffect(() => {
-    if (typeof configuration === 'object') {
-      addConfigurationList(getClientConfiguration_Response);
-    }
-  }, []);
-
-  const addConfigurationList = (payload: any) => {
-    let updateOptionalConfigurations: any = {};
-    for (const property in payload) {
-      if (!configuration[property]) {
-        updateOptionalConfigurations[property] = new Object();
-      }
-    }
-    updateOptionalConfigurations = { ...configuration, ...updateOptionalConfigurations };
-    setConfiguration(updateOptionalConfigurations);
-  };
   if (configDictionary.length > 0) {
     return (
       <Fragment>
         {configDictionary.map((category: string, i: number) => (
-          <EditOptions
-            configDictionary={{ [category]: descriptors[category] }}
-            configuration={configuration}
-            setConfiguration={setConfiguration}
-            key={i}
-          />
+          <EditOptions configDictionary={{ [category]: descriptors[category] }} key={i} />
         ))}
       </Fragment>
     );

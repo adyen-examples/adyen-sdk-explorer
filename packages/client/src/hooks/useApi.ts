@@ -53,5 +53,5 @@ export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: stri
     makeRequest();
   }, [url, method, apiKey, body]);
 
-  return data;
+  return [data];
 };
