@@ -42,8 +42,10 @@ export type SessionsOnDeckState = {
 
 export type OnDeckState = {
   profile: ProfileOnDeckState | {};
-  global: GlobalOnDeckState | {};
-  local: LocalOnDeckState | {};
+  optional: {
+    global: GlobalOnDeckState | {};
+    local: LocalOnDeckState | {};
+  };
   sessions: SessionsOnDeckState | {};
 };
 

@@ -1,11 +1,12 @@
 import { useState, Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Button, Container, Paper, Step, StepLabel, Stepper, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { Container, Paper, Step, StepLabel, Stepper, ThemeProvider, Typography, createTheme } from '@mui/material';
 import { useApi } from '../../hooks';
 import ApiConfig from './ApiConfig';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
 import ReviewForm from './ReviewForm';
+import type { RootState } from '../../store';
 
 const theme = createTheme();
 
@@ -13,41 +14,24 @@ const theme = createTheme();
 
 const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
   useApi('http://localhost:8080/configurations', 'GET');
-  const test: any = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
-  const [configuration, setConfiguration] = useState({
-    name: '',
-    product: '',
-    checkout_version: '',
-    dropin_version: ''
-  });
+  const { global, local, sessions } = useSelector((state: RootState) => state.descriptor);
 
   const steps = ['Profile', 'Optional Configuration', 'API Configuration', 'Review your config'];
 
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <ProfileForm configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
+        return <ProfileForm step={step} setActiveStep={setActiveStep} />;
       case 1:
-        return <OptionalConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
+        return <OptionalConfig step={step} setActiveStep={setActiveStep} descriptors={[global, local]} />;
       case 2:
-        return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
+        return <ApiConfig step={step} setActiveStep={setActiveStep} descriptors={[sessions]} />;
       case 3:
-        return <ReviewForm configuration={{ ...configuration }} />;
+        return <ReviewForm step={step} setActiveStep={setActiveStep} />;
       default:
         throw new Error('Unknown step');
     }
-  };
-
-  const handleNext = () => {
-    if (activeStep === steps.length - 1) {
-      test('dropin', { state: { configuration } });
-    }
-    setActiveStep(activeStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
   };
 
   return (
@@ -72,19 +56,7 @@ const CheckoutBuilder = ({ options: { value, currency, countryCode, component },
                 </Typography>
               </Fragment>
             ) : (
-              <Fragment>
-                {getStepContent(activeStep)}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
-                    </Button>
-                  )}
-                  <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
-                    {activeStep === steps.length - 1 ? 'Build Checkout' : 'Next'}
-                  </Button>
-                </Box>
-              </Fragment>
+              <Fragment>{getStepContent(activeStep)}</Fragment>
             )}
           </Fragment>
         </Paper>

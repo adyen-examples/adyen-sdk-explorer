@@ -1,4 +1,3 @@
-export * as selectors from './selectors';
 export {
   userReducer,
   userActions,

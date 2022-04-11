@@ -1,46 +1,49 @@
 import { Checkbox, Grid, TextField, Typography } from '@mui/material';
+import type { Descriptor } from '../../app/types';
 
-const ListOptions = (props: any) => {
-  const { configDictionary } = props;
-  const optionsType = Object.keys(configDictionary)[0];
-  const configList = configDictionary[optionsType];
+const ListOptions = ({
+  configDictionary,
+  configuration,
+  setConfiguration
+}: {
+  configDictionary: Descriptor[];
+  configuration: { [key: string]: any };
+  setConfiguration: (config: {}) => void;
+}) => {
+  console.log('LIST OPTIONS CONFIG', configuration);
 
-  // const handleToggle = (t: any) => () => {
-  //   const all: any = { ...configuration };
-  //   console.log('all', all);
+  const handleToggle = (t: any) => () => {
+    if (configuration && configuration.hasOwnProperty(t)) {
+      delete configuration[t];
+    } else {
+      configuration[t] = '';
+    }
+    setConfiguration(configuration);
+  };
 
-  //   if (all[optionsType].hasOwnProperty(t)) {
-  //     delete all[optionsType][t];
-  //   } else {
-  //     all[optionsType][t] = '';
-  //   }
-  //   setConfiguration(all);
-  // };
-
-  // const handleInput = (t: any) => (e: any) => {
-  //   const all: any = { ...configuration };
-  //   all[optionsType][t] = e.target.value;
-  //   setConfiguration(all);
-  // };
+  const handleInput = (t: any) => (e: any) => {
+    configuration[t] = e.target.value;
+    setConfiguration(configuration);
+  };
 
   return (
     <Grid container rowSpacing={2}>
-      {/* {configList &&
-        configList.map((g: any, i: any) => (
+      {configDictionary &&
+        configDictionary.map((g: any, i: any) => (
           <Grid item xs={11} key={i}>
             <Checkbox
-              checked={thisConfiguration.hasOwnProperty(g.name)}
+              checked={configuration.hasOwnProperty(g.name)}
               onChange={handleToggle(g.name)}
               inputProps={{ 'aria-label': 'controlled' }}
               size="small"
             />
             <Typography variant="overline">{g.name}</Typography>
             <Typography variant="subtitle2">{g.description}</Typography>
-            {thisConfiguration.hasOwnProperty(g.name) && (
-              <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} value={thisConfiguration[g.name]} fullWidth />
+            {configuration.hasOwnProperty(g.name) && (
+              <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} value={configuration[g.name]} fullWidth />
             )}
           </Grid>
-        ))} */}
+        ))}
     </Grid>
   );
 

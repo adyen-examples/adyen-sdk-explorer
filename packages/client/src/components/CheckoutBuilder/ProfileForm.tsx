@@ -1,17 +1,22 @@
-import { Fragment } from 'react';
+import { Fragment, useState, ChangeEvent } from 'react';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
+import { NavButtons } from './NavButtons';
+import type { ConfigPropTypes } from './types';
 
-const ProfileForm = (props: any) => {
-  const { configuration, setConfiguration } = props;
-  const { product, checkout_version, dropin_version } = configuration;
+const ProfileForm = ({ step, setActiveStep }: ConfigPropTypes) => {
+  const [config, setConfig] = useState({
+    name: '',
+    product: '',
+    checkoutVersion: '',
+    dropinVersion: ''
+  });
+  // const { product, checkout_version, dropin_version } = configuration;
 
-  const handleChange = (name: string) => (e: SelectChangeEvent) => {
-    setConfiguration({ ...configuration, [name]: e.target.value });
-  };
-
-  const handleTextChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('logging object before setting state', { ...configuration, [name]: e.target.value });
-    setConfiguration({ ...configuration, [name]: e.target.value });
+  const handleChange = (e: any) => {
+    setConfig(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }));
   };
 
   return (
@@ -25,11 +30,11 @@ const ProfileForm = (props: any) => {
         <Grid item xs={12} sx={{ mt: -3 }}>
           <TextField
             id="profileName"
-            name="profileName"
+            name="name"
             label="Profile name"
             variant="standard"
-            value={configuration.name}
-            onChange={handleTextChange('name')}
+            value={config.name}
+            onChange={handleChange}
             sx={{ width: '50%' }}
           />
         </Grid>
@@ -48,7 +53,14 @@ const ProfileForm = (props: any) => {
         <Grid item xs={12} sm={6}>
           <FormControl required sx={{ width: 1 }}>
             <InputLabel id="dropin-select-required-label">Product</InputLabel>
-            <Select labelId="product-select-label" id="product-select" value={product} onChange={handleChange('product')} label="Product *">
+            <Select
+              labelId="product-select-label"
+              id="product-select"
+              name="product"
+              value={config.product}
+              onChange={handleChange}
+              label="Product *"
+            >
               <MenuItem value={'dropin'}>dropin</MenuItem>
             </Select>
             <FormHelperText>Required</FormHelperText>
@@ -72,8 +84,9 @@ const ProfileForm = (props: any) => {
             <Select
               labelId="dropin-version-select-label"
               id="dropin-version-select"
-              value={dropin_version}
-              onChange={handleChange('dropin_version')}
+              name="dropinVersion"
+              value={config.dropinVersion}
+              onChange={handleChange}
               label="Dropin Version *"
             >
               <MenuItem value={'v5.11.0'}>v5.11.0</MenuItem>
@@ -99,9 +112,10 @@ const ProfileForm = (props: any) => {
             <Select
               labelId="checkout-version-select-label"
               id="checkout-version-select"
-              value={checkout_version}
+              name="checkoutVersion"
+              value={config.checkoutVersion}
               label="Checkout Version *"
-              onChange={handleChange('checkout_version')}
+              onChange={handleChange}
             >
               <MenuItem value={'v68'}>v68</MenuItem>
             </Select>
@@ -109,6 +123,7 @@ const ProfileForm = (props: any) => {
           </FormControl>
         </Grid>
       </Grid>
+      <NavButtons step={step} setActiveStep={setActiveStep} configuration={config} />
     </Fragment>
   );
 };
