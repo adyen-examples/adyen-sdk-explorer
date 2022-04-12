@@ -4,8 +4,8 @@ import { getClientConfiguration_Response } from '../../helpers/payloadSamples';
 import EditOptions from './EditOptions';
 
 const OptionalConfig = (props: any) => {
-  const { configuration, setConfiguration } = props;
-  const { optionalConfiguration } = configuration;
+  const { baseConfiguration, setBaseConfiguration } = props;
+  const {configuration} = baseConfiguration;
   const [configDictionary, setConfigDictionary]: any = useState({});
 
   useEffect(() => {
@@ -14,16 +14,14 @@ const OptionalConfig = (props: any) => {
     }
   }, []);
 
-  const addConfigurationList = (payload: any) => {
-    let updateOptionalConfigurations: any = {};
-    for (const property in payload) {
-      if (!configuration[property]) {
-        updateOptionalConfigurations[property] = new Object();
+  const addConfigurationList = (data: any) => {
+    for (const property in data) {
+      if (!configuration.state[property]) {
+        configuration.state = {[property]: new Object() }
       }
     }
-    updateOptionalConfigurations = {...configuration, ...updateOptionalConfigurations};
-    setConfiguration(updateOptionalConfigurations);
-    setConfigDictionary(payload);
+    setBaseConfiguration({configuration});
+    setConfigDictionary(data);
   };
   if (Object.keys(configDictionary).length > 0 && typeof configDictionary === 'object') {
     return (
@@ -31,9 +29,9 @@ const OptionalConfig = (props: any) => {
         {Object.keys(configDictionary).map((category: any, i: any) => (
           <EditOptions
             configDictionary={{ [category]: configDictionary[category] }}
-            configuration={configuration}
-            setConfiguration={setConfiguration}
             key={i}
+            baseConfiguration={baseConfiguration} 
+            setBaseConfiguration={setBaseConfiguration}
           />
         ))}
       </React.Fragment>

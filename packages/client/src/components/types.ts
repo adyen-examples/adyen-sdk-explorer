@@ -15,13 +15,18 @@ export type PaymentsFormProps = {
 };
 
 export type BaseConfigurationProps = {
-  name: string;
-  product: 'dropin' | 'card';
-  componentLibrary: 'v5.11.0';
-  checkoutLibrary: 'v68'
+  name?: string;
+  product?: 'dropin' | 'card';
+  componentLibrary?: 'v5.11.0';
+  checkoutLibrary?: 'v68';
 }
 
-export type Configurations = 'globalConfigOptions' | 'localConfigOptions' | 'sessions' | 'paymentMethods' | 'payments' | 'paymentDetails';
-
-// export type SessionConfiguration
+export type Configurations = {
+  globalConfigOptions?: object;
+  localConfigOptions?: object;
+  sessions?: object;
+  paymentMethods? : object;
+  payments?: object;
+  paymentDetails?: object;
+}
 

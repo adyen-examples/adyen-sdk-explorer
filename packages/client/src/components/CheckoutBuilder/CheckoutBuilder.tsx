@@ -8,65 +8,52 @@ import Stepper from '@mui/material/Stepper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ApiConfig from './ApiConfig';
+import BaseConfiguration from './BaseConfiguration';
 import OptionalConfig from './OptionalConfig';
 import ProfileForm from './ProfileForm';
 import ReviewForm from './ReviewForm';
-import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-//Create init config class
-
-
 const CheckoutBuilder = ({ options: { value, currency, countryCode, component }, onSubmit, onChange }: any) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [configuration, setConfiguration] = useState({
-    name: '',
-    product: '',
-    checkout_version: '',
-    dropin_version: ''
-  });
-
-  const steps = ['Profile', 'Optional Configuration', 'API Configuration', 'Review your config'];
-
-  const getStepContent = (step: number) => {
-    switch (step) {
-      case 0:
-        return <ProfileForm configuration={{...configuration}} setConfiguration={setConfiguration} />;
-      case 1:
-        return <OptionalConfig configuration={{ ...configuration }} setConfiguration={setConfiguration} />;
-      case 2:
-        return <ApiConfig configuration={{ ...configuration }} setConfiguration={setConfiguration}/>;
-      case 3:
-        return <ReviewForm configuration={{ ...configuration }}/>;
-      default:
-        throw new Error('Unknown step');
-    }
-  };
+  const [baseConfiguration, setBaseConfiguration] = useState(
+    {configuration : new BaseConfiguration()}
+  );
+  const navigate: any = useNavigate();
 
   useEffect(() => {
-    console.log('configuration from base',configuration);
+    console.log('BaseConfiguration', baseConfiguration);
   });
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   onSubmit();
-  // };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   onChange(e);
-  // };
-  const test: any = useNavigate();
   const handleNext = () => {
-    if(activeStep === steps.length - 1){
-      test('dropin',{state: {configuration}});
+    if (activeStep === steps.length - 1) {
+      navigate('dropin', { state: baseConfiguration });
     }
     setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const steps = ['Profile', 'Optional Configuration', 'API Configuration', 'Review your config'];
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <ProfileForm baseConfiguration={baseConfiguration} setBaseConfiguration={setBaseConfiguration} />;
+      case 1:
+        return <OptionalConfig baseConfiguration={baseConfiguration} setBaseConfiguration={setBaseConfiguration} />;
+      case 2:
+      return <ApiConfig baseConfiguration={baseConfiguration} setBaseConfiguration={setBaseConfiguration} />;
+      case 3:
+        return <ReviewForm baseConfiguration={baseConfiguration} />;
+      default:
+        throw new Error('Unknown step');
+    }
   };
 
   return (

@@ -9,18 +9,19 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
 const ProfileForm = (props: any) => {
-  const { configuration, setConfiguration } = props;
-  const { name, product, checkout_version, dropin_version } = configuration;
+  const { baseConfiguration, setBaseConfiguration } = props;
+  const {configuration} = baseConfiguration;
 
   const handleChange = (name: string) => (e: SelectChangeEvent) => {
-    setConfiguration({ ...configuration, [name]: e.target.value });
+    configuration.state = { [name]: e.target.value };
+    setBaseConfiguration({configuration});
   };
 
   const handleTextChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('logging object before setting state', { ...configuration, [name]: e.target.value });
-    setConfiguration({ ...configuration, [name]: e.target.value });
+    configuration.state = { [name]: e.target.value };
+    setBaseConfiguration({configuration});
   };
-
+  
   return (
     <React.Fragment>
       <Grid container spacing={2}>
@@ -35,7 +36,7 @@ const ProfileForm = (props: any) => {
             name="profileName"
             label="Profile name"
             variant="standard"
-            value={configuration.name}
+            value={configuration.state.name ? configuration.state.name : ''}
             onChange={handleTextChange('name')}
             sx={{ width: '50%' }}
           />
@@ -55,7 +56,13 @@ const ProfileForm = (props: any) => {
         <Grid item xs={12} sm={6}>
           <FormControl required sx={{ width: 1 }}>
             <InputLabel id="dropin-select-required-label">Product</InputLabel>
-            <Select labelId="product-select-label" id="product-select" value={product} onChange={handleChange('product')} label="Product *">
+            <Select
+              labelId="product-select-label"
+              id="product-select"
+              value={configuration.state.product ? configuration.state.product : ''}
+              onChange={handleChange('product')}
+              label="Product *"
+            >
               <MenuItem value={'dropin'}>dropin</MenuItem>
             </Select>
             <FormHelperText>Required</FormHelperText>
@@ -79,7 +86,7 @@ const ProfileForm = (props: any) => {
             <Select
               labelId="dropin-version-select-label"
               id="dropin-version-select"
-              value={dropin_version}
+              value={configuration.state.dropin_version ? configuration.state.dropin_version : ''}
               onChange={handleChange('dropin_version')}
               label="Dropin Version *"
             >
@@ -106,7 +113,7 @@ const ProfileForm = (props: any) => {
             <Select
               labelId="checkout-version-select-label"
               id="checkout-version-select"
-              value={checkout_version}
+              value={configuration.state.checkout_version ? configuration.state.checkout_version : ''}
               label="Checkout Version *"
               onChange={handleChange('checkout_version')}
             >
