@@ -25,11 +25,13 @@ export type GlobalOnDeckState = {
   showPayButton: boolean;
   openFirstPaymentMethod: boolean;
   openFirstStoredPaymentMethod: boolean;
+  [key: string]: any;
 };
 
 export type LocalOnDeckState = {
   amount: PaymentAmount;
   showPayButton: boolean;
+  [key: string]: any;
 };
 
 export type SessionsOnDeckState = {
@@ -38,15 +40,16 @@ export type SessionsOnDeckState = {
   shopperLocale: string;
   shopperEmail: string;
   shopperReference: string;
+  [key: string]: any;
 };
 
 export type OnDeckState = {
-  profile: ProfileOnDeckState | {};
+  profile: ProfileOnDeckState;
   optional: {
-    global: GlobalOnDeckState | {};
-    local: LocalOnDeckState | {};
+    global: GlobalOnDeckState;
+    local: LocalOnDeckState;
   };
-  sessions: SessionsOnDeckState | {};
+  sessions: SessionsOnDeckState;
 };
 
 export type Descriptor = {

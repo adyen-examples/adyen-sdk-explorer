@@ -1,24 +1,22 @@
 import { Checkbox, Grid, TextField, Typography } from '@mui/material';
-import type { Descriptor } from '../../app/types';
+import type { ConfigTypes } from '../types';
+import type { Descriptor } from '../../../app/types';
 
-const ListOptions = ({
-  configDictionary,
-  configuration,
-  setConfiguration
-}: {
+type ListOptionsProps = {
   configDictionary: Descriptor[];
-  configuration: { [key: string]: any };
+  configuration: ConfigTypes;
   setConfiguration: (config: {}) => void;
-}) => {
+};
+
+export const ListOptions = ({ configDictionary, configuration, setConfiguration }: ListOptionsProps) => {
   console.log('LIST OPTIONS CONFIG', configuration);
 
-  const handleToggle = (t: any) => () => {
+  const handleToggle = (t: string) => () => {
     if (configuration && configuration.hasOwnProperty(t)) {
-      delete configuration[t];
+      setConfiguration({ [t]: null });
     } else {
-      configuration[t] = '';
+      setConfiguration({ [t]: '' });
     }
-    setConfiguration(configuration);
   };
 
   const handleInput = (t: any) => (e: any) => {
@@ -31,15 +29,10 @@ const ListOptions = ({
       {configDictionary &&
         configDictionary.map((g: any, i: any) => (
           <Grid item xs={11} key={i}>
-            <Checkbox
-              checked={configuration.hasOwnProperty(g.name)}
-              onChange={handleToggle(g.name)}
-              inputProps={{ 'aria-label': 'controlled' }}
-              size="small"
-            />
+            <Checkbox checked={configuration[g.name]} onChange={handleToggle(g.name)} inputProps={{ 'aria-label': 'controlled' }} size="small" />
             <Typography variant="overline">{g.name}</Typography>
             <Typography variant="subtitle2">{g.description}</Typography>
-            {configuration.hasOwnProperty(g.name) && (
+            {configuration[g.name] && (
               <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} value={configuration[g.name]} fullWidth />
             )}
           </Grid>
@@ -51,5 +44,3 @@ const ListOptions = ({
   //     <Typography variant="overline">...Loading</Typography>
   //   )
 };
-
-export default ListOptions;

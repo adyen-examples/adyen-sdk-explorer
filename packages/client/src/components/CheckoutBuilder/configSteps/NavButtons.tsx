@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import { onDeckActions } from '../../app';
-import { useAppDispatch } from '../../hooks';
+import { onDeckActions } from '../../../app';
+import { useAppDispatch } from '../../../hooks';
 
 const { updateProfileInfo, updateOptionalInfo, updateSessionsInfo } = onDeckActions;
 

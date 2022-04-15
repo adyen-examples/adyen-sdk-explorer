@@ -1,9 +1,8 @@
 import { Fragment, useState, ChangeEvent } from 'react';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import { NavButtons } from './NavButtons';
-import type { ConfigPropTypes } from './types';
 
-const ProfileForm = ({ step, setActiveStep }: ConfigPropTypes) => {
+export const ProfileForm = ({ step, setActiveStep }: { step: number; setActiveStep: (step: number) => void }) => {
   const [config, setConfig] = useState({
     name: '',
     product: '',
@@ -127,5 +126,3 @@ const ProfileForm = ({ step, setActiveStep }: ConfigPropTypes) => {
     </Fragment>
   );
 };
-
-export default ProfileForm;

@@ -2,7 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { OnDeckState } from '../types';
 
-const initialState: OnDeckState = {
+type InitialOnDeckStateType = {
+  profile: {};
+  optional: {
+    global: {};
+    local: {};
+  };
+  sessions: {};
+};
+
+const initialState: InitialOnDeckStateType = {
   profile: {},
   optional: {
     global: {},
