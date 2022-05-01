@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAppDispatch } from '.';
-import { descriptorActions } from '../app';
+import { descriptorsActions } from '../app';
 import type { AllowedMethods, RequestOptions } from './types';
 
-const { updateDescriptors } = descriptorActions;
+const { updateDescriptors } = descriptorsActions;
 
 export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: string = '', body?: any) => {
   const [data, setData] = useState<any>({

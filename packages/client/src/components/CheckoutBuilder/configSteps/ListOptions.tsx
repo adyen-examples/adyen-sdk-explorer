@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react';
-import { Checkbox, Grid, TextField, Typography } from '@mui/material';
+import { ChangeEvent } from 'react';
+import { Grid } from '@mui/material';
 import { Option } from './Option';
 import type { ConfigTypes } from '../types';
 import type { Descriptor } from '../../../app/types';

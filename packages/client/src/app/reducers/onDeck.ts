@@ -18,16 +18,13 @@ export const onDeckSlice = createSlice({
       return { ...state, profile };
     },
     updateGlobalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const global = { ...state.global, ...action.payload };
-      return { ...state, global };
+      return { ...state, global: action.payload };
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const local = { ...state.local, ...action.payload };
-      return { ...state, local };
+      return { ...state, local: action.payload };
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const sessions = { ...state.sessions, ...action.payload };
-      return { ...state, sessions };
+      return { ...state, sessions: action.payload };
     },
     clearOnDeckInfo: state => {
       return initialState;
