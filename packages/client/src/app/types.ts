@@ -44,10 +44,10 @@ export type SessionsOnDeckState = {
 };
 
 export type OnDeckState = {
-  profile?: ProfileOnDeckState;
-  global?: GlobalOnDeckState;
-  local?: LocalOnDeckState;
-  sessions?: SessionsOnDeckState;
+  profile: ProfileOnDeckState | {};
+  global: GlobalOnDeckState | {};
+  local: LocalOnDeckState | {};
+  sessions: SessionsOnDeckState | {};
   [key: string]: ProfileOnDeckState | GlobalOnDeckState | LocalOnDeckState | SessionsOnDeckState | {} | undefined;
 };
 

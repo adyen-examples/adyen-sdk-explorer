@@ -8,8 +8,8 @@ const initialState: DescriptorList = {
   sessions: []
 };
 
-export const descriptorSlice = createSlice({
-  name: 'descriptor',
+export const descriptorsSlice = createSlice({
+  name: 'descriptors',
   initialState,
   reducers: {
     updateDescriptors: (state, action: PayloadAction<DescriptorList>) => {
@@ -24,4 +24,4 @@ export const descriptorSlice = createSlice({
   }
 });
 
-export const { actions, reducer } = descriptorSlice;
+export const { actions, reducer } = descriptorsSlice;

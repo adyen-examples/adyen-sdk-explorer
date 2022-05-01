@@ -3,8 +3,8 @@ export {
   userActions,
   onDeckReducer,
   onDeckActions,
-  descriptorReducer,
-  descriptorActions,
+  descriptorsReducer,
+  descriptorsActions,
   configurationReducer,
   configurationActions
 } from './reducers';
