@@ -1,26 +1,29 @@
 import { useState } from 'react';
 import type { OnDeckState } from '../../app/types';
+import type { ConfigTypes } from '../../components/CheckoutBuilder/types';
 
-type UpdateConfigArgs = {
-  name: 'profile' | 'global' | 'local' | 'sessions';
-  key: string;
-  value: string;
-};
+type UpdateConfigNames = 'profile' | 'global' | 'local' | 'sessions';
 
-export const useBuildOnDeck = (config: OnDeckState) => {
-  const [newConfig, setNewConfig] = useState(config);
+export const useBuildOnDeck = (currentConfig: OnDeckState) => {
+  const [config, setConfig] = useState(currentConfig);
 
-  const updateConfig = ({ name, key, value }: UpdateConfigArgs) => {
-    const objectOfInterest = newConfig[name];
-    const objectToUpdate = { ...objectOfInterest, [key]: value };
-    setNewConfig(prevState => ({
+  const updateConfig = (name: UpdateConfigNames, key: string, value: string | null) => {
+    const objectOfInterest = config[name];
+    let objectToUpdate: ConfigTypes;
+    if (value === null && config.hasOwnProperty(key)) {
+      objectToUpdate = { ...config };
+      delete objectToUpdate[key];
+    } else {
+      objectToUpdate = { ...objectOfInterest, [key]: value };
+    }
+    setConfig(prevState => ({
       ...prevState,
       [name]: objectToUpdate
     }));
   };
 
   return {
-    newConfig,
+    config,
     updateConfig
   };
 };
