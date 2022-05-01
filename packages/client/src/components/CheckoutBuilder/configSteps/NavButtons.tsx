@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
-const { updateProfileInfo, updateOptionalInfo, updateSessionsInfo } = onDeckActions;
+const { updateProfileInfo, updateGlobalInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 type NavButtonsProps = {
   step: number;
@@ -22,10 +22,12 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
       case 0:
         return dispatch(updateProfileInfo(configuration));
       case 1:
-        return dispatch(updateOptionalInfo(configuration));
+        return dispatch(updateGlobalInfo(configuration));
       case 2:
-        return dispatch(updateSessionsInfo(configuration));
+        return dispatch(updateLocalInfo(configuration));
       case 3:
+        return dispatch(updateSessionsInfo(configuration));
+      case 4:
         return navigate('dropin');
       default:
         throw new Error('Unknown step');

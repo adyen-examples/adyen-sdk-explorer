@@ -1,46 +1,41 @@
+import { useState, ChangeEvent } from 'react';
 import { Checkbox, Grid, TextField, Typography } from '@mui/material';
+import { Option } from './Option';
 import type { ConfigTypes } from '../types';
 import type { Descriptor } from '../../../app/types';
 
 type ListOptionsProps = {
-  configDictionary: Descriptor[];
+  descriptors: Descriptor[];
   configuration: ConfigTypes;
-  setConfiguration: (config: {}) => void;
+  handleUpdateConfig: (key: string, value: string | null) => void;
 };
 
-export const ListOptions = ({ configDictionary, configuration, setConfiguration }: ListOptionsProps) => {
-  console.log('LIST OPTIONS CONFIG', configuration);
-
-  const handleToggle = (t: string) => () => {
-    if (configuration && configuration.hasOwnProperty(t)) {
-      setConfiguration({ [t]: null });
+export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: ListOptionsProps) => {
+  const addOrRemoveProp = (e: ChangeEvent<HTMLInputElement>) => {
+    const key = e.target.name;
+    if (configuration && configuration.hasOwnProperty(key)) {
+      handleUpdateConfig(key, null);
     } else {
-      setConfiguration({ [t]: '' });
+      handleUpdateConfig(key, '');
     }
   };
 
-  const handleInput = (t: any) => (e: any) => {
-    configuration[t] = e.target.value;
-    setConfiguration(configuration);
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    handleUpdateConfig(e.target.name, e.target.value);
   };
 
   return (
     <Grid container rowSpacing={2}>
-      {configDictionary &&
-        configDictionary.map((g: any, i: any) => (
-          <Grid item xs={11} key={i}>
-            <Checkbox checked={configuration[g.name]} onChange={handleToggle(g.name)} inputProps={{ 'aria-label': 'controlled' }} size="small" />
-            <Typography variant="overline">{g.name}</Typography>
-            <Typography variant="subtitle2">{g.description}</Typography>
-            {configuration[g.name] && (
-              <TextField onChange={handleInput(g.name)} id="showPayButton" label={g.name} value={configuration[g.name]} fullWidth />
-            )}
-          </Grid>
+      {descriptors &&
+        descriptors.map((descriptor: Descriptor, i: number) => (
+          <Option
+            descriptor={descriptor}
+            indexKey={i}
+            addOrRemoveProp={addOrRemoveProp}
+            handleInput={handleInput}
+            value={configuration[descriptor.name]}
+          />
         ))}
     </Grid>
   );
-
-  //   return (
-  //     <Typography variant="overline">...Loading</Typography>
-  //   )
 };

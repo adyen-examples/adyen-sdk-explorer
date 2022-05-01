@@ -4,19 +4,15 @@ import type { OnDeckState } from '../types';
 
 type InitialOnDeckStateType = {
   profile: {};
-  optional: {
-    global: {};
-    local: {};
-  };
+  global: {};
+  local: {};
   sessions: {};
 };
 
 const initialState: InitialOnDeckStateType = {
   profile: {},
-  optional: {
-    global: {},
-    local: {}
-  },
+  global: {},
+  local: {},
   sessions: {}
 };
 
@@ -28,12 +24,13 @@ export const onDeckSlice = createSlice({
       const profile = { ...state.profile, ...action.payload };
       return { ...state, profile };
     },
-    updateOptionalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const { global, local } = action.payload.optional;
-      Object.assign({}, state.optional, {
-        global,
-        local
-      });
+    updateGlobalInfo: (state, action: PayloadAction<OnDeckState>) => {
+      const global = { ...state.global, ...action.payload };
+      return { ...state, global };
+    },
+    updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
+      const local = { ...state.local, ...action.payload };
+      return { ...state, local };
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckState>) => {
       const sessions = { ...state.sessions, ...action.payload };
