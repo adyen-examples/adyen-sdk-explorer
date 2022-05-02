@@ -21,13 +21,15 @@ export const ConfigWrapper = () => {
       displayStep = <ProfileForm step={activeStep} setActiveStep={setActiveStep} />;
       break;
     case 1:
-      displayStep = <Config configuration={global} descriptors={descriptors.global} step={activeStep} setActiveStep={setActiveStep} />;
+      displayStep = <Config key="global" configuration={global} descriptors={descriptors.global} step={activeStep} setActiveStep={setActiveStep} />;
       break;
     case 2:
-      displayStep = <Config configuration={local} descriptors={descriptors.local} step={activeStep} setActiveStep={setActiveStep} />;
+      displayStep = <Config key="local" configuration={local} descriptors={descriptors.local} step={activeStep} setActiveStep={setActiveStep} />;
       break;
     case 3:
-      displayStep = <Config configuration={sessions} descriptors={descriptors.sessions} step={activeStep} setActiveStep={setActiveStep} />;
+      displayStep = (
+        <Config key="sessions" configuration={sessions} descriptors={descriptors.sessions} step={activeStep} setActiveStep={setActiveStep} />
+      );
       break;
     case 4:
       displayStep = <ReviewForm step={activeStep} setActiveStep={setActiveStep} />;

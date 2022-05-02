@@ -8,9 +8,9 @@ export const Config = ({ configuration, descriptors, step, setActiveStep }: Conf
   const [currentConfig, setCurrentConfig] = useState(configuration);
   console.log('RERENDER FOR STEP', step, currentConfig);
 
-  useEffect(() => {
-    setCurrentConfig(configuration);
-  }, [configuration]);
+  // useEffect(() => {
+  //   setCurrentConfig(configuration);
+  // }, [configuration]);
 
   const handleUpdateConfig = (key: string, value: string | null) => {
     console.log('HANDLE UPDATE CONFIG', key, value);
