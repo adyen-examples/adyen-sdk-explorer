@@ -1,39 +1,57 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from '.';
+import { descriptorsActions } from '../app';
+import type { AllowedMethods, RequestOptions } from './types';
 
-export const apiStates = {
-  LOADING: 'LOADING',
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR'
-};
+const { updateDescriptors } = descriptorsActions;
 
-export const useApi = (url:any) => {
-  const [data, setData] = React.useState({
-    state: apiStates.LOADING,
-    error: '',
-    data: []
+export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: string = '', body?: any) => {
+  const [data, setData] = useState<any>({
+    state: 'LOADING',
+    error: null,
+    data: null
   });
-
+  const dispatch = useAppDispatch();
   const setPartData = (partialData: any) => setData({ ...data, ...partialData });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setPartData({
-      state: apiStates.LOADING
+      state: 'LOADING'
     });
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
+
+    const requestOptions: RequestOptions = {
+      method,
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: apiKey
+      }
+    };
+
+    if (body && method !== 'GET') {
+      requestOptions.body = body;
+    }
+
+    const makeRequest: () => void = async () => {
+      try {
+        const response = await fetch(url, requestOptions);
+        const data = await response.json();
+        console.log(data);
         setPartData({
-          state: apiStates.SUCCESS,
+          state: 'SUCCESS',
           data
         });
-      })
-      .catch(() => {
+        dispatch(updateDescriptors(data));
+      } catch (err) {
+        console.error(err);
         setPartData({
-          state: apiStates.ERROR,
+          state: 'ERROR',
           error: 'fetch failed'
         });
-      });
-  }, []);
+      }
+    };
 
-  return data;
+    makeRequest();
+  }, [url, method, apiKey, body]);
+
+  return [data];
 };

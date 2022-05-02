@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build --workspace=adyen-demo-client && npm run start --workspace=adyen-demo-server"
+    "start": "npm run build --workspace=adyen-demo-client && npm run start --workspace=adyen-demo-server",
+    "dev": "npm run start --workspace=adyen-demo-server && npm run start --workspace=adyen-demo-client"
   },
   "repository": {
     "type": "git",

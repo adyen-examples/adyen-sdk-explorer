@@ -99,7 +99,7 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
     const updatedConfig = await Configuration.findOneAndUpdate({ _id: req.body.id }, { $set: toUpdate }, { new: true }).exec();
     if (updatedConfig) {
       const { owner, name, version, configuration } = updatedConfig;
-      return res.send(200).json({ id: req.body.id, owner, name, version, configuration });
+      return res.status(200).json({ id: req.body.id, owner, name, version, configuration });
     }
     res.status(500).json({ message: 'Internal server error' });
   } catch (err) {
@@ -110,7 +110,7 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
 
 router.get('/', (req, res) => {
   try {
-    return res.send(201).json({ globalConfig, localConfig, sessionsConfig });
+    return res.status(201).json({ globalConfig, localConfig, sessionsConfig });
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

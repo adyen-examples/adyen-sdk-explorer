@@ -1,5 +1,10 @@
-export * as actions from './actions';
-export * as selectors from './selectors';
-export { userReducer, configurationReducer } from './reducers';
-
-export type { ConfigurationState, UserState } from './types';
+export {
+  userReducer,
+  userActions,
+  onDeckReducer,
+  onDeckActions,
+  descriptorsReducer,
+  descriptorsActions,
+  configurationReducer,
+  configurationActions
+} from './reducers';

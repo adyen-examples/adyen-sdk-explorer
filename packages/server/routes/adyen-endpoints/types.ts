@@ -11,7 +11,7 @@ export interface InitializationRequest extends BaseAdyenRequest {
     amount: PaymentAmount;
     returnUrl: string;
     reference: string;
-    expiresAt?: Date;
+    expiresAt?: string;
     countryCode?: string;
     shopperLocale?: string;
     shopperEmail?: string;

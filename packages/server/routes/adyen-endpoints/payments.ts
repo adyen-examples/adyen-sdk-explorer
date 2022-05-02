@@ -1,6 +1,5 @@
 import { Request, Response, Router } from 'express';
 import request from 'request-promise';
-import { errorHandler } from '../helpers';
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
 
 import type { InitializationRequest, RequestOptions } from './types';
@@ -24,7 +23,7 @@ router.post('/getPaymentMethods', async (req: Request, res: Response) => {
     const response: PaymentMethodsResponseInterface = await request(options);
     res.send(201).json(response);
   } catch (err: any) {
-    errorHandler('/getPaymentMethods', 500, err.message, res);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -44,7 +43,7 @@ router.post('/makePayment', async (req: Request, res: Response) => {
     const response = await request(options);
     res.send(201).json(response);
   } catch (err: any) {
-    errorHandler('/makePayment', 500, err.message, res);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -64,7 +63,7 @@ router.post('/additionalDetails', async (req: Request, res: Response) => {
     const response = await request(options);
     res.send(201).json(response);
   } catch (err: any) {
-    errorHandler('/additionalDetails', 500, err.message, res);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
