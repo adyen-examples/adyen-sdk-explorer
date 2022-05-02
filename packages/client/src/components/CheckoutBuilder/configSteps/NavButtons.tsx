@@ -28,7 +28,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
       case 3:
         return dispatch(updateSessionsInfo(configuration));
       case 4:
-        return navigate('dropin');
+        return navigate('dropin', { state: configuration });
       default:
         throw new Error('Unknown step');
     }
@@ -51,7 +51,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
         </Button>
       )}
       <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
-        {step === 3 ? 'Build Checkout' : 'Next'}
+        {step === 4 ? 'Build Checkout' : 'Next'}
       </Button>
     </Box>
   );

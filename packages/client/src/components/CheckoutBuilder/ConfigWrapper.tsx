@@ -32,7 +32,7 @@ export const ConfigWrapper = () => {
       );
       break;
     case 4:
-      displayStep = <ReviewForm step={activeStep} setActiveStep={setActiveStep} />;
+      displayStep = <ReviewForm step={activeStep} setActiveStep={setActiveStep} configuration={{ global, local, sessions }} />;
       break;
     case 5:
       displayStep = (
