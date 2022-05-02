@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Divider, Typography, Stepper, Step, StepLabel } from '@mui/material';
-import { ProfileForm, ReviewForm, NavButtons } from './configSteps';
+import { ProfileForm, ReviewForm } from './configSteps';
 import { Config } from './Config';
 import type { RootState } from '../../store';
 
@@ -9,6 +9,8 @@ export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
   const { global, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [activeStep, setActiveStep] = useState(0);
+
+  console.log('ACTIVE STEP', activeStep);
 
   const steps = ['Profile', 'Global Configuration', 'Component Configuration', 'API Configuration', 'Review your config'];
 
@@ -30,6 +32,13 @@ export const ConfigWrapper = () => {
     case 4:
       displayStep = <ReviewForm step={activeStep} setActiveStep={setActiveStep} />;
       break;
+    case 5:
+      displayStep = (
+        <Typography variant="h5" gutterBottom>
+          Your Checkout is being generated...
+        </Typography>
+      );
+      break;
     default:
       throw new Error('Unknown step');
   }
@@ -45,17 +54,7 @@ export const ConfigWrapper = () => {
           </Step>
         ))}
       </Stepper>
-      <Fragment>
-        {activeStep === steps.length ? (
-          <Fragment>
-            <Typography variant="h5" gutterBottom>
-              Your Checkout is being generated...
-            </Typography>
-          </Fragment>
-        ) : (
-          <Fragment>{displayStep}</Fragment>
-        )}
-      </Fragment>
+      {displayStep}
     </Fragment>
   );
 };

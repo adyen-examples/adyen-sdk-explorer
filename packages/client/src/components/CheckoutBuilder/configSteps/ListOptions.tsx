@@ -30,7 +30,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
         descriptors.map((descriptor: Descriptor, i: number) => (
           <Option
             descriptor={descriptor}
-            indexKey={i}
+            indexKey={descriptor.name}
             addOrRemoveProp={addOrRemoveProp}
             handleInput={handleInput}
             value={configuration[descriptor.name]}

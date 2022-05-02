@@ -4,7 +4,7 @@ import type { Descriptor } from '../../../app/types';
 
 type OptionPropTypes = {
   value: string;
-  indexKey: number;
+  indexKey: string;
   descriptor: Descriptor;
   addOrRemoveProp: (e: ChangeEvent<HTMLInputElement>) => void | undefined;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;

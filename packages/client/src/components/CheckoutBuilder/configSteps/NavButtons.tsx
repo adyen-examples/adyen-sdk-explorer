@@ -15,7 +15,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  console.log('NAV BUTTON CONFIG', configuration);
+  console.log('NAV BUTTON CONFIG', step, configuration);
 
   const runStepAction = () => {
     switch (step) {

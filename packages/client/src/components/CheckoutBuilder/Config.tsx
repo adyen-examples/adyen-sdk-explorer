@@ -1,4 +1,4 @@
-import { useState, Fragment, ChangeEvent } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Editor } from './configSteps/Editor';
 import { ListOptions, NavButtons } from './configSteps';
@@ -6,7 +6,12 @@ import type { ConfigPropTypes } from './types';
 
 export const Config = ({ configuration, descriptors, step, setActiveStep }: ConfigPropTypes) => {
   const [currentConfig, setCurrentConfig] = useState(configuration);
-  console.log(currentConfig);
+  console.log('RERENDER FOR STEP', step, currentConfig);
+
+  useEffect(() => {
+    setCurrentConfig(configuration);
+  }, [configuration]);
+
   const handleUpdateConfig = (key: string, value: string | null) => {
     console.log('HANDLE UPDATE CONFIG', key, value);
     if (value === null) {
