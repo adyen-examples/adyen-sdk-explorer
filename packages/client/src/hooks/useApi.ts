@@ -3,6 +3,8 @@ import { useAppDispatch } from '.';
 import { descriptorsActions } from '../app';
 import type { AllowedMethods, RequestOptions } from './types';
 
+// Pass action as argument for dispatch callback?
+
 const { updateDescriptors } = descriptorsActions;
 
 export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: string = '', body?: any) => {

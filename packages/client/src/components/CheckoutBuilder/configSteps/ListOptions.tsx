@@ -27,7 +27,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
   return (
     <Grid container rowSpacing={2}>
       {descriptors &&
-        descriptors.map((descriptor: Descriptor, i: number) => (
+        descriptors.map((descriptor: Descriptor) => (
           <Option
             descriptor={descriptor}
             indexKey={descriptor.name}

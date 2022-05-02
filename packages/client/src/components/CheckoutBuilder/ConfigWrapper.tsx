@@ -5,12 +5,12 @@ import { ProfileForm, ReviewForm } from './configSteps';
 import { Config } from './Config';
 import type { RootState } from '../../store';
 
+//Rendering components twice if head to drop-in and hit back
+
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
   const { global, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [activeStep, setActiveStep] = useState(0);
-
-  console.log('ACTIVE STEP', activeStep);
 
   const steps = ['Profile', 'Global Configuration', 'Component Configuration', 'API Configuration', 'Review your config'];
 

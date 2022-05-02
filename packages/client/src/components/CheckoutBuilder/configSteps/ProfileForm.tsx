@@ -9,7 +9,6 @@ export const ProfileForm = ({ step, setActiveStep }: { step: number; setActiveSt
     checkoutVersion: '',
     dropinVersion: ''
   });
-  // const { product, checkout_version, dropin_version } = configuration;
 
   const handleChange = (e: any) => {
     setConfig(prevState => ({

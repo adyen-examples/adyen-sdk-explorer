@@ -6,14 +6,8 @@ import type { ConfigPropTypes } from './types';
 
 export const Config = ({ configuration, descriptors, step, setActiveStep }: ConfigPropTypes) => {
   const [currentConfig, setCurrentConfig] = useState(configuration);
-  console.log('RERENDER FOR STEP', step, currentConfig);
-
-  // useEffect(() => {
-  //   setCurrentConfig(configuration);
-  // }, [configuration]);
 
   const handleUpdateConfig = (key: string, value: string | null) => {
-    console.log('HANDLE UPDATE CONFIG', key, value);
     if (value === null) {
       let newConfig = { ...currentConfig };
       delete newConfig[key];
