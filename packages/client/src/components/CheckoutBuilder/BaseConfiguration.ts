@@ -1,8 +1,10 @@
-import { BaseConfigurationProps, Configurations } from '../types';
+import { Session } from 'inspector';
+import { BaseConfigurationProps } from '../types';
+import SessionConfiguration from './SessionConfiguration';
 
 class BaseConfiguration<P extends BaseConfigurationProps> {
   private _props: P;
-  private _state: any;
+  protected _state: any;
 
   public constructor(props: any = {}) {
     this._props = this.formatProps({ ...props });
@@ -38,6 +40,11 @@ class BaseConfiguration<P extends BaseConfigurationProps> {
 
   public getConfigOption(configOption: string) : object {
       return this._state[configOption];
+  }
+
+  public toSessionConfiguration(): SessionConfiguration {
+    const test = new SessionConfiguration(this._props,this._state);
+    return test;
   }
 }
 
