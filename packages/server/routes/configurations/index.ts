@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
 
-import { User, Configuration } from '../../models';
+import { User, Configuration, additionalData, sessionsConfig, paymentMethodDetails } from '../../models';
 import { jwtAuth, isAuthorizedForAction } from '../auth';
 
 import type { ConfigToUpdate } from './types';
 
-// TEMPORARY MOCK DB FOR INITIALIZING
-import { globalConfig, localConfig, sessionsConfig } from '../../temp';
+// Adyen attributes
+import { globalConfig, localConfig } from '../../temp';
 
 const router = Router();
 

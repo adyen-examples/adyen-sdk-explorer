@@ -1,0 +1,102 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "brand": {
+      "description": "Secondary brand of the card. For example: **plastix**, **hmclub**.",
+      "type": "string"
+    },
+    "cupsecureplus.smscode": {
+      "deprecated": true,
+      "type": "string"
+    },
+    "cvc": {
+      "description": "The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).",
+      "type": "string"
+    },
+    "encryptedCardNumber": {
+      "description": "The encrypted card number.",
+      "maxLength": 10000,
+      "type": "string"
+    },
+    "encryptedExpiryMonth": {
+      "description": "The encrypted card expiry month.",
+      "maxLength": 10000,
+      "type": "string"
+    },
+    "encryptedExpiryYear": {
+      "description": "The encrypted card expiry year.",
+      "maxLength": 10000,
+      "type": "string"
+    },
+    "encryptedSecurityCode": {
+      "description": "The encrypted card verification code.",
+      "maxLength": 10000,
+      "type": "string"
+    },
+    "expiryMonth": {
+      "description": "The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).",
+      "type": "string"
+    },
+    "expiryYear": {
+      "description": "The card expiry year. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).",
+      "type": "string"
+    },
+    "fundingSource": {
+      "description": "The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.",
+      "enum": ["debit"],
+      "type": "string"
+    },
+    "holderName": {
+      "description": "The name of the card holder.",
+      "type": "string"
+    },
+    "networkPaymentReference": {
+      "description": "The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.",
+      "type": "string"
+    },
+    "number": {
+      "description": "The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "shopperNotificationReference": {
+      "description": "The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "threeDS2SdkVersion": {
+      "description": "Version of the 3D Secure 2 mobile SDK.",
+      "maxLength": 12,
+      "type": "string"
+    },
+    "type": {
+      "default": "scheme",
+      "description": "Default payment method details. Common for scheme payment methods, and for simple payment method details.",
+      "enum": [
+        "scheme",
+        "networkToken",
+        "giftcard",
+        "alliancedata",
+        "card",
+        "qiwiwallet",
+        "lianlianpay_ebanking_enterprise",
+        "lianlianpay_ebanking_credit",
+        "lianlianpay_ebanking_debit",
+        "entercash"
+      ],
+      "type": "string"
+    }
+  },
+  "required": ["encryptedCardNumber", "encryptedExpiryMonth", "encryptedExpiryYear"],
+  "title": "Card"
+}

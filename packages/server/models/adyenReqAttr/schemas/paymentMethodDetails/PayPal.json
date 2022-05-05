@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "orderID": {
+      "description": "The unique ID associated with the order.",
+      "type": "string"
+    },
+    "payerID": {
+      "description": "The unique ID associated with the payer.",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "subtype": {
+      "description": "The type of flow to initiate.",
+      "enum": ["redirect", "sdk"],
+      "type": "string"
+    },
+    "type": {
+      "default": "paypal",
+      "description": "**paypal**",
+      "enum": ["paypal"],
+      "type": "string"
+    }
+  },
+  "required": ["type"],
+  "title": "PayPal"
+}

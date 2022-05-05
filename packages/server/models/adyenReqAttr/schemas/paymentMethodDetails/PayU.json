@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "shopperNotificationReference": {
+      "description": "The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used for recurring payment only.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "payu_IN_upi",
+      "description": "**payu_IN_upi**",
+      "enum": ["payu_IN_upi"],
+      "type": "string"
+    },
+    "virtualPaymentAddress": {
+      "description": "The virtual payment address for UPI.",
+      "type": "string"
+    }
+  },
+  "required": ["type"],
+  "title": "PayU"
+}
