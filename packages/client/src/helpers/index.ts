@@ -6,7 +6,7 @@ export const compareFormData = (prev: any, next: FormDataProps) => {
   }
 
   const valueMatch = prev.amount.value && prev.amount.value === next.amount.value;
-  const currencyMatch = prev.amout.currency && prev.amount.currency === next.amount.currency;
+  const currencyMatch = prev.amount.currency && prev.amount.currency === next.amount.currency;
   const countryCodeMatch = prev.countryCode && prev.countryCode === next.countryCode;
 
   return countryCodeMatch && currencyMatch && valueMatch;

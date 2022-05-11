@@ -4,23 +4,27 @@ import { useMemoCompare } from '../helpers/useMemoCompare';
 import { compareCheckoutData } from '../../helpers';
 import type { CheckoutConfig, EditableCheckoutConfigFields } from '../types';
 
-export const useCheckout = (options: EditableCheckoutConfigFields) => {
+//options: EditableCheckoutConfigFields
+export const useCheckout = (options: any) => {
   const [checkout, setCheckout] = useState<any>(null);
-
+  const {global, session} = options;
   // creates ref and uses data compare callback to decide if re-rendering should occur.  Without this, there is an infinite loop.
-  const opts = useMemoCompare(options, compareCheckoutData);
-
+  // const opts = useMemoCompare(options, compareCheckoutData);
+  // I modified this to remove the comparison and only mount 
   useEffect(() => {
     let configuration: CheckoutConfig;
     if (options.session) {
       configuration = {
-        ...options,
+        ...global,
+        session,
         onPaymentCompleted: (result, component) => {
           console.info(result, component);
         },
         onError: (error, component) => {
           console.error(error.name, error.message, error.stack, component);
-        }
+        },
+        clientKey: "test_QFGJGRQZERFWNFYWKEZSQL3E342QEDNU",
+        environment: "test"
       };
     } else {
       configuration = {
@@ -39,14 +43,17 @@ export const useCheckout = (options: EditableCheckoutConfigFields) => {
         }
       };
     }
+  
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);
 
       setCheckout(component);
     };
 
+    console.log('initializing with this configuration', configuration);
+    
     initializeCheckout(configuration);
-  }, [opts]);
+  }, []);
 
   return [checkout];
 };

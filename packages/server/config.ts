@@ -1,3 +1,4 @@
+require("dotenv").config();
 export const PORT = process.env.PORT || 8080;
 export const ADYEN_API_KEY = process.env.ADYEN_API_KEY || '';
 export const ADYEN_BASE_URL = process.env.ADYEN_BASE_URL || 'https://checkout-test.adyen.com';

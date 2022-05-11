@@ -28,6 +28,7 @@ export interface RequestOptions {
   };
   body: any;
   json: boolean;
+  method?: string;
 }
 
 export type { PaymentAmount };

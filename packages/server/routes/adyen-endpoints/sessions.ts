@@ -1,29 +1,35 @@
 import { Router, Request, Response } from 'express';
 import request from 'request-promise';
-
 import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
-
 import type { InitializationRequest, RequestOptions } from './types';
 import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
 
 const router = Router();
 
-router.post('/sessionStart', async (req: Request, res: Response) => {
-  const { version, apiKey, payload }: InitializationRequest = req.body;
+router.post('/sessionStart', async (req: Request, res: Response) => { 
+  const { payload }: InitializationRequest = req.body;
+  
   try {
     const options: RequestOptions = {
-      url: `${ADYEN_BASE_URL}/${version}/sessions`,
+      url: `${ADYEN_BASE_URL}/v68/sessions`,
       headers: {
         'Content-type': 'application/json',
-        'x-api-key': apiKey || ADYEN_API_KEY
+        'x-api-key': ADYEN_API_KEY
       },
-      body: payload,
-      json: true
+      body: {
+        ...payload,
+        merchantAccount:'AdyenRecruitment_SF9',
+        returnUrl: 'http://test-merchant.com',
+        reference: 'test-payment'
+      },
+      json: true,
+      method:'POST'
     };
-
+    
     const response: CheckoutSessionSetupResponse = await request(options);
-    res.send(201).json(response);
+    res.json(response);
   } catch (err: any) {
+    console.log('error: ',err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

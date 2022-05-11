@@ -10,15 +10,14 @@ import type { RootState } from '../../store';
 const ComponentBase = () => {
   const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
 
-  // const params = useParams();
-  // const component = params.component;
-  // const [checkoutInfo] = useInitializeCheckout(options, component, endpoint);
-  // const { state } = useLocation();
-  // console.log(state);
+  const params = useParams();
+  const component = params.component;
+  const [checkoutInfo] = useInitializeCheckout(sessions, component, 'sessions/sessionStart');
 
-  // if (checkoutInfo && component) {
-  //   return <Component type={component} options={checkoutInfo} />;
-  // }
+  // Here we are going to create the class and add all of the callbacks
+  if (checkoutInfo && component) {
+    return <Component type={component} options={{global,local,session: {id: checkoutInfo.id, sessionData: checkoutInfo.sessionData}}} />;
+  }
   return <div>Loading...</div>;
 };
 
