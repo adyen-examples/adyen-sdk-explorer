@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import request from 'request-promise';
-import { ADYEN_API_KEY, ADYEN_BASE_URL } from '../../config';
+import { ADYEN_API_KEY, ADYEN_BASE_URL, ADYEN_MERCHANT_ACCOUNT } from '../../config';
 import type { InitializationRequest, RequestOptions } from './types';
 import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/types';
 
@@ -17,10 +17,10 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
         'x-api-key': ADYEN_API_KEY
       },
       body: {
-        ...payload,
-        merchantAccount:'AdyenRecruitment_SF9',
+        merchantAccount: ADYEN_MERCHANT_ACCOUNT,
         returnUrl: 'http://test-merchant.com',
-        reference: 'test-payment'
+        reference: 'test-payment',
+        ...payload
       },
       json: true,
       method:'POST'
