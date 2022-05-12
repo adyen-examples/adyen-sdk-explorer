@@ -1,22 +1,26 @@
 import { ConfigurationBaseProps } from '../types';
 
 class ConfigurationBase<P extends ConfigurationBaseProps> {
-  public _props: P;
-  public _state: any;
+  public props: P;
+  public data: any;
+  public state: any;
 
   public constructor(props: P) {
-    this._props = this.formatProps({ ...props });
-    this._state = this._props ? this._props : new Object();
+    this.props = this.formatProps({ ...props });
+    this.state = this.props ? this.props : new Object();
   }
   protected formatProps(props: any) {
     return props || {};
   }
   get state(): object {
-    return this._state;
+    return this.state;
   }
-  public set state(configuration: any): void {
-    this._state = { ...this._state, ...configuration };
+  set state(configuration: any): void {
+    this.state = { ...this.state, ...configuration };
+  }
+  set data(payload: any): void {
+    this.data = { payload };
   }
 }
 
-export default BaseConfiguration;
+export default ConfigurationBase;
