@@ -17,10 +17,10 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
         'x-api-key': ADYEN_API_KEY
       },
       body: {
+        ...payload,
         merchantAccount: ADYEN_MERCHANT_ACCOUNT,
         returnUrl: 'http://test-merchant.com',
-        reference: 'test-payment',
-        ...payload
+        reference: 'test-payment'
       },
       json: true,
       method:'POST'

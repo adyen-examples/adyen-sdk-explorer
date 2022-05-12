@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Adyen Demo Front End",
   "main": "index.js",
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

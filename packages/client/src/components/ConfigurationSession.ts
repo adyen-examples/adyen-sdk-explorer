@@ -1,9 +1,15 @@
-import { ConfigurationSessionProps } from '../types';
+import { ConfigurationSessionProps } from './types';
 import ConfigurationBase from './ConfigurationBase';
 
 class ConfigurationSession<P extends ConfigurationSessionProps = any> extends ConfigurationBase<P> {
-  constructor(props: P) {
+  public initClientAPI: string;
+  public apiConfiguration: object;
+// need to update props type to props: P
+  constructor(props: any) { 
     super(props);
+    this.initClientAPI = 'sessions/sessionStart';
+    this.apiConfiguration = this.props.sessions;
+
     this.onPaymentCompleted = this.onPaymentCompleted.bind(this);
     this.onError = this.onError.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -38,26 +44,6 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
   }
   public onAdditionalDetails(state: any, element: object): void {
     console.info(state, element);
-  }
-
-  public get globalConfigOptions(): object {
-    return this._state.globalConfigOptions;
-  }
-
-  public get localConfigOptions(): object {
-    return this._state.localConfigOptions;
-  }
-
-  public get sessionsRequestOptions(): object {
-    return this._state.sessions;
-  }
-
-  public get session(): {id:string, data: string} {
-    return this.session;
-  }
-
-  public set session(session: {id:string, data: string}){
-    this.session = session;
   }
 }
 

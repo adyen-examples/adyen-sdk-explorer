@@ -16,6 +16,7 @@ const Component = ({ type, options }: { type: string; options: any }) => {
   // So either we create a component for each, or we just pass in useCheckout and such
   // I think we use the state as the example we had. 
   
+  
   const [checkout] = useCheckout(options);
 
   if (checkout) {

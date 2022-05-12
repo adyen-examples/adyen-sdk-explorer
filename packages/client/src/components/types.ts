@@ -1,3 +1,5 @@
+import { object } from 'prop-types';
+
 export type FormDataProps = {
   amount: {
     value: number;
@@ -14,9 +16,17 @@ export type PaymentsFormProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export type ConfigurationBaseProps = {
-  global?: object;
-  local?: object;
-  sessions?: object;
-  checkout?:object;
+export interface ConfigurationBaseProps {
+  global: object;
+  local: object;
+  profile: {
+    checkoutVersion: string;
+    dropinVersion: string;
+    name: string;
+    product: string;
+  };
+}
+
+export interface ConfigurationSessionProps extends ConfigurationBaseProps {
+  sessions: object;
 }
