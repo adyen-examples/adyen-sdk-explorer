@@ -13,3 +13,10 @@ export type PaymentsFormProps = {
   onSubmit: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type ConfigurationBaseProps = {
+  global?: object;
+  local?: object;
+  sessions?: object;
+  checkout?:object;
+}
