@@ -1,34 +1,60 @@
-import { ChangeEvent } from 'react';
+import { useState } from 'react';
 import { Grid } from '@mui/material';
-import { Option } from './Option';
-import type { ConfigTypes } from '../types';
-import type { Descriptor } from '../../../app/types';
+import { OptionWrapper } from './OptionWrapper';
+import type { UpdateConfig, AddOrRemoveProp, Descriptor, HandleInput } from '../types';
 
-type ListOptionsProps = {
+interface ListOptionsProps {
   descriptors: Descriptor[];
-  configuration: ConfigTypes;
-  handleUpdateConfig: (key: string, value: string | null) => void;
-};
+  configuration: any;
+  handleUpdateConfig: UpdateConfig;
+}
 
 export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: ListOptionsProps) => {
-  const addOrRemoveProp = (e: ChangeEvent<HTMLInputElement>) => {
-    const key = e.target.name;
+  console.log('configuration', configuration);
+
+  const checkForNested = (current: Descriptor) => {
+    let value: any = '';
+    if (current.properties && current.properties.length) {
+      value = {};
+      current.properties.forEach(({ name }: { name: string }) => {
+        value[name] = '';
+      });
+    } else if (current.type === 'array' && current.items) {
+      value = [];
+      if (current.items.constructor == Array) {
+        const arrayProto: { [key: string]: string } = {};
+        current.items.forEach(({ name }: { name: string }) => {
+          arrayProto[name] = '';
+        });
+        value.push(arrayProto);
+      }
+    }
+    return value;
+  };
+
+  const addOrRemoveProp: AddOrRemoveProp = e => {
+    const key: string = e.target.name;
+    console.log('KEY', key);
+    const descriptor = descriptors.find(descriptor => descriptor.name === key);
     if (configuration && configuration.hasOwnProperty(key)) {
       handleUpdateConfig(key, null);
     } else {
-      handleUpdateConfig(key, '');
+      const value = descriptor ? checkForNested(descriptor) : '';
+      handleUpdateConfig(key, value);
     }
   };
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    handleUpdateConfig(e.target.name, e.target.value);
+  const handleInput: HandleInput = (e, current) => {
+    handleUpdateConfig(e.target.name, e.target.value, current);
   };
+
+  //Add option wrapper to check for nesting and send back correct update object
 
   return (
     <Grid container rowSpacing={2}>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => (
-          <Option
+          <OptionWrapper
             descriptor={descriptor}
             indexKey={descriptor.name}
             addOrRemoveProp={addOrRemoveProp}

@@ -3,7 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { OnDeckState } from '../types';
 
 const initialState: OnDeckState = {
-  profile: {},
+  profile: {
+    name: '',
+    product: '',
+    dropinVersion: '',
+    checkoutVersion: ''
+  },
   global: {},
   local: {},
   sessions: {}

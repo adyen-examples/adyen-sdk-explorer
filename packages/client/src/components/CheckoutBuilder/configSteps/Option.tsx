@@ -1,29 +1,19 @@
-import { useState, ChangeEvent } from 'react';
-import { Grid, Checkbox, Typography, TextField } from '@mui/material';
-import type { Descriptor } from '../../../app/types';
+import { Grid, Typography, TextField } from '@mui/material';
+import { Descriptor, HandleInput } from '../types';
 
-type OptionPropTypes = {
-  value: string;
-  indexKey: string;
+export interface OptionPropTypes {
   descriptor: Descriptor;
-  addOrRemoveProp: (e: ChangeEvent<HTMLInputElement>) => void | undefined;
-  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+  onChange: HandleInput;
+  value: string;
+  isChecked: boolean;
+}
 
-export const Option = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionPropTypes) => {
-  const [isChecked, setIsChecked] = useState(!!value);
-
-  const handleToggle = (e: ChangeEvent<HTMLInputElement>, checked: boolean) => {
-    addOrRemoveProp(e);
-    setIsChecked(checked);
-  };
-
+export const Option = ({ descriptor, onChange, value, isChecked }: OptionPropTypes) => {
   return (
-    <Grid item xs={11} key={indexKey}>
-      <Checkbox name={descriptor.name} checked={isChecked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} size="small" />
+    <Grid item xs={11}>
       <Typography variant="overline">{descriptor.name}</Typography>
-      <Typography variant="subtitle2">{descriptor.description}</Typography>
-      {isChecked && <TextField name={descriptor.name} onChange={handleInput} id={descriptor.name} label={descriptor.name} value={value} fullWidth />}
+      {/* <Typography variant="subtitle2">{descriptor.description}</Typography> */}
+      {isChecked && <TextField name={descriptor.name} onChange={onChange} id={descriptor.name} label={descriptor.name} value={value} fullWidth />}
     </Grid>
   );
 };

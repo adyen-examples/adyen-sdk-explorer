@@ -1,29 +1,25 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import type { OnDeckState } from '../../app/types';
-import type { ConfigTypes } from '../../components/CheckoutBuilder/types';
 
 type UpdateConfigNames = 'profile' | 'global' | 'local' | 'sessions';
+
+export type UpdateConfig = (key: string, value: string | null) => void;
+
+export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, config: any, stateSetter: UpdateConfig) => void | undefined;
 
 export const useBuildOnDeck = (currentConfig: OnDeckState) => {
   const [config, setConfig] = useState(currentConfig);
 
-  const updateConfig = (name: UpdateConfigNames, key: string, value: string | null) => {
-    const objectOfInterest = config[name];
-    let objectToUpdate: ConfigTypes;
-    if (value === null && config.hasOwnProperty(key)) {
-      objectToUpdate = { ...config };
-      delete objectToUpdate[key];
+  const addOrRemoveProp: AddOrRemoveProp = (e, current, stateSetter): void => {
+    const key = e.target.name;
+    if (current && current.hasOwnProperty(key)) {
+      stateSetter(key, null);
     } else {
-      objectToUpdate = { ...objectOfInterest, [key]: value };
+      stateSetter(key, '');
     }
-    setConfig(prevState => ({
-      ...prevState,
-      [name]: objectToUpdate
-    }));
   };
 
   return {
-    config,
-    updateConfig
+    config
   };
 };
