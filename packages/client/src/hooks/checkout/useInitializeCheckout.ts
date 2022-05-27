@@ -4,6 +4,7 @@ import { compareFormData } from '../../helpers';
 import type { InitializationRequest, RequestOptions } from '../types';
 
 //options should be changed to initialization request
+//before export const useInitializeCheckout = (options: any, component: string, endpoint: string) => {
 export const useInitializeCheckout = (options: any, component: string, endpoint: string) => {
   const [checkoutResponse, setCheckoutResponse] = useState<any>(null);
   console.log('Starting useInitializeCheckout');

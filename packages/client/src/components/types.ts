@@ -17,8 +17,8 @@ export type PaymentsFormProps = {
 };
 
 export interface ConfigurationBaseProps {
-  global: object;
-  local: object;
+  global: any;
+  local: any;
   profile: {
     checkoutVersion: string;
     dropinVersion: string;

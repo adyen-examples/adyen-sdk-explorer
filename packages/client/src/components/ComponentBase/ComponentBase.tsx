@@ -1,24 +1,22 @@
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { useInitializeCheckout } from '../../hooks';
-import { InitializationRequest } from '../../hooks/types';
-import Component from './Component';
-import { useLocation } from 'react-router-dom';
 import type { RootState } from '../../store';
 import ConfigurationSession from '../ConfigurationSession';
+import Component from './Component';
 
 const ComponentBase = () => {
   const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const configuration = new ConfigurationSession({ profile, global, local, sessions });
-  const [test] = useInitializeCheckout(configuration.apiConfiguration, configuration.product, configuration.initClientAPI);
 
-  configuration.data = test;
-  console.log('configuration test',configuration.data);
-  console.log('test',test)
-  if (configuration) {
-    return (
-      <Component type={configuration.product} options={{ global, local, session: { id: configuration.data.id, sessionData: configuration.data.sessionData } }} />
-    );
+
+  const { apiConfiguration, product, initEndpoint } = configuration;
+  const [data] = useInitializeCheckout(apiConfiguration, product, initEndpoint);
+  configuration.setData(data);
+
+  // const [data] = useInitializeCheckout(configuration);
+
+  if (data) {
+    return <Component options={configuration} />;
   }
   return <div>Loading...</div>;
 };
