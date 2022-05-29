@@ -10,17 +10,16 @@ const ComponentBase = () => {
   const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [queryParameters] = useSearchParams();
   const [data] = useInitializeCheckout({ payload: sessions, endpoint: 'sessions/sessionStart' });
-  
-  if (queryParameters.get('redirectResult')) {
-    // return <RedirectComponent configuration={{ profile global, local, sessions }} redirectInfo={redirectInfo} />;
-    return <div>Loading...</div>;
-  } else if (data) {
-    console.log('dataa');
-    
-    const configuration = new ConfigurationSession({ profile, global, local, sessions, data });
+  const redirectResult: any = queryParameters.get('redirectResult');
+  let configuration = null;
+
+  if(data) {
+    configuration = new ConfigurationSession({ profile, global, local, sessions, data });
+    if(redirectResult) {
+      return <RedirectComponent configuration={configuration} redirectResult={redirectResult}/>;
+    }
     return <Component configuration={configuration} />;
   }
-
   return <div>Loading...</div>;
 };
 

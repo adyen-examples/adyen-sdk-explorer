@@ -7,7 +7,7 @@ const Component = ({ configuration }: { configuration: any }) => {
   const [checkout] = useCheckout(configuration);
 
   if (checkout) {
-    console.log('about to mount');
+    console.log('Configuration before mounting',configuration);
     
     checkout.create('dropin').mount('#checkout');
   }
