@@ -3,14 +3,14 @@ import ConfigurationBase from './ConfigurationBase';
 
 class ConfigurationSession<P extends ConfigurationSessionProps = any> extends ConfigurationBase<P> {
   public initEndpoint: string;
-  public apiConfiguration: object;
   public sessions: any;
 // need to update props type to props: P
   constructor(props: any) { 
+    const { profile, global, local, sessions, data } = props;
     super(props);
     this.initEndpoint = 'sessions/sessionStart';
-    this.apiConfiguration = this.props.sessions;
-    this.sessions = this.props.sessions;
+    this.sessions = sessions;
+    this.setData(data);
 
     this.onPaymentCompleted = this.onPaymentCompleted.bind(this);
     this.onError = this.onError.bind(this);

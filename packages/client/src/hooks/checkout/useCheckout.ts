@@ -11,6 +11,9 @@ export const useCheckout = (options: any) => {
   // creates ref and uses data compare callback to decide if re-rendering should occur.  Without this, there is an infinite loop.
   // const opts = useMemoCompare(options, compareCheckoutData);
   // I modified this to remove the comparison and only mount 
+  
+  console.log('options from useCheckout hook', options);
+  
   useEffect(() => {
     let configuration: CheckoutConfig;
     if (options.session) {
@@ -46,14 +49,14 @@ export const useCheckout = (options: any) => {
   
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);
-
       setCheckout(component);
     };
 
     console.log('initializing with this configuration', configuration);
     
-    initializeCheckout(configuration);
+    initializeCheckout({});
   }, []);
-
+  console.log('this is the checkout',checkout);
+  
   return [checkout];
 };
