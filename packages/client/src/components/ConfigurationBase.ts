@@ -1,24 +1,30 @@
 import { ConfigurationBaseProps } from './types';
-//P extends ConfigurationBaseProps
+
 class ConfigurationBase<P extends ConfigurationBaseProps> {
   public props: P;
-  public data: any;
-  public global: any;
-  public local: any;
-  public profile: any;
+  public clientKey: string;
 
   public constructor(props: P) {
     this.props = this.formatProps({ ...props });
-    this.profile = this.props.profile;
-    this.global = this.props.global;
-    this.local = this.props.local;
+    this.clientKey = 'test_QFGJGRQZERFWNFYWKEZSQL3E342QEDNU';
   }
-  protected formatProps(props: any) {
+  protected formatProps(props: P) {
     return props || {};
   }
-
-  protected setData(res: any) {
-    this.data = res;
+  get profile() {
+    return this.props.profile;
+  }
+  get product() {
+    return this.props.profile.product;
+  }
+  get global() {
+    return this.props.global;
+  }
+  get local() {
+    return this.props.local;
+  }
+  get data() {
+    return this.props.data;
   }
 }
 

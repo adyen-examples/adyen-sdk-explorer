@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useMemoCompare } from '../helpers/useMemoCompare';
-import { compareFormData } from '../../helpers';
-import type { InitializationRequest, RequestOptions } from '../types';
+import { useEffect, useState } from 'react';
+import type { RequestOptions } from '../types';
 
 export const useInitializeCheckout = ({payload, endpoint}: {payload: any, endpoint:string}) => {
   const [checkoutResponse, setCheckoutResponse] = useState<any>(null);

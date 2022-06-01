@@ -29,3 +29,7 @@ export const compareCheckoutData = (prev: any, next: [any]) => {
 
   return Array.isArray(prev) && Array.isArray(paymentMethodNames) && prev.every((name, i) => name === paymentMethodNames[i]);
 };
+
+export const isEmpty = (x : object) => { 
+  return Object.keys(x).length===0;
+ }

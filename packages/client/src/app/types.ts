@@ -41,6 +41,7 @@ export type SessionsOnDeckState = {
   shopperEmail: string;
   shopperReference: string;
   [key: string]: string;
+  amount: any;
 };
 
 export type OnDeckState = {

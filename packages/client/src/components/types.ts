@@ -1,4 +1,5 @@
 import { object } from 'prop-types';
+import type {GlobalOnDeckState, LocalOnDeckState, ProfileOnDeckState, SessionsOnDeckState} from '../app/types'
 
 export type FormDataProps = {
   amount: {
@@ -17,16 +18,12 @@ export type PaymentsFormProps = {
 };
 
 export interface ConfigurationBaseProps {
-  global: any;
-  local: any;
-  profile: {
-    checkoutVersion: string;
-    dropinVersion: string;
-    name: string;
-    product: string;
-  };
+  global:GlobalOnDeckState | {};
+  local: LocalOnDeckState | {};
+  profile: ProfileOnDeckState;
+  data: any;
 }
 
 export interface ConfigurationSessionProps extends ConfigurationBaseProps {
-  sessions: object;
+  sessions: SessionsOnDeckState | {};
 }

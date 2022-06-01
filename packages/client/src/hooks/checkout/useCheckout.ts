@@ -1,22 +1,18 @@
-import { useState, useEffect } from 'react';
 import AdyenCheckout from '@adyen/adyen-web';
-import { compareCheckoutData } from '../../helpers';
-import type { CheckoutConfig, EditableCheckoutConfigFields } from '../types';
+import { useEffect, useState } from 'react';
+import type { CheckoutConfig } from '../types';
 
-export const useCheckout = (options: any) => {
+export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
   
   useEffect(() => {
-    let configuration: CheckoutConfig;
-    configuration = options.CheckoutConfig;
-    
+    let checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
-      console.log('config abaout to be initd', config);
       const component = await AdyenCheckout(config);
       setCheckout(component);
     };
 
-    initializeCheckout(configuration);
+    initializeCheckout(checkoutOptions);
   }, []);
   
   return [checkout];
