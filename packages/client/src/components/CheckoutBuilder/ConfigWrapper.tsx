@@ -20,7 +20,7 @@ export const ConfigWrapper = () => {
 
   const dispatch = useAppDispatch();
 
-  const updateStore = (value: any, action: any): void => {
+  const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
   };
 

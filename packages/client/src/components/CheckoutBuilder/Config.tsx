@@ -8,7 +8,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
     let newConfig = { ...configuration };
 
-    console.log('UPDATE CONFIG PARAMS', item, value, newConfig);
+    console.log('UPDATE CONFIG PARAMS', item, value, current, newConfig);
     if (value === null) {
       delete newConfig[item];
     } else if (current) {

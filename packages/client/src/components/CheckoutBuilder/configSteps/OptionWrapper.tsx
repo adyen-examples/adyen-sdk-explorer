@@ -30,7 +30,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           return (
             isChecked && (
               <Grid item xs={11} key={prop.name}>
-                <Option descriptor={prop} onChange={handleInput} value={value[prop.name]} isChecked={isChecked} />
+                <Option current={descriptor.name} descriptor={prop} onChange={handleInput} value={value[prop.name]} isChecked={isChecked} />
               </Grid>
             )
           );

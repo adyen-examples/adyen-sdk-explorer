@@ -1,11 +1,12 @@
 import { ChangeEvent } from 'react';
 import type { Descriptor, OnDeckPropType } from '../../app/types';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export interface ConfigPropTypes {
   step: number;
   configuration: OnDeckPropType;
   descriptors: Descriptor[];
-  action: any;
+  action: ActionCreatorWithPayload<any>;
   updateStore: (value: any, action: any) => void;
   setActiveStep: (step: number) => void;
 }
