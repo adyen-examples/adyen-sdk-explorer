@@ -13,7 +13,7 @@ export interface OptionPropTypes {
 export const Option = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   return (
     <Grid item xs={11}>
-      <Typography variant="overline">{descriptor.name}</Typography>
+      <Typography variant="body2">{descriptor.name}</Typography>
       {/* <Typography variant="subtitle2">{descriptor.description}</Typography> */}
       {isChecked && (
         <TextField

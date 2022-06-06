@@ -32,11 +32,13 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
           <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
         </Grid>
         <Grid item xs={5}>
-          <Grid container spacing={3}>
-            <Grid item sx={{ height: '100%' }} xs={12}>
-              <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
+          <div style={{ position: 'sticky', top: 0 }}>
+            <Grid container spacing={3}>
+              <Grid item sx={{ height: '100%' }} xs={12}>
+                <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
+              </Grid>
             </Grid>
-          </Grid>
+          </div>
         </Grid>
       </Grid>
       <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />

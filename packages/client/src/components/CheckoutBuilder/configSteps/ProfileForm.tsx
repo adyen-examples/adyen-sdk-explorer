@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import { NavButtons } from './NavButtons';
 import type { OnDeckPropType } from '../../../app/types';
@@ -8,13 +8,13 @@ interface ProfileFormProps {
   configuration: OnDeckPropType;
   step: number;
   action: any;
-  updateStore: (key: string, value: any, action: any) => void;
+  updateStore: (value: any, action: ActionCreatorWithPayload<any>) => void;
   setActiveStep: (step: number) => void;
 }
 
 export const ProfileForm = ({ configuration, step, setActiveStep, action, updateStore }: ProfileFormProps) => {
   const handleChange = (e: any) => {
-    updateStore(e.target.name, e.target.value, action);
+    updateStore({ [e.target.name]: e.target.value }, action);
   };
 
   return (
@@ -42,7 +42,7 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="overline" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
             ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
             dapibus.
@@ -70,7 +70,7 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="overline" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
             ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
             dapibus.
@@ -98,7 +98,7 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="overline" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
             ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
             dapibus.

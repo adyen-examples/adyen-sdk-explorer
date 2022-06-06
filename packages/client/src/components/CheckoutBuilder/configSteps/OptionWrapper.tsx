@@ -24,7 +24,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   if (descriptor.properties) {
     optionsDisplay = (
       <Fragment>
-        <Typography variant="overline">{descriptor.name}</Typography>
+        <Typography variant="body2">{descriptor.name}</Typography>
         {/* <Typography variant="subtitle2">{descriptor.description}</Typography> */}
         {descriptor.properties.map((prop: Descriptor) => {
           return (

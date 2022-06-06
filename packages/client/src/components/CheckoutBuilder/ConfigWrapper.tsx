@@ -28,6 +28,8 @@ export const ConfigWrapper = () => {
 
   let displayStep;
 
+  console.log('STORE', profile, global, local, sessions);
+
   switch (activeStep) {
     case 0:
       displayStep = (
