@@ -1,0 +1,28 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "clickAndCollect": {
+      "description": "Set this to **true** if the shopper would like to pick up and collect their order, instead of having the goods delivered to them.",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "zip",
+      "description": "**zip**",
+      "enum": ["zip", "zip_pos"],
+      "type": "string"
+    }
+  },
+  "title": "Zip"
+}

@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "firstName": {
+      "description": "The shopper's first name.",
+      "type": "string"
+    },
+    "lastName": {
+      "description": "The shopper's last name.",
+      "type": "string"
+    },
+    "shopperEmail": {
+      "description": "The shopper's email.",
+      "type": "string"
+    },
+    "type": {
+      "description": "**doku**",
+      "enum": [
+        "doku_mandiri_va",
+        "doku_cimb_va",
+        "doku_danamon_va",
+        "doku_bni_va",
+        "doku_permata_lite_atm",
+        "doku_bri_va",
+        "doku_bca_va",
+        "doku_alfamart",
+        "doku_indomaret"
+      ],
+      "type": "string"
+    }
+  },
+  "required": ["type", "firstName", "lastName", "shopperEmail"],
+  "title": "Doku"
+}

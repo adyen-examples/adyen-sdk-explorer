@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "fundingSource": {
+      "description": "The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.",
+      "enum": ["debit"],
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "samsungPayToken": {
+      "description": "The payload you received from the Samsung Pay SDK response.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "samsungpay",
+      "description": "**samsungpay**",
+      "enum": ["samsungpay"],
+      "type": "string"
+    }
+  },
+  "required": ["samsungPayToken"],
+  "title": "Samsung Pay"
+}

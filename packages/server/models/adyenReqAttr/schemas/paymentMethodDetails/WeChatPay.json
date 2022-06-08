@@ -1,0 +1,12 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "default": "wechatpay",
+      "description": "**wechatpay**",
+      "enum": ["wechatpay", "wechatpay_pos"],
+      "type": "string"
+    }
+  },
+  "title": "WeChat Pay"
+}

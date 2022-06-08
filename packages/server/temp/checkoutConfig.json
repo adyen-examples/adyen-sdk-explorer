@@ -1,0 +1,36 @@
+[
+  {
+    "description": "The amount of the payment.",
+    "properties": [
+      {
+        "description": "The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).",
+        "maxLength": 3,
+        "minLength": 3,
+        "type": "string",
+        "name": "currency"
+      },
+      {
+        "description": "The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).",
+        "format": "int64",
+        "type": "integer",
+        "name": "value"
+      }
+    ],
+    "name": "amount"
+  },
+  {
+    "name": "showPayButton",
+    "description": "Show or hides a Pay Button for each payment method. Defaults to true. The Pay button triggers the onSubmit event when payment details are valid. If you want to disable the button and then trigger the submit flow on your own, set this to false and call the .submit() method from your own button implementation. PayPal Smart Payment Buttons doesn't support the .submit() method.",
+    "type": "boolean"
+  },
+  {
+    "name": "locale",
+    "description": "The language used in the Drop-in UI. For possible values, see the list of available languages.  By default, this is the either the shopperLocale from your /sessions request or, if this locale is not available on Drop-in, en-US.",
+    "type": "string"
+  },
+  {
+    "name": "setStatusAutomatically",
+    "description": "Set to false to not set the Drop-in status to 'loading' when onSubmit is triggered. Defaults to true.",
+    "type": "boolean"
+  }
+]

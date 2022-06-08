@@ -1,0 +1,20 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "issuer": {
+      "description": "The Dragonpay issuer value of the shopper's selected bank. Set this to an **id** of a Dragonpay issuer to preselect it.",
+      "type": "string"
+    },
+    "shopperEmail": {
+      "description": "The shopper’s email address.",
+      "type": "string"
+    },
+    "type": {
+      "description": "**dragonpay**",
+      "enum": ["dragonpay_ebanking", "dragonpay_otc_banking", "dragonpay_otc_non_banking", "dragonpay_otc_philippines"],
+      "type": "string"
+    }
+  },
+  "required": ["type", "issuer"],
+  "title": "Dragonpay"
+}

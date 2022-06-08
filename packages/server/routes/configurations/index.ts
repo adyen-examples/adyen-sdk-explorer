@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
 
-import { User, Configuration } from '../../models';
+import { User, Configuration, additionalData, sessionsConfig, paymentMethodDetails } from '../../models';
 import { jwtAuth, isAuthorizedForAction } from '../auth';
 
 import type { ConfigToUpdate } from './types';
 
-// TEMPORARY MOCK DB FOR INITIALIZING
-import { globalConfig, localConfig, sessionsConfig } from '../../temp';
+// Adyen attributes
+import { checkoutConfig, localConfig } from '../../temp';
 
 const router = Router();
 
@@ -110,7 +110,7 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
 
 router.get('/', (req, res) => {
   try {
-    return res.status(201).json({ globalConfig, localConfig, sessionsConfig });
+    return res.status(201).json({ checkoutConfig, localConfig, sessionsConfig });
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

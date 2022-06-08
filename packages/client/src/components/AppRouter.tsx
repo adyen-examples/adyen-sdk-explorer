@@ -6,7 +6,7 @@ const ApplicationRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<CheckoutBuilder />} />
-      <Route path=":component" element={<ComponentBase />} />
+      <Route path="/:component" element={<ComponentBase />} />
     </Routes>
   );
 };

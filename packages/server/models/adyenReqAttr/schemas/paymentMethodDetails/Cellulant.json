@@ -1,0 +1,16 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "issuer": {
+      "description": "The Cellulant issuer.",
+      "type": "string"
+    },
+    "type": {
+      "default": "cellulant",
+      "description": "**Cellulant**",
+      "enum": ["cellulant"],
+      "type": "string"
+    }
+  },
+  "title": "Cellulant"
+}

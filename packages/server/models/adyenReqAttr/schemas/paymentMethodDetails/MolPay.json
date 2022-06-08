@@ -1,0 +1,16 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "issuer": {
+      "description": "The shopper's bank. Specify this with the issuer value that corresponds to this bank.",
+      "type": "string"
+    },
+    "type": {
+      "description": "**molpay**",
+      "enum": ["molpay_ebanking_fpx_MY", "molpay_ebanking_TH"],
+      "type": "string"
+    }
+  },
+  "required": ["type", "issuer"],
+  "title": "MOLPay"
+}

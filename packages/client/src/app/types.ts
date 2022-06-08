@@ -1,5 +1,3 @@
-import type { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
-
 export type ConfigurationState = {
   id: string;
   owner: string;
@@ -14,50 +12,28 @@ export type UserState = {
   configurations: [ConfigurationState] | [];
 };
 
-export type ProfileOnDeckState = {
-  name: string;
-  product: string;
-  checkoutVersion: string;
-  dropinVersion: string;
-};
-
-export type GlobalOnDeckState = {
-  showPayButton: boolean;
-  openFirstPaymentMethod: boolean;
-  openFirstStoredPaymentMethod: boolean;
-  [key: string]: boolean;
-};
-
-export type LocalOnDeckState = {
-  amount: PaymentAmount;
-  showPayButton: boolean;
-  [key: string]: PaymentAmount | boolean;
-};
-
-export type SessionsOnDeckState = {
-  expiresAt: string;
-  countryCode: string;
-  shopperLocale: string;
-  shopperEmail: string;
-  shopperReference: string;
-  [key: string]: string;
-};
+export type OnDeckPropType = { [key: string]: any };
 
 export type OnDeckState = {
-  profile: ProfileOnDeckState | {};
-  global: GlobalOnDeckState | {};
-  local: LocalOnDeckState | {};
-  sessions: SessionsOnDeckState | {};
-  [key: string]: ProfileOnDeckState | GlobalOnDeckState | LocalOnDeckState | SessionsOnDeckState | {} | undefined;
+  profile: OnDeckPropType;
+  checkout: OnDeckPropType | {};
+  local: OnDeckPropType | {};
+  sessions: OnDeckPropType | {};
+  [key: string]: any;
 };
 
 export type Descriptor = {
   name: string;
   description: string;
+  properties?: [];
+  items?: { type: string } | [];
+  type?: string;
+  format?: string;
+  [key: string]: any;
 };
 
 export type DescriptorList = {
-  global: Descriptor[] | [];
+  checkout: Descriptor[] | [];
   local: Descriptor[] | [];
   sessions: Descriptor[] | [];
   [key: string]: Descriptor[] | [];

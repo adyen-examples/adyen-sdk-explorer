@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
-const { updateProfileInfo, updateGlobalInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
+const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 type NavButtonsProps = {
   step: number;
@@ -20,7 +20,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
       case 0:
         return dispatch(updateProfileInfo(configuration));
       case 1:
-        return dispatch(updateGlobalInfo(configuration));
+        return dispatch(updateCheckoutInfo(configuration));
       case 2:
         return dispatch(updateLocalInfo(configuration));
       case 3:

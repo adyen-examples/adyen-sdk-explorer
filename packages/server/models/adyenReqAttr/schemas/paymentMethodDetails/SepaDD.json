@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "iban": {
+      "description": "The International Bank Account Number (IBAN).",
+      "type": "string"
+    },
+    "ownerName": {
+      "description": "The name of the bank account holder.",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "sepadirectdebit",
+      "description": "**sepadirectdebit**",
+      "enum": ["sepadirectdebit", "sepadirectdebit_amazonpay"],
+      "type": "string"
+    }
+  },
+  "required": ["iban", "ownerName"],
+  "title": "SEPA Direct Debit"
+}

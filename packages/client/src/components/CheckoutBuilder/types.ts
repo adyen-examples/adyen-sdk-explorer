@@ -1,12 +1,20 @@
-import type { Descriptor, DescriptorList, GlobalOnDeckState, LocalOnDeckState, SessionsOnDeckState } from '../../app/types';
+import { ChangeEvent } from 'react';
+import type { Descriptor, OnDeckPropType } from '../../app/types';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
-export type ConfigTypes = GlobalOnDeckState | LocalOnDeckState | SessionsOnDeckState | { [key: string]: any };
-
-export type ConfigPropTypes = {
+export interface ConfigPropTypes {
   step: number;
-  configuration: ConfigTypes;
+  configuration: OnDeckPropType;
   descriptors: Descriptor[];
+  action: ActionCreatorWithPayload<any>;
+  updateStore: (value: any, action: any) => void;
   setActiveStep: (step: number) => void;
-};
+}
 
-export type { Descriptor };
+export type UpdateConfig = (key: string, value: string | null, current?: any) => void;
+
+export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>) => void | undefined;
+
+export type HandleInput = (e: ChangeEvent<HTMLInputElement>, current?: string) => void;
+
+export type { Descriptor, OnDeckPropType };

@@ -8,7 +8,7 @@ import type { RootState } from '../../store';
 
 // TODO: Get information from global state and render correct component
 const ComponentBase = () => {
-  const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
 
   // const params = useParams();
   // const component = params.component;
