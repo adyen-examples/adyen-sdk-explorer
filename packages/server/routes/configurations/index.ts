@@ -6,7 +6,7 @@ import { jwtAuth, isAuthorizedForAction } from '../auth';
 import type { ConfigToUpdate } from './types';
 
 // Adyen attributes
-import { globalConfig, localConfig } from '../../temp';
+import { checkoutConfig, localConfig } from '../../temp';
 
 const router = Router();
 
@@ -110,7 +110,7 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
 
 router.get('/', (req, res) => {
   try {
-    return res.status(201).json({ globalConfig, localConfig, sessionsConfig });
+    return res.status(201).json({ checkoutConfig, localConfig, sessionsConfig });
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

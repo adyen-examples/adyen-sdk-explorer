@@ -9,7 +9,7 @@ const initialState: OnDeckState = {
     dropinVersion: '',
     checkoutVersion: ''
   },
-  global: {},
+  checkout: {},
   local: {},
   sessions: {}
 };
@@ -22,8 +22,8 @@ export const onDeckSlice = createSlice({
       const profile = { ...state.profile, ...action.payload };
       return { ...state, profile };
     },
-    updateGlobalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      return { ...state, global: action.payload };
+    updateCheckoutInfo: (state, action: PayloadAction<OnDeckState>) => {
+      return { ...state, checkout: action.payload };
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
       return { ...state, local: action.payload };

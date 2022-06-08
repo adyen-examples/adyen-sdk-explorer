@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import type { OnDeckState } from '../../app/types';
 
-type UpdateConfigNames = 'profile' | 'global' | 'local' | 'sessions';
+type UpdateConfigNames = 'profile' | 'checkout' | 'local' | 'sessions';
 
 export type UpdateConfig = (key: string, value: string | null) => void;
 

@@ -16,7 +16,7 @@ export type OnDeckPropType = { [key: string]: any };
 
 export type OnDeckState = {
   profile: OnDeckPropType;
-  global: OnDeckPropType | {};
+  checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
   [key: string]: any;
@@ -33,7 +33,7 @@ export type Descriptor = {
 };
 
 export type DescriptorList = {
-  global: Descriptor[] | [];
+  checkout: Descriptor[] | [];
   local: Descriptor[] | [];
   sessions: Descriptor[] | [];
   [key: string]: Descriptor[] | [];

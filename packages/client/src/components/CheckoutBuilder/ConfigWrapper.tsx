@@ -9,13 +9,13 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 import type { OnDeckState } from '../../app/types';
 
-const { updateProfileInfo, updateGlobalInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
+const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 //TODO[Bug]: Rendering components twice if head to drop-in and hit back
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
-  const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [activeStep, setActiveStep] = useState(0);
 
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export const ConfigWrapper = () => {
 
   let displayStep;
 
-  console.log('STORE', profile, global, local, sessions);
+  console.log('STORE', profile, checkout, local, sessions);
 
   switch (activeStep) {
     case 0:
@@ -46,12 +46,12 @@ export const ConfigWrapper = () => {
     case 1:
       displayStep = (
         <Config
-          key="global"
-          configuration={global}
-          descriptors={descriptors.global}
+          key="checkout"
+          configuration={checkout}
+          descriptors={descriptors.checkout}
           step={activeStep}
           setActiveStep={setActiveStep}
-          action={updateGlobalInfo}
+          action={updateCheckoutInfo}
           updateStore={updateStore}
         />
       );
@@ -83,7 +83,7 @@ export const ConfigWrapper = () => {
       );
       break;
     case 4:
-      displayStep = <ReviewForm key="review" step={activeStep} setActiveStep={setActiveStep} configuration={{ global, local, sessions }} />;
+      displayStep = <ReviewForm key="review" step={activeStep} setActiveStep={setActiveStep} configuration={{ checkout, local, sessions }} />;
       break;
     case 5:
       displayStep = (

@@ -1,5 +1,5 @@
 export const getClientConfiguration_Response = {
-  globalConfigOptions: [
+  checkoutConfigOptions: [
     {
       name: 'showPayButton',
       description: `Show or hides a Pay Button for each payment method. Defaults to true. The Pay button triggers the onSubmit event when
@@ -31,26 +31,26 @@ export const getClientConfiguration_Response = {
 };
 
 export const getSessions_Response = {
-    sessions: [
-      {
-        name: 'expiresAt',
-        description: `The session expiry date in ISO8601 format, for example 2019-11-23T12:25:28Z, or 2020-05-27T20:25:28+08:00. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.`
-      },
-      {
-        name: 'countryCode',
-        description: `The shopper's country code. This is used to filter the list of available payment methods to your shopper.`
-      },
-      {
-        name: 'shopperLocale',
-        description: `The language that the payment methods will appear in. Set it to the shopper's language and country code. The default is en-US. The front end also uses this locale if it's available.`
-      },
-      {
-        name: 'shopperEmail',
-        description: `The shopper's email address. Strongly recommended because this field is used in a number of risk checks, and for 3D Secure.`
-      },
-      {
-        name: 'shopperReference',
-        description: `Your reference to uniquely identify this shopper. Strongly recommended because this field is used in a number of risk checks.`
-      }
-    ]
+  sessions: [
+    {
+      name: 'expiresAt',
+      description: `The session expiry date in ISO8601 format, for example 2019-11-23T12:25:28Z, or 2020-05-27T20:25:28+08:00. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.`
+    },
+    {
+      name: 'countryCode',
+      description: `The shopper's country code. This is used to filter the list of available payment methods to your shopper.`
+    },
+    {
+      name: 'shopperLocale',
+      description: `The language that the payment methods will appear in. Set it to the shopper's language and country code. The default is en-US. The front end also uses this locale if it's available.`
+    },
+    {
+      name: 'shopperEmail',
+      description: `The shopper's email address. Strongly recommended because this field is used in a number of risk checks, and for 3D Secure.`
+    },
+    {
+      name: 'shopperReference',
+      description: `Your reference to uniquely identify this shopper. Strongly recommended because this field is used in a number of risk checks.`
+    }
+  ]
 };
