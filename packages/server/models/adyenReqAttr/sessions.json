@@ -94,14 +94,6 @@
     "name": "billingAddress"
   },
   {
-    "description": "List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).\n\nExample: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`",
-    "items": {
-      "type": "string"
-    },
-    "type": "array",
-    "name": "blockedPaymentMethods"
-  },
-  {
     "description": "The delay between the authorisation and scheduled auto-capture, specified in hours.",
     "format": "int32",
     "type": "integer",

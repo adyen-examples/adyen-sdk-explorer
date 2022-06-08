@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import { Grid } from '@mui/material';
 import { Editor } from './configSteps/Editor';
 import { ListOptions, NavButtons } from './configSteps';
@@ -15,7 +15,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
       let newCurrent = { ...newConfig[current], [item]: value };
       newConfig = { ...newConfig, [current]: newCurrent };
     } else {
-      console.log('ADDING FRESH', name);
+      console.log('ADDING FRESH', current);
       newConfig = { ...newConfig, [item]: value };
     }
     updateStore(newConfig, action);
