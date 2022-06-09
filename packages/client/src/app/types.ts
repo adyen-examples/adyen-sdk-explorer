@@ -1,3 +1,6 @@
+import type { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
+
+
 export type ConfigurationState = {
   id: string;
   owner: string;
