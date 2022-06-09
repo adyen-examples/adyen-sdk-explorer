@@ -8,7 +8,6 @@ const router = Router();
 
 router.post('/sessionStart', async (req: Request, res: Response) => { 
   const { payload }: InitializationRequest = req.body;
-  console.log('payload from server', payload);
   
   try {
     const options: RequestOptions = {
