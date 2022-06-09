@@ -2,7 +2,7 @@ import ConfigurationBase from './ConfigurationBase';
 import { ConfigurationSessionProps } from './types';
 
 class ConfigurationSession<P extends ConfigurationSessionProps = any> extends ConfigurationBase<P> {
-  constructor(props: P) {
+  constructor(props: any) {
     super(props);
     this.onPaymentCompleted = this.onPaymentCompleted.bind(this);
     this.onError = this.onError.bind(this);
