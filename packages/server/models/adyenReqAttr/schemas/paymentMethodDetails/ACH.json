@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "bankAccountNumber": {
+      "description": "The bank account number (without separators).",
+      "type": "string"
+    },
+    "bankLocationId": {
+      "description": "The bank routing number of the account. The field value is `nil` in most cases.",
+      "type": "string"
+    },
+    "encryptedBankAccountNumber": {
+      "description": "Encrypted bank account number. The bank account number (without separators).",
+      "type": "string"
+    },
+    "encryptedBankLocationId": {
+      "description": "Encrypted location id. The bank routing number of the account. The field value is `nil` in most cases.",
+      "type": "string"
+    },
+    "ownerName": {
+      "description": "The name of the bank account holder.\nIf you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example:\n* χ12 is converted to ch12.\n* üA is converted to euA.\n* Peter Møller is converted to Peter Mller, because banks don't accept 'ø'.\nAfter replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example:\n* John17 - allowed.\n* J17 - allowed.\n* 171 - not allowed.\n* John-7 - allowed.\n> If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "ach",
+      "description": "**ach**",
+      "enum": ["ach"],
+      "type": "string"
+    }
+  },
+  "required": ["bankAccountNumber"],
+  "title": "ACH Direct Debit"
+}

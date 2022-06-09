@@ -1,0 +1,24 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "giropay",
+      "description": "**giropay**",
+      "enum": ["giropay"],
+      "type": "string"
+    }
+  },
+  "title": "Giropay"
+}

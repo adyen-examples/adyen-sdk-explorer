@@ -1,10 +1,36 @@
 [
   {
-    "name": "amount",
-    "description": "Amount to be displayed on the Pay Button. It expects an object with the value and currency properties. For example, { value: 1000, currency: 'USD' }."
+    "name": "openFirstPaymentMethod",
+    "description": "When enabled, Drop-in opens the first payment method automatically on page load. Defaults to true.",
+    "type": "boolean"
   },
   {
-    "name": "showPayButton",
-    "description": "Show or hides a Pay Button for each payment method. Defaults to true. The Pay button triggers the onSubmit event when payment details are valid. If you want to disable the button and then trigger the submit flow on your own, set this to false and call the .submit() method from your own button implementation. PayPal Smart Payment Buttons doesn't support the .submit() method."
+    "name": "openFirstStoredPaymentMethod",
+    "description": "When enabled, Drop-in opens the payment method with stored card details on page load. This option takes precedence over openFirstPaymentMethod. Defaults to true.",
+    "type": "boolean"
+  },
+  {
+    "name": "showStoredPaymentMethods",
+    "description": "Shows or hides payment methods with stored card details. Defaults to true.",
+    "type": "boolean"
+  },
+  {
+    "name": "showRemovePaymentMethodButton",
+    "description": "Allows the shopper to remove a stored payment method. Defaults to false.",
+    "type": "boolean"
+  },
+  {
+    "name": "showPaymentMethods",
+    "description": "Shows or hides regular (not stored) payment methods. Set to false if you only want to show payment methods with stored card details. Defaults to true.",
+    "type": "boolean"
+  },
+  {
+    "name": "setStatusAutomatically",
+    "description": "Set to false to not set the Drop-in status to 'loading' when onSubmit is triggered. Defaults to true.",
+    "type": "boolean"
+  },
+  {
+    "name": "instantPaymentTypes",
+    "description": "Moves payment methods to the top of the list of available payment methods. This is available for Apple Pay and Google Pay."
   }
 ]

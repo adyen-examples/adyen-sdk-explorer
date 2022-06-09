@@ -1,5 +1,3 @@
-import type { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
-
 export type ConfigurationState = {
   id: string;
   owner: string;
@@ -43,22 +41,28 @@ export type SessionsOnDeckState = {
   [key: string]: string;
   amount: any;
 };
+export type OnDeckPropType = { [key: string]: any };
 
 export type OnDeckState = {
-  profile: ProfileOnDeckState | {};
-  global: GlobalOnDeckState | {};
-  local: LocalOnDeckState | {};
-  sessions: SessionsOnDeckState | {};
-  [key: string]: ProfileOnDeckState | GlobalOnDeckState | LocalOnDeckState | SessionsOnDeckState | {} | undefined;
+  profile: OnDeckPropType;
+  checkout: OnDeckPropType | {};
+  local: OnDeckPropType | {};
+  sessions: OnDeckPropType | {};
+  [key: string]: any;
 };
 
 export type Descriptor = {
   name: string;
   description: string;
+  properties?: [];
+  items?: { type: string } | [];
+  type?: string;
+  format?: string;
+  [key: string]: any;
 };
 
 export type DescriptorList = {
-  global: Descriptor[] | [];
+  checkout: Descriptor[] | [];
   local: Descriptor[] | [];
   sessions: Descriptor[] | [];
   [key: string]: Descriptor[] | [];

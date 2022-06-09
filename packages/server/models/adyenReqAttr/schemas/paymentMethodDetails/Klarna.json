@@ -1,0 +1,37 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "billingAddress": {
+      "description": "The address where to send the invoice.",
+      "type": "string"
+    },
+    "deliveryAddress": {
+      "description": "The address where the goods should be delivered.",
+      "type": "string"
+    },
+    "personalDetails": {
+      "description": "Shopper name, date of birth, phone number, and email address.",
+      "type": "string"
+    },
+    "recurringDetailReference": {
+      "deprecated": true,
+      "x-deprecatedInVersion": "49",
+      "x-deprecatedMessage": "Use `storedPaymentMethodId` instead.",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "storedPaymentMethodId": {
+      "x-addedInVersion": "49",
+      "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+      "type": "string"
+    },
+    "type": {
+      "default": "klarna",
+      "description": "**klarna**",
+      "enum": ["klarna", "klarnapayments", "klarnapayments_account", "klarnapayments_b2b", "klarna_paynow", "klarna_account", "klarna_b2b"],
+      "type": "string"
+    }
+  },
+  "required": ["type"],
+  "title": "Klarna"
+}

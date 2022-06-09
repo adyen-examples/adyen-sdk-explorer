@@ -1,8 +1,8 @@
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
-import type { ConfigTypes } from '../types';
+import type { OnDeckPropType } from '../types';
 type EditorProps = {
-  configuration: ConfigTypes;
+  configuration: OnDeckPropType;
   handleJsonEditorUpdate: (e: any) => void;
 };
 

@@ -1,0 +1,17 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "issuer": {
+      "description": "The Dotpay issuer value of the shopper's selected bank. Set this to an **id** of a Dotpay issuer to preselect it.",
+      "type": "string"
+    },
+    "type": {
+      "default": "dotpay",
+      "description": "**dotpay**",
+      "enum": ["dotpay"],
+      "type": "string"
+    }
+  },
+  "required": ["issuer"],
+  "title": "Dotpay"
+}

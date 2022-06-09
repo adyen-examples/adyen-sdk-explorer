@@ -1,0 +1,12 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "default": "androidpay",
+      "description": "**androidpay**",
+      "enum": ["androidpay"],
+      "type": "string"
+    }
+  },
+  "title": "Android Pay"
+}

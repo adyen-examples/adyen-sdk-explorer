@@ -3,8 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { OnDeckState } from '../types';
 
 const initialState: OnDeckState = {
-  profile: {},
-  global: {},
+  profile: {
+    name: '',
+    product: '',
+    dropinVersion: '',
+    checkoutVersion: ''
+  },
+  checkout: {},
   local: {},
   sessions: {}
 };
@@ -17,8 +22,8 @@ export const onDeckSlice = createSlice({
       const profile = { ...state.profile, ...action.payload };
       return { ...state, profile };
     },
-    updateGlobalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      return { ...state, global: action.payload };
+    updateCheckoutInfo: (state, action: PayloadAction<OnDeckState>) => {
+      return { ...state, checkout: action.payload };
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
       return { ...state, local: action.payload };

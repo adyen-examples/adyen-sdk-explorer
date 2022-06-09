@@ -1,0 +1,16 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "issuer": {
+      "description": "The issuer id of the shopper's selected bank.",
+      "type": "string"
+    },
+    "type": {
+      "description": "**billdesk**",
+      "enum": ["billdesk_online", "billdesk_wallet", "onlinebanking_IN", "wallet_IN"],
+      "type": "string"
+    }
+  },
+  "required": ["type", "issuer"],
+  "title": "BillDesk"
+}

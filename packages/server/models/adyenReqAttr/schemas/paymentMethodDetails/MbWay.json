@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "shopperEmail": {
+      "description": "",
+      "type": "string"
+    },
+    "telephoneNumber": {
+      "description": "",
+      "type": "string"
+    },
+    "type": {
+      "default": "mbway",
+      "description": "**mbway**",
+      "enum": ["mbway"],
+      "type": "string"
+    }
+  },
+  "required": ["telephoneNumber", "shopperEmail"],
+  "title": "MBWay"
+}
