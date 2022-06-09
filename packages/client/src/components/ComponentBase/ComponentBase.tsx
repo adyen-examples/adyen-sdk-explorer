@@ -15,6 +15,11 @@ const ComponentBase = () => {
   const [data] = useInitializeCheckout({ payload: sessions, endpoint: 'sessions/sessionStart' });
   let configuration: any = null;
 
+console.log(
+  'profile, checkout, local, sessions',profile, checkout, local, sessions
+);
+
+
   if (error) {
     return <div>Error Component</div>;
   } else if (redirectResult) {
