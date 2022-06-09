@@ -1,6 +1,3 @@
-import type { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
-
-
 export type ConfigurationState = {
   id: string;
   owner: string;
@@ -15,35 +12,6 @@ export type UserState = {
   configurations: [ConfigurationState] | [];
 };
 
-export type ProfileOnDeckState = {
-  name: string;
-  product: string;
-  checkoutVersion: string;
-  dropinVersion: string;
-};
-
-export type GlobalOnDeckState = {
-  showPayButton: boolean;
-  openFirstPaymentMethod: boolean;
-  openFirstStoredPaymentMethod: boolean;
-  [key: string]: boolean;
-};
-
-export type LocalOnDeckState = {
-  amount: PaymentAmount;
-  showPayButton: boolean;
-  [key: string]: PaymentAmount | boolean;
-};
-
-export type SessionsOnDeckState = {
-  expiresAt: string;
-  countryCode: string;
-  shopperLocale: string;
-  shopperEmail: string;
-  shopperReference: string;
-  [key: string]: string;
-  amount: any;
-};
 export type OnDeckPropType = { [key: string]: any };
 
 export type OnDeckState = {
