@@ -7,7 +7,7 @@ import ConfigurationSession from '../ConfigurationSession';
 import Component from './Component';
 
 const ComponentBase = () => {
-  const { profile, global, local, sessions } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [values, setError] = useState({ error: false, code: '', message: '' });
   const { error, code, message } = values;
   const [queryParameters] = useSearchParams();
@@ -18,10 +18,10 @@ const ComponentBase = () => {
   if (error) {
     return <div>Error Component</div>;
   } else if (redirectResult) {
-    configuration = new ConfigurationSession({ profile, global, local, sessions });
+    configuration = new ConfigurationSession({ profile, checkout, local, sessions });
     return <div>Redirect Component</div>;
   } else if (data) {
-    configuration = new ConfigurationSession({ profile, global, local, sessions, data });
+    configuration = new ConfigurationSession({ profile, checkout, local, sessions, data });
     return <Component configuration={configuration} />;
   }
 
