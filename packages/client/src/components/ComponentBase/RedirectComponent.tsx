@@ -1,9 +1,13 @@
-import { useInitializeCheckout } from '../../hooks';
-import type { RootState } from '../../store';
+import { useCheckout } from '../../hooks';
 
-const RedirectComponent = ({configuration, redirectResult}: {configuration: any, redirectResult: any}) => {
+const Component = ({ configuration }: { configuration: any }) => {
+  const [checkout] = useCheckout(configuration);
 
-    return <div id="checkout"></div>;
+  if (checkout) {
+    checkout.submitDetails(configuration.redirectResult);
+    checkout.create(configuration.product).mount('#checkout');
+  }
+  return <div id="checkout"></div>;
 };
 
-export default RedirectComponent;
+export default Component;

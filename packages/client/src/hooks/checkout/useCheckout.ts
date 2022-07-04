@@ -4,7 +4,7 @@ import type { CheckoutConfig } from '../types';
 
 export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
-  
+
   useEffect(() => {
     let checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
@@ -14,6 +14,6 @@ export const useCheckout = (configuration: any) => {
 
     initializeCheckout(checkoutOptions);
   }, []);
-  
+
   return [checkout];
 };

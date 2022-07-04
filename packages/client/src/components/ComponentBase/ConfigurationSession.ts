@@ -8,16 +8,24 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     this.onError = this.onError.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onValid = this.onValid.bind(this);
-    this.onComplete = this.onComplete.bind(this);
-    this.onAdditionalDetails = this.onAdditionalDetails.bind(this);
   }
   get sessions() {
     return this.props.sessions;
   }
   get session() {
+    if (this.queryParameters && this.queryParameters.sessionId) {
+      return {
+        id: this.queryParameters.sessionId
+      };
+    }
     return {
       id: this.data.id,
       sessionData: this.data.sessionData
+    };
+  }
+  get redirectResult() {
+    return {
+      details: { redirectResult: this.queryParameters.redirectResult }
     };
   }
   get checkoutConfig(): any {
@@ -29,8 +37,6 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
       onError: this.onError,
       onChange: this.onChange,
       onValid: this.onValid,
-      onComplete: this.onComplete,
-      onAdditionalDetails: this.onAdditionalDetails,
       paymentMethodsConfiguration: {
         card: {
           ...this.local
@@ -39,7 +45,8 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
       ...this.global
     };
   }
-  public onPaymentCompleted(result: any, component: object): void {
+
+  public onPaymentCompleted(result: any, component: any): void {
     console.log('Payment Completed');
     console.info(result, component);
   }
@@ -50,12 +57,6 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     console.info(state, element);
   }
   public onValid(state: any, element: object): void {
-    console.info(state, element);
-  }
-  public onComplete(state: any, element: object): void {
-    console.info(state, element);
-  }
-  public onAdditionalDetails(state: any, element: object): void {
     console.info(state, element);
   }
 }

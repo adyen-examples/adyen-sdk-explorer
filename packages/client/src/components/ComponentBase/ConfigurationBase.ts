@@ -1,4 +1,5 @@
 import { ConfigurationBaseProps } from '../types';
+import { CLIENT_KEY } from '../../config';
 
 class ConfigurationBase<P extends ConfigurationBaseProps> {
   public props: P;
@@ -25,6 +26,9 @@ class ConfigurationBase<P extends ConfigurationBaseProps> {
   }
   get data() {
     return this.props.data;
+  }
+  get queryParameters() {
+    return this.props.queryParameters;
   }
 }
 

@@ -7,7 +7,7 @@ import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/t
 const router = Router();
 
 router.post('/sessionStart', async (req: Request, res: Response) => {
-  const { payload }: InitializationRequest = req.body;
+  const payload: InitializationRequest = req.body;
 
   try {
     const options: RequestOptions = {
@@ -19,7 +19,6 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
       body: {
         ...payload,
         merchantAccount: ADYEN_MERCHANT_ACCOUNT,
-        returnUrl: 'http://test-merchant.com',
         reference: 'test-payment'
       },
       json: true,
@@ -30,7 +29,7 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
     res.json(response);
   } catch (err: any) {
     const { error } = err;
-    res.status(err.statusCode).json({"error":error});
+    res.status(err.statusCode).json({ error: error });
   }
 });
 
