@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { RequestOptions } from '../types';
 
-export const useInitializeCheckout = ({payload, endpoint}: {payload: any, endpoint:string}) => {
+export const useInitializeCheckout = ({ payload, endpoint }: { payload: any; endpoint: string }) => {
   const [checkoutResponse, setCheckoutResponse] = useState<any>(null);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export const useInitializeCheckout = ({payload, endpoint}: {payload: any, endpoi
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({'payload': payload})
+      body: JSON.stringify({ payload: payload })
     };
 
     const initialize: () => void = async () => {
@@ -18,12 +18,9 @@ export const useInitializeCheckout = ({payload, endpoint}: {payload: any, endpoi
         const response = await fetch(`http://localhost:8080/${endpoint}`, requestOptions);
         const parsed = await response.json();
         setCheckoutResponse(parsed);
-      } catch (err) {
-        if (err && typeof err === 'object') {
-          console.error('Error', err);
-        } else {
-          console.error('Something went wrong');
-        }
+      } catch (e) {
+        console.error('Error', e);
+        setCheckoutResponse({error: { errorType: 'network', message: 'Network Error', status: '500', errorCode: '502' }});
       }
     };
 

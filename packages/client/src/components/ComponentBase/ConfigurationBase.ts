@@ -1,4 +1,4 @@
-import { ConfigurationBaseProps } from './types';
+import { ConfigurationBaseProps } from '../types';
 
 class ConfigurationBase<P extends ConfigurationBaseProps> {
   public props: P;

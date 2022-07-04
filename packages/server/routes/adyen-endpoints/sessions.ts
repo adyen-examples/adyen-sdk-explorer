@@ -6,9 +6,9 @@ import type { CheckoutSessionSetupResponse } from '@adyen/adyen-web/dist/types/t
 
 const router = Router();
 
-router.post('/sessionStart', async (req: Request, res: Response) => { 
+router.post('/sessionStart', async (req: Request, res: Response) => {
   const { payload }: InitializationRequest = req.body;
-  
+
   try {
     const options: RequestOptions = {
       url: `${ADYEN_BASE_URL}/v68/sessions`,
@@ -23,14 +23,14 @@ router.post('/sessionStart', async (req: Request, res: Response) => {
         reference: 'test-payment'
       },
       json: true,
-      method:'POST'
+      method: 'POST'
     };
-    
+
     const response: CheckoutSessionSetupResponse = await request(options);
     res.json(response);
   } catch (err: any) {
-    console.log('error: ',err);
-    res.status(500).json({ message: 'Internal Server Error' });
+    const { error } = err;
+    res.status(err.statusCode).json({"error":error});
   }
 });
 

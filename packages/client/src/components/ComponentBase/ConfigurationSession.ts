@@ -1,5 +1,5 @@
 import ConfigurationBase from './ConfigurationBase';
-import { ConfigurationSessionProps } from './types';
+import { ConfigurationSessionProps } from '../types';
 
 class ConfigurationSession<P extends ConfigurationSessionProps = any> extends ConfigurationBase<P> {
   constructor(props: any) {
