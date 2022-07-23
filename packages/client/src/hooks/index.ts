@@ -6,6 +6,7 @@ export type { InitializationRequest, EditableCheckoutConfigFields, CheckoutConfi
 export { useApi } from './useApi';
 export { useCheckout, useInitializeCheckout } from './checkout';
 export { useBuildOnDeck } from './configBuilder/useBuildOnDeck';
+export { useRedirect } from './configBuilder/useRedirect';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

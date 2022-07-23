@@ -48,8 +48,8 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
           Back
         </Button>
       )}
-      <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
-        {step === 4 ? 'Build Checkout' : 'Next'}
+      <Button disabled = {(step === 4) ? true : false} variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+        {step === 4 ? 'Save Checkout' : 'Next'}
       </Button>
     </Box>
   );

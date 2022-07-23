@@ -88,7 +88,7 @@ export const localeEn = {
 
 export const dark_vscode_tribute = {
     default: '#D4D4D4',
-    background: '#2A2E37',
+    background: '#00112C',
     background_warning: '#1E1E1E',
     string: '#CE8453',
     number: '#B5CE9F',

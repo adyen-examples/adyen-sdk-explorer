@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
 import { NavButtons } from './NavButtons';
+import ComponentBase from '../../ComponentBase/ComponentBase'
 
 type ReviewFormProps = {
   configuration: object;
@@ -10,8 +11,10 @@ type ReviewFormProps = {
 };
 
 export const ReviewForm = ({ configuration, step, setActiveStep }: ReviewFormProps) => {
+
   return (
     <Fragment>
+      <ComponentBase />
       <JSONInput viewOnly={true} placeholder={configuration} colors={dark_vscode_tribute} locale={localeEn} height="700px" width="100%" />
       <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
     </Fragment>

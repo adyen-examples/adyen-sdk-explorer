@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Divider, Typography, Stepper, Step, StepLabel } from '@mui/material';
 import { ProfileForm, ReviewForm } from './configSteps';
@@ -8,6 +8,7 @@ import { onDeckActions } from '../../app';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 import type { OnDeckState } from '../../app/types';
+import { useRedirect } from '../../hooks';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
@@ -15,21 +16,20 @@ const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsIn
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
-  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
   const [activeStep, setActiveStep] = useState(0);
 
+  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
+  useRedirect({ profile, checkout, local, sessions },setActiveStep); 
   const dispatch = useAppDispatch();
-
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
   };
 
-  const steps = ['Profile', 'Global Configuration', 'Component Configuration', 'API Configuration', 'Review your config'];
-
+  const steps = ['Profile', 'Global', 'Component', 'API', 'Review'];
   let displayStep;
 
-  console.log('STORE', profile, checkout, local, sessions);
-
+  console.log('STORE', JSON.stringify({ profile, checkout, local, sessions }));
+  
   switch (activeStep) {
     case 0:
       displayStep = (
@@ -98,8 +98,6 @@ export const ConfigWrapper = () => {
 
   return (
     <Fragment>
-      <Typography variant="h6">{steps[activeStep]}</Typography>
-      <Divider />
       <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
         {steps.map(label => (
           <Step key={label}>

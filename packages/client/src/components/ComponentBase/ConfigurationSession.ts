@@ -49,6 +49,7 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
   public onPaymentCompleted(result: any, component: any): void {
     console.log('Payment Completed');
     console.info(result, component);
+    alert('On payment completed');
   }
   public onError(error: Error, component: object | undefined): void {
     console.error(error.name, error.message, error.stack, component);

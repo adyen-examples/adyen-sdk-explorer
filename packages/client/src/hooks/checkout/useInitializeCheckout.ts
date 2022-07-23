@@ -5,15 +5,17 @@ import { API_URL, CLIENT_URL } from '../../config';
 export const useInitializeCheckout = ({ payload, endpoint }: { payload: any; endpoint: string }) => {
   const [checkoutResponse, setCheckoutResponse] = useState<any>(null);
   const { profile, sessions } = payload;
-  const serializedConfig = encodeURIComponent(JSON.stringify(payload));
+  const serializedConfig =JSON.stringify(payload);
 
   useEffect(() => {
+    console.log('Use effect on initializeCheckout');
+    
     const requestOptions: RequestOptions = {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${profile.product}?config=${serializedConfig}` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/checkout-builder` })
     };
     const initialize: () => void = async () => {
       try {

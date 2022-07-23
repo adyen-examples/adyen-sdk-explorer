@@ -5,8 +5,8 @@ import { CheckoutBuilder, PaymentsForm, ComponentBase } from '.';
 const ApplicationRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<CheckoutBuilder />} />
-      <Route path="/:component" element={<ComponentBase />} />
+      <Route path="/checkout-builder" element={<CheckoutBuilder />} />
+      <Route path="/checkout-builder/:component" element={<ComponentBase />} />
     </Routes>
   );
 };
