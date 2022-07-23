@@ -2,7 +2,7 @@ import AdyenCheckout from '@adyen/adyen-web';
 import { useEffect, useState } from 'react';
 import type { CheckoutConfig } from '../types';
 
-export const useCheckout = (configuration: any) => {
+export const useCheckout = (configuration: any, data: any) => {
   const [checkout, setCheckout] = useState<any>(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export const useCheckout = (configuration: any) => {
     };
 
     initializeCheckout(checkoutOptions);
-  }, []);
+  }, [data]);
 
   return [checkout];
 };
