@@ -12,7 +12,7 @@ const Component = ({ configuration }: { configuration: any }) => {
   }
   if (adyenCheckout) {
     localStorage.setItem('configuration', JSON.stringify({ profile, checkout, local, sessions }));
-    configuration = new ConfigurationSession({ profile, checkout, local, sessions, data });
+    const checkoutConfiguration = new ConfigurationSession({ profile, checkout, local, sessions, data });
     console.log('non redirect flow: configuration', configuration);
 
     adyenCheckout.create(configuration.product).mount('#checkout');
