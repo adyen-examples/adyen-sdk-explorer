@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
 import { Grid } from '@mui/material';
-import { Editor } from './configSteps/Editor';
+import { Fragment } from 'react';
 import { ListOptions, NavButtons } from './configSteps';
+import { Editor } from './configSteps/Editor';
 import type { ConfigPropTypes, UpdateConfig } from './types';
 
 export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore }: ConfigPropTypes) => {
