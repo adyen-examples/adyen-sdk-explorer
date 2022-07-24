@@ -1,14 +1,12 @@
-import { Fragment, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Divider, Typography, Stepper, Step, StepLabel } from '@mui/material';
-import { ProfileForm, ReviewForm } from './configSteps';
-import { Config } from './Config';
-import { useAppDispatch } from '../../hooks';
-import { onDeckActions } from '../../app';
+import { Step, StepLabel, Stepper, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { onDeckActions } from '../../app';
+import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
-import type { OnDeckState } from '../../app/types';
-import { useRedirect } from '../../hooks';
+import { Config } from './Config';
+import { ProfileForm, ReviewForm } from './configSteps';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 

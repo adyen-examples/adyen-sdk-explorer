@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
+const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
   step: number;
@@ -24,6 +24,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
       case 2:
         return dispatch(updateLocalInfo(configuration));
       case 3:
+        dispatch(updateRedirectInfo(false));
         return dispatch(updateSessionsInfo(configuration));
       case 4:
         return navigate('dropin', { state: configuration });

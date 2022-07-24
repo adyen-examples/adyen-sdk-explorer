@@ -4,7 +4,7 @@ import type { RootState, AppDispatch } from '../store';
 export type { InitializationRequest, EditableCheckoutConfigFields, CheckoutConfig, PaymentAmount, PaymentMethodsResponseInterface } from './types';
 
 export { useApi } from './useApi';
-export { useCheckout, useInitializeCheckout } from './checkout';
+export { useCheckout, useInitializeSession } from './checkout';
 export { useBuildOnDeck } from './configBuilder/useBuildOnDeck';
 export { useRedirect } from './configBuilder/useRedirect';
 

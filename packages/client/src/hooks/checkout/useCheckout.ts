@@ -2,10 +2,12 @@ import AdyenCheckout from '@adyen/adyen-web';
 import { useEffect, useState } from 'react';
 import type { CheckoutConfig } from '../types';
 
-export const useCheckout = (configuration: any, data: any) => {
+export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
 
   useEffect(() => {
+    console.log('configuration.checkoutConfig: ',configuration.checkoutConfig);
+    
     let checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);
@@ -13,7 +15,7 @@ export const useCheckout = (configuration: any, data: any) => {
     };
 
     initializeCheckout(checkoutOptions);
-  }, [data]);
+  }, []);
 
   return [checkout];
 };

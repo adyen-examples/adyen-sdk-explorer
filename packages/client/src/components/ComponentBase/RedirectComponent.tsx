@@ -1,26 +1,24 @@
+import { useSearchParams } from 'react-router-dom';
 import { useCheckout } from '../../hooks';
-import { ConfigurationSession } from './ConfigurationSession'
+import ConfigurationSession from './ConfigurationSession';
 
-const Component = ({ configuration }: { configuration: any }) => {
+const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const [queryParameters] = useSearchParams();
   const redirectResult: any = queryParameters.get('redirectResult'),
     sessionId: any = queryParameters.get('sessionId');
-  const { profile, checkout, local, sessions } = configuration;
-  const [adyenCheckout] = useCheckout(configuration);
+  const sessions = new ConfigurationSession({
+    ...configuration,
+    queryParameters: { redirectResult: redirectResult, sessionId: sessionId }
+  });
+  const [checkout] = useCheckout(sessions);
+  const product = configuration.profile.product;
 
-  if (adyenCheckout) {
-    configuration = new ConfigurationSession({
-      profile,
-      checkout,
-      local,
-      sessions,
-      queryParameters: { redirectResult: redirectResult, sessionId: sessionId }
-    });
-    adyenCheckout.submitDetails(configuration.redirectResult);
-    adyenCheckout.create(configuration.product).mount('#checkout');
+  if (checkout) {
+    checkout.submitDetails(sessions.redirectResult);
+    checkout.create(product).mount('#checkout');
   }
-
-  return <div id="checkout">Loading...</div>;
+  
+  return <div id="checkout"></div>;
 };
 
-export default Component;
+export default RedirectComponent;

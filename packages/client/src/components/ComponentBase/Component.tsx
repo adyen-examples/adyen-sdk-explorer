@@ -1,23 +1,16 @@
-import { useCheckout } from '../../hooks';
-import { useInitializeCheckout } from '../../hooks';
-import { ConfigurationSession } from './ConfigurationSession'
+import { useInitializeSession } from '../../hooks';
 
 const Component = ({ configuration }: { configuration: any }) => {
-  const { profile, checkout, local, sessions } = configuration;
-  const [data] = useInitializeCheckout({ payload: { profile, checkout, local, sessions }, endpoint: 'sessions/sessionStart' });
-  const [adyenCheckout] = useCheckout(configuration, data);
+  const [checkout, error] = useInitializeSession({ configuration, endpoint: 'sessions/sessionStart' });
+  const product = configuration.profile.product;
 
-  if (data.error) {
-    return <div>{JSON.stringify(data.error)}</div>;
+  if (error) {
+    return <div>{JSON.stringify(error)}</div>;
   }
-  if (adyenCheckout) {
-    localStorage.setItem('configuration', JSON.stringify({ profile, checkout, local, sessions }));
-    const checkoutConfiguration = new ConfigurationSession({ profile, checkout, local, sessions, data });
-    console.log('non redirect flow: configuration', configuration);
-
-    adyenCheckout.create(configuration.product).mount('#checkout');
+  if (checkout) {
+    checkout.create(product).mount('#checkout');
   }
-  return <div id="checkout">Loading...</div>;
+  return <div id="checkout"></div>;
 };
 
 export default Component;

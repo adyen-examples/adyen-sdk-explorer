@@ -1,5 +1,4 @@
 import { ConfigurationBaseProps } from '../types';
-import { CLIENT_KEY } from '../../config';
 
 class ConfigurationBase<P extends ConfigurationBaseProps> {
   public props: P;
