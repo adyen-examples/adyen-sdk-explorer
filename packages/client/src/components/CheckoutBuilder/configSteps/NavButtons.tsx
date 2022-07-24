@@ -43,13 +43,13 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <Box sx={{ bgcolor:'secondary.main' }}>
       {step !== 0 && (
-        <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+        <Button onClick={handleBack}>
           Back
         </Button>
       )}
-      <Button disabled = {(step === 4) ? true : false} variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+      <Button variant="contained" onClick={handleNext}>
         {step === 4 ? 'Save Checkout' : 'Next'}
       </Button>
     </Box>

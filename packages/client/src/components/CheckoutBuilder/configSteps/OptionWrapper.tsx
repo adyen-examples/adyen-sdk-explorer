@@ -1,7 +1,9 @@
 import { useState, ChangeEvent, Fragment } from 'react';
-import { Grid, Checkbox, Typography } from '@mui/material';
+import { Grid, Checkbox, Typography, ToggleButton } from '@mui/material';
 import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export interface OptionWrapperPropTypes {
   value: any;
@@ -14,7 +16,7 @@ export interface OptionWrapperPropTypes {
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
   const [isChecked, setIsChecked] = useState(!!value);
 
-  const handleToggle = (e: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+  const handleToggle = (e: any, checked: boolean) => {
     addOrRemoveProp(e);
     setIsChecked(checked);
   };
@@ -44,8 +46,18 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   // return <Option descriptor={descriptor} indexKey={indexKey} value={value} addOrRemoveProp={addOrRemoveProp} handleInput={handleInput} />;
   return (
     <Grid item xs={11} key={indexKey}>
+      <ExpandMoreIcon />
       <Checkbox name={descriptor.name} checked={isChecked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} size="small" />
       {optionsDisplay}
     </Grid>
   );
+
+  // return (
+  //   <Grid item xs={11} key={indexKey}>
+  //     <ToggleButton value="check" selected={isChecked} onChange={handleToggle}>
+  //       <ExpandMoreIcon />
+  //     </ToggleButton>
+  //     {optionsDisplay}
+  //   </Grid>
+  // );
 };

@@ -1,6 +1,13 @@
-import { Step, StepLabel, Stepper, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BiotechIcon from '@mui/icons-material/Biotech';
+import CodeIcon from '@mui/icons-material/Code';
+import PublicIcon from '@mui/icons-material/Public';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Grid, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { StepIconProps } from '@mui/material/StepIcon';
+import { styled } from '@mui/material/styles';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import { useAppDispatch, useRedirect } from '../../hooks';
@@ -11,13 +18,28 @@ import { ProfileForm, ReviewForm } from './configSteps';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 //TODO[Bug]: Rendering components twice if head to drop-in and hit back
+const ColorlibStepIconRoot = styled('div')<{
+  ownerState: { completed?: boolean; active?: boolean };
+}>(({ theme, ownerState }) => ({
+  color: theme.palette.grey[700],
+  zIndex: 1,
+  width: 50,
+  height: 50,
+  display: 'flex',
+  borderRadius: '50%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  ...((ownerState.active || ownerState.completed) && {
+    color: '#0abf53'
+  })
+}));
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
   const [activeStep, setActiveStep] = useState(0);
 
   const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
-  useRedirect({ profile, checkout, local, sessions },setActiveStep); 
+  useRedirect({ profile, checkout, local, sessions }, setActiveStep);
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
@@ -27,7 +49,7 @@ export const ConfigWrapper = () => {
   let displayStep;
 
   console.log('STORE', JSON.stringify({ profile, checkout, local, sessions }));
-  
+
   switch (activeStep) {
     case 0:
       displayStep = (
@@ -94,16 +116,38 @@ export const ConfigWrapper = () => {
       throw new Error('Unknown step');
   }
 
+  const ColorlibStepIcon = (props: StepIconProps) => {
+    const { active, completed, className } = props;
+
+    const icons: { [index: string]: React.ReactElement } = {
+      1: <AccountCircleIcon />,
+      2: <PublicIcon />,
+      3: <BiotechIcon />,
+      4: <CodeIcon />,
+      5: <ShoppingCartIcon />
+    };
+
+    return (
+      <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+        {icons[String(props.icon)]}
+      </ColorlibStepIconRoot>
+    );
+  };
+
   return (
-    <Fragment>
-      <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      {displayStep}
-    </Fragment>
+    <Grid container>
+      <Grid item xs={8} mt={2}>
+        <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel StepIconComponent={ColorlibStepIcon}/>
+            </Step>
+          ))}
+        </Stepper>
+      </Grid>
+      <Grid item xs={12}>
+        {displayStep}
+      </Grid>
+    </Grid>
   );
 };

@@ -7,7 +7,7 @@ export const themeOptions: any = {
       main: '#0066ff'
     },
     secondary: {
-      //   main: '#09ae4c',
+      //   main: '#09ae4c',dark blue #00112C
       main: '#00112C'
     },
     background: {

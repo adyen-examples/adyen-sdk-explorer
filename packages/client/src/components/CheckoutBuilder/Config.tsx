@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Box, Divider, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { ListOptions, NavButtons } from './configSteps';
 import { Editor } from './configSteps/Editor';
@@ -8,14 +8,12 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
     let newConfig = { ...configuration };
 
-    console.log('UPDATE CONFIG PARAMS', item, value, current, newConfig);
     if (value === null) {
       delete newConfig[item];
     } else if (current) {
       let newCurrent = { ...newConfig[current], [item]: value };
       newConfig = { ...newConfig, [current]: newCurrent };
     } else {
-      console.log('ADDING FRESH', current);
       newConfig = { ...newConfig, [item]: value };
     }
     updateStore(newConfig, action);
@@ -28,20 +26,34 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
   return (
     <Fragment>
       <Grid mt={2} container>
+        <Grid item xs={10}>
+          <Typography pb={2} variant="body1" gutterBottom>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
+            ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
+            dapibus.
+          </Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant="overline" gutterBottom>
+            <Box sx={{ fontSize: 16,fontWeight: 'medium' }}>Parameters</Box>
+          </Typography>
+          <Divider />
+        </Grid>
         <Grid item xs={7}>
           <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
         </Grid>
-        <Grid item xs={5}>
-          <div style={{ position: 'sticky', top: 0 }}>
-            <Grid container spacing={3}>
-              <Grid item sx={{ height: '100%' }} xs={12}>
+        <Grid item xs={2}>
+          <Grid container spacing={3}>
+            <Grid item sx={{ height: '100%' }} xs={12}>
+              <Box sx={{ position: 'fixed', top: 0, right: 0, width: '450px', height: '100vh', bgcolor: 'secondary.main' }}>
                 <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
-              </Grid>
+                <Divider light />
+                <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
+              </Box>
             </Grid>
-          </div>
+          </Grid>
         </Grid>
       </Grid>
-      <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
     </Fragment>
   );
 };
