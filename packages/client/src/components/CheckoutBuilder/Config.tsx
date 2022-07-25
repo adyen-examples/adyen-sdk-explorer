@@ -26,20 +26,20 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
   return (
     <Fragment>
       <Grid mt={2} container>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <Typography pb={2} variant="body1" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
             ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
             dapibus.
           </Typography>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <Typography variant="overline" gutterBottom>
             <Box sx={{ fontSize: 16, fontWeight: 'medium' }}>Parameters</Box>
           </Typography>
           <Divider />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
         </Grid>
         <Grid
@@ -49,7 +49,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
           container
           sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '25%' }}
         >
-          <Grid item xs={10} sx={{ height: '90%' }}>
+          <Grid item xs={8} sx={{ height: '90%' }}>
             <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
           </Grid>
           <Grid item xs={1}>

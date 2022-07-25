@@ -21,46 +21,41 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
 
   return (
     <Fragment>
-      <Grid mt={2} container>
-        <Grid item xs={10}>
+      <Grid mt={1} mr={1} container>
+        <Grid item xs={8}>
           <Typography pb={2} variant="body1" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
             ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
             dapibus.
           </Typography>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <Typography variant="overline" gutterBottom>
             <Box sx={{ fontSize: 16, fontWeight: 'medium' }}>Parameters</Box>
           </Typography>
           <Divider />
         </Grid>
-        <Grid item xs={10} sx={{ mt: 1 }}>
-          <TextField
-            id="profileName"
-            name="name"
-            label="Profile name"
-            fullWidth
-            value={configuration.name}
-            onChange={handleChange}
-          />
+        <Grid item xs={8} sx={{ mt: 1 }}>
+          <TextField id="profileName" name="name" label="Profile name" fullWidth value={configuration.name} onChange={handleChange} />
+          <FormHelperText>Required</FormHelperText>
         </Grid>
-        <Grid item xs={10} sm={6}>
-          <FormControl required sx={{ width: 1 }}>
-            <InputLabel id="dropin-select-required-label">Product</InputLabel>
+        <Grid item xs={8}>
+          <FormControl fullWidth>
+            <InputLabel>Product</InputLabel>
             <Select
+              sx={{ width: '100%' }}
               labelId="product-select-label"
               id="product-select"
               name="product"
               value={configuration.product}
               onChange={handleChange}
-              label="Product *"
+              label="Product"
               defaultValue="dropin"
             >
               <MenuItem value={'dropin'}>dropin</MenuItem>
             </Select>
-            <FormHelperText>Required</FormHelperText>
           </FormControl>
+          <FormHelperText>Required</FormHelperText>
         </Grid>
       </Grid>
       <Grid

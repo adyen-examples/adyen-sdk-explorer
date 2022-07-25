@@ -15,6 +15,9 @@ export const themeOptions: any = {
       default: '#fff'
     }
   },
+  typography: {
+    fontFamily: 'Poppins, sans-serif'
+  },
   props: {
     MuiAppBar: {
       color: 'default'
