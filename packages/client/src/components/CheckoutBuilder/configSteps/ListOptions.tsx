@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { Grid } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
 import type { UpdateConfig, AddOrRemoveProp, Descriptor, HandleInput } from '../types';
@@ -48,19 +48,19 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     handleUpdateConfig(e.target.name, e.target.value, current);
   };
 
-  //Add option wrapper to check for nesting and send back correct update object
-
   return (
-    <Grid container rowSpacing={2}>
+    <Grid container>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => (
-          <OptionWrapper
-            descriptor={descriptor}
-            indexKey={descriptor.name}
-            addOrRemoveProp={addOrRemoveProp}
-            handleInput={handleInput}
-            value={configuration[descriptor.name]}
-          />
+          <Grid item xs={12}>
+            <OptionWrapper
+              descriptor={descriptor}
+              indexKey={descriptor.name}
+              addOrRemoveProp={addOrRemoveProp}
+              handleInput={handleInput}
+              value={configuration[descriptor.name]}
+            />
+          </Grid>
         ))}
     </Grid>
   );

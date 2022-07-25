@@ -11,12 +11,12 @@ const ComponentBase = () => {
   const { profile, checkout, local, sessions } = globalStateDeck;
   const isRedirect = globalStateDeck.isRedirect;
   const configuration = { profile, checkout, local, sessions };
-  
+
   if (isRedirect) {
-    return <RedirectComponent configuration={configuration} />;
+    return <RedirectComponent configuration={configuration}/>;
   }
 
-  return <Component configuration={configuration} />;
+  return <Component configuration={configuration}/>;
 };
 
 export default ComponentBase;

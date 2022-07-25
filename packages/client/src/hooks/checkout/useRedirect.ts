@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import AdyenCheckout from '@adyen/adyen-web';
-import { useMemoCompare } from '../helpers/useMemoCompare';
+import { useEffect, useState } from 'react';
 import { compareSessionData } from '../../helpers';
-import { CLIENT_KEY, ENVIRONMENT } from '../../config';
-import type { EditableCheckoutConfigFields, CheckoutConfig } from '../types';
+import { useMemoCompare } from '../helpers/useMemoCompare';
+import type { CheckoutConfig, EditableCheckoutConfigFields } from '../types';
 
 export const useRedirect = (options: EditableCheckoutConfigFields) => {
   const [checkout, setCheckout] = useState<any>(null);

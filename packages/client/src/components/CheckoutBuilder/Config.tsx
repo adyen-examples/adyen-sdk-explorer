@@ -1,4 +1,4 @@
-import { Grid, Box, Divider, Typography } from '@mui/material';
+import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { ListOptions, NavButtons } from './configSteps';
 import { Editor } from './configSteps/Editor';
@@ -35,21 +35,31 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
         </Grid>
         <Grid item xs={10}>
           <Typography variant="overline" gutterBottom>
-            <Box sx={{ fontSize: 16,fontWeight: 'medium' }}>Parameters</Box>
+            <Box sx={{ fontSize: 16, fontWeight: 'medium' }}>Parameters</Box>
           </Typography>
           <Divider />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={10}>
           <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
         </Grid>
-        <Grid item xs={2}>
-          <Grid container spacing={3}>
-            <Grid item sx={{ height: '100%' }} xs={12}>
-              <Box sx={{ position: 'fixed', top: 0, right: 0, width: '450px', height: '100vh', bgcolor: 'secondary.main' }}>
-                <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
-                <Divider light />
+        <Grid
+          direction="column"
+          justifyContent="space-between"
+          alignItems="stretch"
+          container
+          sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '25%' }}
+        >
+          <Grid item xs={10} sx={{ height: '90%' }}>
+            <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
+          </Grid>
+          <Grid item xs={1}>
+            <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="space-between" alignItems="flex-end">
+              <Grid item>
+                <Button variant="contained">Edit</Button>
+              </Grid>
+              <Grid item>
                 <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
-              </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

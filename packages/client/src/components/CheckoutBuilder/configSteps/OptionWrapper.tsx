@@ -27,37 +27,32 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
     optionsDisplay = (
       <Fragment>
         <Typography variant="body2">{descriptor.name}</Typography>
+        <Grid container pl={2}>
+          {descriptor.properties.map((prop: Descriptor) => {
+            return (
+              isChecked && (
+                <Grid item xs={7} key={prop.name}>
+                  <Option current={descriptor.name} descriptor={prop} onChange={handleInput} value={value[prop.name]} isChecked={isChecked} />
+                </Grid>
+              )
+            );
+          })}
+        </Grid>
         {/* <Typography variant="subtitle2">{descriptor.description}</Typography> */}
-        {descriptor.properties.map((prop: Descriptor) => {
-          return (
-            isChecked && (
-              <Grid item xs={11} key={prop.name}>
-                <Option current={descriptor.name} descriptor={prop} onChange={handleInput} value={value[prop.name]} isChecked={isChecked} />
-              </Grid>
-            )
-          );
-        })}
       </Fragment>
     );
   } else {
     optionsDisplay = <Option descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />;
   }
 
-  // return <Option descriptor={descriptor} indexKey={indexKey} value={value} addOrRemoveProp={addOrRemoveProp} handleInput={handleInput} />;
   return (
-    <Grid item xs={11} key={indexKey}>
-      <ExpandMoreIcon />
-      <Checkbox name={descriptor.name} checked={isChecked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} size="small" />
-      {optionsDisplay}
+    <Grid container key={indexKey}>
+      <Grid item xs={7}>
+        <Checkbox name={descriptor.name} checked={isChecked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} size="small" />
+      </Grid>
+      <Grid item xs={7}>
+        {optionsDisplay}
+      </Grid>
     </Grid>
   );
-
-  // return (
-  //   <Grid item xs={11} key={indexKey}>
-  //     <ToggleButton value="check" selected={isChecked} onChange={handleToggle}>
-  //       <ExpandMoreIcon />
-  //     </ToggleButton>
-  //     {optionsDisplay}
-  //   </Grid>
-  // );
 };

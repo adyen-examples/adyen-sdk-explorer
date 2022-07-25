@@ -30,10 +30,7 @@ export const ReviewForm = ({ configuration, step, setActiveStep }: ReviewFormPro
           <JSONInput viewOnly={true} placeholder={configuration} colors={dark_vscode_tribute} locale={localeEn} height="100%" width="100%" />
         </Grid>
         <Grid item xs={1}>
-          <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="space-between" alignItems="flex-end">
-            <Grid item>
-              <Button variant="contained">Edit</Button>
-            </Grid>
+          <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="flex-end" alignItems="flex-end">
             <Grid item>
               <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
             </Grid>
