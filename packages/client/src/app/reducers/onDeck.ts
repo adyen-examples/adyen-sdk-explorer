@@ -5,9 +5,7 @@ import type { OnDeckState } from '../types';
 const initialState: OnDeckState = {
   profile: {
     name: '',
-    product: '',
-    dropinVersion: '',
-    checkoutVersion: ''
+    product: ''
   },
   checkout: {},
   local: {},
