@@ -4,7 +4,7 @@ import { ListOptions, NavButtons } from './configSteps';
 import { Editor } from './configSteps/Editor';
 import type { ConfigPropTypes, UpdateConfig } from './types';
 
-export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore }: ConfigPropTypes) => {
+export const Config = ({ configurpation, descriptors, step, setActiveStep, action, updateStore }: ConfigPropTypes) => {
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
     let newConfig = { ...configuration };
 

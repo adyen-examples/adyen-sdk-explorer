@@ -21,7 +21,7 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
 
   return (
     <Fragment>
-      <Grid mt={1} mr={1} container>
+      <Grid mt={2} container >
         <Grid item xs={8}>
           <Typography pb={2} variant="body1" gutterBottom>
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
