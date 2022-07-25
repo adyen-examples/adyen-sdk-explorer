@@ -13,7 +13,7 @@ export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) =
       placeholder={{ ...configuration }}
       colors={dark_vscode_tribute}
       locale={localeEn}
-      height="100%"
+      height="94%"
       width="100%"
     />
   );
