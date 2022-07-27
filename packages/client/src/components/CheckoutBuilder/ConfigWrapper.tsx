@@ -30,7 +30,7 @@ const ColorlibStepIconRoot = styled('div')<{
   justifyContent: 'center',
   alignItems: 'center',
   ...((ownerState.active || ownerState.completed) && {
-    color: '#0abf53'
+    color: '#0066ff'
   })
 }));
 
@@ -136,7 +136,7 @@ export const ConfigWrapper = () => {
 
   return (
     <Grid container>
-      <Grid item xs={8} mt={2}>
+      <Grid item xs={9} mt={2}>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map(label => (
             <Step key={label}>

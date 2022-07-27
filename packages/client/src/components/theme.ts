@@ -16,7 +16,31 @@ export const themeOptions: any = {
     }
   },
   typography: {
-    fontFamily: 'Poppins, sans-serif'
+    fontFamily: 'Poppins, sans-serif',
+    h6: {
+      fontWeight: 700,
+      fontSize: '0.8rem',
+      fontFamily: 'sans-serif'
+    },
+    body2: {
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '0.9rem',
+      fontWeight: 300,
+      lineHeight: 1.8
+    },
+    h4: {
+      fontWeight: 600,
+      fontSize: '1.1rem',
+      fontFamily: 'Poppins, sans-serif'
+    },
+    h5: {
+      fontWeight: 600,
+      fontSize: '1rem',
+      fontFamily: 'Poppins, sans-serif'
+    },
+    caption:{
+      color: '#69778C'
+    }
   },
   props: {
     MuiAppBar: {

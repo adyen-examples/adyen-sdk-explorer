@@ -3,6 +3,14 @@ import { Fragment } from 'react';
 import { ListOptions, NavButtons } from './configSteps';
 import { Editor } from './configSteps/Editor';
 import type { ConfigPropTypes, UpdateConfig } from './types';
+import { Content } from './configSteps/Content';
+
+const content = {
+  title: 'Profile',
+  version: 'Web Components/Drop-in v5.19.0',
+  description:
+    'The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either on the locally on the main instance, globally through the AdyenCheckout , or in API request. Create and store a configuration profile for future use.'
+};
 
 export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore }: ConfigPropTypes) => {
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
@@ -47,7 +55,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
           justifyContent="space-between"
           alignItems="stretch"
           container
-          sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '25%' }}
+          sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%' }}
         >
           <Grid item xs={8} sx={{ height: '90%' }}>
             <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
@@ -55,7 +63,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
           <Grid item xs={1}>
             <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="space-between" alignItems="flex-end">
               <Grid item>
-                <Button variant="contained">Edit</Button>
+                <Button sx={{bgcolor:'#0abf53'}} variant="contained">Edit</Button>
               </Grid>
               <Grid item>
                 <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />
