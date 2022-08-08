@@ -10,6 +10,7 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
+import content from '../../helpers/content.json';
 import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { Config } from './Config';
@@ -23,11 +24,12 @@ const ColorlibStepIconRoot = styled('div')<{
 }>(({ theme, ownerState }) => ({
   color: theme.palette.grey[700],
   zIndex: 1,
-  width: 50,
   height: 50,
   display: 'flex',
   borderRadius: '50%',
   justifyContent: 'center',
+  padding:0,
+  margin:0,
   alignItems: 'center',
   ...((ownerState.active || ownerState.completed) && {
     color: '#0066ff'
@@ -36,7 +38,10 @@ const ColorlibStepIconRoot = styled('div')<{
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
+
   const [activeStep, setActiveStep] = useState(0);
+  const steps = ['Profile', 'Global', 'Component', 'API', 'Review'];
+  let displayStep;
 
   const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
   useRedirect({ profile, checkout, local, sessions }, setActiveStep);
@@ -45,8 +50,7 @@ export const ConfigWrapper = () => {
     dispatch(action(value));
   };
 
-  const steps = ['Profile', 'Global', 'Component', 'API', 'Review'];
-  let displayStep;
+  const { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent }: any = content;
 
   console.log('STORE', JSON.stringify({ profile, checkout, local, sessions }));
 
@@ -60,6 +64,7 @@ export const ConfigWrapper = () => {
           setActiveStep={setActiveStep}
           action={updateProfileInfo}
           updateStore={updateStore}
+          content={profilePageContent}
         />
       );
       break;
@@ -73,6 +78,7 @@ export const ConfigWrapper = () => {
           setActiveStep={setActiveStep}
           action={updateCheckoutInfo}
           updateStore={updateStore}
+          content={globalPageContent}
         />
       );
       break;
@@ -86,6 +92,7 @@ export const ConfigWrapper = () => {
           setActiveStep={setActiveStep}
           action={updateLocalInfo}
           updateStore={updateStore}
+          content={localPageContent}
         />
       );
       break;
@@ -99,11 +106,20 @@ export const ConfigWrapper = () => {
           setActiveStep={setActiveStep}
           action={updateSessionsInfo}
           updateStore={updateStore}
+          content={apiPageContent}
         />
       );
       break;
     case 4:
-      displayStep = <ReviewForm key="review" step={activeStep} setActiveStep={setActiveStep} configuration={{ checkout, local, sessions }} />;
+      displayStep = (
+        <ReviewForm
+          key="review"
+          step={activeStep}
+          setActiveStep={setActiveStep}
+          configuration={{ checkout, local, sessions }}
+          content={reviewPageContent}
+        />
+      );
       break;
     case 5:
       displayStep = (
@@ -135,17 +151,17 @@ export const ConfigWrapper = () => {
   };
 
   return (
-    <Grid container>
-      <Grid item xs={9} mt={2}>
-        <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+    <Grid justifyContent="center" container>
+      <Grid item xs={6} mt={4} mb={4}>
+        <Stepper activeStep={activeStep}>
           {steps.map(label => (
             <Step key={label}>
-              <StepLabel StepIconComponent={ColorlibStepIcon}/>
+              <StepLabel StepIconComponent={ColorlibStepIcon} />
             </Step>
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={8}>
         {displayStep}
       </Grid>
     </Grid>

@@ -50,7 +50,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
         </Button>
       )}
       <Button variant="contained" onClick={handleNext}>
-        {step === 4 ? 'Save Checkout' : 'Next'}
+        {step === 4 ? 'Export' : 'Next'}
       </Button>
     </Box>
   );

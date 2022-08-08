@@ -15,7 +15,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/checkout-builder` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/` })
     };
     const initialize: () => void = async () => {
       try {

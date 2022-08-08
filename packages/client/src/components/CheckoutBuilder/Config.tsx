@@ -5,14 +5,8 @@ import { Editor } from './configSteps/Editor';
 import type { ConfigPropTypes, UpdateConfig } from './types';
 import { Content } from './configSteps/Content';
 
-const content = {
-  title: 'Profile',
-  version: 'Web Components/Drop-in v5.19.0',
-  description:
-    'The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either on the locally on the main instance, globally through the AdyenCheckout , or in API request. Create and store a configuration profile for future use.'
-};
-
-export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore }: ConfigPropTypes) => {
+export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore, content }: ConfigPropTypes) => {
+  const { profilePageContent } = content;
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
     let newConfig = { ...configuration };
 
@@ -33,20 +27,8 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
 
   return (
     <Fragment>
+      <Content title={content.title} version={content.version} description={content.description} />
       <Grid mt={2} container>
-        <Grid item xs={8}>
-          <Typography pb={2} variant="body1" gutterBottom>
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
-            ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta
-            dapibus.
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <Typography variant="overline" gutterBottom>
-            <Box sx={{ fontSize: 16, fontWeight: 'medium' }}>Parameters</Box>
-          </Typography>
-          <Divider />
-        </Grid>
         <Grid item xs={8}>
           <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
         </Grid>
@@ -63,7 +45,9 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
           <Grid item xs={1}>
             <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="space-between" alignItems="flex-end">
               <Grid item>
-                <Button sx={{bgcolor:'#0abf53'}} variant="contained">Edit</Button>
+                <Button sx={{ bgcolor: '#0abf53' }} variant="contained">
+                  Edit
+                </Button>
               </Grid>
               <Grid item>
                 <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />

@@ -1,0 +1,27 @@
+{
+  "profilePageContent": {
+    "title": "Profile",
+    "version": "Web Components/Drop-in v5.19.0",
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+  },
+  "globalPageContent": {
+    "title": "Checkout",
+    "version": "Web Components/Drop-in v5.19.0",
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+  },
+  "localPageContent": {
+    "title": "Local",
+    "version": "Web Components/Drop-in v5.19.0",
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+  },
+  "apiPageContent": {
+    "title": "API",
+    "version": "Web Components/Drop-in v5.19.0",
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+  },
+  "reviewPageContent": {
+    "title": "Review",
+    "version": "Web Components/Drop-in v5.19.0",
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+  }
+}

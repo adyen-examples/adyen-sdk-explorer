@@ -1,11 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { OnDeckState } from '../types';
 
-
 const initialState: OnDeckState = {
   profile: {
-    name: '',
-    product: ''
+    product: 'dropin'
   },
   checkout: {},
   local: {},
@@ -30,9 +28,9 @@ export const onDeckSlice = createSlice({
     updateSessionsInfo: (state, action: PayloadAction<OnDeckState>) => {
       return { ...state, sessions: action.payload };
     },
-    updateRedirectInfo: (state, action: PayloadAction<any>) => { 
+    updateRedirectInfo: (state, action: PayloadAction<any>) => {
       return { ...state, isRedirect: action.payload };
-     },
+    },
     clearOnDeckInfo: state => {
       return initialState;
     }
