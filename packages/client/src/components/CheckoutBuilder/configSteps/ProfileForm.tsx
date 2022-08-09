@@ -24,23 +24,9 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
 
   return (
     <Fragment>
-      <Content title={content.title} version={content.version} description={content.description} />
-      <Grid spacing={1} mt={2} container>
-        {/* 
-        Commented out until we can begin to store config profiles in backend
-        <Grid item xs={7}>
-          <TextField
-            sx={{ borderRadius: '0' }}
-            id="profileName"
-            name="name"
-            label="Name"
-            fullWidth
-            value={configuration.name}
-            onChange={handleChange}
-          />
-          <FormHelperText>Required</FormHelperText>
-        </Grid> */}
-        <Grid item xs={8}>
+      <Grid spacing={1} mt={2} ml={0} container>
+        <Grid item xs={11}>
+          <Content title={content.title} version={content.version} description={content.description} />
           <FormControl fullWidth>
             <InputLabel>Product</InputLabel>
             <Select
@@ -57,7 +43,7 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
           </FormControl>
           <FormHelperText>Required</FormHelperText>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={1}>
           <Grid
             direction="column"
             justifyContent="space-between"
