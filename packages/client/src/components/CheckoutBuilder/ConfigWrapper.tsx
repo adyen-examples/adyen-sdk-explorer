@@ -15,6 +15,7 @@ import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
+import { Alerts } from './Alerts';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
@@ -28,8 +29,8 @@ const ColorlibStepIconRoot = styled('div')<{
   display: 'flex',
   borderRadius: '50%',
   justifyContent: 'center',
-  padding:0,
-  margin:0,
+  padding: 0,
+  margin: 0,
   alignItems: 'center',
   ...((ownerState.active || ownerState.completed) && {
     color: '#0066ff'
@@ -161,7 +162,7 @@ export const ConfigWrapper = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={1} ></Grid>
+      <Grid item xs={1}></Grid>
       <Grid item xs={8}>
         {displayStep}
       </Grid>

@@ -9,7 +9,7 @@ interface ContentProps {
 
 export const Content = ({ title, version, description }: ContentProps) => {
   return (
-    <Grid spacing={1} mt={2} container>
+    <Grid spacing={1} mt={1} container>
       <Grid item xs={12}>
         <Typography
           component={'span'}

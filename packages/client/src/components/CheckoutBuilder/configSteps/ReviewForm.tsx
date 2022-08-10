@@ -18,7 +18,7 @@ export const ReviewForm = ({ configuration, step, setActiveStep, content }: Revi
     <React.Fragment>
       <Content title={content.title} version={content.version} description={content.description} />
       <Grid mt={2} container>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <ComponentBase />
         </Grid>
       </Grid>

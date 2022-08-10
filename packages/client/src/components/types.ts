@@ -22,6 +22,7 @@ export interface ConfigurationBaseProps {
   profile: any;
   data: any;
   queryParameters: any;
+  setState: any;
 }
 
 export interface ConfigurationSessionProps extends ConfigurationBaseProps {
