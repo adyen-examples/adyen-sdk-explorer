@@ -21,10 +21,10 @@ app.use(function (req, res, next) {
 
 const root = path.join(__dirname, '../client', 'build');
 app.use(express.static(root));
-app.get('/checkout-builder', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile('index.html', { root });
 });
-app.get('/checkout-builder/dropin', (req, res) => {
+app.get('/dropin', (req, res) => {
   res.sendFile('index.html', { root });
 });
 

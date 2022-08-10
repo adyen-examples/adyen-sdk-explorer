@@ -9,36 +9,36 @@ interface ContentProps {
 
 export const Content = ({ title, version, description }: ContentProps) => {
   return (
-    <Grid spacing={1} mt={2} container>
-      <Grid item xs={9}>
+    <Grid spacing={1} mt={1} container>
+      <Grid item xs={12}>
         <Typography
           component={'span'}
           p={0.7}
           sx={{ bgcolor: '#e6f8ed', borderColor: '#cef2dd', color: '#055f29', borderRadius: '5px' }}
           variant="h6"
         >
-          SDK Builder
+          SDK Explorer
         </Typography>
         <Typography component={'span'} p={0.7} variant="h5">
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={12}>
         <Typography component={'span'} p={0.7} variant="caption">
           {version}
         </Typography>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={12}>
         <Typography mt={2} mb={3} variant="body2" gutterBottom>
           {description}
         </Typography>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={12}>
         <Typography variant="h4" gutterBottom>
           <Box>Parameters</Box>
         </Typography>
       </Grid>
-      <Grid pb={2} item xs={9}>
+      <Grid pb={2} item xs={12}>
         <Divider />
       </Grid>
     </Grid>

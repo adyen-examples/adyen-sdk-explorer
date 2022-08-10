@@ -6,8 +6,6 @@ export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
 
   useEffect(() => {
-    console.log('configuration.checkoutConfig: ',configuration.checkoutConfig);
-    
     let checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);

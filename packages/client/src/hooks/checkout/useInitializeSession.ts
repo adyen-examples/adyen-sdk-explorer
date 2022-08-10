@@ -8,6 +8,8 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
   const [values, setCheckout] = useState<any>({ checkout: null, error: null });
   const { checkout, error } = values;
   const { sessions } = configuration;
+  const [errors, setErrors] = useState(null);
+
 
   useEffect(() => {
     const requestOptions: RequestOptions = {
@@ -15,7 +17,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/checkout-builder` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/` })
     };
     const initialize: () => void = async () => {
       try {
@@ -25,8 +27,10 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           const errorMessage = parsedResponse.error;
           setCheckout({ checkout: null, error: errorMessage });
         } else {
-          console.log('Configuration in useInitializeSession', configuration);
-          const sessions = new ConfigurationSession({...configuration,data: parsedResponse});
+          //we are not doing anything with error just yet
+          const sessions = new ConfigurationSession({...configuration,data: parsedResponse, setState: {error: setErrors}});
+          console.log('sessions.checkoutConfig',sessions.checkoutConfig);
+          
           const component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('configuration', JSON.stringify(configuration));
           setCheckout({ checkout: component, error: null });

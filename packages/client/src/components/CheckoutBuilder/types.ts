@@ -9,6 +9,7 @@ export interface ConfigPropTypes {
   action: ActionCreatorWithPayload<any>;
   updateStore: (value: any, action: any) => void;
   setActiveStep: (step: number) => void;
+  content?: any;
 }
 
 export type UpdateConfig = (key: string, value: string | null, current?: any) => void;

@@ -1,12 +1,15 @@
+import { CLIENT_KEY } from '../../config';
 import { ConfigurationBaseProps } from '../types';
 
 class ConfigurationBase<P extends ConfigurationBaseProps> {
   public props: P;
   public clientKey: string;
+  public setError: any;
 
   public constructor(props: P) {
     this.props = this.formatProps({ ...props });
-    this.clientKey = 'test_QFGJGRQZERFWNFYWKEZSQL3E342QEDNU';
+    this.clientKey = CLIENT_KEY;
+    this.setError = props.setState.error;
   }
   protected formatProps(props: P) {
     return props || {};
