@@ -42,16 +42,23 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
     setActiveStep(step - 1);
   };
 
+  const downloadJSON = () => {
+    alert('Downloading configuration');
+  };
+
   return (
-    <Box sx={{ bgcolor:'secondary.main' }}>
-      {step !== 0 && (
-        <Button onClick={handleBack}>
-          Back
+    <Box sx={{ bgcolor: 'secondary.main' }}>
+      {step !== 0 && <Button onClick={handleBack}>Back</Button>}
+      {step !== 4 && (
+        <Button variant="contained" onClick={handleNext}>
+          Next
         </Button>
       )}
-      <Button variant="contained" onClick={handleNext}>
-        {step === 4 ? 'Export' : 'Next'}
-      </Button>
+      {step === 4 && (
+        <Button variant="contained" onClick={downloadJSON}>
+          Export
+        </Button>
+      )}
     </Box>
   );
 };
