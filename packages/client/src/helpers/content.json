@@ -2,7 +2,7 @@
   "profilePageContent": {
     "title": "Profile",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either on the main instance of Checkout, on the main instance of dropin, or in the API request. Build and export a configuration profile for future use."
   },
   "globalPageContent": {
     "title": "Checkout",

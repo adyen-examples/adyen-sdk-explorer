@@ -46,6 +46,24 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
     alert('Downloading configuration');
   };
 
+  const exportToJson = () => {
+    let filename = 'export.json';
+    let contentType = 'application/json;charset=utf-8;';
+    const nav = window.navigator as any;
+    if (nav && nav.msSaveOrOpenBlob) {
+      var blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(configuration)))], { type: contentType });
+      nav.msSaveOrOpenBlob(blob, filename);
+    } else {
+      var a = document.createElement('a');
+      a.download = filename;
+      a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(configuration));
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
   return (
     <Box sx={{ bgcolor: 'secondary.main' }}>
       {step !== 0 && <Button onClick={handleBack}>Back</Button>}
@@ -55,7 +73,7 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
         </Button>
       )}
       {step === 4 && (
-        <Button variant="contained" onClick={downloadJSON}>
+        <Button variant="contained" onClick={exportToJson}>
           Export
         </Button>
       )}
