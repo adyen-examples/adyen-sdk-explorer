@@ -21,7 +21,7 @@ class ConfigurationBase<P extends ConfigurationBaseProps> {
     return this.props.profile.product;
   }
   get global() {
-    return this.props.global;
+    return this.props.checkout;
   }
   get local() {
     return this.props.local;

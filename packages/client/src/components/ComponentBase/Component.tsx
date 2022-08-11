@@ -2,6 +2,8 @@ import { useInitializeSession } from '../../hooks';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 
 const Component = ({ configuration }: { configuration: any }) => {
+  console.log('configuration inside component',configuration);
+  
   const [checkout, error] = useInitializeSession({ configuration, endpoint: 'sessions/sessionStart' });
   const product = configuration.profile.product;
 

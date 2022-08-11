@@ -23,6 +23,7 @@ export interface ConfigurationBaseProps {
   data: any;
   queryParameters: any;
   setState: any;
+  checkout: any;
 }
 
 export interface ConfigurationSessionProps extends ConfigurationBaseProps {

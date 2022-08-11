@@ -28,6 +28,8 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           setCheckout({ checkout: null, error: errorMessage });
         } else {
           //we are not doing anything with error just yet
+          console.log(configuration);
+          
           const sessions = new ConfigurationSession({...configuration,data: parsedResponse, setState: {error: setErrors}});
           console.log('sessions.checkoutConfig',sessions.checkoutConfig);
           

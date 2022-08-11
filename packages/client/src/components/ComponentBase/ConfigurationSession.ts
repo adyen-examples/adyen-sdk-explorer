@@ -29,6 +29,8 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     };
   }
   get checkoutConfig(): any {
+    console.log('this.global: ', this.global);
+    
     return {
       environment: 'test',
       clientKey: this.clientKey,
