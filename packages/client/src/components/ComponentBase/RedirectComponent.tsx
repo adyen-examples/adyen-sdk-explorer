@@ -9,21 +9,23 @@ const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const redirectResult: any = queryParameters.get('redirectResult'),
     sessionId: any = queryParameters.get('sessionId');
   const [error, setError] = useState(null);
-  const [success,setSuccess] = useState(null);
+  const [result, setResult] = useState<any>(null);
   const sessions = new ConfigurationSession({
     ...configuration,
-    queryParameters: { redirectResult: redirectResult, sessionId: sessionId },setState: {error: setError}
+    queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
+    setState: { error: setError, result: setResult }
   });
   const [checkout] = useCheckout(sessions);
   const product = configuration.profile.product;
 
   if (error) {
-    return <Alerts severityType={'error'} message={JSON.stringify(error)} />
-  } else if (success) {
-    return <Alerts severityType={'success'} message={'success'} />
+    return <Alerts severityType={'error'} message={JSON.stringify(error)} />;
+  } else if (result) {
+    console.log('result', result);
+    return <Alerts severityType={result.status} message={result.resultCode} />;
   } else if (checkout) {
     checkout.submitDetails(sessions.redirectResult);
-    checkout.create(product,configuration.local).mount('#checkout');
+    checkout.create(product, configuration.local).mount('#checkout');
   }
 
   return <div id="checkout"></div>;

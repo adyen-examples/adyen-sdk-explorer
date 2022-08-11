@@ -46,10 +46,17 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     };
   }
 
-  public onPaymentCompleted(result: any, component: any): void {
-    console.log('Payment Completed');
-    console.info(result, component);
-    alert('On payment completed');
+  public onPaymentCompleted(result: any, component: any): void {    
+    if(this.setResult){
+      let code = result.resultCode;
+      if(result.resultCode === 'Authorised'){
+        this.setResult({status: 'success', resultCode: code});
+      }else if(result.resultCode === 'Pending'){
+        this.setResult({status: 'info', resultCode: code});
+      }else if(result.resultCode == 'Refused'){
+        this.setResult({status: 'error', resultCode: code});
+      }
+    }
   }
   public onError(error: Error, component: object | undefined): void {
     if (this.setError) {
