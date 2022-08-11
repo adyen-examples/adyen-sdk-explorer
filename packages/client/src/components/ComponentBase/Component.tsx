@@ -2,7 +2,6 @@ import { useInitializeSession } from '../../hooks';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 
 const Component = ({ configuration }: { configuration: any }) => {
-  console.log('configuration inside component',configuration);
   
   const [checkout, error] = useInitializeSession({ configuration, endpoint: 'sessions/sessionStart' });
   const product = configuration.profile.product;
@@ -11,7 +10,11 @@ const Component = ({ configuration }: { configuration: any }) => {
     return <Alerts severityType={'error'} message={JSON.stringify(error)} />
   }
   if (checkout) {
-    checkout.create(product).mount('#checkout');
+    // we need to change this so that we get it from the ConfigurationSessions instead
+    console.log('configuration.checkout: ',configuration.local);
+    console.log('whole configuration',configuration.local)
+    
+    checkout.create(product,configuration.local).mount('#checkout');
   }
   return <div id="checkout"></div>;
 };

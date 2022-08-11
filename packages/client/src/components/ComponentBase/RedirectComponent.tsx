@@ -23,7 +23,7 @@ const RedirectComponent = ({ configuration }: { configuration: any }) => {
     return <Alerts severityType={'success'} message={'success'} />
   } else if (checkout) {
     checkout.submitDetails(sessions.redirectResult);
-    checkout.create(product).mount('#checkout');
+    checkout.create(product,configuration.local).mount('#checkout');
   }
 
   return <div id="checkout"></div>;

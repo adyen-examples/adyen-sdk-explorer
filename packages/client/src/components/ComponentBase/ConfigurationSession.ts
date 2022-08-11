@@ -29,8 +29,6 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     };
   }
   get checkoutConfig(): any {
-    console.log('this.global: ', this.global);
-    
     return {
       environment: 'test',
       clientKey: this.clientKey,
@@ -39,11 +37,11 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
       onError: this.onError,
       onChange: this.onChange,
       onValid: this.onValid,
-      paymentMethodsConfiguration: {
-        card: {
-          ...this.local
-        }
-      },
+      // paymentMethodsConfiguration: {   We can bring this back, but we need a seperate step
+      //   card: {
+      //     ...this.local
+      //   }
+      // },
       ...this.global
     };
   }

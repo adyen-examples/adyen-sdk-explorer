@@ -7,21 +7,21 @@
   "globalPageContent": {
     "title": "Checkout",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+    "description": "Set a global or component-specific configuration on the main instance of Checkout."
   },
   "localPageContent": {
-    "title": "Local",
+    "title": "Dropin",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+    "description": "Set a configuration that is specific to Drop-in on the dropin instance."
   },
   "apiPageContent": {
     "title": "API",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+    "description": "Set a configuration at the API level to be passed on the /sessions endpoint"
   },
   "reviewPageContent": {
     "title": "Review",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuration either locally or on the main instance, globally through the AdyenCheckout , or in API request. Build and export a configuration profile for future use."
+    "description": "Review the component that was rendered based on your configuration. If you receive an error go back and reconfigure your SDK."
   }
 }
