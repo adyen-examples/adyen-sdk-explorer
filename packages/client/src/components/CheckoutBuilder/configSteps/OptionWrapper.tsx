@@ -2,8 +2,9 @@ import { useState, ChangeEvent, Fragment } from 'react';
 import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel } from '@mui/material';
 import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { marked } from 'marked';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export interface OptionWrapperPropTypes {
   value: any;
@@ -23,11 +24,17 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
 
   let optionsDisplay = null;
 
+  const createMarkup = (description: any) => {
+    console.log('createMarkup', description);
+
+    return { __html: description };
+  };
+
   if (isChecked) {
     if (descriptor.properties) {
       optionsDisplay = (
         <Fragment>
-          <Grid container pl={2}>
+          <Grid container sx={{ borderLeft: '1px solid', borderColor: 'primary.gray' }} pl={2}>
             {descriptor.properties.map((prop: Descriptor) => {
               return (
                 isChecked && (
@@ -51,16 +58,26 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
         <FormGroup>
           <FormControlLabel
             control={
-              <Checkbox name={descriptor.name} checked={isChecked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} size="small" />
+              <Checkbox
+                icon={<KeyboardArrowDownIcon/>}
+                checkedIcon={<KeyboardArrowUpIcon />}
+                name={descriptor.name}
+                checked={isChecked}
+                onChange={handleToggle}
+                inputProps={{ 'aria-label': 'controlled' }}
+                size="small"
+              />
             }
-            label={descriptor.name}
+            label={<Typography variant="subtitle1">{descriptor.name}</Typography>}
           />
         </FormGroup>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2">{descriptor.description}</Typography>
+        <Typography variant="body2">
+          <div dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))} />
+        </Typography>
       </Grid>
-      <Grid item xs={12} mb={3}>
+      <Grid item xs={12}>
         {optionsDisplay}
       </Grid>
     </Grid>

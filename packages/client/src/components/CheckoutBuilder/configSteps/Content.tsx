@@ -34,8 +34,8 @@ export const Content = ({ title, version, description }: ContentProps) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h4" gutterBottom>
-          <Box>Parameters</Box>
+        <Typography variant="h3" gutterBottom>
+          <Box>parameters</Box>
         </Typography>
       </Grid>
       <Grid pb={2} item xs={12}>

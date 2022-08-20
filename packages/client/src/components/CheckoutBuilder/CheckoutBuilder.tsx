@@ -7,11 +7,11 @@ import { ConfigWrapper } from './ConfigWrapper';
 const CheckoutBuilder = () => {
   useApi('http://localhost:8080/configurations', 'GET');
   return (
-      <Container component="main" maxWidth="lg">
-        <Paper elevation={0} sx={{ mx: { xs: 3, md: 8 }, p: { xs: 4, md: 5 } }}>
-          <ConfigWrapper />
-        </Paper>
-      </Container>
+    <Container component="main" maxWidth="lg">
+      <Paper elevation={0} sx={{ mt: { xs: 9 } }}>
+        <ConfigWrapper />
+      </Paper>
+    </Container>
   );
 };
 

@@ -14,15 +14,14 @@ export const Option = ({ descriptor, onChange, value, isChecked, current }: Opti
   return (
     <Grid item xs={11}>
       <Typography variant="body2">{descriptor.name}</Typography>
-      {/* <Typography variant="subtitle2">{descriptor.description}</Typography> */}
       {isChecked && (
         <TextField
           name={descriptor.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e, current)}
           id={descriptor.name}
-          label={descriptor.name}
           value={value}
           fullWidth
+          variant="standard"
         />
       )}
     </Grid>

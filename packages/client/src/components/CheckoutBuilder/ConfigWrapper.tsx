@@ -152,8 +152,8 @@ export const ConfigWrapper = () => {
   };
 
   return (
-    <Grid justifyContent="center" container>
-      <Grid item xs={7} mt={4} mb={4} pl={6} pr={6}>
+    <Grid container>
+      <Grid item xs={7} mt={4} mb={1}>
         <Stepper activeStep={activeStep}>
           {steps.map(label => (
             <Step key={label}>
@@ -162,7 +162,6 @@ export const ConfigWrapper = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={1}></Grid>
       <Grid item xs={8}>
         {displayStep}
       </Grid>
