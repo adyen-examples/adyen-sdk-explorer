@@ -10,8 +10,6 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: ListOptionsProps) => {
-  console.log('configuration', configuration);
-
   const checkForNested = (current: Descriptor) => {
     let value: any = '';
     if (current.properties && current.properties.length) {
@@ -32,6 +30,28 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     return value;
   };
 
+  const setDefaultType = (descriptor: Descriptor) => {
+    let defaultValue = null;
+    if (descriptor.type) {
+      switch (descriptor.type) {
+        case 'string':
+          defaultValue = '';
+          break;
+        case 'boolean':
+          defaultValue = true;
+          break;
+        case 'integer':
+          defaultValue = 0;
+          break;
+        default:
+          defaultValue = '';
+      }
+      return defaultValue;
+    }
+
+    return checkForNested(descriptor);
+  };
+
   const addOrRemoveProp: AddOrRemoveProp = e => {
     const key: string = e.target.name;
     console.log('KEY', key);
@@ -39,7 +59,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     if (configuration && configuration.hasOwnProperty(key)) {
       handleUpdateConfig(key, null);
     } else {
-      const value = descriptor ? checkForNested(descriptor) : '';
+      const value = descriptor ? setDefaultType(descriptor) : '';
       handleUpdateConfig(key, value);
     }
   };
