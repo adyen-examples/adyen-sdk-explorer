@@ -1,18 +1,5 @@
+import { AppBar, Box, CssBaseline, Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 380;
 
@@ -33,39 +20,46 @@ export const Nav = ({ children }: any) => {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            bgcolor: 'secondary.gray'
           }
         }}
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
-        <Divider />
+        <Box pl={2} pt={2}>
+          <img src="https://docs.adyen.com/api-explorer/img/adyen-api-logo.svg" alt="adyen logo" width="157" height="30" />
+        </Box>
         <List>
-          {['Dropin'].map((text, index) => (
+          <ListItem>
+            <Typography variant="h5">Checkout</Typography>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
+              <Typography variant="caption">Overview</Typography>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <Typography variant="h6">Payments</Typography>
+          </ListItem>
+          {['Dropin', 'Cards', 'Paysafecard'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Cards', 'ACH Direct Debit', 'Affirm'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                <Typography
+                  component={'span'}
+                  p={0.7}
+                  sx={{ bgcolor: '#e6f8ed', borderColor: '#cef2dd', color: '#055f29', borderRadius: '5px' }}
+                  variant="caption"
+                >
+                  SDK
+                </Typography>
+                <Typography variant="caption">{text}</Typography>
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
-      <Box component="main">
-        {children}
-      </Box>
+      <Box component="main">{children}</Box>
     </Box>
   );
 };

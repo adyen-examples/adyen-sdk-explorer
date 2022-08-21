@@ -27,7 +27,7 @@ export const ReviewForm = ({ configuration, step, setActiveStep, content }: Revi
             justifyContent="space-between"
             alignItems="stretch"
             container
-            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%' }}
+            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%', pt: '64px' }}
           >
             <Grid item xs={10} sx={{ height: '90%' }}>
               <JSONInput viewOnly={true} placeholder={configuration} colors={dark_vscode_tribute} locale={localeEn} height="100%" width="100%" />

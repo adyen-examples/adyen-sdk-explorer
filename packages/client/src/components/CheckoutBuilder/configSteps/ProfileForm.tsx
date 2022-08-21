@@ -49,12 +49,12 @@ export const ProfileForm = ({ configuration, step, setActiveStep, action, update
             justifyContent="space-between"
             alignItems="stretch"
             container
-            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%' }}
+            sx={{ position: 'fixed', bottom: 0, right: 0, height: '100%', bgcolor: 'secondary.main', width: '28%', pt:'64px' }}
           >
-            <Grid item xs={10} sx={{ height: '90%' }}>
+            <Grid item xs={10}>
               <JSONInput viewOnly={true} placeholder={configuration} colors={dark_vscode_tribute} locale={localeEn} height="100%" width="100%" />
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2}>
               <Grid p={1} sx={{ height: '100%' }} direction="row" container justifyContent="flex-end" alignItems="flex-end">
                 <Grid item>
                   <NavButtons step={step} setActiveStep={setActiveStep} configuration={configuration} />

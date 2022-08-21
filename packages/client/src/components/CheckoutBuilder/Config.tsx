@@ -38,7 +38,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
             justifyContent="space-between"
             alignItems="stretch"
             container
-            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%' }}
+            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%', pt:'64px' }}
           >
             <Grid item xs={10} sx={{ height: '90%' }}>
               <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />

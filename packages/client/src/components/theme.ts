@@ -9,7 +9,8 @@ export const themeOptions: any = {
     },
     secondary: {
       //   main: '#09ae4c',dark blue #00112C
-      main: '#00112C'
+      main: '#00112C',
+      gray: '#F2F6F9'
     },
     background: {
       paper: '#fff',
