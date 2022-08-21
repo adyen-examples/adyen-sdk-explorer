@@ -1,4 +1,4 @@
-import Header from './Header/Header';
+import Header from './Nav/Header/Header';
 import PaymentsForm from './PaymentsForm/PaymentsForm';
 import ComponentBase from './ComponentBase/ComponentBase';
 import CheckoutBuilder from './CheckoutBuilder/CheckoutBuilder';

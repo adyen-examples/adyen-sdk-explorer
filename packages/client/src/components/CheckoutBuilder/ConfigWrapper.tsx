@@ -1,8 +1,4 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import BiotechIcon from '@mui/icons-material/Biotech';
-import CodeIcon from '@mui/icons-material/Code';
-import PublicIcon from '@mui/icons-material/Public';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { AccountCircleIcon, BiotechIcon, CodeIcon, PublicIcon, ShoppingCartIcon } from '@mui/icons-material/AccountCircle';
 import { Grid, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { styled } from '@mui/material/styles';
@@ -15,11 +11,9 @@ import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
-import { Alerts } from './Alerts';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
-//TODO[Bug]: Rendering components twice if head to drop-in and hit back
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
