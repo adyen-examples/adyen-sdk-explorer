@@ -7,7 +7,7 @@ const CheckoutBuilder = () => {
   return (
     <Container component="main" maxWidth="lg">
       <Paper elevation={0} sx={{ mt: { xs: 9 } }}>
-        <ConfigWrapper />
+        <ConfigWrapper/>
       </Paper>
     </Container>
   );

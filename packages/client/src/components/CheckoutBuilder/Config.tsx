@@ -8,6 +8,8 @@ import { Content } from './configSteps/Content';
 export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore, content }: ConfigPropTypes) => {
   const { profilePageContent } = content;
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
+    console.log('handleupdateconfig',item,value,current);
+    
     let newConfig = { ...configuration };
 
     if (value === null) {

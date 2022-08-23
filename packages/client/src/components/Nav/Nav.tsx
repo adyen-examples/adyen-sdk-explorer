@@ -1,18 +1,36 @@
 import { AppBar, Box, CssBaseline, Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { onDeckActions } from '../../app';
+import { useAppDispatch } from '../../hooks';
 
 const drawerWidth = 380;
 
 export const Nav = ({ children }: any) => {
+  const { updateProfileInfo } = onDeckActions;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = (product: any) => (e: any) => {
+    console.log('product', product, 'e', e);
+    const value: any = { product: product };
+    dispatch(updateProfileInfo(value));
+    // I still need to clear the state and set a param for the step at the global state level
+    // I also want to replicate a fake api call that provides the payment methods
+    navigate('/');
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
-          </Typography>
-        </Toolbar>
+      <AppBar elevation={0} position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
+        <Box bgcolor="white" sx={{ borderBottom: 1, borderColor: 'primary.border'}} >
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              Permanent drawer
+            </Typography>
+          </Toolbar>
+        </Box>
       </AppBar>
       <Drawer
         sx={{
@@ -42,9 +60,9 @@ export const Nav = ({ children }: any) => {
           <ListItem>
             <Typography variant="h6">Payments</Typography>
           </ListItem>
-          {['Dropin', 'Cards', 'Paysafecard'].map((text, index) => (
+          {['dropin', 'cards', 'ACH Direct Debit', 'Affirm', 'Afterpay', 'Alipay', 'Amazon Pay', 'Apple Pay', 'paysafecard', 'dropin', 'cards', 'ACH Direct Debit', 'Affirm', 'Afterpay', 'Alipay', 'Amazon Pay', 'Apple Pay', 'paysafecard'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={handleClick(text)}>
                 <Typography
                   component={'span'}
                   p={0.7}

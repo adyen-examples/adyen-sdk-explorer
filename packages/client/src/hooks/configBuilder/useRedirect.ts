@@ -16,8 +16,6 @@ export const useRedirect = (globalStateConfig: any, setStep: any) => {
     if (redirectResult) {
       const storedConfig = JSON.parse(encodedConfig);
       const { profile, checkout, local, sessions } = storedConfig;
-      console.log('globalStateConfig: ', globalStateConfig);
-      console.log('isConfigEmpty(globalStateConfig', isConfigEmpty(globalStateConfig));
 
       if (isConfigEmpty(globalStateConfig)) {
         dispatch(updateProfileInfo(profile));

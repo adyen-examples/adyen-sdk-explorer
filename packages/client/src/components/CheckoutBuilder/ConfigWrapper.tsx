@@ -1,4 +1,8 @@
-import { AccountCircleIcon, BiotechIcon, CodeIcon, PublicIcon, ShoppingCartIcon } from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BiotechIcon from '@mui/icons-material/Biotech';
+import CodeIcon from '@mui/icons-material/Code';
+import PublicIcon from '@mui/icons-material/Public';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Grid, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { styled } from '@mui/material/styles';
@@ -11,6 +15,7 @@ import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
+import { Alerts } from './Alerts';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
@@ -33,7 +38,6 @@ const ColorlibStepIconRoot = styled('div')<{
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
-
   const [activeStep, setActiveStep] = useState(0);
   const steps = ['Profile', 'Global', 'Component', 'API', 'Review'];
   let displayStep;

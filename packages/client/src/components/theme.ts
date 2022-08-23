@@ -5,7 +5,8 @@ export const themeOptions: any = {
     type: 'light',
     primary: {
       main: '#0066ff',
-      gray: '#bdbdbd'
+      gray: '#bdbdbd',
+      border: '#d2dae1'
     },
     secondary: {
       //   main: '#09ae4c',dark blue #00112C

@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, Fragment } from 'react';
-import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel } from '@mui/material';
+import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel, Select, MenuItem } from '@mui/material';
 import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
 import { marked } from 'marked';
@@ -11,7 +11,7 @@ export interface OptionWrapperPropTypes {
   indexKey: string;
   descriptor: Descriptor;
   addOrRemoveProp: AddOrRemoveProp;
-  handleInput: HandleInput;
+  handleInput: any;// need to change this to HandleInput from types
 }
 
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
@@ -25,8 +25,6 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   let optionsDisplay = null;
 
   const createMarkup = (description: any) => {
-    console.log('createMarkup', description);
-
     return { __html: description };
   };
 
@@ -49,6 +47,20 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       );
     } else if (descriptor.type === 'string') {
       optionsDisplay = <Option descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />;
+    } else if (descriptor.type === 'boolean' && descriptor.name) {
+      optionsDisplay = (
+        <Select
+          sx={{ width: '25%', borderRadius: '0', borderColor: '#0066ff', color: '#0066ff' }}
+          labelId="boolean-label"
+          id="boolean-select"
+          name="boolean"
+          value={value}
+          onChange={handleInput}
+        >
+          <MenuItem value={value}>true</MenuItem>
+          <MenuItem value={value}>false</MenuItem>
+        </Select>
+      );
     }
   }
 
@@ -59,7 +71,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           <FormControlLabel
             control={
               <Checkbox
-                icon={<KeyboardArrowDownIcon/>}
+                icon={<KeyboardArrowDownIcon />}
                 checkedIcon={<KeyboardArrowUpIcon />}
                 name={descriptor.name}
                 checked={isChecked}
