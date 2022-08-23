@@ -1,5 +1,5 @@
 import { Header } from '.';
-import { Nav } from './Nav/Nav';
+import { Layout } from './Nav/Layout';
 import ApplicationRouter from './AppRouter';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { themeOptions } from './theme';
@@ -9,9 +9,9 @@ const Application = () => {
   return (
     <div id="app">
       <ThemeProvider theme={theme}>
-        <Nav>
+        <Layout>
           <ApplicationRouter />
-        </Nav>
+        </Layout>
       </ThemeProvider>
     </div>
   );

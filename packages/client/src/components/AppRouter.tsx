@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { PaymentsFormProps } from './types';
-import { CheckoutBuilder, PaymentsForm, ComponentBase } from '.';
+import { CheckoutBuilder, ComponentBase } from '.';
 
 const ApplicationRouter = () => {
   return (
