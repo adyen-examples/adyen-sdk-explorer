@@ -17,6 +17,8 @@ export interface OptionWrapperPropTypes {
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
   const [isChecked, setIsChecked] = useState(!!value);
 
+  console.log('option wrapper', descriptor, indexKey, value);
+  
   const handleToggle = (e: any, checked: boolean) => {
     addOrRemoveProp(e);
     setIsChecked(checked);
@@ -53,12 +55,12 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           sx={{ width: '25%', borderRadius: '0', borderColor: '#0066ff', color: '#0066ff' }}
           labelId="boolean-label"
           id="boolean-select"
-          name="boolean"
+          name={descriptor.name}
           value={value}
-          onChange={handleInput}
+          onChange={(e: any) => handleInput(e, descriptor.name)}
         >
-          <MenuItem value={value}>true</MenuItem>
-          <MenuItem value={value}>false</MenuItem>
+          <MenuItem value={true as any}>true</MenuItem>
+          <MenuItem value={false as any}>false</MenuItem>
         </Select>
       );
     }

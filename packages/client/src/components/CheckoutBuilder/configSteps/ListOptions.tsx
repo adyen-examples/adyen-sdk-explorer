@@ -65,6 +65,9 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
   };
 
   const handleInput: HandleInput = (e, current) => {
+    console.log('handleinput called');
+    console.log(e.target);
+    
     handleUpdateConfig(e.target.name, e.target.value, current);
   };
 

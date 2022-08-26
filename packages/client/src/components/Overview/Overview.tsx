@@ -1,3 +1,3 @@
-export const Overview = ({ configuration }: { configuration: any }) => {
+export const Overview = () => {
   return <div>Overview</div>;
 };

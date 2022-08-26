@@ -5,8 +5,8 @@ import { ConfigWrapper } from './ConfigWrapper';
 const CheckoutBuilder = () => {
   useApi('http://localhost:8080/configurations', 'GET');
   return (
-    <Container component="main" maxWidth="lg">
-      <Paper elevation={0} sx={{ mt: { xs: 9 } }}>
+    <Container maxWidth="lg">
+      <Paper elevation={0}>
         <ConfigWrapper/>
       </Paper>
     </Container>
