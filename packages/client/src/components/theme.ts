@@ -51,6 +51,11 @@ export const themeOptions: any = {
       fontWeight: 500,
       fontSize: '1.1rem',
       fontFamily: 'Roboto, sans-serif'
+    },
+    subtitle2: {
+      fontWeight: 300,
+      fontSize: '.9rem',
+      fontFamily: 'Roboto, sans-serif'
     }
   },
   props: {

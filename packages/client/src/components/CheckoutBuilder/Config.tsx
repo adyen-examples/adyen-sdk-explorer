@@ -8,13 +8,15 @@ import { Content } from './configSteps/Content';
 export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore, content }: ConfigPropTypes) => {
   const { profilePageContent } = content;
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
-    console.log('handleupdateconfig',item,value,current);
-    
+    console.log('handleupdateconfig', item, value, current);
+
     let newConfig = { ...configuration };
 
     if (value === null) {
       delete newConfig[item];
-    } else if (current) {
+    } else if (current && 'boolean' == typeof value) {
+      newConfig = { ...newConfig, [current]: value };
+    } else if (current && 'string' == typeof value) {
       let newCurrent = { ...newConfig[current], [item]: value };
       newConfig = { ...newConfig, [current]: newCurrent };
     } else {
@@ -40,7 +42,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
             justifyContent="space-between"
             alignItems="stretch"
             container
-            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%', pt:'64px' }}
+            sx={{ position: 'fixed', top: 0, right: 0, height: '100vh', bgcolor: 'secondary.main', width: '28%', pt: '64px' }}
           >
             <Grid item xs={10} sx={{ height: '90%' }}>
               <Editor configuration={configuration} handleJsonEditorUpdate={handleJsonEditorUpdate} />
