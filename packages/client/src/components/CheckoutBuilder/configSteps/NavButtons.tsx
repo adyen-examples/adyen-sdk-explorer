@@ -8,13 +8,13 @@ const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsIn
 type NavButtonsProps = {
   step: number;
   configuration: any;
-  setActiveStep: (step: number) => void;
+  setActiveStep: (step: number) => any;
 };
 
 export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  
   const runStepAction = () => {
     switch (step) {
       case 0:
@@ -34,12 +34,12 @@ export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsPro
   };
 
   const handleNext = () => {
-    runStepAction();
-    setActiveStep(step + 1);
+    runStepAction();   
+    dispatch(setActiveStep(step + 1));
   };
 
   const handleBack = () => {
-    setActiveStep(step - 1);
+    dispatch(setActiveStep(step - 1));
   };
 
   const downloadJSON = () => {

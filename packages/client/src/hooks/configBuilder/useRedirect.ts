@@ -23,7 +23,7 @@ export const useRedirect = (globalStateConfig: any, setStep: any) => {
         dispatch(updateLocalInfo(local));
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
-        setStep(4);
+        dispatch(setStep(4));
       }
     }
   }, []);

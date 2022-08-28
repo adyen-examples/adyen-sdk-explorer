@@ -7,7 +7,6 @@ import { Grid, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { styled } from '@mui/material/styles';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import content from '../../helpers/content.json';
@@ -15,9 +14,8 @@ import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
-import { Alerts } from './Alerts';
 
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
+const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
 
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
@@ -38,12 +36,11 @@ const ColorlibStepIconRoot = styled('div')<{
 
 export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
-  const [activeStep, setActiveStep] = useState(0);
   const steps = ['Profile', 'Global', 'Component', 'API', 'Review'];
   let displayStep;
 
-  const { profile, checkout, local, sessions } = useSelector((state: RootState) => state.onDeck);
-  useRedirect({ profile, checkout, local, sessions }, setActiveStep);
+  const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
+  useRedirect({ profile, checkout, local, sessions }, updateStep);
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
@@ -52,6 +49,7 @@ export const ConfigWrapper = () => {
   const { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent }: any = content;
 
   console.log('STORE', JSON.stringify({ profile, checkout, local, sessions }));
+  console.log(activeStep);
 
   switch (activeStep) {
     case 0:
@@ -60,7 +58,7 @@ export const ConfigWrapper = () => {
           key="profile"
           configuration={profile}
           step={activeStep}
-          setActiveStep={setActiveStep}
+          setActiveStep={updateStep}
           action={updateProfileInfo}
           updateStore={updateStore}
           content={profilePageContent}
@@ -74,7 +72,7 @@ export const ConfigWrapper = () => {
           configuration={checkout}
           descriptors={descriptors.checkout}
           step={activeStep}
-          setActiveStep={setActiveStep}
+          setActiveStep={updateStep}
           action={updateCheckoutInfo}
           updateStore={updateStore}
           content={globalPageContent}
@@ -88,7 +86,7 @@ export const ConfigWrapper = () => {
           configuration={local}
           descriptors={descriptors.local}
           step={activeStep}
-          setActiveStep={setActiveStep}
+          setActiveStep={updateStep}
           action={updateLocalInfo}
           updateStore={updateStore}
           content={localPageContent}
@@ -102,7 +100,7 @@ export const ConfigWrapper = () => {
           configuration={sessions}
           descriptors={descriptors.sessions}
           step={activeStep}
-          setActiveStep={setActiveStep}
+          setActiveStep={updateStep}
           action={updateSessionsInfo}
           updateStore={updateStore}
           content={apiPageContent}
@@ -114,7 +112,7 @@ export const ConfigWrapper = () => {
         <ReviewForm
           key="review"
           step={activeStep}
-          setActiveStep={setActiveStep}
+          setActiveStep={updateStep}
           configuration={{ checkout, local, sessions }}
           content={reviewPageContent}
         />
@@ -150,8 +148,8 @@ export const ConfigWrapper = () => {
   };
 
   return (
-    <Grid container>
-      <Grid item xs={7} mt={4} mb={1}>
+    <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
+      <Grid item xs={1} sx={{width: '50%'}}>
         <Stepper activeStep={activeStep}>
           {steps.map(label => (
             <Step key={label}>
@@ -160,7 +158,7 @@ export const ConfigWrapper = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={11}>
         {displayStep}
       </Grid>
     </Grid>
