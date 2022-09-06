@@ -1,18 +1,34 @@
 import { Box, CssBaseline } from '@mui/material';
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
 import { Sidebar } from './Sidebar/Sidebar';
 
-export const Layout = ({ children }: any) => {
+const products: any = {
+  dropin: { txvariant: 'dropin', steps: ['profile','checkout', 'local', 'sessions', 'review'] },
+  cards: { txvariant: 'card', steps: ['profile','local', 'sessions', 'review'] },
+  paysafecard: { txvariant: 'paysafecard', steps: ['profile','local', 'sessions', 'review'] }
+};
+
+export const Layout = ({ main: Main }: any) => {
   const drawerWidth = 380;
   const headerHeight = 64;
   const editorWidth = 420;
+
+  const params = useParams();
+  const component: any = params.component;
+
+  const payload = products;
+  const componentProps = payload[component];
+
+  const childComponent = payload ? <Main props={componentProps} /> : '...Loading';
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header drawerWidth={drawerWidth} />
-      <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight}/>
+      <Sidebar drawerWidth={drawerWidth} products={products} />
       <Box
         sx={{
           position: 'fixed',
@@ -26,9 +42,9 @@ export const Layout = ({ children }: any) => {
         }}
         component="main"
       >
-        {children}
+        {childComponent}
       </Box>
-      <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth}/>
+      <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />
     </Box>
   );
 };

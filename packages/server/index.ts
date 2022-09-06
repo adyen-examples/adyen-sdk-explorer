@@ -24,18 +24,19 @@ app.use(express.static(root));
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root });
 });
-app.get('/dropin', (req, res) => {
+app.get('/:component', (req, res) => {
+  //validate component against db or return 404
   res.sendFile('index.html', { root });
 });
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/auth', authRouter);
-app.use('/users', userRouter);
-app.use('/sessions', sessionsRouter);
-app.use('/payments', paymentsRouter);
-app.use('/configurations', configurationRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/sessions', sessionsRouter);
+app.use('/api/payments', paymentsRouter);
+app.use('/api/configurations', configurationRouter);
 
 let server: any;
 

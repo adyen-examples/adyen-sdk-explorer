@@ -8,8 +8,6 @@ import { Content } from './configSteps/Content';
 export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore, content }: ConfigPropTypes) => {
   const { profilePageContent } = content;
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
-    console.log('handleupdateconfig', item, value, current);
-
     let newConfig = { ...configuration };
 
     if (value === null) {
@@ -30,13 +28,9 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
   };
 
   return (
-    <Fragment>
-      <Grid mt={2} ml={0} spacing={1} container>
-        <Grid item xs={12}>
-          <Content title={content.title} version={content.version} description={content.description} />
-          <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
-        </Grid>
-      </Grid>
-    </Fragment>
+    <Box>
+      <Content title={content.title} version={content.version} description={content.description} />
+      <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
+    </Box>
   );
 };

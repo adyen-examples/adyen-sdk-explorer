@@ -2,7 +2,7 @@ import { useInitializeSession } from '../../hooks';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 
 const Component = ({ configuration }: { configuration: any }) => {
-  const [checkout, error] = useInitializeSession({ configuration, endpoint: 'sessions/sessionStart' });
+  const [checkout, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
   const product = configuration.profile.product;
 
   if (error) {

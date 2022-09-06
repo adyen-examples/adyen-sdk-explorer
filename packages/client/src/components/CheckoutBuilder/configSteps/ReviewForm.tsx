@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import React from 'react';
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
@@ -15,13 +15,9 @@ type ReviewFormProps = {
 
 export const ReviewForm = ({ configuration, step, setActiveStep, content }: ReviewFormProps) => {
   return (
-    <React.Fragment>
-      <Grid mt={2} spacing={1} ml={0} container>
-        <Grid item xs={12}>
-          <Content title={content.title} version={content.version} description={content.description} />
-          <ComponentBase />
-        </Grid>
-      </Grid>
-    </React.Fragment>
+    <Box>
+      <Content title={content.title} version={content.version} description={content.description} />
+      <ComponentBase />
+    </Box>
   );
 };

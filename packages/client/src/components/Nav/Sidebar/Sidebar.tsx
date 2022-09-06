@@ -3,19 +3,28 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
-export const Sidebar = ({drawerWidth}: any) => {
-  const { updateProfileInfo } = onDeckActions;
+export const Sidebar = ({ products, drawerWidth }: any) => {
+  const { updateProfileInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (product: any) => (e: any) => {
- 
-    const value: any = { product: product };
-    dispatch(updateProfileInfo(value));
-    // I still need to clear the state and set a param for the step at the global state level
-    // I also want to replicate a fake api call that provides the payment methods
-    navigate(`/${product}`);
+  const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
+    dispatch(action(value));
+  };
+
+  const handleClick = (path: any, txvariant: any = null) => (e: any) => {
+    navigate(`/${path}`);
+    if (txvariant) {
+      let activeProduct = {
+        product: txvariant
+      };
+      updateStore(activeProduct, updateProfileInfo);
+    }
+
+    let resetStep = 0;
+    updateStore(resetStep, updateStep);
   };
 
   return (
@@ -39,36 +48,15 @@ export const Sidebar = ({drawerWidth}: any) => {
         <ListItem>
           <Typography variant="h5">Checkout</Typography>
         </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <Typography variant="caption">Overview</Typography>
-          </ListItemButton>
-        </ListItem>
+        <ListItemButton onClick={handleClick('')}>
+          <Typography variant="caption">Overview</Typography>
+        </ListItemButton>
         <ListItem>
           <Typography variant="h6">Payments</Typography>
         </ListItem>
-        {[
-          'dropin',
-          'cards',
-          'ACH Direct Debit',
-          'Affirm',
-          'Afterpay',
-          'Alipay',
-          'Amazon Pay',
-          'Apple Pay',
-          'paysafecard',
-          'dropin',
-          'cards',
-          'ACH Direct Debit',
-          'Affirm',
-          'Afterpay',
-          'Alipay',
-          'Amazon Pay',
-          'Apple Pay',
-          'paysafecard'
-        ].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton onClick={handleClick(text)}>
+        {Object.keys(products).map((product: any, index: number) => (
+          <ListItem key={product} disablePadding>
+            <ListItemButton onClick={handleClick(product, products[product].txvariant)}>
               <Typography
                 component={'span'}
                 p={0.7}
@@ -77,7 +65,7 @@ export const Sidebar = ({drawerWidth}: any) => {
               >
                 SDK
               </Typography>
-              <Typography variant="caption">{text}</Typography>
+              <Typography variant="caption">{product}</Typography>
             </ListItemButton>
           </ListItem>
         ))}
