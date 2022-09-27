@@ -59,7 +59,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           <FormControlLabel
             control={
               <Checkbox
-                icon={<KeyboardArrowDownIcon/>}
+                icon={<KeyboardArrowDownIcon />}
                 checkedIcon={<KeyboardArrowUpIcon />}
                 name={descriptor.name}
                 checked={isChecked}
