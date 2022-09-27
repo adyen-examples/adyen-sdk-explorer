@@ -1,3 +1,4 @@
+import cors from 'cors';
 import path from 'path';
 import express from 'express';
 
@@ -6,7 +7,7 @@ import mongoose, { ConnectOptions } from 'mongoose';
 import cookieParser from 'cookie-parser';
 
 import { dbConnect, mongoOptions } from './db-mongoose';
-import { PORT, DATABASE_URL } from './config';
+import { PORT, DATABASE_URL, CLIENT_ORIGIN } from './config';
 import { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
 
 export const app = express();
@@ -19,12 +20,18 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
+
 const root = path.join(__dirname, '../client', 'build');
 app.use(express.static(root));
-app.get('/', (req, res) => {
+app.get('/checkout-builder', (req, res) => {
   res.sendFile('index.html', { root });
 });
-app.get('/dropin', (req, res) => {
+app.get('/checkout-builder/dropin', (req, res) => {
   res.sendFile('index.html', { root });
 });
 
