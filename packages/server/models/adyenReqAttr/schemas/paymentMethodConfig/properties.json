@@ -121,9 +121,11 @@
   "affirm": {
     "template": {
       "visibility": {
-        "personalDetails": "hidden",
-        "billingAddress": "readOnly",
-        "deliveryAddress": "editable"
+        "defaultValue": {
+          "personalDetails": "hidden",
+          "billingAddress": "readOnly",
+          "deliveryAddress": "editable"
+        }
       }
     }
   },
@@ -468,21 +470,29 @@
   },
   "ratepay": {
     "template": {
-      "countryCode": "NL",
+      "countryCode": {
+        "defaultValue": "NL"
+      },
       "visibility": {
-        "personalDetails": "hidden",
-        "billingAddress": "readOnly",
-        "deliveryAddress": "editable"
+        "defaultValue": {
+          "personalDetails": "hidden",
+          "billingAddress": "readOnly",
+          "deliveryAddress": "editable"
+        }
       }
     }
   },
   "ratepay_directdebit": {
     "template": {
-      "countryCode": "NL",
+      "countryCode": {
+        "defaultValue": "NL"
+      },
       "visibility": {
-        "personalDetails": "hidden",
-        "billingAddress": "readOnly",
-        "deliveryAddress": "editable"
+        "defaultValue": {
+          "personalDetails": "hidden",
+          "billingAddress": "readOnly",
+          "deliveryAddress": "editable"
+        }
       }
     }
   },
