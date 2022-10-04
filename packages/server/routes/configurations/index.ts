@@ -1,12 +1,14 @@
 import { Router, Request, Response } from 'express';
 
-import { User, Configuration, additionalData, sessionsConfig, paymentMethodDetails } from '../../models';
+import { User, Configuration, additionalData, sessionsConfig, paymentMethodProperties } from '../../models';
 import { jwtAuth, isAuthorizedForAction } from '../auth';
 
 import type { ConfigToUpdate } from './types';
 
 // Adyen attributes
 import { checkoutConfig, localConfig } from '../../temp';
+
+type PaymentMethodProperties = { [key: string]: any };
 
 const router = Router();
 
@@ -104,14 +106,6 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
     res.status(500).json({ message: 'Internal server error' });
   } catch (err) {
     console.error('CONFIGURATIONS UPDATE ERROR', err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-router.get('/', (req, res) => {
-  try {
-    return res.status(201).json({ checkoutConfig, localConfig, sessionsConfig });
-  } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
