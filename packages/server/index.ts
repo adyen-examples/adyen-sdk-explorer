@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 
 import { dbConnect, mongoOptions } from './db-mongoose';
 import { PORT, DATABASE_URL, CLIENT_ORIGIN } from './config';
-import { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
+import { authRouter, userRouter, sessionsRouter, resourcesRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
 
 export const app = express();
 app.use(express.json());
@@ -42,6 +42,7 @@ app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/sessions', sessionsRouter);
 app.use('/payments', paymentsRouter);
+app.use('/resources', resourcesRouter);
 app.use('/configurations', configurationRouter);
 
 let server: any;
