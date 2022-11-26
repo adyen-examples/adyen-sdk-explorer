@@ -64,24 +64,26 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     }
   };
 
-  const handleInput: HandleInput = (e, current) => {   
+  const handleInput: HandleInput = (e, current) => {
     handleUpdateConfig(e.target.name, e.target.value, current);
   };
 
   return (
     <Grid container>
       {descriptors &&
-        descriptors.map((descriptor: Descriptor) => (
-          <Grid item xs={12}>
-            <OptionWrapper
-              descriptor={descriptor}
-              indexKey={descriptor.name}
-              addOrRemoveProp={addOrRemoveProp}
-              handleInput={handleInput}
-              value={configuration[descriptor.name]}
-            />
-          </Grid>
-        ))}
+        descriptors.map((descriptor: Descriptor) => {
+          return (
+            <Grid item xs={12}>
+              <OptionWrapper
+                descriptor={descriptor}
+                indexKey={descriptor.name}
+                addOrRemoveProp={addOrRemoveProp}
+                handleInput={handleInput}
+                value={configuration[descriptor.name]}
+              />
+            </Grid>
+          );
+        })}
     </Grid>
   );
 };

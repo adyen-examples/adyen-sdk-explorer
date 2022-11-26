@@ -3,13 +3,19 @@ import { useEffect, useState } from 'react';
 import ConfigurationSession from '../../components/ComponentBase/ConfigurationSession';
 import { API_URL, CLIENT_URL } from '../../config';
 import type { RequestOptions } from '../types';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 
 export const useInitializeSession = ({ configuration, endpoint }: { configuration: any; endpoint: string }) => {
   const [values, setCheckout] = useState<any>({ checkout: null, error: null });
   const { checkout, error } = values;
   const { sessions } = configuration;
   const [errors, setErrors] = useState(null);
+  const { profile } = configuration;
+  const txvariant = profile.product;
 
+  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
+  const { activeStep } = useSelector((state: RootState) => state.onDeck);
 
   useEffect(() => {
     const requestOptions: RequestOptions = {
@@ -17,7 +23,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${txvariant}` })
     };
     const initialize: () => void = async () => {
       try {
@@ -28,10 +34,11 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           setCheckout({ checkout: null, error: errorMessage });
         } else {
           //we are not doing anything with error just yet
-          
-          const sessions = new ConfigurationSession({...configuration,data: parsedResponse, setState: {error: setErrors}});         
+
+          const sessions = new ConfigurationSession({ ...configuration, data: parsedResponse, setState: { error: setErrors } });
           const component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('configuration', JSON.stringify(configuration));
+          localStorage.setItem('sdkExplorer', JSON.stringify({steps, activeStep}));
           setCheckout({ checkout: component, error: null });
         }
       } catch (e) {

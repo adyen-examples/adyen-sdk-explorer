@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 
 import { dbConnect, mongoOptions } from './db-mongoose';
 import { PORT, DATABASE_URL } from './config';
-import { authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
+import { productsRouter, authRouter, userRouter, sessionsRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
 
 export const app = express();
 app.use(express.json());
@@ -37,6 +37,7 @@ app.use('/api/users', userRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/payments', paymentsRouter);
 app.use('/api/configurations', configurationRouter);
+app.use('/api/products', productsRouter);
 
 let server: any;
 

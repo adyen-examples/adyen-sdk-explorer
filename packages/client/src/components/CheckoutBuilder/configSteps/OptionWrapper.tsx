@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, Fragment } from 'react';
+import { useState, ChangeEvent, Fragment, useEffect } from 'react';
 import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
@@ -6,6 +6,8 @@ import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { styled } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom';
+import { LoginSharp } from '@mui/icons-material';
 
 const AdyenInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -48,6 +50,13 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   const createMarkup = (description: any) => {
     return { __html: description };
   };
+  //We'll come back to this, but we should not be using local state, and instead just listen to the prop
+
+  // useEffect(() => {
+  //   console.log('Change in the prop');
+  //   console.log('The value is: ',value)
+  // }, [value])
+  
 
   if (isChecked) {
     if (descriptor.properties) {
@@ -79,7 +88,9 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
             onChange={(e: any) => handleInput(e, descriptor.name)}
             input={<AdyenInput />}
           >
-            <MenuItem sx={{fontSize: 'subtitle2.fontSize'}} value={true as any}>true</MenuItem>
+            <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
+              true
+            </MenuItem>
             <MenuItem value={false as any}>false</MenuItem>
           </Select>
         </FormControl>

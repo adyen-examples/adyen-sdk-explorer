@@ -4,47 +4,69 @@ import { useParams } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
 import { Sidebar } from './Sidebar/Sidebar';
-
-const products: any = {
-  dropin: { txvariant: 'dropin', steps: ['profile','checkout', 'local', 'sessions', 'review'] },
-  cards: { txvariant: 'card', steps: ['profile','local', 'sessions', 'review'] },
-  paysafecard: { txvariant: 'paysafecard', steps: ['profile','local', 'sessions', 'review'] }
-};
+import { useApiLocal, useRedirect } from '../../hooks';
+import { sdkExplorerActions, onDeckActions } from '../../app';
+import { useAppDispatch } from '../../hooks';
+import type { RootState } from '../../store';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+const { updateExplorer } = sdkExplorerActions;
+const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const drawerWidth = 380;
   const headerHeight = 64;
   const editorWidth = 420;
 
-  const params = useParams();
-  const component: any = params.component;
+  const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
+  const { state, error, data } = products;
 
-  const payload = products;
-  const componentProps = payload[component];
+  const dispatch = useAppDispatch();
 
-  const childComponent = payload ? <Main props={componentProps} /> : '...Loading';
+  const pathParams = useParams();
+  const product: any = pathParams.component;
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Header drawerWidth={drawerWidth} />
-      <Sidebar drawerWidth={drawerWidth} products={products} />
-      <Box
-        sx={{
-          position: 'fixed',
-          top: '0',
-          bottom: '0',
-          width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
-          ml: `${drawerWidth}px`,
-          mr: `${editorWidth}px`,
-          overflow: 'scroll',
-          mt: `${headerHeight}px`
-        }}
-        component="main"
-      >
-        {childComponent}
+  let editor = null;
+
+  if (!products.error && products.data) {
+    let sdkExplorerProps = data.products[product];
+
+    if (sdkExplorerProps) {
+      const txvariant = sdkExplorerProps.txvariant;
+      const activeProduct: any = {
+        product: txvariant
+      };
+      console.log('activeProduct', activeProduct);
+
+      dispatch(updateExplorer(sdkExplorerProps));
+      dispatch(updateProfileInfo(activeProduct));
+      editor = <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />;
+    }
+
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Header drawerWidth={drawerWidth} />
+        <Sidebar drawerWidth={drawerWidth} products={data.products} />
+        <Box
+          sx={{
+            position: 'fixed',
+            top: '0',
+            bottom: '0',
+            width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
+            ml: `${drawerWidth}px`,
+            mr: `${editorWidth}px`,
+            overflow: 'scroll',
+            mt: `${headerHeight}px`
+          }}
+          component="main"
+        >
+          <Main key={product} />
+          {editor}
+        </Box>
       </Box>
-      <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />
-    </Box>
-  );
+    );
+  }
+
+  return <Box>...Loading</Box>;
 };

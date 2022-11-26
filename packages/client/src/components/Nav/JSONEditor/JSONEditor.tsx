@@ -8,44 +8,45 @@ import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
 
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
-
 export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
+  const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
   };
 
-  let configuration = null;
-  let updateConfiguration = null;
-
-  switch (activeStep) {
-    case 0:
+  let configuration: any = null;
+  let updateConfiguration: any = null;
+  console.log('Steps: ', steps);
+  
+  switch (steps[activeStep]) {
+    case 'profile':
       configuration = profile;
       updateConfiguration = (value: any) => {
         updateStore(value, updateProfileInfo);
       };
       break;
-    case 1:
+    case 'checkout':
       configuration = checkout;
       updateConfiguration = (value: any) => {
         updateStore(value, updateCheckoutInfo);
       };
       break;
-    case 2:
+    case 'local':
       configuration = local;
       updateConfiguration = (value: any) => {
         updateStore(value, updateLocalInfo);
       };
       break;
-    case 3:
+    case 'sessions':
       configuration = sessions;
       updateConfiguration = (value: any) => {
         updateStore(value, updateSessionsInfo);
       };
       break;
-    case 4:
+    case 'review':
       configuration = { checkout, local, sessions };
       updateConfiguration = (value: any) => {
         console.error('Updating from review');
@@ -90,7 +91,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
             </Button>
           </Grid>
           <Grid item>
-            <NavButtons step={activeStep} setActiveStep={updateStep} configuration={configuration} />
+            <NavButtons steps={steps} step={activeStep} setActiveStep={updateStep} configuration={configuration} />
           </Grid>
         </Grid>
       </Grid>

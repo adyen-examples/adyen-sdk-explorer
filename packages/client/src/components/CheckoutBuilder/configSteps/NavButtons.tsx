@@ -6,28 +6,28 @@ import { useAppDispatch } from '../../../hooks';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
+  steps: any;
   step: number;
   configuration: any;
   setActiveStep: (step: number) => any;
 };
 
-export const NavButtons = ({ step, setActiveStep, configuration }: NavButtonsProps) => {
+export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
+  // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
-    switch (step) {
-      case 0:
+    switch (steps[step]) {
+      case 'profile':
         return dispatch(updateProfileInfo(configuration));
-      case 1:
+      case 'checkout':
         return dispatch(updateCheckoutInfo(configuration));
-      case 2:
+      case 'local':
         return dispatch(updateLocalInfo(configuration));
-      case 3:
+      case 'sessions':
         dispatch(updateRedirectInfo(false));
         return dispatch(updateSessionsInfo(configuration));
-      case 4:
-        return navigate('dropin', { state: configuration });
       default:
         throw new Error('Unknown step');
     }

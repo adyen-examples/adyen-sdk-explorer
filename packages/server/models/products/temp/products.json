@@ -1,0 +1,7 @@
+{
+  "dropin": { "txvariant": "dropin", "steps": ["checkout", "local", "sessions", "review"] },
+  "cards": { "txvariant": "cards", "steps": ["checkout", "sessions", "review"] },
+  "paysafecard": { "txvariant": "paysafecard", "steps": ["checkout", "sessions", "review"] },
+  "sepadirectdebit": { "txvariant": "sepadirectdebit", "steps": ["checkout", "sessions", "review"] }
+
+}

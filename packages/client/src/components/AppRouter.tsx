@@ -7,7 +7,7 @@ const ApplicationRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout main={Overview} />} />
-      <Route path="/:component" element={<Layout main={CheckoutBuilder} />} />
+      <Route path="/:component" key="/:component" element={<Layout main={CheckoutBuilder}/>} />
     </Routes>
   );
 };

@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import '@adyen/adyen-web/dist/adyen.css';
-import './index.scss';
 
 import { store } from './store';
 import App from './components/App';

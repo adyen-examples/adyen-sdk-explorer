@@ -3,19 +3,19 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import content from '../../helpers/content.json';
-import { useAppDispatch, useRedirect } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import type { RootState } from '../../store';
 import { ColorlibStepIcon } from './ColorlibStepIcon';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
+import { useRedirect } from '../../hooks';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
 
-export const ConfigWrapper = ({ txvariant, steps }: any) => {
+export const ConfigWrapper = () => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
-
+  const { txvariant, steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
-  useRedirect({ profile, checkout, local, sessions }, updateStep);
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
@@ -23,8 +23,10 @@ export const ConfigWrapper = ({ txvariant, steps }: any) => {
 
   const { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent }: any = content;
 
-  console.info('STORE', JSON.stringify({ profile, checkout, local, sessions }));
-  
+  useRedirect({ checkout, local, sessions });
+
+  console.info('STORE', JSON.stringify({ profile, checkout, local, sessions, activeStep, txvariant, steps }));
+
   let displayStep;
   const stepMap: any = {
     profile: (
