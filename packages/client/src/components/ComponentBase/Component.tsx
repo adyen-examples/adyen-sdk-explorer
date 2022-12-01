@@ -3,10 +3,7 @@ import { Alerts } from '../CheckoutBuilder/Alerts';
 
 const Component = ({ configuration }: { configuration: any }) => {
   const [checkout, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
-  const product = configuration.profile.product;
-
-  console.log('product: ', product);
-  
+  const product = configuration.profile.product;  
 
   if (error) {
     return <Alerts severityType={'error'} message={JSON.stringify(error)} />;

@@ -1,7 +1,14 @@
 {
   "dropin": { "txvariant": "dropin", "steps": ["checkout", "local", "sessions", "review"] },
-  "cards": { "txvariant": "cards", "steps": ["checkout", "sessions", "review"] },
+  "cards": { "txvariant": "card", "steps": ["checkout", "sessions", "review"] },
+  "ach": { "txvariant": "ach", "steps": ["checkout", "sessions", "review"] },
+  "affirm": { "txvariant": "affirm", "steps": ["checkout", "sessions", "review"] },
+  "afterpay": { "txvariant": "afterpaytouch", "steps": ["checkout", "sessions", "review"] },
+  "alipay": { "txvariant": "alipay", "steps": ["checkout", "sessions", "review"] },
+  "amazonpay": { "txvariant": "amazonpay", "steps": ["checkout", "sessions", "review"] },
+  "bcmc": { "txvariant": "bcmc", "steps": ["checkout", "sessions", "review"] },
   "paysafecard": { "txvariant": "paysafecard", "steps": ["checkout", "sessions", "review"] },
-  "sepadirectdebit": { "txvariant": "sepadirectdebit", "steps": ["checkout", "sessions", "review"] }
+  "sepadirectdebit": { "txvariant": "sepadirectdebit", "steps": ["checkout", "sessions", "review"] },
+  "wechatpayQR": { "txvariant": "wechatpayQR", "steps": ["checkout", "sessions", "review"] }
 
 }

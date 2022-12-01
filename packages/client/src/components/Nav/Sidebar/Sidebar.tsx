@@ -64,7 +64,7 @@ export const Sidebar = ({ products, drawerWidth }: any) => {
             stroke-width="0"
             fill="#09ae4c"
           >
-            DOCS
+            SDK
           </text>
         </svg>
       </Box>

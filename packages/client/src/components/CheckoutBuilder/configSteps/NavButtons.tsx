@@ -15,6 +15,7 @@ type NavButtonsProps = {
 export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const stepsLength = Object.keys(steps).length;
   
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
@@ -67,12 +68,12 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
   return (
     <Box sx={{ bgcolor: 'secondary.main' }}>
       {step !== 0 && <Button onClick={handleBack}>Back</Button>}
-      {step !== 4 && (
+      {step !== stepsLength - 1 && (
         <Button variant="contained" onClick={handleNext}>
           Next
         </Button>
       )}
-      {step === 4 && (
+      {step === stepsLength - 1 && (
         <Button variant="contained" onClick={exportToJson}>
           Export
         </Button>
