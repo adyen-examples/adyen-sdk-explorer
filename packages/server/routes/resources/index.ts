@@ -17,11 +17,16 @@ router.get('/', (req: Request, res: Response) => {
   }
 });
 
-router.get('/:paymentMethod', (req: Request, res: Response) => {
+router.post('/', (req: Request, res: Response) => {
   try {
     const paymentMethodProps: PaymentMethodProperties = paymentMethodProperties;
-    const paymentMethodToSend = paymentMethodProps[req.params.paymentMethod];
-    return res.status(201).json(paymentMethodToSend);
+    const paymentMethods: PaymentMethodProperties = {};
+
+    req.body.paymentMethods.forEach((pm: string) => {
+      paymentMethods[pm] = paymentMethodProps[pm];
+    });
+
+    return res.status(201).json(paymentMethods);
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

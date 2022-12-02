@@ -1,47 +1,70 @@
-{
-  "card": {
-    "template": {
-      "brands": {
+[
+  {
+    "name": "card",
+    "properties": [
+      {
+        "name": "brands",
+        "type": "array",
         "description": "Array of card brands that will be recognized. For a list of possible values, refer to [Supported card types](https://docs.adyen.com/payment-methods/cards/custom-card-integration#supported-card-types).",
         "defaultValue": ["mc", "visa", "amex"]
       },
-      "brandsConfiguration": {
+      {
+        "name": "brandsConfiguration",
+        "type": "object",
         "description": "Object where you can customize the icons for different brands.",
         "defaultValue": {}
       },
-      "showBrandIcon": {
+      {
+        "name": "showBrandIcon",
+        "type": "boolean",
         "description": "Set to false to not show the brand logo when the card brand has been recognized.",
         "defaultValue": true
       },
-      "showBrandsUnderCardNumber": {
+      {
+        "name": "showBrandsUnderCardNumber",
+        "type": "boolean",
         "description": "Shows brand logos under the card number field when the shopper selects the card payment method.",
         "defaultValue": true
       },
-      "enableStoreDetails": {
+      {
+        "name": "enableStoreDetails",
+        "type": "boolean",
         "description": "Set to true to show the checkbox for saving the card details for recurring payments.",
         "defaultValue": true
       },
-      "hasHolderName": {
+      {
+        "name": "hasHolderName",
+        "type": "boolean",
         "description": "Set to true to show the input field for the cardholder name.",
         "defaultValue": true
       },
-      "holderNameRequired": {
+      {
+        "name": "holderNameRequired",
+        "type": "boolean",
         "description": "Set to true to make the cardholder name a required field. To show the field, you additionally need to set `hasHolderName` to true",
         "defaultValue": true
       },
-      "positionHolderNameOnTop": {
+      {
+        "name": "positionHolderNameOnTop",
+        "type": "boolean",
         "description": "Renders the cardholder name field at the top of the payment form.",
         "defaultValue": true
       },
-      "hideCVC": {
+      {
+        "name": "hideCVC",
+        "type": "boolean",
         "description": "Set to true to hide the CVC field.",
         "defaultValue": true
       },
-      "configuration.socialSecurityNumberMode": {
+      {
+        "name": "configuration.socialSecurityNumberMode",
+        "type": "string",
         "description": "Renders a social security number field. For example, this is required for certain card payments in Brazil. Possible values are: show, hide, auto",
         "defaultValue": "auto"
       },
-      "styles": {
+      {
+        "name": "styles",
+        "type": "object",
         "description": "Set a style object to customize the card input fields. For a list of supported properties, refer to [Styling card input fields](https://docs.adyen.com/payment-methods/cards/custom-card-integration#styling).",
         "defaultValue": {
           "error": {
@@ -55,15 +78,21 @@
           }
         }
       },
-      "billingAddressRequired": {
+      {
+        "name": "billingAddressRequired",
+        "type": "boolean",
         "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
         "defaultValue": false
       },
-      "billingAddressAllowedCountries": {
+      {
+        "name": "billingAddressAllowedCountries",
+        "type": "array",
         "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
         "defaultValue": ["US", "NL", "FR"]
       },
-      "data": {
+      {
+        "name": "data",
+        "type": "object",
         "description": "Object that contains placeholder information that you can use to prefill fields",
         "defaultValue": {
           "billingAddress": {
@@ -76,7 +105,9 @@
           }
         }
       },
-      "installmentOptions": {
+      {
+        "name": "installmentOptions",
+        "type": "object",
         "description": "If you want to offer credit card installments, specify here the numbers of monthly installments that the shopper can choose from.",
         "defaultValue": {
           "card": {
@@ -84,115 +115,179 @@
           }
         }
       },
-      "showInstallmentAmounts": {
+      {
+        "name": "showInstallmentAmounts",
+        "type": "boolean",
         "description": "If you want to offer credit card installments, set to true to show the payment amount per installment.",
         "defaultValue": false
       },
-      "minimumExpiryDate": {
+      {
+        "name": "minimumExpiryDate",
+        "type": "string",
         "description": "If a shopper enters a date that is earlier than specified here, they will see the following error:'Your card expires before check out date.'",
         "defaultValue": "10/22"
       },
-      "autoFocus": {
+      {
+        "name": "autoFocus",
+        "type": "boolean",
         "description": "Automatically move the focus from date field to the CVC field.",
         "defaultValue": true
       },
-      "SRConfig": {
+      {
+        "name": "SRConfig",
+        "type": "object",
         "description": "Object for configuring screen reader behavior. Does not affect what gets rendered in the checkout form.",
         "defaultValue": {}
       },
-      "SRConfig.collateErrors": {
+      {
+        "name": "SRConfig.collateErrors",
+        "type": "boolean",
         "description": "Indicates if all errors in the form are read out after each validation. For example, if there is an error in the card number field, the error is read out after validating each of the other fields, until the error is fixed.",
         "defaultValue": true
       },
-      "SRConfig.moveFocus": {
+      {
+        "name": "SRConfig.moveFocus",
+        "type": "boolean",
         "description": "Indicates if focus automatically switches to the first field with an error when the shopper selects the Pay button. Can only be set if SRConfig.collateErrors is true",
         "defaultValue": true
       }
-    }
+    ]
   },
-  "ach": {
-    "template": {
-      "enableStoreDetails": {
+  {
+    "name": "ach",
+    "properties": [
+      {
+        "name": "enableStoreDetails",
+        "type": "boolean",
         "description": "Set to true to show the checkbox for saving the card details for recurring payments.",
         "defaultValue": true
       }
-    }
+    ]
   },
-  "affirm": {
-    "template": {
-      "visibility": {
+  {
+    "name": "affirm",
+    "properties": [
+      {
+        "name": "visibility",
+        "type": "object",
         "defaultValue": {
           "personalDetails": "hidden",
           "billingAddress": "readOnly",
           "deliveryAddress": "editable"
         }
       }
-    }
+    ]
   },
-  "afterpaytouch": {
-    "template": {}
+  {
+    "name": "afterpaytouch",
+    "properties": []
   },
-  "alipay": {
-    "template": {}
+  {
+    "name": "alipay",
+    "properties": []
   },
-  "alipay_hk": {
-    "template": {}
+  {
+    "name": "alipay_hk",
+    "properties": []
   },
-  "amazonpay": {
-    "template": {
-      "configuration": {
-        "merchantId": "YOUR_MERCHANT_ID",
-        "publicKeyId": "YOUR_PUBLIC_KEY",
-        "storeId": "..."
-      },
-      "chargePermissionType": "Recurring",
-      "recurringMetadata": {
-        "frequency": {
-          "unit": "Month",
-          "value": "1"
+  {
+    "name": "amazonpay",
+    "properties": [
+      {
+        "name": "configuration",
+        "type": "object",
+        "defaultValue": {
+          "merchantId": "YOUR_MERCHANT_ID",
+          "publicKeyId": "YOUR_PUBLIC_KEY",
+          "storeId": "..."
         }
       },
-      "currency": "EUR",
-      "environment": "test",
-      "returnUrl": "https://example.com/review_order"
-    }
+      {
+        "name": "chargePermissionType",
+        "type": "string",
+        "defaultValue": "Recurring"
+      },
+      {
+        "name": "recurringMetadata",
+        "type": "object",
+        "defaultValue": {
+          "frequency": {
+            "unit": "Month",
+            "value": "1"
+          }
+        }
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "defaultValue": "EUR"
+      },
+      {
+        "name": "environment",
+        "type": "string",
+        "defaultValue": "test"
+      },
+      {
+        "name": "returnUrl",
+        "type": "string",
+        "defaultValue": "https://example.com/review_order"
+      }
+    ]
   },
-  "applepay": {
-    "template": {}
+  {
+    "name": "applepay",
+    "properties": []
   },
-  "atome": {
-    "template": {}
+  {
+    "name": "atome",
+    "properties": []
   },
-  "directdebit_GB": {
-    "template": {}
+  {
+    "name": "directdebit_GB",
+    "properties": []
   },
-  "bcmc": {
-    "template": {
-      "enableStoreDetails": {
+  {
+    "name": "bcmc",
+    "properties": [
+      {
+        "name": "enableStoreDetails",
+        "type": "boolean",
         "description": "Set to true to show the checkbox for saving the card details for recurring payments.",
         "defaultValue": true
       },
-      "hasHolderName": {
+      {
+        "name": "hasHolderName",
+        "type": "boolean",
         "description": "Set to true to show the input field for the cardholder name.",
         "defaultValue": true
       },
-      "holderNameRequired": {
+      {
+        "name": "holderNameRequired",
+        "type": "boolean",
         "description": "Set to true to make the cardholder name a required field. To show the field, you additionally need to set `hasHolderName` to true",
         "defaultValue": true
       },
-      "holderName": {
+      {
+        "name": "holderName",
+        "type": "string",
         "description": "String that is used to prefill the cardholder name field.",
         "defaultValue": "J.Smith"
       },
-      "positionHolderNameOnTop": {
+      {
+        "name": "positionHolderNameOnTop",
+        "type": "boolean",
         "description": "Renders the cardholder name field at the top of the payment form.",
         "defaultValue": true
       },
-      "name": {
+      {
+        "name": "name",
+        "type": "string",
         "description": "String that is used to display the payment method name to the shopper.",
         "defaultValue": "Bancontact"
       },
-      "styles": {
+      {
+        "name": "styles",
+        "type": "object",
         "description": "Set a style object to customize the card input fields. For a list of supported properties, refer to [Styling card input fields](https://docs.adyen.com/payment-methods/cards/custom-card-integration#styling).",
         "defaultValue": {
           "error": {
@@ -206,35 +301,51 @@
           }
         }
       },
-      "minimumExpiryDate": {
+      {
+        "name": "minimumExpiryDate",
+        "type": "string",
         "description": "If a shopper enters a date that is earlier than specified here, they will see the following error:'Your card expires before check out date.'",
         "defaultValue": "10/22"
       },
-      "brands": {
+      {
+        "name": "brands",
+        "type": "array",
         "description": "Array of card brands that will be recognized. For a list of possible values, refer to [Supported card types](https://docs.adyen.com/payment-methods/cards/custom-card-integration#supported-card-types).",
         "defaultValue": ["bcmc"]
       },
-      "brandsConfiguration": {
+      {
+        "name": "brandsConfiguration",
+        "type": "object",
         "description": "Object where you can customize the icons for different brands.",
         "defaultValue": {}
       },
-      "showBrandIcon": {
+      {
+        "name": "showBrandIcon",
+        "type": "boolean",
         "description": "Set to false to not show the brand logo when the card brand has been recognized.",
         "defaultValue": true
       },
-      "showBrandsUnderCardNumber": {
+      {
+        "name": "showBrandsUnderCardNumber",
+        "type": "boolean",
         "description": "Shows brand logos under the card number field when the shopper selects the card payment method.",
         "defaultValue": true
       },
-      "billingAddressRequired": {
+      {
+        "name": "billingAddressRequired",
+        "type": "boolean",
         "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
         "defaultValue": false
       },
-      "billingAddressAllowedCountries": {
+      {
+        "name": "billingAddressAllowedCountries",
+        "type": "array",
         "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
         "defaultValue": ["US", "NL", "FR"]
       },
-      "data": {
+      {
+        "name": "data",
+        "type": "object",
         "description": "Object that contains placeholder information that you can use to prefill fields",
         "defaultValue": {
           "billingAddress": {
@@ -247,48 +358,68 @@
           }
         }
       },
-      "autoFocus": {
+      {
+        "name": "autoFocus",
+        "type": "boolean",
         "description": "Automatically move the focus from date field to the CVC field.",
         "defaultValue": true
       },
-      "SRConfig": {
+      {
+        "name": "SRConfig",
+        "type": "object",
         "description": "Object for configuring screen reader behavior. Does not affect what gets rendered in the checkout form.",
         "defaultValue": {}
       },
-      "SRConfig.collateErrors": {
+      {
+        "name": "SRConfig.collateErrors",
+        "type": "boolean",
         "description": "Indicates if all errors in the form are read out after each validation. For example, if there is an error in the card number field, the error is read out after validating each of the other fields, until the error is fixed.",
         "defaultValue": true
       },
-      "SRConfig.moveFocus": {
+      {
+        "name": "SRConfig.moveFocus",
+        "type": "boolean",
         "description": "Indicates if focus automatically switches to the first field with an error when the shopper selects the Pay button. Can only be set if SRConfig.collateErrors is true",
         "defaultValue": true
       }
-    }
+    ]
   },
-  "bcmc_mobile": {
-    "template": {}
+  {
+    "name": "bcmc_mobile",
+    "properties": []
   },
-  "benefit": {
-    "template": {}
+  {
+    "name": "benefit",
+    "properties": []
   },
-  "blik": {
-    "template": {}
+  {
+    "name": "blik",
+    "properties": []
   },
-  "boletobancario": {
-    "template": {
-      "personalDetailsRequired": {
+  {
+    "name": "boletobancario",
+    "properties": [
+      {
+        "name": "personalDetailsRequired",
+        "type": "boolean",
         "description": "Set to false if you have already collected the shopper's first name, last name, and CPF/CNPJ (socialSecurityNumber)",
         "defaultValue": true
       },
-      "billingAddressRequired": {
+      {
+        "name": "billingAddressRequired",
+        "type": "boolean",
         "description": "Set this to false if you have already collected the shopper's street, house number or name, city, postal code, and state or province.",
         "defaultValue": true
       },
-      "showEmailAddress": {
+      {
+        "name": "showEmailAddress",
+        "type": "boolean",
         "description": "Set this to false if you have already collected the shopper's email address.",
         "defaultValue": true
       },
-      "data": {
+      {
+        "name": "data",
+        "type": "object",
         "description": "Object to pre-fill shopper details on the form",
         "defaultValue": {
           "firstName": "José",
@@ -305,228 +436,310 @@
           "shopperEmail": "joses@test.com"
         }
       }
-    }
+    ]
   },
-  "clearpay": {
-    "template": {}
+  {
+    "name": "clearpay",
+    "properties": []
   },
-  "dana": {
-    "template": {}
+  {
+    "name": "dana",
+    "properties": []
   },
-  "eps": {
-    "template": {}
+  {
+    "name": "eps",
+    "properties": []
   },
-  "fawry": {
-    "template": {}
+  {
+    "name": "fawry",
+    "properties": []
   },
-  "gcash": {
-    "template": {}
+  {
+    "name": "gcash",
+    "properties": []
   },
-  "giftcard": {
-    "template": {}
+  {
+    "name": "giftcard",
+    "properties": []
   },
-  "giropay": {
-    "template": {}
+  {
+    "name": "giropay",
+    "properties": []
   },
-  "googlepay": {
-    "template": {}
+  {
+    "name": "googlepay",
+    "properties": []
   },
-  "gopay_wallet": {
-    "template": {}
+  {
+    "name": "gopay_wallet",
+    "properties": []
   },
-  "grabpay_SG": {
-    "template": {}
+  {
+    "name": "grabpay_SG",
+    "properties": []
   },
-  "ideal": {
-    "template": {}
+  {
+    "name": "ideal",
+    "properties": []
   },
-  "doku_alfamart": {
-    "template": {}
+  {
+    "name": "doku_alfamart",
+    "properties": []
   },
-  "econtext_stores": {
-    "template": {
-      "personalDetailsRequired": {
+  {
+    "name": "econtext_stores",
+    "properties": [
+      {
+        "name": "personalDetailsRequired",
+        "type": "boolean",
         "description": "Set to false to hide the input fields for shopper name, email, and telephone number",
         "defaultValue": true
       }
-    }
+    ]
   },
-  "kakaopay": {
-    "template": {}
+  {
+    "name": "kakaopay",
+    "properties": []
   },
-  "klarna_paynow": {
-    "template": {}
+  {
+    "name": "klarna_paynow",
+    "properties": []
   },
-  "klarna": {
-    "template": {}
+  {
+    "name": "klarna",
+    "properties": []
   },
-  "klarna_account": {
-    "template": {}
+  {
+    "name": "klarna_account",
+    "properties": []
   },
-  "knet": {
-    "template": {}
+  {
+    "name": "knet",
+    "properties": []
   },
-  "mbway": {
-    "template": {}
+  {
+    "name": "mbway",
+    "properties": []
   },
-  "mobilepay": {
-    "template": {}
+  {
+    "name": "mobilepay",
+    "properties": []
   },
-  "momo_wallet": {
-    "template": {}
+  {
+    "name": "momo_wallet",
+    "properties": []
   },
-  "multibanco": {
-    "template": {}
+  {
+    "name": "multibanco",
+    "properties": []
   },
-  "onlineBanking_CZ": {
-    "template": {
-      "showImage": {
+  {
+    "name": "onlineBanking_CZ",
+    "properties": [
+      {
+        "name": "showImage",
+        "type": "boolean",
         "description": "Set to false to remove the bank logos from the Online banking Czech Republic form.",
         "defaultValue": true
       },
-      "issuer": {
+      {
+        "name": "issuer",
+        "type": "boolean",
         "description": "Set to an Online banking Czech Republic issuer ID to preselect a specific bank.",
         "defaultValue": true
       },
-      "highlightedIssuers": {
+      {
+        "name": "highlightedIssuers",
+        "type": "array",
         "description": "Set to the Online banking Czech Republic issuer IDs for banks you want to show on top of the dropdown menu. Added in v5.1.0",
         "defaultValue": []
       },
-      "placeholder": {
+      {
+        "name": "placeholder",
+        "type": "string",
         "description": "String to show for the dropdown menu text. Custom translation configuration overrides this value.",
         "defaultValue": "Select your bank"
       }
-    }
+    ]
   },
-  "ebanking_FI": {
-    "template": {}
+  {
+    "name": "ebanking_FI",
+    "properties": []
   },
-  "onlinebanking_IN": {
-    "template": {}
+  {
+    "name": "onlinebanking_IN",
+    "properties": []
   },
-  "molpay_ebanking_fpx_MY": {
-    "template": {
-      "showImage": {
+  {
+    "name": "molpay_ebanking_fpx_MY",
+    "properties": [
+      {
+        "name": "showImage",
+        "type": "boolean",
         "description": "Set to false to remove the bank logos from the Online banking Malaysia form.",
         "defaultValue": true
       },
-      "issuer": {
+      {
+        "name": "issuer",
+        "type": "boolean",
         "description": "Set to an Online banking Malaysia issuer ID to preselect a specific bank.",
         "defaultValue": true
       },
-      "highlightedIssuers": {
+      {
+        "name": "highlightedIssuers",
+        "type": "array",
         "description": "Set to the Online banking Malaysia issuer IDs for banks you want to show on top of the dropdown menu. Added in v5.1.0",
         "defaultValue": []
       },
-      "placeholder": {
+      {
+        "name": "placeholder",
+        "type": "string",
         "description": "String to show for the dropdown menu text. Custom translation configuration overrides this value.",
         "defaultValue": "Select your bank"
       }
-    }
+    ]
   },
-  "onlineBanking_PL": {
-    "template": {}
+  {
+    "name": "onlineBanking_PL",
+    "properties": []
   },
-  "molpay_ebanking_TH": {
-    "template": {
-      "showImage": {
+  {
+    "name": "molpay_ebanking_TH",
+    "properties": [
+      {
+        "name": "showImage",
+        "type": "boolean",
         "description": "Set to false to remove the bank logos from the Online banking Thailand form.",
         "defaultValue": true
       },
-      "issuer": {
+      {
+        "name": "issuer",
+        "type": "boolean",
         "description": "Set to an Online banking Thailand issuer ID to preselect a specific bank.",
         "defaultValue": true
       },
-      "highlightedIssuers": {
+      {
+        "name": "highlightedIssuers",
+        "type": "array",
         "description": "Set to the Online banking Thailand issuer IDs for banks you want to show on top of the dropdown menu. Added in v5.1.0",
         "defaultValue": []
       },
-      "placeholder": {
+      {
+        "name": "placeholder",
+        "type": "string",
         "description": "String to show for the dropdown menu text. Custom translation configuration overrides this value.",
         "defaultValue": "Select your bank"
       }
-    }
+    ]
   },
-  "momo_atm": {
-    "template": {}
+  {
+    "name": "momo_atm",
+    "properties": []
   },
-  "oxxo": {
-    "template": {}
+  {
+    "name": "oxxo",
+    "properties": []
   },
-  "paybright": {
-    "template": {}
+  {
+    "name": "paybright",
+    "properties": []
   },
-  "paypal": {
-    "template": {}
+  {
+    "name": "paypal",
+    "properties": []
   },
-  "paysafecard": {
-    "template": {}
+  {
+    "name": "paysafecard",
+    "properties": []
   },
-  "paytm": {
-    "template": {}
+  {
+    "name": "paytm",
+    "properties": []
   },
-  "pix": {
-    "template": {}
+  {
+    "name": "pix",
+    "properties": []
   },
-  "ratepay": {
-    "template": {
-      "countryCode": {
+  {
+    "name": "ratepay",
+    "properties": [
+      {
+        "name": "countryCode",
+        "type": "string",
         "defaultValue": "NL"
       },
-      "visibility": {
+      {
+        "name": "visibility",
+        "type": "object",
         "defaultValue": {
           "personalDetails": "hidden",
           "billingAddress": "readOnly",
           "deliveryAddress": "editable"
         }
       }
-    }
+    ]
   },
-  "ratepay_directdebit": {
-    "template": {
-      "countryCode": {
+  {
+    "name": "ratepay_directdebit",
+    "properties": [
+      {
+        "name": "countryCode",
+        "type": "string",
         "defaultValue": "NL"
       },
-      "visibility": {
+      {
+        "name": "visibility",
+        "type": "object",
         "defaultValue": {
           "personalDetails": "hidden",
           "billingAddress": "readOnly",
           "deliveryAddress": "editable"
         }
       }
-    }
+    ]
   },
-  "sepadirectdebit": {
-    "template": {}
+  {
+    "name": "sepadirectdebit",
+    "properties": []
   },
-  "directEbanking": {
-    "template": {}
+  {
+    "name": "directEbanking",
+    "properties": []
   },
-  "swish": {
-    "template": {}
+  {
+    "name": "swish",
+    "properties": []
   },
-  "touchngo": {
-    "template": {}
+  {
+    "name": "touchngo",
+    "properties": []
   },
-  "trustly": {
-    "template": {}
+  {
+    "name": "trustly",
+    "properties": []
   },
-  "twint": {
-    "template": {}
+  {
+    "name": "twint",
+    "properties": []
   },
-  "upi": {
-    "template": {}
+  {
+    "name": "upi",
+    "properties": []
   },
-  "vipps": {
-    "template": {}
+  {
+    "name": "vipps",
+    "properties": []
   },
-  "wallet-IN": {
-    "template": {}
+  {
+    "name": "wallet-IN",
+    "properties": []
   },
-  "wechatpayQR": {
-    "template": {}
+  {
+    "name": "wechatpayQR",
+    "properties": []
   },
-  "zip": {
-    "template": {}
+  {
+    "name": "zip",
+    "properties": []
   }
-}
+]
