@@ -20,10 +20,8 @@ router.get('/', (req: Request, res: Response) => {
 router.post('/', (req: Request, res: Response) => {
   try {
     const paymentMethodProps: PaymentMethodProperties = paymentMethodProperties;
-    const paymentMethods: PaymentMethodProperties = {};
-
-    req.body.paymentMethods.forEach((pm: string) => {
-      paymentMethods[pm] = paymentMethodProps[pm];
+    const paymentMethods = req.body.paymentMethods.map((pm: string) => {
+      return paymentMethodProps.find((pmProps: any) => pmProps.name === pm);
     });
 
     return res.status(201).json(paymentMethods);
