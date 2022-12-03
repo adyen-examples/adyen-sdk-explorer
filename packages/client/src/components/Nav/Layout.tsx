@@ -28,8 +28,18 @@ export const Layout = ({ main: Main }: any) => {
 
   let editor = null;
 
-  if (!products.error && products.data) {
-    let sdkExplorerProps = data.products[product];
+  if (!error && data) {
+    // Here we only have the path parameter which is not the tx variant
+    // And we need to pass the tx variant.
+    // We'll have to search each txvariant until there is a match
+
+    let sdkExplorerProps: any = null;
+    Object.keys(data.products).forEach(component => {
+      if (data.products[component].txvariant === product) {
+        sdkExplorerProps = data.products[component];
+      }
+    });
+    console.log('sdkExplorerProps', sdkExplorerProps);
 
     if (sdkExplorerProps) {
       const txvariant = sdkExplorerProps.txvariant;
@@ -41,6 +51,8 @@ export const Layout = ({ main: Main }: any) => {
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
       editor = <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />;
+    } else {
+      return <h1>404: Page not found</h1>;
     }
 
     return (

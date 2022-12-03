@@ -33,17 +33,15 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           const errorMessage = parsedResponse.error;
           setCheckout({ checkout: null, error: errorMessage });
         } else {
-          //we are not doing anything with error just yet
-
           const sessions = new ConfigurationSession({ ...configuration, data: parsedResponse, setState: { error: setErrors } });
-          const component = await AdyenCheckout(sessions.checkoutConfig);
+          let component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('configuration', JSON.stringify(configuration));
-          localStorage.setItem('sdkExplorer', JSON.stringify({steps, activeStep}));
+          localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));
           setCheckout({ checkout: component, error: null });
         }
       } catch (e) {
-        console.error('Error', e);
-        // setCheckoutResponse({ error: { errorType: 'network', message: 'Network Error', status: '500', errorCode: '502' } });
+        console.error('Catch error', e);
+        setCheckout({ checkout: null, error: e });
       }
     };
 

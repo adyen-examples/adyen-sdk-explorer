@@ -1,14 +1,14 @@
 {
-  "dropin": { "txvariant": "dropin", "steps": ["checkout", "local", "sessions", "review"] },
-  "cards": { "txvariant": "card", "steps": ["checkout", "sessions", "review"] },
-  "ach": { "txvariant": "ach", "steps": ["checkout", "sessions", "review"] },
-  "affirm": { "txvariant": "affirm", "steps": ["checkout", "sessions", "review"] },
-  "afterpay": { "txvariant": "afterpaytouch", "steps": ["checkout", "sessions", "review"] },
-  "alipay": { "txvariant": "alipay", "steps": ["checkout", "sessions", "review"] },
-  "amazonpay": { "txvariant": "amazonpay", "steps": ["checkout", "sessions", "review"] },
-  "bcmc": { "txvariant": "bcmc", "steps": ["checkout", "sessions", "review"] },
-  "paysafecard": { "txvariant": "paysafecard", "steps": ["checkout", "sessions", "review"] },
-  "sepadirectdebit": { "txvariant": "sepadirectdebit", "steps": ["checkout", "sessions", "review"] },
-  "wechatpayQR": { "txvariant": "wechatpayQR", "steps": ["checkout", "sessions", "review"] }
-
+  "Drop-in": { "txvariant": "dropin", "steps": ["checkout", "local", "sessions", "review"] },
+  "Cards": { "txvariant": "card", "steps": ["checkout", "sessions", "review"] },
+  "ACH": { "txvariant": "ach", "steps": ["checkout", "sessions", "review"] },
+  "Affirm": { "txvariant": "affirm", "steps": ["checkout", "sessions", "review"] },
+  "Afterpay": { "txvariant": "afterpaytouch", "steps": ["checkout", "sessions", "review"] },
+  "Alipay": { "txvariant": "alipay", "steps": ["checkout", "sessions", "review"] },
+  "Amazon Pay": { "txvariant": "amazonpay", "steps": ["checkout", "sessions", "review"] },
+  "Bancontact": { "txvariant": "bcmc", "steps": ["checkout", "sessions", "review"] },
+  "iDeal": { "txvariant": "ideal", "steps": ["checkout", "local", "sessions", "review"] },
+  "MoMo": { "txvariant": "momo_wallet", "steps": ["checkout", "sessions", "review"] },
+  "Paysafecard": { "txvariant": "paysafecard", "steps": ["checkout", "sessions", "review"] },
+  "SEPA Direct Debit": { "txvariant": "sepadirectdebit", "steps": ["checkout", "sessions", "review"] }
 }
