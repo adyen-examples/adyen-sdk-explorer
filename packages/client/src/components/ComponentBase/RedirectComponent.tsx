@@ -21,7 +21,6 @@ const RedirectComponent = ({ configuration }: { configuration: any }) => {
   if (error) {
     return <Alerts severityType={'error'} message={JSON.stringify(error)} />;
   } else if (result) {
-    console.log('result', result);
     return <Alerts severityType={result.status} message={result.resultCode} />;
   } else if (checkout) {
     checkout.submitDetails(sessions.redirectResult);

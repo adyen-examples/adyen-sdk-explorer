@@ -46,23 +46,30 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
     };
   }
 
-  public onPaymentCompleted(result: any, component: any): void {    
-    if(this.setResult){
-      let code = result.resultCode;
-      if(result.resultCode === 'Authorised'){
-        this.setResult({status: 'success', resultCode: code});
-      }else if(result.resultCode === 'Pending'){
-        this.setResult({status: 'info', resultCode: code});
-      }else if(result.resultCode == 'Refused'){
-        this.setResult({status: 'error', resultCode: code});
+  public onPaymentCompleted(result: any, component: any): void {
+    let resultCode = result.resultCode;
+    let status = null;
+    if (result && resultCode) {
+      switch (resultCode) {
+        case 'Authorised':
+          status = 'success';
+          break;
+        case 'Pending':
+          status = 'warning';
+          break;
+        case 'Refused':
+          status = 'error';
+          break;
+        default:
+          break;
       }
+      this.setResult({ status: status, resultCode: resultCode });
     }
   }
   public onError(error: Error, component: object | undefined): void {
     if (this.setError) {
       this.setError(error);
     }
-    console.error('Mine!', error.name, error.message, error.stack, component);
   }
   public onChange(state: any, element: object): void {
     console.info(state, element);

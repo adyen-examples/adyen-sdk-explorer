@@ -11,9 +11,9 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
   const { checkout, error } = values;
   const { sessions } = configuration;
   const [errors, setErrors] = useState(null);
+  const [result, setResult] = useState(null);
   const { profile } = configuration;
   const txvariant = profile.product;
-
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { activeStep } = useSelector((state: RootState) => state.onDeck);
 
@@ -33,7 +33,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           const errorMessage = parsedResponse.error;
           setCheckout({ checkout: null, error: errorMessage });
         } else {
-          const sessions = new ConfigurationSession({ ...configuration, data: parsedResponse, setState: { error: setErrors } });
+          const sessions = new ConfigurationSession({ ...configuration, data: parsedResponse, setState: { error: setErrors, result: setResult } });
           let component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('configuration', JSON.stringify(configuration));
           localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));
@@ -48,5 +48,5 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     initialize();
   }, []);
 
-  return [checkout, error];
+  return [checkout, result, error];
 };
