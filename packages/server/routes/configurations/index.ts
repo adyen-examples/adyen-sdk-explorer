@@ -1,12 +1,14 @@
 import { Router, Request, Response } from 'express';
 
-import { User, Configuration, additionalData, sessionsConfig, paymentMethodDetails } from '../../models';
+import { User, Configuration, additionalData, sessionsConfig, paymentMethodProperties } from '../../models';
 import { jwtAuth, isAuthorizedForAction } from '../auth';
 
 import type { ConfigToUpdate } from './types';
 
 // Adyen attributes
 import { checkoutConfig, localConfig } from '../../temp';
+
+type PaymentMethodProperties = { [key: string]: any };
 
 const router = Router();
 
