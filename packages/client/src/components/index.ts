@@ -1,6 +1,5 @@
-import Header from './Header/Header';
-import PaymentsForm from './PaymentsForm/PaymentsForm';
+import { Header } from './Nav/Header/Header';
 import ComponentBase from './ComponentBase/ComponentBase';
 import CheckoutBuilder from './CheckoutBuilder/CheckoutBuilder';
 
-export { Header, PaymentsForm, ComponentBase, CheckoutBuilder };
+export { Header, ComponentBase, CheckoutBuilder };

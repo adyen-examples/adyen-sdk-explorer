@@ -1,17 +1,40 @@
-import { useState, ChangeEvent, Fragment } from 'react';
-import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel } from '@mui/material';
+import { useState, ChangeEvent, Fragment, useEffect } from 'react';
+import { Grid, Checkbox, Typography, ToggleButton, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
 import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { styled } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom';
+import { LoginSharp } from '@mui/icons-material';
+
+const AdyenInput = styled(InputBase)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    borderRadius: 0,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #0066ff',
+    fontSize: theme.typography.subtitle2.fontSize,
+    fontWeight: theme.typography.subtitle2.fontWeight,
+    padding: '1px 1px 1px 1px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    fontFamily: theme.typography.subtitle2.fontFamily,
+    color: theme.palette.primary.main,
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
+    }
+  }
+}));
 
 export interface OptionWrapperPropTypes {
   value: any;
   indexKey: string;
   descriptor: Descriptor;
   addOrRemoveProp: AddOrRemoveProp;
-  handleInput: HandleInput;
+  handleInput: any; // need to change this to HandleInput from types
 }
 
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
@@ -25,10 +48,15 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   let optionsDisplay = null;
 
   const createMarkup = (description: any) => {
-    console.log('createMarkup', description);
-
     return { __html: description };
   };
+  //We'll come back to this, but we should not be using local state, and instead just listen to the prop
+
+  // useEffect(() => {
+  //   console.log('Change in the prop');
+  //   console.log('The value is: ',value)
+  // }, [value])
+  
 
   if (isChecked) {
     if (descriptor.properties) {
@@ -49,6 +77,24 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       );
     } else if (descriptor.type === 'string') {
       optionsDisplay = <Option descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />;
+    } else if (descriptor.type === 'boolean' && descriptor.name) {
+      optionsDisplay = (
+        <FormControl sx={{ width: '25%' }} size="small">
+          <Select
+            labelId="boolean-label"
+            id="boolean-select"
+            name={descriptor.name}
+            value={value}
+            onChange={(e: any) => handleInput(e, descriptor.name)}
+            input={<AdyenInput />}
+          >
+            <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
+              true
+            </MenuItem>
+            <MenuItem value={false as any}>false</MenuItem>
+          </Select>
+        </FormControl>
+      );
     }
   }
 

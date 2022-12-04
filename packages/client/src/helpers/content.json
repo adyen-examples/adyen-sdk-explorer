@@ -10,9 +10,9 @@
     "description": "Set a global configuration on the main instance of Checkout. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "localPageContent": {
-    "title": "Dropin",
+    "title": "Component",
     "version": "Web Components/Drop-in v5.19.0",
-    "description": "Set a configuration that is specific to Drop-in on the dropin instance. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
+    "description": "Set a configuration that is specific to the component on the products instance. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "apiPageContent": {
     "title": "API",

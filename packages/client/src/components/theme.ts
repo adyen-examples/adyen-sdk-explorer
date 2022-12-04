@@ -1,11 +1,10 @@
-// import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-
 export const themeOptions: any = {
   palette: {
     type: 'light',
     primary: {
       main: '#0066ff',
-      gray: '#bdbdbd'
+      gray: '#bdbdbd',
+      border: '#d2dae1'
     },
     secondary: {
       //   main: '#09ae4c',dark blue #00112C
@@ -51,6 +50,11 @@ export const themeOptions: any = {
     subtitle1: {
       fontWeight: 500,
       fontSize: '1.1rem',
+      fontFamily: 'Roboto, sans-serif'
+    },
+    subtitle2: {
+      fontWeight: 300,
+      fontSize: '.9rem',
       fontFamily: 'Roboto, sans-serif'
     }
   },

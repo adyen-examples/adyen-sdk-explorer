@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 
 import { dbConnect, mongoOptions } from './db-mongoose';
 import { PORT, DATABASE_URL, CLIENT_ORIGIN } from './config';
-import { authRouter, userRouter, sessionsRouter, resourcesRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
+import { productsRouter, authRouter, userRouter, sessionsRouter, resourcesRouter, paymentsRouter, configurationRouter, localStrategy, jwtStrategy } from './routes';
 
 export const app = express();
 app.use(express.json());
@@ -31,19 +31,21 @@ app.use(express.static(root));
 app.get('/checkout-builder', (req, res) => {
   res.sendFile('index.html', { root });
 });
-app.get('/checkout-builder/dropin', (req, res) => {
+app.get('/:component', (req, res) => {
+  //validate component against db or return 404
   res.sendFile('index.html', { root });
 });
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/auth', authRouter);
-app.use('/users', userRouter);
-app.use('/sessions', sessionsRouter);
-app.use('/payments', paymentsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/sessions', sessionsRouter);
+app.use('/api/payments', paymentsRouter);
 app.use('/resources', resourcesRouter);
-app.use('/configurations', configurationRouter);
+app.use('/api/configurations', configurationRouter);
+app.use('/api/products', productsRouter);
 
 let server: any;
 
