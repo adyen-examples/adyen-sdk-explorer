@@ -74,7 +74,7 @@ export const Sidebar = ({ products, drawerWidth }: any) => {
           <Typography variant="h5">Checkout</Typography>
         </ListItem>
         <ListItemButton>
-          <Link underline="none" href={'/'}>
+          <Link sx={{width:'100%'}} underline="none" href={'/'}>
             <Typography variant="caption">Overview</Typography>
           </Link>
         </ListItemButton>
@@ -84,7 +84,7 @@ export const Sidebar = ({ products, drawerWidth }: any) => {
         {Object.keys(products).map((product: any, index: number) => (
           <ListItem key={product} disablePadding>
             <ListItemButton>
-              <Link underline="none" href={`/${products[product].txvariant}`}>
+              <Link sx={{width:'100%'}} underline="none" href={`/${products[product].txvariant}`}>
                 <Typography
                   component={'span'}
                   p={0.7}

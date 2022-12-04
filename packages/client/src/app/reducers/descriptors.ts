@@ -16,7 +16,6 @@ export const descriptorsSlice = createSlice({
       const checkout = [...new Set([...state.checkout, ...action.payload.checkoutConfig])];
       const local = [...new Set([...state.local, ...action.payload.localConfig])];
       const sessions = [...new Set([...state.sessions, ...action.payload.sessionsConfig])];
-      console.log(checkout, local, sessions);
       return { ...state, checkout, local, sessions };
     },
     clearDescriptorInfo: state => {
