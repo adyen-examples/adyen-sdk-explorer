@@ -68,8 +68,18 @@ class ConfigurationSession<P extends ConfigurationSessionProps = any> extends Co
   }
   public onError(error: Error, component: object | undefined): void {
     console.error('Component onError event handler invoked', error);
+    let message: any = null;
+    let value: any = error;
+    if (error.message) {
+      message = error.message;
+      value = { message: message };
+    }
+    console.log('Value: ',value);
+    
     if (this.setError) {
-      this.setError(error);
+      console.log('Setting Error');
+      console.log('value is ',value);
+      this.setError(value);
     }
   }
   public onChange(state: any, element: object): void {
