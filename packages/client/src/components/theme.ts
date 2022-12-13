@@ -29,6 +29,11 @@ export const themeOptions: any = {
       fontWeight: 300,
       lineHeight: 1.8
     },
+    h2: {
+      fontWeight: 600,
+      fontSize: '2.4rem',
+      fontFamily: 'Poppins, sans-serif'
+    },
     h3: {
       fontWeight: 600,
       fontSize: '1.2rem',

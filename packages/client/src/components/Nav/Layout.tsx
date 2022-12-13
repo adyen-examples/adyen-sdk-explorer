@@ -1,22 +1,18 @@
+import { EditRounded } from '@mui/icons-material';
 import { Box, CssBaseline } from '@mui/material';
-import * as React from 'react';
 import { useParams } from 'react-router-dom';
+import { onDeckActions, sdkExplorerActions } from '../../app';
+import { useApiLocal, useAppDispatch } from '../../hooks';
 import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
 import { Sidebar } from './Sidebar/Sidebar';
-import { useApiLocal, useRedirect } from '../../hooks';
-import { sdkExplorerActions, onDeckActions } from '../../app';
-import { useAppDispatch } from '../../hooks';
-import type { RootState } from '../../store';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const drawerWidth = 380;
   const headerHeight = 64;
-  const editorWidth = 420;
+  let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
   const { state, error, data } = products;
@@ -44,6 +40,7 @@ export const Layout = ({ main: Main }: any) => {
 
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
+      editorWidth = 420;
       editor = <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />;
     } else if (!sdkExplorerProps && product) {
       return <h1>404: Page not found</h1>;

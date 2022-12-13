@@ -13,8 +13,9 @@ export const Content = ({ title, version, description }: ContentProps) => {
       <Grid item xs={12}>
         <Typography
           component={'span'}
+          p={0.7}
           sx={{ bgcolor: '#e6f8ed', borderColor: '#cef2dd', color: '#055f29', borderRadius: '5px' }}
-          variant="h6"
+          variant="caption"
         >
           SDK Explorer
         </Typography>
