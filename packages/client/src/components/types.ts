@@ -10,12 +10,6 @@ export type FormDataProps = {
   component?: string;
 };
 
-export type PaymentsFormProps = {
-  options: FormDataProps;
-  onSubmit: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
 export interface ConfigurationBaseProps {
   global:any;
   local: any;

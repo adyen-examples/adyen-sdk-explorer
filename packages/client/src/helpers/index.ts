@@ -35,8 +35,7 @@ export const isEmpty = (x: object) => {
 };
 
 export const isConfigEmpty = (x: object) => {
-  const defaultProduct = 'dropin';
-  const emptyConfig = { profile: { product: defaultProduct }, checkout: {}, local: {}, sessions: {} };
+  const emptyConfig = { checkout: {}, local: {}, sessions: {} };
   return deepEqual(emptyConfig, x);
 };
 

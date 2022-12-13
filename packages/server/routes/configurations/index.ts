@@ -110,4 +110,12 @@ router.put('/:userId/:id', jwtAuth, isAuthorizedForAction, async (req: Request, 
   }
 });
 
+router.get('/', (req, res) => {
+  try {
+    return res.status(201).json({ checkoutConfig, localConfig, sessionsConfig });
+  } catch (err) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 export { router };

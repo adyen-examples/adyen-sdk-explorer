@@ -3,13 +3,19 @@ import { useEffect, useState } from 'react';
 import ConfigurationSession from '../../components/ComponentBase/ConfigurationSession';
 import { API_URL, CLIENT_URL } from '../../config';
 import type { RequestOptions } from '../types';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 
 export const useInitializeSession = ({ configuration, endpoint }: { configuration: any; endpoint: string }) => {
-  const [values, setCheckout] = useState<any>({ checkout: null, error: null });
-  const { checkout, error } = values;
-  const { sessions } = configuration;
-  const [errors, setErrors] = useState(null);
+  const [checkout, setCheckout] = useState<any>(null);
+  const [error, setError] = useState(null);
+  const [result, setResult] = useState(null);
 
+  const { sessions, profile } = configuration;
+  const txvariant = profile.product;
+
+  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
+  const { activeStep } = useSelector((state: RootState) => state.onDeck);
 
   useEffect(() => {
     const requestOptions: RequestOptions = {
@@ -17,7 +23,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${txvariant}` })
     };
     const initialize: () => void = async () => {
       try {
@@ -25,23 +31,22 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
         const parsedResponse = await response.json();
         if (parsedResponse.error) {
           const errorMessage = parsedResponse.error;
-          setCheckout({ checkout: null, error: errorMessage });
+          setError(errorMessage);
         } else {
-          //we are not doing anything with error just yet
-          
-          const sessions = new ConfigurationSession({...configuration,data: parsedResponse, setState: {error: setErrors}});         
-          const component = await AdyenCheckout(sessions.checkoutConfig);
+          const sessions = new ConfigurationSession({ ...configuration, data: parsedResponse, setState: { error: setError, result: setResult } });
+          let component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('configuration', JSON.stringify(configuration));
-          setCheckout({ checkout: component, error: null });
+          localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));
+          setCheckout(component);
         }
-      } catch (e) {
-        console.error('Error', e);
-        // setCheckoutResponse({ error: { errorType: 'network', message: 'Network Error', status: '500', errorCode: '502' } });
+      } catch (e: any) {
+        console.error('Catch error', e);
+        setError(e);
       }
     };
 
     initialize();
   }, []);
 
-  return [checkout, error];
+  return [checkout, result, error];
 };

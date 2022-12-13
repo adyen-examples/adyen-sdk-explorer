@@ -18,10 +18,14 @@ const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const [checkout] = useCheckout(sessions);
   const product = configuration.profile.product;
 
+  
+  console.log('This is the error: ', error );
+  
   if (error) {
+    console.log('Error Present');
+    
     return <Alerts severityType={'error'} message={JSON.stringify(error)} />;
   } else if (result) {
-    console.log('result', result);
     return <Alerts severityType={result.status} message={result.resultCode} />;
   } else if (checkout) {
     checkout.submitDetails(sessions.redirectResult);

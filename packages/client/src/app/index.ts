@@ -6,5 +6,7 @@ export {
   descriptorsReducer,
   descriptorsActions,
   configurationReducer,
-  configurationActions
+  configurationActions,
+  sdkExplorerReducer,
+  sdkExplorerActions
 } from './reducers';

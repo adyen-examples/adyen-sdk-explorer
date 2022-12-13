@@ -2,19 +2,20 @@ import { useInitializeSession } from '../../hooks';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 
 const Component = ({ configuration }: { configuration: any }) => {
-  
-  const [checkout, error] = useInitializeSession({ configuration, endpoint: 'sessions/sessionStart' });
+  const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
   const product = configuration.profile.product;
 
   if (error) {
-    return <Alerts severityType={'error'} message={JSON.stringify(error)} />
-  }
-  if (checkout) {
-    // we need to change this so that we get it from the ConfigurationSessions instead
-    console.log('configuration.checkout: ',configuration.local);
-    console.log('whole configuration',configuration.local)
-    
-    checkout.create(product,configuration.local).mount('#checkout');
+    return <Alerts severityType={'error'} message={JSON.stringify(error)} />;
+  } else if (result) {
+    return <Alerts severityType={result.status} message={result.resultCode} />;
+  } else if (checkout) {
+    try {
+      checkout.create(product, configuration.local).mount('#checkout');
+    } catch (error: any) {
+      console.error(error);
+      return <Alerts severityType={'error'} message={error.message ? error.message : 'Error creating component'} />;
+    }
   }
   return <div id="checkout"></div>;
 };

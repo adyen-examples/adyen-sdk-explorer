@@ -71,17 +71,19 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
   return (
     <Grid container>
       {descriptors &&
-        descriptors.map((descriptor: Descriptor) => (
-          <Grid item xs={12}>
-            <OptionWrapper
-              descriptor={descriptor}
-              indexKey={descriptor.name}
-              addOrRemoveProp={addOrRemoveProp}
-              handleInput={handleInput}
-              value={configuration[descriptor.name]}
-            />
-          </Grid>
-        ))}
+        descriptors.map((descriptor: Descriptor) => {
+          return (
+            <Grid item xs={12}>
+              <OptionWrapper
+                descriptor={descriptor}
+                indexKey={descriptor.name}
+                addOrRemoveProp={addOrRemoveProp}
+                handleInput={handleInput}
+                value={configuration[descriptor.name]}
+              />
+            </Grid>
+          );
+        })}
     </Grid>
   );
 };

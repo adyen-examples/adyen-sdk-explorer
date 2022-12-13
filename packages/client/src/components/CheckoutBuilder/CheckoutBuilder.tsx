@@ -1,15 +1,17 @@
-import { Container, Paper, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 import { useApi } from '../../hooks';
 import { ConfigWrapper } from './ConfigWrapper';
 
-//Create init config class
 
 const CheckoutBuilder = () => {
-  useApi('http://localhost:8080/resources', 'GET');
+  useApi('http://localhost:8080/api/configurations', 'GET');  
+
+  // From here I can update the state so that this is forced to rerender everything
+  // I think useNavigate might be updating the state
   return (
-    <Container component="main" maxWidth="lg">
-      <Paper elevation={0} sx={{ mt: { xs: 9 } }}>
-        <ConfigWrapper />
+    <Container maxWidth="lg">
+      <Paper elevation={0}>
+        <ConfigWrapper/>
       </Paper>
     </Container>
   );
