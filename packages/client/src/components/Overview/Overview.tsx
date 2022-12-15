@@ -24,11 +24,11 @@ export const Overview = () => {
             <li>Build your own card program with our customizable card issuing solution.</li>
           </ul>
         </Typography>
-        <Divider />
       </Box>
       <Box component="div" sx={{ width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
         <AdyenLogo />
       </Box>
+      <Divider />
     </Box>
   );
 };
