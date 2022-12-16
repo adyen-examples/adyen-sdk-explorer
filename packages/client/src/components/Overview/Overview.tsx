@@ -1,11 +1,14 @@
-import { Grid, Paper, Box, Typography, Divider } from '@mui/material';
+import { Link, Grid, Paper, Box, Typography, Divider } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../assets/adyen-study-icon.svg';
 
 export const Overview = () => {
   return (
     <Box>
       <Box sx={{ display: 'flex' }}>
-        <Box component="div" sx={{ mt: 6, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}>
+        <Box
+          component="div"
+          sx={{ mt: 6, mb: 6, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
+        >
           <Typography variant="h2">
             Welcome to <br /> Adyen's SDK Explorer
           </Typography>
@@ -25,8 +28,12 @@ export const Overview = () => {
               <li>Build your own card program with our customizable card issuing solution.</li>
             </ul>
           </Typography>
+          <Typography variant="h5">Not sure where to start</Typography>
+          <Typography variant="caption">
+            See our guide to <Link href="https://docs.adyen.com/get-started-with-adyen">get started with Adyen</Link>
+          </Typography>
         </Box>
-        <Box component="div" sx={{ width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
+        <Box component="div" sx={{ alignItems: 'flex-end', width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
           <AdyenLogo />
         </Box>
       </Box>
