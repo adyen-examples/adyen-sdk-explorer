@@ -19,7 +19,7 @@ export const Overview = () => {
               <li>Praesent sapien massa</li>
               <li>Praesent sapien massa</li>
             </ul>
-            Our Mobile SDKs enable you to:
+            Our Web SDKs enable you to:
             <ul>
               <li>
                 Create an end-to-end payment solution for peer-to-peer marketplaces, on-demand services, crowdfunding platforms, and other platform
