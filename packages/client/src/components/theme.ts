@@ -25,8 +25,8 @@ export const themeOptions: any = {
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
-      fontSize: '0.9rem',
-      fontWeight: 300,
+      fontSize: '0.8rem',
+      fontWeight: 500,
       lineHeight: 1.8
     },
     h2: {
