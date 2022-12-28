@@ -54,7 +54,7 @@ export const Overview = () => {
           </Typography>
           <Typography variant="h5">Not sure where to start</Typography>
           <Typography variant="caption">
-            See our guide to <Link href="https://docs.adyen.com/get-started-with-adyen">get started with Adyen</Link>
+            See our guide to <Link href="https://docs.adyen.com/get-started-with-adyen" underline="none">get started with Adyen</Link>
           </Typography>
         </Box>
         <Box component="div" sx={{ alignItems: 'flex-end', width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
@@ -63,6 +63,7 @@ export const Overview = () => {
       </Box>
       <Divider />
       <LogosGrid logos={logos} />
+      <Divider />
     </Box>
   );
 };

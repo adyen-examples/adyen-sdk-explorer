@@ -1,16 +1,20 @@
-import { Grid, Link, Typography } from '@mui/material';
+import { Grid, Link, Typography, Box } from '@mui/material';
 
 export const LogosGrid = ({ logos }: any) => {
   return (
-    <Grid container>
+    <Grid container sx={{px:2}}>
       {logos.map((logo: any) => (
-        <Grid item>
-          {logo.svg()}
-          <Typography>{logo.title}</Typography>
-          <Typography>{logo.description}</Typography>
-          <Typography variant="caption">
-            <Link href={logo.link}>Learn more</Link>
-          </Typography>
+        <Grid item xs={4} sx={{ display: 'flex', px: 2, py:6 }}>
+          <Box>{logo.svg()}</Box>
+          <Box sx={{ flex: '1 1 0', pl: 1 }}>
+            <Typography variant="h5">{logo.title}</Typography>
+            <Typography variant="subtitle2">{logo.description}</Typography>
+            <Typography variant="caption">
+              <Link href={logo.link} underline="none">
+                Learn more
+              </Link>
+            </Typography>
+          </Box>
         </Grid>
       ))}
     </Grid>
