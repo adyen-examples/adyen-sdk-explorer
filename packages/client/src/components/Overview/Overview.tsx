@@ -1,7 +1,31 @@
 import { Link, Grid, Paper, Box, Typography, Divider } from '@mui/material';
+import { LogosGrid } from './LogosGrid';
 import { ReactComponent as AdyenLogo } from '../../assets/adyen-study-icon.svg';
+import { ReactComponent as AdyenAuthenticateLogo } from '../../assets/adyen-authenticate-logo.svg';
+import { ReactComponent as AdyenVersionLogo } from '../../assets/adyen-version-logo.svg';
+import { ReactComponent as AdyenHandleLogo } from '../../assets/adyen-handle-logo.svg';
 
 export const Overview = () => {
+  const logos = [
+    {
+      title: 'Authenticate',
+      link: 'https://docs.adyen.com/development-resources/api-authentication',
+      description: 'Each API request that you make to Adyen is processed through an API credential linked to your company account.',
+      svg: () => <AdyenAuthenticateLogo />
+    },
+    {
+      title: 'Version',
+      link: 'https://docs.adyen.com/development-resources/versioning',
+      description: 'Adyen APIs support resources versioning through a version suffix in the resource URL.',
+      svg: () => <AdyenVersionLogo />
+    },
+    {
+      title: 'Response handling',
+      link: 'https://docs.adyen.com/development-resources/response-handling',
+      description: 'After submitting an API call to Adyen, you receive a response back to inform you that your request was received and processed.',
+      svg: () => <AdyenHandleLogo />
+    }
+  ];
   return (
     <Box>
       <Box sx={{ display: 'flex' }}>
@@ -38,6 +62,7 @@ export const Overview = () => {
         </Box>
       </Box>
       <Divider />
+      <LogosGrid logos={logos} />
     </Box>
   );
 };
