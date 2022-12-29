@@ -18,7 +18,7 @@
     "description": "Set a configuration that is specific to the component on the products instance. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "apiPageContent": {
-    "title": "API",
+    "title": "API Configuration",
     "subtitle": "Sessions",
     "version": "Web Components/Drop-in v5.19.0",
     "description": "Set a configuration at the API level to be passed on the /sessions endpoint. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."

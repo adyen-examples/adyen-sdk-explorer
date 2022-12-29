@@ -64,7 +64,7 @@ export const Layout = ({ main: Main }: any) => {
           }}
           component="main"
         >
-          <Main key={product} />
+          <Main txvariant={product} />
           {editor}
         </Box>
       </Box>

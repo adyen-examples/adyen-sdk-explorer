@@ -18,7 +18,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
           sx={{ bgcolor: '#e6f8ed', borderColor: '#cef2dd', color: '#055f29', borderRadius: '5px' }}
           variant="caption"
         >
-          SDK Explorer
+          SDK
         </Typography>
         <Typography component={'span'} mt={2} mb={3} variant="h5">
           {title}
