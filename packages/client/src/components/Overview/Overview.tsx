@@ -11,144 +11,145 @@ export const Overview = () => {
     {
       title: 'Authenticate',
       link: 'https://docs.adyen.com/development-resources/api-authentication',
-      description: 'Each API request that you make to Adyen is processed through an API credential linked to your company account.',
+      description:
+        'Each API request that you make to Adyen is processed through an API credential linked to your company account, and each client is associated with one set of API credentials.',
       svg: () => <AdyenAuthenticateLogo />
     },
     {
       title: 'Version',
       link: 'https://docs.adyen.com/development-resources/versioning',
-      description: 'Adyen APIs support resources versioning through a version suffix in the resource URL.',
+      description: `Adyen's SDK is open source and available to the public to contribute.`,
       svg: () => <AdyenVersionLogo />
     },
     {
-      title: 'Response handling',
+      title: 'Error handling',
       link: 'https://docs.adyen.com/development-resources/response-handling',
-      description: 'After submitting an API call to Adyen, you receive a response back to inform you that your request was received and processed.',
+      description: 'After instantiating an Adyen solution to your front end, you receive a an error event handler.',
       svg: () => <AdyenHandleLogo />
     }
   ];
 
   const links = [
     {
-      title: 'Payments',
+      title: 'Online Payments',
       subcategories: [
         {
-          title: 'Online Payments',
+          title: 'Accept Payments',
           links: [
             {
-              title: 'Checkout',
-              url: '',
-              description: 'Accept and manage payments made with payment methods from across the world.'
+              title: 'Drop-in',
+              url: 'https://docs.adyen.com/online-payments/web-drop-in',
+              description:
+                'Drop-in is our pre-built UI solution for accepting payments on your website. Drop-in shows all payment methods as a list, in the same block.'
             },
             {
-              title: 'Recurring payments',
-              url: '',
-              description: 'Save payment details and use them for future one-off or subscription payments.'
+              title: 'Components',
+              url: 'https://docs.adyen.com/online-payments/web-components',
+              description:
+                'Components is our pre-built UI solution for accepting payments on your website. Each component renders a payment method which you can place anywhere on your website.'
             },
             {
-              title: 'Get notification webhooks',
-              url: '',
-              description: 'Get updates about payment status changes, payouts, newly available reports, and other events.'
+              title: 'API only',
+              url: 'https://docs.adyen.com/online-payments/api-only',
+              description: `Use our APIs and build your own payment form if you want full control over the look and feel of your checkout page. If you'd rather not build your own payment form, use one of our pre-built UI options.`
             },
             {
-              title: 'Payouts',
-              url: '',
-              description: 'Send funds to your suppliers, partners, or customers.'
+              title: 'Result codes',
+              url: 'https://docs.adyen.com/online-payments/payment-result-codes',
+              description: 'Each payment has a resultCode that represents its current state, as well as any actions you should take.'
             },
             {
-              title: 'BinLookup',
-              url: '',
-              description: 'Retrieve interchange and scheme fees as well as 3D Secure version support based on a given BIN.'
-            },
-            {
-              title: 'Classic payments integration',
-              url: '',
-              description: 'Authorize and modify payments using Adyens older payments API.'
+              title: 'Supported payment methods',
+              url: 'https://docs.adyen.com/online-payments/supported-payment-methods',
+              description: `If you're using any of our client-side integrations, your integration can readily support many of the payment methods.`
             }
           ]
         },
         {
-          title: 'In-person payments',
+          title: 'Modifications',
           links: [
             {
-              title: 'Create stores',
-              url: '',
-              description: 'Add a store to your merchant account.'
+              title: 'Capture',
+              url: 'https://docs.adyen.com/online-payments/capture',
+              description:
+                'For payment methods that support separate authorisation and capture, you can capture the payment later, for example after the goods have been shipped. This lets you cancel the payment in case of any issues with the shipment.'
             },
             {
-              title: 'Order terminals',
-              url: '',
-              description: 'Order payment terminal products and define the delivery address.'
+              title: 'Cancel',
+              url: 'https://docs.adyen.com/online-payments/cancel',
+              description:
+                'If you have authorised a payment but do not want to capture it, for example because an item is out of stock, you need to cancel the payment. To specify the payment that you want to cancel, use the pspReference of this payment.'
             },
             {
-              title: 'Assign terminals',
-              url: '',
-              description: 'Assign payment terminals to a store for boarding, or reassign them to the inventory or to another store.'
+              title: 'Refund',
+              url: 'https://docs.adyen.com/online-payments/refund',
+              description: 'You can refund either the full captured amount or a part of the captured amount.'
             },
             {
-              title: 'Configure terminals',
-              url: '',
-              description: 'Update payment terminal settings for a company, merchant account, store, or terminal.'
+              title: 'Reversal',
+              url: 'https://docs.adyen.com/online-payments/reversal',
+              description: 'If you want to return the funds to your shopper, but are not certain whether the payment has been captured or not.'
             },
             {
-              title: 'Schedule terminals actions',
-              url: '',
-              description: 'Carry out an action, like installing an Android app, on specific terminals at a specific time.'
+              title: 'Pre-authorisation and adjustment',
+              url: 'https://docs.adyen.com/online-payments/adjust-authorisation',
+              description: 'Change the amount or extend the length of the authorisation.'
             }
           ]
         }
       ]
     },
     {
-      title: 'Platforms and financial products',
+      title: 'Features',
       subcategories: [
         {
-          title: 'Platforms and issuing',
+          title: '3D Secure 2',
           links: [
             {
-              title: 'Configure your platform',
-              url: '',
-              description: 'Create a platform, onboard users as account holders, create balance accounts, and issue cards and business accounts.'
+              title: 'Redirect',
+              url: 'https://docs.adyen.com/online-payments/3d-secure/redirect-3ds2',
+              description: 'Provide a redirect URL where the shopper can complete authentication.'
             },
             {
-              title: 'Transfer funds',
-              url: '',
-              description: 'Move funds within your platform or send funds from your platform to a bank account.'
+              title: 'Native 3D Secure 2',
+              url: 'https://docs.adyen.com/online-payments/3d-secure/native-3ds2',
+              description: `The shopper's identity may be verified using passive, biometric, or a two-factor authentication method.`
             },
             {
-              title: 'Get notification webhooks',
-              url: '',
-              description: 'Get updates about events that occur in your platform.'
+              title: 'Other 3D Secure Flows',
+              url: 'https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows',
+              description: 'Depending on your implementation, you can choose to perform the following alternative 3D Secure flows.'
             }
           ]
         },
         {
-          title: 'Classic Platforms',
+          title: 'Tokenization',
           links: [
             {
-              title: 'Onboard your users',
-              url: '',
-              description: 'Generate links to Adyen-hosted pages, such as an onboarding page or a PCI compliance questionnaire.'
+              title: 'Create and use tokens',
+              url: 'https://docs.adyen.com/online-payments/tokenization/create-and-use-tokens',
+              description: 'With Adyen, you can securely store one or more payment details per shopper.'
             },
             {
-              title: 'Manage account-related entities',
-              url: '',
-              description: 'Manage account-related entities on your platform.'
+              title: 'Manage tokens',
+              url: 'https://docs.adyen.com/online-payments/tokenization/managing-tokens',
+              description:
+                'Your shoppers may need to update the payment methods they saved with you, or request you to remove a previously saved payment detail.'
+            }
+          ]
+        },
+        {
+          title: 'Accout Updater',
+          links: [
+            {
+              title: 'Real Time Account Updater',
+              url: 'https://docs.adyen.com/online-payments/account-updater/real-time-account-updater',
+              description: `Our Real Time Account Updater instantly checks with Visa and Mastercard for updated card details. If there's an update, we'll immediately retry the payment with the updated card details.`
             },
             {
-              title: 'Manage funds',
-              url: '',
-              description: 'Manage funds in the accounts on your platform.'
-            },
-            {
-              title: 'Configure notifications',
-              url: '',
-              description: 'Set up and test notifications that inform you of events on your platform.'
-            },
-            {
-              title: 'Get notifications',
-              url: '',
-              description: 'Get updates about events that occur in your platform.'
+              title: 'Batch Account Updater',
+              url: 'https://docs.adyen.com/online-payments/account-updater/batch-account-updater',
+              description: `Send batch files to request updates for your shoppers' cards. We request the updates from Visa and Mastercard, and receive the new shopper card information.`
             }
           ]
         }
@@ -167,26 +168,26 @@ export const Overview = () => {
             Welcome to <br /> Adyen's SDK Explorer
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2">
-            With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, including:
+            With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, and customizations. You can
+            pass an optional configuration to satisfy your business needs in the following implementation checkpoints:
             <ul>
-              <li>Praesent sapien massa</li>
-              <li>Praesent sapien massa</li>
-              <li>Praesent sapien massa</li>
+              <li>Checkout Configuration</li>
+              <li>Component Configuration</li>
+              <li>API Configuration</li>
             </ul>
-            Our Web SDKs enable you to:
+            This application will guide you in passing an optional configuration in the aforementioned implementation locations. Our SDK Explorer
+            enables you to:
             <ul>
-              <li>
-                Create an end-to-end payment solution for peer-to-peer marketplaces, on-demand services, crowdfunding platforms, and other platform
-                business models.
-              </li>
-              <li>Build your own card program with our customizable card issuing solution.</li>
+              <li>Quickly configure and construct an Adyen component to your specifications.</li>
+              <li>Get up to speed on all of Adyen SDK's optional configurations.</li>
+              <li>Test a combination of optional configurations.</li>
             </ul>
           </Typography>
           <Typography variant="h5">Not sure where to start</Typography>
           <Typography variant="caption">
             See our guide to{' '}
-            <Link href="https://docs.adyen.com/get-started-with-adyen" underline="none">
-              get started with Adyen
+            <Link href="https://docs.adyen.com/online-payments/web-drop-in/optional-configuration" underline="none">
+              getting started with Adyen's optional configuration
             </Link>
           </Typography>
         </Box>

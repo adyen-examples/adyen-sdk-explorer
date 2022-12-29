@@ -1,4 +1,3 @@
-import { EditRounded } from '@mui/icons-material';
 import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
