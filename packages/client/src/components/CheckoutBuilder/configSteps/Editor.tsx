@@ -6,17 +6,16 @@ type EditorProps = {
   handleJsonEditorUpdate: (e: any) => void;
 };
 
-type HandleChange = (e: any) => void
+type HandleChange = (e: any) => void;
 
 export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) => {
-
-  const handleChange: HandleChange = (e) => {
+  const handleChange: HandleChange = e => {
     const { error, jsObject } = e;
 
     if (jsObject && !error) {
       handleJsonEditorUpdate(e);
     }
-  }
+  };
 
   return (
     <JSONInput
@@ -24,8 +23,13 @@ export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) =
       placeholder={{ ...configuration }}
       colors={dark_vscode_tribute}
       locale={localeEn}
-      height="94%"
+      height="100%"
       width="100%"
+      style={{
+        labels: {
+          display: 'none'
+        }
+      }}
     />
   );
 };

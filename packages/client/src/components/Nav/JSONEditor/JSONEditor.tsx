@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Box } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
@@ -19,8 +19,10 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   let configuration: any = null;
   let updateConfiguration: any = null;
+  let codePrefix = null;
+  let codePostfix = null;
   console.log('Steps: ', steps);
-  
+
   switch (steps[activeStep]) {
     case 'profile':
       configuration = profile;
@@ -33,12 +35,22 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       updateConfiguration = (value: any) => {
         updateStore(value, updateCheckoutInfo);
       };
+      codePrefix = `
+    const checkout = await AdyenCheckout(`;
+      codePostfix = `    );
+ 
+    checkout.create('dropin', {...});`;
       break;
     case 'local':
       configuration = local;
       updateConfiguration = (value: any) => {
         updateStore(value, updateLocalInfo);
       };
+      codePrefix = `
+    const checkout = await AdyenCheckout({...});
+      
+    checkout.create('dropin',`;
+      codePostfix = `    );`;
       break;
     case 'sessions':
       configuration = sessions;
@@ -60,7 +72,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   return (
     <Grid
       direction="column"
-      justifyContent="space-between"
+      justifyContent="flex-start"
       alignItems="stretch"
       container
       sx={{
@@ -73,10 +85,28 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         width: `${editorWidth}px`
       }}
     >
-      <Grid item xs={11}>
+      {codePrefix && (
+        <Grid item xs="auto">
+          <Box sx={{ color: 'white' }}>
+            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+              <code style={{ fontSize: '13px' }}>{codePrefix}</code>
+            </pre>
+          </Box>
+        </Grid>
+      )}
+      <Grid item xs="auto">
         <Editor configuration={configuration} handleJsonEditorUpdate={updateConfiguration} />
       </Grid>
-      <Grid sx={{ position: 'relative' }} item xs={1}>
+      {codePostfix && (
+        <Grid item xs="auto">
+          <Box sx={{ color: 'white' }}>
+            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+              <code style={{ fontSize: '13px' }}>{codePostfix}</code>
+            </pre>
+          </Box>
+        </Grid>
+      )}
+      <Grid sx={{ position: 'relative' }} item xs>
         <Grid
           sx={{ height: '100%', position: 'absolute', bottom: '0' }}
           p={1}
@@ -98,3 +128,15 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     </Grid>
   );
 };
+
+/*
+
+{
+      beforeSumbit: () => {},
+      onError: () => {},
+      onChange: () => {},
+      onSubmit: () => {},
+      onAdditionalDetails () => {},
+      paymentMethodsConfiguration: {...},
+
+*/

@@ -29,7 +29,7 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
 
   return (
     <Box>
-      <Content title={content.title} version={content.version} description={content.description} />
+      <Content title={content.title} subtitle={content.subtitle} version={content.version} description={content.description} />
       <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
     </Box>
   );
