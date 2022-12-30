@@ -17,8 +17,6 @@ export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) =
     }
   };
 
-  console.log('configuration ./Editor: ', configuration);
-
   return (
     <JSONInput
       onChange={(e: any) => handleChange(e)}
