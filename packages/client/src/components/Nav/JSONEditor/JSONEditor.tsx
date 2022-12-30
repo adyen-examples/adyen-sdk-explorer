@@ -54,6 +54,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       break;
     case 'sessions':
       configuration = sessions;
+      codePrefix = `
+      Request:`;
       updateConfiguration = (value: any) => {
         updateStore(value, updateSessionsInfo);
       };
