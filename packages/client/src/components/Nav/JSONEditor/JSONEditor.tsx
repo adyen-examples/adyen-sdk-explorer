@@ -25,6 +25,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   const [viewOnly, setViewOnly] = useState(true);
   const handleEdit = () => {
+    console.log('handlEdit called');
+    
     setViewOnly(!viewOnly);
   };
 
