@@ -5,7 +5,7 @@ import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 export const Header = ({ drawerWidth, headerHeight }: any) => {
   return (
     <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
-      <Box bgcolor="white" sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3 }}>
+      <Box bgcolor="white" sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3, px: 2 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box>
             <AdyenLogo />

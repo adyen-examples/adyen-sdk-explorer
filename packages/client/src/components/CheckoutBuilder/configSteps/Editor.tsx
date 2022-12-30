@@ -13,9 +13,11 @@ export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) =
     const { error, jsObject } = e;
 
     if (jsObject && !error) {
-      handleJsonEditorUpdate(e);
+      handleJsonEditorUpdate(jsObject);
     }
   };
+
+  console.log('configuration ./Editor: ', configuration);
 
   return (
     <JSONInput
