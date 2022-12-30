@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
+import { useEffect, useState } from 'react';
 
 export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
@@ -21,7 +22,11 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   let updateConfiguration: any = null;
   let codePrefix = null;
   let codePostfix = null;
-  console.log('Steps: ', steps);
+
+  const [viewOnly, setViewOnly] = useState(true);
+  const handleEdit = () => {
+    setViewOnly(!viewOnly);
+  };
 
   switch (steps[activeStep]) {
     case 'profile':
@@ -39,7 +44,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     const checkout = await AdyenCheckout(`;
       codePostfix = `    );
  
-    checkout.create('dropin', {...});`;
+    checkout.create('${profile.product}', {...});`;
       break;
     case 'local':
       configuration = local;
@@ -49,7 +54,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       codePrefix = `
     const checkout = await AdyenCheckout({...});
       
-    checkout.create('dropin',`;
+    checkout.create('${profile.product}',`;
       codePostfix = `    );`;
       break;
     case 'sessions':
@@ -70,6 +75,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       console.log('activeStep');
       throw new Error('Unknown step');
   }
+  console.log('profile, ', profile);
 
   return (
     <Grid
@@ -97,7 +103,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         </Grid>
       )}
       <Grid item xs="auto">
-        <Editor configuration={configuration} handleJsonEditorUpdate={updateConfiguration} />
+        <Editor viewOnly={viewOnly} configuration={configuration} handleJsonEditorUpdate={updateConfiguration} />
       </Grid>
       {codePostfix && (
         <Grid item xs="auto">
@@ -118,8 +124,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           alignItems="flex-end"
         >
           <Grid item>
-            <Button sx={{ bgcolor: '#0abf53' }} variant="contained">
-              Edit
+            <Button onClick={handleEdit} sx={{ bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}` }} variant="contained">
+              {viewOnly ? 'Edit' : 'View Only'}
             </Button>
           </Grid>
           <Grid item>
@@ -130,15 +136,3 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     </Grid>
   );
 };
-
-/*
-
-{
-      beforeSumbit: () => {},
-      onError: () => {},
-      onChange: () => {},
-      onSubmit: () => {},
-      onAdditionalDetails () => {},
-      paymentMethodsConfiguration: {...},
-
-*/
