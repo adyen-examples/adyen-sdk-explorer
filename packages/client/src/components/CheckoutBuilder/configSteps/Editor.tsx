@@ -12,18 +12,23 @@ type EditorProps = {
 type HandleChange = (e: any) => void;
 
 export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
-  console.log('Setting style, viewOnly = ', viewOnly);
-
   const handleChange: HandleChange = e => {
     const { error, jsObject } = e;
 
     if (jsObject && !error) {
       handleJsonEditorUpdate(jsObject);
+      console.log('handleJsonEditorUpdate', handleJsonEditorUpdate);
+      console.log('jsobject', jsObject);
     }
   };
 
   return (
-    <Box sx={{ svg: { display: `${viewOnly ? 'none' : 'block'}` }, '[name="labels"]': { visibility: `${viewOnly ? 'hidden !important' : 'visible !important'}` } }}>
+    <Box
+      sx={{
+        svg: { display: `${viewOnly ? 'none' : 'block'}` },
+        '[name="labels"]': { visibility: `${viewOnly ? 'hidden !important' : 'visible !important'}` }
+      }}
+    >
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}

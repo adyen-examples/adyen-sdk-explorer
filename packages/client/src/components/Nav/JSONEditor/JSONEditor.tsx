@@ -20,64 +20,116 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   let configuration: any = null;
   let updateConfiguration: any = null;
-  let codePrefix = null;
-  let codePostfix = null;
+  let codePrefix: any = null;
+  let codePostfix: any = null;
+  let codeSnippets: any = null;
+  let step: any = null;
 
   const [viewOnly, setViewOnly] = useState(true);
   const handleEdit = () => {
-    console.log('handlEdit called');
-    
     setViewOnly(!viewOnly);
   };
 
+  const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
+    <Box>
+      <Grid item xs="auto">
+        <Box sx={{ color: 'white' }}>
+          <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+            <code style={{ fontSize: '13px' }}>{prefix}</code>
+          </pre>
+        </Box>
+      </Grid>
+      <Grid item xs="auto">
+        <Editor viewOnly={viewOnly} configuration={configurationBlock} handleJsonEditorUpdate={updateConfiguration} />
+      </Grid>
+      <Grid item xs="auto">
+        <Box sx={{ color: 'white' }}>
+          <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+            <code style={{ fontSize: '13px' }}>{postfix}</code>
+          </pre>
+        </Box>
+      </Grid>
+    </Box>
+  );
+
   switch (steps[activeStep]) {
     case 'profile':
-      configuration = profile;
+      configuration = { profile };
       updateConfiguration = (value: any) => {
         updateStore(value, updateProfileInfo);
       };
+      step = 'profile';
       break;
     case 'checkout':
-      configuration = checkout;
+      configuration = { checkout };
       updateConfiguration = (value: any) => {
         updateStore(value, updateCheckoutInfo);
       };
-      codePrefix = `
-    const checkout = await AdyenCheckout(`;
-      codePostfix = `    );
+      codeSnippets = {
+        checkout: {
+          prefix: `
+    const checkout = await AdyenCheckout(`,
+          postfix: `    );
  
-    checkout.create('${profile.product}', {...});`;
+    checkout.create('${profile.product}', {...});`
+        }
+      };
+      step = 'checkout';
       break;
     case 'local':
-      configuration = local;
+      configuration = { local };
       updateConfiguration = (value: any) => {
         updateStore(value, updateLocalInfo);
       };
-      codePrefix = `
+      codeSnippets = {
+        local: {
+          prefix: `
     const checkout = await AdyenCheckout({...});
-      
-    checkout.create('${profile.product}',`;
-      codePostfix = `    );`;
+            
+    checkout.create('${profile.product}',`,
+          postfix: `    );`
+        }
+      };
+      step = 'local';
       break;
     case 'sessions':
-      configuration = sessions;
-      codePrefix = `
-      Request:`;
+      configuration = { sessions };
       updateConfiguration = (value: any) => {
         updateStore(value, updateSessionsInfo);
       };
+      codeSnippets = {
+        sessions: {
+          prefix: `
+    Request:`,
+          postfix: ``
+        }
+      };
+      step = 'sessions';
       break;
     case 'review':
       configuration = { checkout, local, sessions };
-      updateConfiguration = (value: any) => {
-        console.error('Updating from review');
+      codeSnippets = {
+        checkout: {
+          prefix: `
+    const checkout = await AdyenCheckout(`,
+          postfix: `    );`
+        },
+        local: {
+          prefix: `
+    checkout.create('${profile.product}',`,
+          postfix: `    );`
+        },
+        sessions: {
+          prefix: `
+    Request:`,
+          postfix: `    Response:`
+        }
       };
+      step = 'review';
       break;
     default:
-      console.log('activeStep');
       throw new Error('Unknown step');
   }
-  console.log('profile, ', profile);
 
   return (
     <Grid
@@ -95,27 +147,10 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         width: `${editorWidth}px`
       }}
     >
-      {codePrefix && (
-        <Grid item xs="auto">
-          <Box sx={{ color: 'white' }}>
-            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{codePrefix}</code>
-            </pre>
-          </Box>
-        </Grid>
-      )}
-      <Grid item xs="auto">
-        <Editor viewOnly={viewOnly} configuration={configuration} handleJsonEditorUpdate={updateConfiguration} />
-      </Grid>
-      {codePostfix && (
-        <Grid item xs="auto">
-          <Box sx={{ color: 'white' }}>
-            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{codePostfix}</code>
-            </pre>
-          </Box>
-        </Grid>
-      )}
+      {codeSnippets &&
+        Object.entries(codeSnippets).map(([key, value]: any) => {
+          return codeBlock(value.prefix, value.postfix, configuration[key]);
+        })}
       <Grid sx={{ position: 'relative' }} item xs>
         <Grid
           sx={{ height: '100%', position: 'absolute', bottom: '0' }}
@@ -126,12 +161,21 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           alignItems="flex-end"
         >
           <Grid item>
-            <Button onClick={handleEdit} sx={{ bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}` }} variant="contained">
+            <Button
+              onClick={handleEdit}
+              sx={{ bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`, '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` } }}
+              variant="contained"
+            >
               {viewOnly ? 'Edit' : 'View Only'}
             </Button>
           </Grid>
           <Grid item>
-            <NavButtons steps={steps} step={activeStep} setActiveStep={updateStep} configuration={configuration} />
+            <NavButtons
+              steps={steps}
+              step={activeStep}
+              setActiveStep={updateStep}
+              configuration={step === 'review' ? configuration : configuration[step]}
+            />
           </Grid>
         </Grid>
       </Grid>
