@@ -163,7 +163,11 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           <Grid item>
             <Button
               onClick={handleEdit}
-              sx={{ bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`, '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` } }}
+              sx={{
+                display: `${step === 'review' ? 'none' : 'inline-flex'}`,
+                bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
+                '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
+              }}
               variant="contained"
             >
               {viewOnly ? 'Edit' : 'View Only'}

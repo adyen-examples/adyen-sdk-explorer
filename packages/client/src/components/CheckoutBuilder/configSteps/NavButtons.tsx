@@ -17,8 +17,6 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
   const dispatch = useAppDispatch();
   const stepsLength = Object.keys(steps).length;
 
-  console.log('This is the configuration I am getting from JSONEditor: ', configuration);
-
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
     switch (steps[step]) {
