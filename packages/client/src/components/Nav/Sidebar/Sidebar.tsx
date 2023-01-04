@@ -7,13 +7,9 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 
 export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
-  const { updateProfileInfo, updateStep, clearOnDeckInfo } = onDeckActions;
+  const { clearOnDeckInfo } = onDeckActions;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
-    dispatch(action(value));
-  };
 
   const selectedButtonStyle = {
     bgcolor: 'primary.main',
@@ -27,7 +23,8 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
   };
 
   const handleClick = (txvariant: any) => {
-    navigate(`/${txvariant}`);
+    // navigate(`/${txvariant}`);
+    dispatch(clearOnDeckInfo());
   };
   return (
     <Drawer

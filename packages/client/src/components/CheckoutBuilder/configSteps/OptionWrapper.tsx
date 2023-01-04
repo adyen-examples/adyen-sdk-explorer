@@ -52,11 +52,11 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
   };
   //We'll come back to this, but we should not be using local state, and instead just listen to the prop
 
-  // useEffect(() => {
-  //   console.log('Change in the prop');
-  //   console.log('The value is: ',value)
-  // }, [value])
-  
+  useEffect(() => {
+    console.log('Change in the prop');
+    console.log('The value is: ', value);
+    setIsChecked(!isChecked);
+  }, [value]);
 
   if (isChecked) {
     if (descriptor.properties) {
