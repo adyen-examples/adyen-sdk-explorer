@@ -26,6 +26,9 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
     color: '#000000'
   };
 
+  const handleClick = (txvariant: any) => {
+    navigate(`/${txvariant}`);
+  };
   return (
     <Drawer
       sx={{
@@ -46,7 +49,9 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
       <List>
         <ListItemButton sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
           <Link sx={{ width: '100%' }} underline="none" href={'/'}>
-            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">Home</Typography>
+            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">
+              Home
+            </Typography>
           </Link>
         </ListItemButton>
         <ListItem>
@@ -68,7 +73,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
             <Box>
               <ListItem key={product} disablePadding>
                 <ListItemButton sx={buttonStyle}>
-                  <Link sx={{ width: '100%' }} underline="none" href={`/${products[product].txvariant}`}>
+                  <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick(products[product].txvariant)}>
                     <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="body2">
                       {product}
                     </Typography>
