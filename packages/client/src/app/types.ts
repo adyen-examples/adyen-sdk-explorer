@@ -19,6 +19,7 @@ export type OnDeckState = {
   checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
+  sessionsResponse: OnDeckPropType | {};
   [key: string]: any;
 };
 

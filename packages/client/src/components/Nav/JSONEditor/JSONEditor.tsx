@@ -10,7 +10,7 @@ import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
 import { useEffect, useState } from 'react';
 
 export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
-  const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();
@@ -32,23 +32,27 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
     <Box>
-      <Grid item xs="auto">
-        <Box sx={{ color: 'white' }}>
-          <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-            <code style={{ fontSize: '13px' }}>{prefix}</code>
-          </pre>
-        </Box>
-      </Grid>
+      {prefix && (
+        <Grid item xs="auto">
+          <Box sx={{ color: 'white' }}>
+            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+              <code style={{ fontSize: '13px' }}>{prefix}</code>
+            </pre>
+          </Box>
+        </Grid>
+      )}
       <Grid item xs="auto">
         <Editor viewOnly={viewOnly} configuration={configurationBlock} handleJsonEditorUpdate={updateConfiguration} />
       </Grid>
-      <Grid item xs="auto">
-        <Box sx={{ color: 'white' }}>
-          <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-            <code style={{ fontSize: '13px' }}>{postfix}</code>
-          </pre>
-        </Box>
-      </Grid>
+      {postfix && (
+        <Grid item xs="auto">
+          <Box sx={{ color: 'white' }}>
+            <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
+              <code style={{ fontSize: '13px' }}>{postfix}</code>
+            </pre>
+          </Box>
+        </Grid>
+      )}
     </Box>
   );
 
@@ -107,7 +111,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       step = 'sessions';
       break;
     case 'review':
-      configuration = { checkout, local, sessions };
+      configuration = { checkout, local, sessions, sessionsResponse };
       codeSnippets = {
         checkout: {
           prefix: `
@@ -121,8 +125,10 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         },
         sessions: {
           prefix: `
-    Request:`,
-          postfix: `    Response:`
+    Request:`
+        },
+        sessionsResponse: {
+          prefix: `    Response:`
         }
       };
       step = 'review';
@@ -130,6 +136,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     default:
       throw new Error('Unknown step');
   }
+
+  console.log('sessionsResponse, ', sessionsResponse);
 
   return (
     <Grid
