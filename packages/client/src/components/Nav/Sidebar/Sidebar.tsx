@@ -23,7 +23,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
   };
 
   const handleClick = (txvariant: any) => {
-    // navigate(`/${txvariant}`);
+    navigate(`/${txvariant}`);
     dispatch(clearOnDeckInfo());
   };
   return (
@@ -45,7 +45,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
     >
       <List>
         <ListItemButton sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-          <Link sx={{ width: '100%' }} underline="none" href={'/'}>
+          <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick('')}>
             <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">
               Home
             </Typography>

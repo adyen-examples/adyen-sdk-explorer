@@ -68,6 +68,8 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     handleUpdateConfig(e.target.name, e.target.value, current);
   };
 
+  console.log('Descriptors: ', descriptors);
+
   return (
     <Grid container>
       {descriptors &&
