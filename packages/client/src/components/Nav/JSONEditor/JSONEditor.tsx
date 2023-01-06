@@ -1,13 +1,12 @@
-import { Button, Grid, Box } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import * as React from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
-import { useEffect, useState } from 'react';
 
 export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
@@ -137,8 +136,6 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       throw new Error('Unknown step');
   }
 
-  console.log('sessionsResponse, ', sessionsResponse);
-
   return (
     <Grid
       direction="column"
@@ -152,7 +149,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         bgcolor: 'secondary.main',
         height: `calc(100% - ${headerHeight}px)`,
         mt: `${headerHeight}px`,
-        width: `${editorWidth}px`
+        width: `${editorWidth}px`,
+        overflow: 'scroll'
       }}
     >
       {codeSnippets &&
@@ -161,7 +159,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         })}
       <Grid sx={{ position: 'relative' }} item xs>
         <Grid
-          sx={{ height: '100%', position: 'absolute', bottom: '0' }}
+          sx={{ height: '100%', position: 'absolute', bottom: '0', width: '100%' }}
           p={1}
           direction="row"
           container
