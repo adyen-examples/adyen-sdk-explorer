@@ -145,7 +145,14 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         bgcolor: 'secondary.main',
         height: `calc(100% - ${headerHeight}px)`,
         mt: `${headerHeight}px`,
-        width: `${editorWidth}px`
+        width: `${editorWidth}px`,
+        display: {
+          xs: 'none',
+          sm: 'none',
+          md: 'block',
+          lg: 'block',
+          xl: 'block'
+        }
       }}
     >
       <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
