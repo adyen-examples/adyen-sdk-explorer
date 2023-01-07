@@ -1,6 +1,6 @@
 import { Box, Button, Grid } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
@@ -30,29 +30,29 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   };
 
   const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
-    <Box>
+    <React.Fragment>
       {prefix && (
-        <Grid item xs="auto">
+        <Box>
           <Box sx={{ color: 'white' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
               <code style={{ fontSize: '13px' }}>{prefix}</code>
             </pre>
           </Box>
-        </Grid>
+        </Box>
       )}
-      <Grid item xs="auto">
+      <Box>
         <Editor viewOnly={viewOnly} configuration={configurationBlock} handleJsonEditorUpdate={updateConfiguration} />
-      </Grid>
+      </Box>
       {postfix && (
-        <Grid item xs="auto">
+        <Box>
           <Box sx={{ color: 'white' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
               <code style={{ fontSize: '13px' }}>{postfix}</code>
             </pre>
           </Box>
-        </Grid>
+        </Box>
       )}
-    </Box>
+    </React.Fragment>
   );
 
   switch (steps[activeStep]) {
@@ -137,11 +137,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   }
 
   return (
-    <Grid
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="stretch"
-      container
+    <Box
       sx={{
         position: 'fixed',
         top: 0,
@@ -149,46 +145,38 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         bgcolor: 'secondary.main',
         height: `calc(100% - ${headerHeight}px)`,
         mt: `${headerHeight}px`,
-        width: `${editorWidth}px`,
-        overflow: 'scroll'
+        width: `${editorWidth}px`
       }}
     >
-      {codeSnippets &&
-        Object.entries(codeSnippets).map(([key, value]: any) => {
-          return codeBlock(value.prefix, value.postfix, configuration[key]);
-        })}
-      <Grid sx={{ position: 'relative' }} item xs>
-        <Grid
-          sx={{ height: '100%', position: 'absolute', bottom: '0', width: '100%' }}
-          p={1}
-          direction="row"
-          container
-          justifyContent="space-between"
-          alignItems="flex-end"
-        >
-          <Grid item>
-            <Button
-              onClick={handleEdit}
-              sx={{
-                display: `${step === 'review' ? 'none' : 'inline-flex'}`,
-                bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
-                '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
-              }}
-              variant="contained"
-            >
-              {viewOnly ? 'Edit' : 'View Only'}
-            </Button>
-          </Grid>
-          <Grid item>
-            <NavButtons
-              steps={steps}
-              step={activeStep}
-              setActiveStep={updateStep}
-              configuration={step === 'review' ? configuration : configuration[step]}
-            />
-          </Grid>
+      <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
+        {codeSnippets &&
+          Object.entries(codeSnippets).map(([key, value]: any) => {
+            return codeBlock(value.prefix, value.postfix, configuration[key]);
+          })}
+      </Box>
+      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: '0', width: `${editorWidth}px` }} p={1}>
+        <Grid item>
+          <Button
+            onClick={handleEdit}
+            sx={{
+              display: `${step === 'review' ? 'none' : 'inline-block'}`,
+              bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
+              '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
+            }}
+            variant="contained"
+          >
+            {viewOnly ? 'Edit' : 'View Only'}
+          </Button>
+        </Grid>
+        <Grid item>
+          <NavButtons
+            steps={steps}
+            step={activeStep}
+            setActiveStep={updateStep}
+            configuration={step === 'review' ? configuration : configuration[step]}
+          />
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 };
