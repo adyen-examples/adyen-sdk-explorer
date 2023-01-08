@@ -5,6 +5,7 @@ import { useApiLocal, useAppDispatch } from '../../hooks';
 import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
 import { Sidebar } from './Sidebar/Sidebar';
+import { Navbar } from './Navbar/Navbar';
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
 
@@ -48,16 +49,26 @@ export const Layout = ({ main: Main }: any) => {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Header drawerWidth={drawerWidth} />
-        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
+        {/* <Header drawerWidth={drawerWidth} />
+        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} /> */}
+        <Navbar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',
             top: '0',
             bottom: '0',
-            width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
-            ml: `${drawerWidth}px`,
-            mr: `${editorWidth}px`,
+            ml: {
+              xs: 0,
+              md: 0,
+              lg: `${drawerWidth}px`,
+              xl: `${drawerWidth}px`
+            },
+            mr: {
+              xs: 0,
+              md: `${editorWidth}px`,
+              lg: `${editorWidth}px`,
+              xl: `${editorWidth}px`
+            },
             overflow: 'scroll',
             mt: `${headerHeight}px`
           }}
