@@ -25,9 +25,14 @@ export const themeOptions: any = {
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
-      fontSize: '0.9rem',
-      fontWeight: 300,
+      fontSize: '0.8rem',
+      fontWeight: 350,
       lineHeight: 1.8
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '2.4rem',
+      fontFamily: 'Poppins, sans-serif'
     },
     h3: {
       fontWeight: 600,

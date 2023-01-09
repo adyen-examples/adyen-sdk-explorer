@@ -1,36 +1,225 @@
-[
-  {
-    "name": "openFirstPaymentMethod",
-    "description": "When enabled, Drop-in opens the first payment method automatically on page load. Defaults to true.",
-    "type": "boolean"
-  },
-  {
-    "name": "openFirstStoredPaymentMethod",
-    "description": "When enabled, Drop-in opens the payment method with stored card details on page load. This option takes precedence over openFirstPaymentMethod. Defaults to true.",
-    "type": "boolean"
-  },
-  {
-    "name": "showStoredPaymentMethods",
-    "description": "Shows or hides payment methods with stored card details. Defaults to true.",
-    "type": "boolean"
-  },
-  {
-    "name": "showRemovePaymentMethodButton",
-    "description": "Allows the shopper to remove a stored payment method. Defaults to false.",
-    "type": "boolean"
-  },
-  {
-    "name": "showPaymentMethods",
-    "description": "Shows or hides regular (not stored) payment methods. Set to false if you only want to show payment methods with stored card details. Defaults to true.",
-    "type": "boolean"
-  },
-  {
-    "name": "setStatusAutomatically",
-    "description": "Set to false to not set the Drop-in status to 'loading' when onSubmit is triggered. Defaults to true.",
-    "type": "boolean"
-  },
-  {
-    "name": "instantPaymentTypes",
-    "description": "Moves payment methods to the top of the list of available payment methods. This is available for Apple Pay and Google Pay."
-  }
-]
+{
+  "dropin": [
+    {
+      "name": "openFirstPaymentMethod",
+      "description": "When enabled, Drop-in opens the first payment method automatically on page load. Defaults to true.",
+      "type": "boolean"
+    },
+    {
+      "name": "openFirstStoredPaymentMethod",
+      "description": "When enabled, Drop-in opens the payment method with stored card details on page load. This option takes precedence over openFirstPaymentMethod. Defaults to true.",
+      "type": "boolean"
+    },
+    {
+      "name": "showStoredPaymentMethods",
+      "description": "Shows or hides payment methods with stored card details. Defaults to true.",
+      "type": "boolean"
+    },
+    {
+      "name": "showRemovePaymentMethodButton",
+      "description": "Allows the shopper to remove a stored payment method. Defaults to false.",
+      "type": "boolean"
+    },
+    {
+      "name": "showPaymentMethods",
+      "description": "Shows or hides regular (not stored) payment methods. Set to false if you only want to show payment methods with stored card details. Defaults to true.",
+      "type": "boolean"
+    },
+    {
+      "name": "setStatusAutomatically",
+      "description": "Set to false to not set the Drop-in status to 'loading' when onSubmit is triggered. Defaults to true.",
+      "type": "boolean"
+    },
+    {
+      "name": "instantPaymentTypes",
+      "description": "Moves payment methods to the top of the list of available payment methods. This is available for Apple Pay and Google Pay."
+    }
+  ],
+  "card": [
+    {
+      "name": "brands",
+      "type": "array",
+      "description": "Array of card brands that will be recognized. For a list of possible values, refer to [Supported card types](https://docs.adyen.com/payment-methods/cards/custom-card-integration#supported-card-types).",
+      "defaultValue": ["mc", "visa", "amex"]
+    },
+    {
+      "name": "brandsConfiguration",
+      "type": "object",
+      "description": "Object where you can customize the icons for different brands.",
+      "defaultValue": {}
+    },
+    {
+      "name": "showBrandIcon",
+      "type": "boolean",
+      "description": "Set to false to not show the brand logo when the card brand has been recognized.",
+      "defaultValue": true
+    },
+    {
+      "name": "showBrandsUnderCardNumber",
+      "type": "boolean",
+      "description": "Shows brand logos under the card number field when the shopper selects the card payment method.",
+      "defaultValue": true
+    },
+    {
+      "name": "enableStoreDetails",
+      "type": "boolean",
+      "description": "Set to true to show the checkbox for saving the card details for recurring payments.",
+      "defaultValue": true
+    },
+    {
+      "name": "hasHolderName",
+      "type": "boolean",
+      "description": "Set to true to show the input field for the cardholder name.",
+      "defaultValue": true
+    },
+    {
+      "name": "holderNameRequired",
+      "type": "boolean",
+      "description": "Set to true to make the cardholder name a required field. To show the field, you additionally need to set `hasHolderName` to true",
+      "defaultValue": true
+    },
+    {
+      "name": "positionHolderNameOnTop",
+      "type": "boolean",
+      "description": "Renders the cardholder name field at the top of the payment form.",
+      "defaultValue": true
+    },
+    {
+      "name": "hideCVC",
+      "type": "boolean",
+      "description": "Set to true to hide the CVC field.",
+      "defaultValue": true
+    },
+    {
+      "name": "configuration.socialSecurityNumberMode",
+      "type": "string",
+      "description": "Renders a social security number field. For example, this is required for certain card payments in Brazil. Possible values are: show, hide, auto",
+      "defaultValue": "auto"
+    },
+    {
+      "name": "styles",
+      "type": "object",
+      "description": "Set a style object to customize the card input fields. For a list of supported properties, refer to [Styling card input fields](https://docs.adyen.com/payment-methods/cards/custom-card-integration#styling).",
+      "defaultValue": {
+        "error": {
+          "color": "red"
+        },
+        "placeholder": {
+          "color": "#d8d8d8"
+        },
+        "validated": {
+          "color": "green"
+        }
+      }
+    },
+    {
+      "name": "billingAddressRequired",
+      "type": "boolean",
+      "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
+      "defaultValue": false
+    },
+    {
+      "name": "billingAddressAllowedCountries",
+      "type": "array",
+      "description": "Set to true to collect the shopper's billing address and mark the fields as required.",
+      "defaultValue": ["US", "NL", "FR"]
+    },
+    {
+      "name": "data",
+      "description": "Object that contains placeholder information that you can use to prefill fields",
+      "defaultValue": {
+        "billingAddress": {
+          "city": "New York",
+          "country": "US",
+          "houseNumberOrName": "1",
+          "postalCode": "10013",
+          "stateOrProvince": "NY",
+          "street": "1st Avenue"
+        }
+      }
+    },
+    {
+      "name": "installmentOptions",
+      "type": "object",
+      "description": "If you want to offer credit card installments, specify here the numbers of monthly installments that the shopper can choose from.",
+      "defaultValue": {
+        "card": {
+          "values": [2, 3, 4]
+        }
+      }
+    },
+    {
+      "name": "showInstallmentAmounts",
+      "type": "boolean",
+      "description": "If you want to offer credit card installments, set to true to show the payment amount per installment.",
+      "defaultValue": false
+    },
+    {
+      "name": "minimumExpiryDate",
+      "type": "string",
+      "description": "If a shopper enters a date that is earlier than specified here, they will see the following error:'Your card expires before check out date.'",
+      "defaultValue": "10/22"
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "description": "Automatically move the focus from date field to the CVC field.",
+      "defaultValue": true
+    },
+    {
+      "name": "SRConfig",
+      "description": "Object for configuring screen reader behavior. Does not affect what gets rendered in the checkout form.",
+      "defaultValue": {},
+      "properties": [
+        {
+          "name": "collateErrors",
+          "type": "boolean",
+          "description": "Indicates if all errors in the form are read out after each validation. For example, if there is an error in the card number field, the error is read out after validating each of the other fields, until the error is fixed.",
+          "defaultValue": true
+        },
+        {
+          "name": "moveFocus",
+          "type": "boolean",
+          "description": "Indicates if focus automatically switches to the first field with an error when the shopper selects the Pay button. Can only be set if SRConfig.collateErrors is true",
+          "defaultValue": true
+        }
+      ]
+    }
+  ],
+  "ach": [
+    {
+      "name": "enableStoreDetails",
+      "type": "boolean",
+      "description": "Set to true to show the checkbox for saving the card details for recurring payments.",
+      "defaultValue": true
+    }
+  ],
+  "affirm": [
+    {
+      "name": "visibility",
+      "defaultValue": {
+        "personalDetails": "hidden",
+        "billingAddress": "readOnly",
+        "deliveryAddress": "editable"
+      },
+      "description": "Set the visibility attribute on specific fields.",
+      "properties": [
+        {
+          "name": "personalDetails",
+          "type": "string",
+          "description": "Override visibility attribute. Posible values are hidden, readOnly, and editable"
+        },
+        {
+          "name": "billingAddress",
+          "type": "string",
+          "description": "Override visibility attribute. Posible values are hidden, readOnly, and editable."
+        },
+        {
+          "name": "deliveryAddress",
+          "type": "string",
+          "description": "Override visibility attribute. Posible values are hidden, readOnly, and editable."
+        }
+      ]
+    }
+  ]
+}
