@@ -23,9 +23,17 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
   return (
     <Box>
       <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
-        <Box bgcolor="white" sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3, px: 2 }}>
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
-            <Box>
+        <Box
+          bgcolor="white"
+          sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3, px: 2, '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } } }}
+        >
+          <Toolbar sx={{ justifyContent: { xs: 'start', md: 'start', lg: 'space-between', xl: 'space-between' } }}>
+            <Box sx={{ color: 'secondary.gray', display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' } }}>
+              <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu}>
+                <MenuIcon />
+              </IconButton>
+            </Box>
+            <Box sx={{ flexGrow: 1 }}>
               <AdyenLogo />
             </Box>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -39,11 +47,6 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
                 </Button>
               ))}
             </Box>
-            {/* <Box sx={{ flexGrow: 1, display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' } }}>
-              <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
-                <MenuIcon />
-              </IconButton>
-            </Box> */}
           </Toolbar>
         </Box>
       </AppBar>
