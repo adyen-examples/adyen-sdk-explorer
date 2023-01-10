@@ -1,9 +1,12 @@
-import { AppBar, Box, Button, Toolbar, IconButton } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, IconButton, Drawer } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { useState } from 'react';
 
 export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   const links = [
     { title: 'Documentation', url: 'https://docs.adyen.com/' },
     {
@@ -17,7 +20,7 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
   ];
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    alert('handle open nav menu called');
+    setIsNavOpen(!isNavOpen);
   };
 
   return (
@@ -52,6 +55,11 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
       </AppBar>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' } }}>
         <Sidebar drawerWidth={drawerWidth} products={products} headerHeight={headerHeight} page={page} />
+      </Box>
+      <Box>
+        <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu}>
+          <Sidebar drawerWidth={drawerWidth} products={products} headerHeight={'-5'} page={page} />
+        </Drawer>
       </Box>
     </Box>
   );
