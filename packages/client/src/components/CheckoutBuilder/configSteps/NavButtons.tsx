@@ -1,8 +1,9 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
@@ -66,18 +67,28 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
   };
 
   return (
-    <Box sx={{ bgcolor: 'secondary.main', display: 'inline-block' }}>
-      {step !== 0 && <Button onClick={handleBack}>Back</Button>}
-      {step !== stepsLength - 1 && (
-        <Button variant="contained" onClick={handleNext}>
-          Next
-        </Button>
-      )}
-      {step === stepsLength - 1 && (
-        <Button variant="contained" onClick={exportToJson}>
-          Export
-        </Button>
-      )}
+    <Box>
+      <Box sx={{ bgcolor: 'secondary.main', display: { xs: 'none', md: 'inline-block' } }}>
+        {step !== 0 && <Button onClick={handleBack}>Back</Button>}
+        {step !== stepsLength - 1 && (
+          <Button variant="contained" onClick={handleNext}>
+            Next
+          </Button>
+        )}
+        {step === stepsLength - 1 && (
+          <Button variant="contained" onClick={exportToJson}>
+            Export
+          </Button>
+        )}
+      </Box>
+      <Box sx={{ position: 'fixed', bottom: 4, right: 5, display: { xs: 'inline-block', md: 'none' } }}>
+        <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleBack}>
+          <NavigateBeforeIcon />
+        </IconButton>
+        <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleNext}>
+          <NavigateNextIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 };

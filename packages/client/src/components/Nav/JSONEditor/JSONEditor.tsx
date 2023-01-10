@@ -139,30 +139,45 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   return (
     <Box
       sx={{
-        position: 'fixed',
-        top: 0,
-        right: 0,
         bgcolor: 'secondary.main',
-        height: `calc(100% - ${headerHeight}px)`,
-        mt: `${headerHeight}px`,
-        width: `${editorWidth}px`,
-        display: {
-          xs: 'none',
-          sm: 'none',
-          md: 'block',
-          lg: 'block',
-          xl: 'block'
-        }
+        mt: `${headerHeight}px`
       }}
     >
-      <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
-        {codeSnippets &&
-          Object.entries(codeSnippets).map(([key, value]: any) => {
-            return codeBlock(value.prefix, value.postfix, configuration[key]);
-          })}
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          bgcolor: 'secondary.main',
+          height: `calc(100% - ${headerHeight}px)`,
+          mt: `${headerHeight}px`,
+          width: `${editorWidth}px`,
+          display: {
+            xs: 'none',
+            sm: 'none',
+            md: 'block',
+            lg: 'block',
+            xl: 'block'
+          }
+        }}
+      >
+        <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
+          {codeSnippets &&
+            Object.entries(codeSnippets).map(([key, value]: any) => {
+              return codeBlock(value.prefix, value.postfix, configuration[key]);
+            })}
+        </Box>
       </Box>
-      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: '0', width: `${editorWidth}px` }} p={1}>
-        <Grid item>
+      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
+        <Grid
+          item
+          sx={{
+            display: {
+              sm: 'none',
+              md: 'block'
+            }
+          }}
+        >
           <Button
             onClick={handleEdit}
             sx={{
