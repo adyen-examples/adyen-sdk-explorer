@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
-import { descriptorsActions } from '../app';
 import type { AllowedMethods, RequestOptions } from './types';
 
 export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey: string = '', body?: any) => {
   const [data, setData] = useState<any>({
-    state: 'LOADING',
+    state: 'SUCCESS',
     error: null,
     data: null
   });
 
-  const setPartialData = (partialData: any) => setData({ ...data, ...partialData });
-
   useEffect(() => {
-    setPartialData({
+    setData((prevState: any) => ({
+      ...prevState,
       state: 'LOADING'
-    });
+    }));
 
     const requestOptions: RequestOptions = {
       method,
@@ -31,18 +29,20 @@ export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey:
     const makeRequest: () => void = async () => {
       try {
         const response = await fetch(url, requestOptions);
-        const data = await response.json();
-        console.log(data);
-        setPartialData({
+        const json = await response.json();
+        console.log(json);
+        setData((prevState: any) => ({
+          ...prevState,
           state: 'SUCCESS',
-          data
-        });
+          data: json
+        }));
       } catch (err) {
         console.error(err);
-        setPartialData({
+        setData((prevState: any) => ({
+          ...prevState,
           state: 'ERROR',
           error: 'fetch failed'
-        });
+        }));
       }
     };
 

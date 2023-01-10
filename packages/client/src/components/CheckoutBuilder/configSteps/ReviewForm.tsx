@@ -1,10 +1,6 @@
-import { Grid, Box } from '@mui/material';
-import React from 'react';
-import JSONInput from 'react-json-editor-ajrm';
-import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
+import { Box } from '@mui/material';
 import ComponentBase from '../../ComponentBase/ComponentBase';
 import { Content } from './Content';
-import { NavButtons } from './NavButtons';
 
 type ReviewFormProps = {
   configuration: object;
@@ -13,7 +9,7 @@ type ReviewFormProps = {
   content: any;
 };
 
-export const ReviewForm = ({ configuration, step, setActiveStep, content }: ReviewFormProps) => {
+export const ReviewForm = ({ content }: ReviewFormProps) => {
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />

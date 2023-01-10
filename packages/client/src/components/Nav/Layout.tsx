@@ -14,7 +14,7 @@ export const Layout = ({ main: Main }: any) => {
   let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
-  const { state, error, data } = products;
+  const { error, data } = products;
 
   const dispatch = useAppDispatch();
 
@@ -49,7 +49,7 @@ export const Layout = ({ main: Main }: any) => {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Header drawerWidth={drawerWidth} />
-        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product}/>
+        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',

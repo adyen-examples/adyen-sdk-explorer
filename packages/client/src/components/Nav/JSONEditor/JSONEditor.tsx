@@ -19,8 +19,6 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   let configuration: any = null;
   let updateConfiguration: any = null;
-  let codePrefix: any = null;
-  let codePostfix: any = null;
   let codeSnippets: any = null;
   let step: any = null;
 

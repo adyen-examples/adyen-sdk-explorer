@@ -1,8 +1,7 @@
-import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
-import * as React from 'react';
+import { AppBar, Box, Toolbar, Button } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 
-export const Header = ({ drawerWidth, headerHeight }: any) => {
+export const Header = ({ headerHeight }: any) => {
   return (
     <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
       <Box bgcolor="white" sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3, px: 2 }}>
@@ -20,6 +19,7 @@ export const Header = ({ drawerWidth, headerHeight }: any) => {
             <Button href="https://www.adyen.com/signup" sx={{ color: '#394962', ml: 3, borderColor: '#bdbdbd' }} variant="outlined">
               Test Account
             </Button>
+            <Button sx={{ color: '#08be52', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
           </Box>
         </Toolbar>
       </Box>
