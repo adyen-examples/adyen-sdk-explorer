@@ -81,7 +81,7 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
           </Button>
         )}
       </Box>
-      <Box sx={{ position: 'fixed', bottom: 4, right: 5, display: { xs: 'inline-block', md: 'none' } }}>
+      <Box sx={{ position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } }}>
         <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleBack}>
           <NavigateBeforeIcon />
         </IconButton>

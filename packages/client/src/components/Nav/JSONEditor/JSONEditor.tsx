@@ -173,6 +173,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           item
           sx={{
             display: {
+              xs:'none',
               sm: 'none',
               md: 'block'
             }
