@@ -4,7 +4,7 @@ export const LinksGrid = ({ links }: any) => {
   return (
     <Grid container sx={{ p: 6 }}>
       {links.map((category: any) => (
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h4">{category.title}</Typography>
           {category.subcategories.map((subcategory: any) => (
             <Box>

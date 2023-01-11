@@ -159,7 +159,7 @@ export const Overview = () => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap-reverse', justifyContent: 'space-between' }}>
         <Box
           component="div"
           sx={{ mt: 6, mb: 6, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
@@ -185,13 +185,13 @@ export const Overview = () => {
           </Typography>
           <Typography variant="h5">Not sure where to start</Typography>
           <Typography variant="caption">
-            See our guide to{' '}
+            See our guide to
             <Link href="https://docs.adyen.com/online-payments/web-drop-in/optional-configuration" underline="none">
               getting started with Adyen's optional configuration
             </Link>
           </Typography>
         </Box>
-        <Box component="div" sx={{ alignItems: 'flex-end', width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
+        <Box component="div" sx={{ alignItems: 'flex-end', alignSelf: 'flex-start', width: '50%', flex: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' } }}>
           <AdyenLogo />
         </Box>
       </Box>
