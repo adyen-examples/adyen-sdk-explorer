@@ -44,12 +44,10 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
       anchor="left"
     >
       <List>
-        <ListItemButton sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-          <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick('')}>
-            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">
-              Home
-            </Typography>
-          </Link>
+        <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
+          <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">
+            Home
+          </Typography>
         </ListItemButton>
         <ListItem>
           <Typography variant="h5">Online Payments</Typography>
@@ -69,12 +67,10 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           return (
             <Box>
               <ListItem key={product} disablePadding>
-                <ListItemButton sx={buttonStyle}>
-                  <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick(products[product].txvariant)}>
-                    <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="body2">
-                      {product}
-                    </Typography>
-                  </Link>
+                <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
+                  <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="body2">
+                    {product}
+                  </Typography>
                 </ListItemButton>
               </ListItem>
               {subcategory}
