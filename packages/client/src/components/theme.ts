@@ -19,14 +19,14 @@ export const themeOptions: any = {
   typography: {
     fontFamily: 'Poppins, sans-serif',
     h6: {
-      fontWeight: 700,
-      fontSize: '0.8rem',
+      fontWeight: 500,
+      fontSize: '0.85rem',
       fontFamily: 'sans-serif'
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
-      fontSize: '0.8rem',
-      fontWeight: 350,
+      fontSize: '0.9rem',
+      fontWeight: 400,
       lineHeight: 1.8
     },
     h2: {
@@ -50,7 +50,8 @@ export const themeOptions: any = {
       fontFamily: 'Poppins, sans-serif'
     },
     caption: {
-      color: '#69778C'
+      color: '#69778C',
+      fontSize: '0.8rem'
     },
     subtitle1: {
       fontWeight: 500,

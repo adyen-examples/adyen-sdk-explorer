@@ -8,7 +8,7 @@ export const LogosGrid = ({ logos }: any) => {
           <Box>{logo.svg()}</Box>
           <Box sx={{ flex: '1 1 0', pl: 1 }}>
             <Typography variant="h5">{logo.title}</Typography>
-            <Typography variant="subtitle2">{logo.description}</Typography>
+            <Typography variant="h6">{logo.description}</Typography>
             <Typography variant="caption">
               <Link href={logo.link} underline="none">
                 Learn more
