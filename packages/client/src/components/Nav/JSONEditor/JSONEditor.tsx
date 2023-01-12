@@ -19,8 +19,6 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   let configuration: any = null;
   let updateConfiguration: any = null;
-  let codePrefix: any = null;
-  let codePostfix: any = null;
   let codeSnippets: any = null;
   let step: any = null;
 
@@ -29,8 +27,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     setViewOnly(!viewOnly);
   };
 
-  const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
-    <Box>
+  const codeBlock = (prefix: string, postfix: string, configurationBlock: any, index: number) => (
+    <Box key={`JSONEdit-${index}`}>
       {prefix && (
         <Grid item xs="auto">
           <Box sx={{ color: 'white' }}>
@@ -154,8 +152,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       }}
     >
       {codeSnippets &&
-        Object.entries(codeSnippets).map(([key, value]: any) => {
-          return codeBlock(value.prefix, value.postfix, configuration[key]);
+        Object.entries(codeSnippets).map(([key, value, index]: any) => {
+          return codeBlock(value.prefix, value.postfix, configuration[key], index);
         })}
       <Grid sx={{ position: 'relative' }} item xs>
         <Grid

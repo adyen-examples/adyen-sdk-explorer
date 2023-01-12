@@ -1,10 +1,7 @@
 import { useSelector } from 'react-redux';
-import { onDeckActions } from '../../app';
 import type { RootState } from '../../store';
 import Component from './Component';
 import RedirectComponent from './RedirectComponent';
-
-const { updateRedirectInfo } = onDeckActions;
 
 const ComponentBase = () => {
   const globalStateDeck = useSelector((state: RootState) => state.onDeck);

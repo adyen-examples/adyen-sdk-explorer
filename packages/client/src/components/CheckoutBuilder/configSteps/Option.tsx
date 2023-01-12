@@ -17,7 +17,7 @@ export const Option = ({ descriptor, onChange, value, isChecked, current }: Opti
       {isChecked && (
         <TextField
           name={descriptor.name}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e, current)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
           id={descriptor.name}
           value={value}
           fullWidth
