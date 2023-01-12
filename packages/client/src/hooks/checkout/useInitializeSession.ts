@@ -52,7 +52,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
 
     initialize();
-  }, [activeStep, configuration, dispatch, endpoint, sessions, steps, txvariant, updateSessionsResponseInfo]);
+  }, []);
 
   return [checkout, result, error];
 };

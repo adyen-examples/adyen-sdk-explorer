@@ -5,6 +5,7 @@ import { Content } from './configSteps/Content';
 
 export const Config = ({ configuration, descriptors, action, updateStore, content }: ConfigPropTypes) => {
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
+    console.log('UPDATE CONFIG ARGS', item, value, current);
     let newConfig = { ...configuration };
 
     if (value === null) {
@@ -17,6 +18,7 @@ export const Config = ({ configuration, descriptors, action, updateStore, conten
     } else {
       newConfig = { ...newConfig, [item]: value };
     }
+    console.log('NEW CONFIG', newConfig);
     updateStore(newConfig, action);
   };
 

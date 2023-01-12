@@ -1,5 +1,5 @@
-import { Fragment, useState } from 'react';
-import { FormControl, List, ListItem, IconButton, ListItemText } from '@mui/material';
+import { Fragment, useState, ChangeEvent } from 'react';
+import { Grid, Typography, TextField, FormControl, List, ListItem, IconButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Option, OptionPropTypes } from './Option';
 
@@ -7,46 +7,68 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   const [input, setInput] = useState('');
   const [listItems, setListItems] = useState<string[]>([]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+  const handleSubmit = (e: any) => {
+    console.log('submitting');
     e.preventDefault();
-    setListItems([...listItems, input]);
-    onChange(descriptor.name, listItems, current);
+    const newList = [...listItems, input];
+    setListItems(newList);
+    onChange(descriptor.name, newList, current);
     setInput('');
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const deleteItem = (item: string) => {
-    const index = listItems.indexOf(item);
-    if (index > -1) {
-      const newList = listItems.splice(index, 1);
-      setListItems(newList);
-      onChange(descriptor.name, newList, current);
-    }
+  const deleteItem = (target: string) => {
+    console.log('deleting', target);
+    const newList = listItems.filter(item => item !== target);
+    setListItems(newList);
+    onChange(descriptor.name, newList, current);
   };
+
+  console.log('LIST ITEMS', listItems);
+  let showListItems;
+
+  if (listItems && listItems.length) {
+    showListItems = (
+      <List>
+        {listItems.map(item => (
+          <ListItem
+            key={item}
+            secondaryAction={
+              <IconButton edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
+                <DeleteIcon />
+              </IconButton>
+            }
+          >
+            <ListItemText primary={item} />
+          </ListItem>
+        ))}
+      </List>
+    );
+  }
 
   return (
     <Fragment>
-      <FormControl sx={{ width: '25%' }} size="small" onSubmit={e => handleSubmit(e)}>
-        <Option descriptor={descriptor} onChange={handleChange} value={value} isChecked={isChecked} current={input} />
-      </FormControl>
-      <List>
-        {listItems.length &&
-          listItems.map(item => (
-            <ListItem
-              key={item}
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon onClick={() => deleteItem(item)} />
-                </IconButton>
-              }
-            >
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-      </List>
+      <form onSubmit={(e: any) => handleSubmit(e)}>
+        <FormControl sx={{ width: '25%' }} size="small">
+          <Grid item xs={11}>
+            <Typography variant="body2">{descriptor.name}</Typography>
+            {isChecked && (
+              <TextField
+                name={descriptor.name}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                id={descriptor.name}
+                value={input}
+                fullWidth
+                variant="standard"
+              />
+            )}
+          </Grid>
+        </FormControl>
+      </form>
+      {showListItems}
     </Fragment>
   );
 };

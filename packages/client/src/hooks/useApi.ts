@@ -11,15 +11,15 @@ export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: stri
   const [data, setData] = useState<any>({
     state: 'LOADING',
     error: null,
-    payload: null
+    data: null
   });
   const dispatch = useAppDispatch();
+  const setPartData = (partialData: any) => setData({ ...data, ...partialData });
 
   useEffect(() => {
-    setData((prevState: any) => ({
-      ...prevState,
+    setPartData({
       state: 'LOADING'
-    }));
+    });
 
     const requestOptions: RequestOptions = {
       method,
@@ -36,26 +36,24 @@ export const useApi = (url: string, method: AllowedMethods = 'GET', apiKey: stri
     const makeRequest: () => void = async () => {
       try {
         const response = await fetch(url, requestOptions);
-        const json = await response.json();
-        console.log(json);
-        setData((prevState: any) => ({
-          ...prevState,
+        const data = await response.json();
+        console.log(data);
+        setPartData({
           state: 'SUCCESS',
-          payload: json
-        }));
+          data
+        });
         dispatch(updateDescriptors(data));
       } catch (err) {
         console.error(err);
-        setData((prevState: any) => ({
-          ...prevState,
+        setPartData({
           state: 'ERROR',
           error: 'fetch failed'
-        }));
+        });
       }
     };
 
     makeRequest();
-  }, [url, method, apiKey, body, dispatch, data]);
+  }, [url, method, apiKey, body]);
 
   return [data];
 };

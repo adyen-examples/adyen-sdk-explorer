@@ -45,7 +45,7 @@ export const useRedirect = (options: EditableCheckoutConfigFields) => {
     };
 
     initializeCheckout(configuration);
-  }, [opts, options]);
+  }, [opts]);
 
   return [checkout];
 };
