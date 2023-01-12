@@ -1,14 +1,13 @@
 import { Fragment, useState, ChangeEvent } from 'react';
 import { Grid, Typography, TextField, FormControl, List, ListItem, IconButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Option, OptionPropTypes } from './Option';
+import { OptionPropTypes } from './Option';
 
 export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   const [input, setInput] = useState('');
   const [listItems, setListItems] = useState<string[]>([]);
 
   const handleSubmit = (e: any) => {
-    console.log('submitting');
     e.preventDefault();
     const newList = [...listItems, input];
     setListItems(newList);
@@ -21,13 +20,11 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   };
 
   const deleteItem = (target: string) => {
-    console.log('deleting', target);
     const newList = listItems.filter(item => item !== target);
     setListItems(newList);
     onChange(descriptor.name, newList, current);
   };
 
-  console.log('LIST ITEMS', listItems);
   let showListItems;
 
   if (listItems && listItems.length) {
