@@ -175,12 +175,11 @@ export const Overview = () => {
               <li>Component Configuration</li>
               <li>API Configuration</li>
             </ul>
-            This application will guide you in passing an optional configuration in the aforementioned implementation locations. Our SDK Explorer
+            This application will guide you in passing an optional configuration throughout the implementation checkpoints. Our SDK Explorer
             enables you to:
             <ul>
               <li>Quickly configure and construct an Adyen component to your specifications.</li>
               <li>Get up to speed on all of Adyen SDK's optional configurations.</li>
-              <li>Test a combination of optional configurations.</li>
             </ul>
           </Typography>
           <Typography variant="h5">Not sure where to start</Typography>

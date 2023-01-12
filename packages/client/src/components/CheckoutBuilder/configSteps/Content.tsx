@@ -13,7 +13,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
   return (
     <Grid mt={1} container>
       <Grid item xs={12}>
-        <Typography component={'span'} mt={2} mb={2} variant="h5">
+        <Typography component={'span'} mt={2} mb={2} variant="h4">
           {title}
         </Typography>
       </Grid>
@@ -22,7 +22,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
           {description}
         </Typography>
       </Grid>
-      <Grid item xs={12} mt={2} sx={{ fontWeight: 800 }}>
+      <Grid item xs={12} mt={2} sx={{ fontWeight: '500px' }}>
         <Typography component={'span'} variant="body2">
           {subtitle}
         </Typography>
@@ -31,8 +31,8 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
         <Typography component={'span'} variant="caption" sx={{ fontSize: '0.73rem' }}>
           {version}
         </Typography>
-        <IconButton sx={{color:'black', fontSize: 'small'}}>
-          <ContentCopyIcon />
+        <IconButton onClick={() => { navigator.clipboard.writeText(`${version}`) }}>
+          <ContentCopyIcon sx={{ color: 'black', fontSize: 'small' }} />
         </IconButton>
       </Grid>
       <Grid item xs={12} mt={2}>
