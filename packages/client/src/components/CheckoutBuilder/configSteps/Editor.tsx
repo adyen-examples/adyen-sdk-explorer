@@ -1,31 +1,43 @@
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../types';
+import { Box } from '@mui/material';
+
 type EditorProps = {
   configuration: OnDeckPropType;
   handleJsonEditorUpdate: (e: any) => void;
+  viewOnly: boolean;
 };
 
-type HandleChange = (e: any) => void
+type HandleChange = (e: any) => void;
 
-export const Editor = ({ configuration, handleJsonEditorUpdate }: EditorProps) => {
-
-  const handleChange: HandleChange = (e) => {
+export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
+  const handleChange: HandleChange = e => {
     const { error, jsObject } = e;
 
     if (jsObject && !error) {
-      handleJsonEditorUpdate(e);
+      handleJsonEditorUpdate(jsObject);
+      console.log('handleJsonEditorUpdate', handleJsonEditorUpdate);
+      console.log('jsobject', jsObject);
     }
-  }
+  };
 
   return (
-    <JSONInput
-      onChange={(e: any) => handleChange(e)}
-      placeholder={{ ...configuration }}
-      colors={dark_vscode_tribute}
-      locale={localeEn}
-      height="94%"
-      width="100%"
-    />
+    <Box
+      sx={{
+        svg: { display: `${viewOnly ? 'none' : 'block'}` },
+        '[name="labels"]': { visibility: `${viewOnly ? 'hidden !important' : 'visible !important'}` }
+      }}
+    >
+      <JSONInput
+        onChange={(e: any) => handleChange(e)}
+        placeholder={{ ...configuration }}
+        colors={dark_vscode_tribute}
+        locale={localeEn}
+        height="100%"
+        width="100%"
+        viewOnly={viewOnly}
+      />
+    </Box>
   );
 };

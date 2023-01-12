@@ -5,11 +5,16 @@ import { API_URL, CLIENT_URL } from '../../config';
 import type { RequestOptions } from '../types';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
+import { onDeckActions } from '../../app';
+import { useAppDispatch } from '../../hooks';
 
 export const useInitializeSession = ({ configuration, endpoint }: { configuration: any; endpoint: string }) => {
   const [checkout, setCheckout] = useState<any>(null);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
+
+  const { updateSessionsResponseInfo } = onDeckActions;
+  const dispatch = useAppDispatch();
 
   const { sessions, profile } = configuration;
   const txvariant = profile.product;
@@ -38,6 +43,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           localStorage.setItem('configuration', JSON.stringify(configuration));
           localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));
           setCheckout(component);
+          dispatch(updateSessionsResponseInfo(parsedResponse));
         }
       } catch (e: any) {
         console.error('Catch error', e);

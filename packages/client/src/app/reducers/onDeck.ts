@@ -8,6 +8,7 @@ const initialState: OnDeckState = {
   checkout: {},
   local: {},
   sessions: {},
+  sessionsResponse: {},
   isRedirect: false,
   activeStep: 0
 };
@@ -33,8 +34,10 @@ export const onDeckSlice = createSlice({
       return { ...state, isRedirect: action.payload };
     },
     updateStep: (state, action: PayloadAction<any>) => {
-      console.log('updating step');
       return { ...state, activeStep: action.payload };
+    },
+    updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
+      return { ...state, sessionsResponse: action.payload };
     },
     clearOnDeckInfo: state => {
       return initialState;

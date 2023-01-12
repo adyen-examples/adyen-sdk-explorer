@@ -135,21 +135,22 @@
       },
       {
         "name": "SRConfig",
-        "type": "object",
         "description": "Object for configuring screen reader behavior. Does not affect what gets rendered in the checkout form.",
-        "defaultValue": {}
-      },
-      {
-        "name": "SRConfig.collateErrors",
-        "type": "boolean",
-        "description": "Indicates if all errors in the form are read out after each validation. For example, if there is an error in the card number field, the error is read out after validating each of the other fields, until the error is fixed.",
-        "defaultValue": true
-      },
-      {
-        "name": "SRConfig.moveFocus",
-        "type": "boolean",
-        "description": "Indicates if focus automatically switches to the first field with an error when the shopper selects the Pay button. Can only be set if SRConfig.collateErrors is true",
-        "defaultValue": true
+        "defaultValue": {},
+        "properties": [
+          {
+            "name": "collateErrors",
+            "type": "boolean",
+            "description": "Indicates if all errors in the form are read out after each validation. For example, if there is an error in the card number field, the error is read out after validating each of the other fields, until the error is fixed.",
+            "defaultValue": true
+          },
+          {
+            "name": "moveFocus",
+            "type": "boolean",
+            "description": "Indicates if focus automatically switches to the first field with an error when the shopper selects the Pay button. Can only be set if SRConfig.collateErrors is true",
+            "defaultValue": true
+          }
+        ]
       }
     ]
   },

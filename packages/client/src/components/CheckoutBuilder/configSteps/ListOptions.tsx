@@ -1,4 +1,3 @@
-import { useState, Fragment } from 'react';
 import { Grid } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
 import type { UpdateConfig, AddOrRemoveProp, Descriptor, HandleInput } from '../types';
@@ -19,7 +18,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
       });
     } else if (current.type === 'array' && current.items) {
       value = [];
-      if (current.items.constructor == Array) {
+      if (current.items.constructor === Array) {
         const arrayProto: { [key: string]: string } = {};
         current.items.forEach(({ name }: { name: string }) => {
           arrayProto[name] = '';
@@ -43,8 +42,12 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
         case 'integer':
           defaultValue = 0;
           break;
+        case 'array':
+          defaultValue = [];
+          break;
         default:
           defaultValue = '';
+          break;
       }
       return defaultValue;
     }
@@ -52,9 +55,8 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     return checkForNested(descriptor);
   };
 
-  const addOrRemoveProp: AddOrRemoveProp = e => {
-    const key: string = e.target.name;
-    console.log('KEY', key);
+  const addOrRemoveProp: AddOrRemoveProp = name => {
+    const key: string = name;
     const descriptor = descriptors.find(descriptor => descriptor.name === key);
     if (configuration && configuration.hasOwnProperty(key)) {
       handleUpdateConfig(key, null);
@@ -64,16 +66,18 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     }
   };
 
-  const handleInput: HandleInput = (e, current) => {
-    handleUpdateConfig(e.target.name, e.target.value, current);
+  const handleInput: HandleInput = (name, value, current) => {
+    handleUpdateConfig(name, value, current);
   };
+
+  console.log('Descriptors: ', descriptors);
 
   return (
     <Grid container>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={descriptor.name}>
               <OptionWrapper
                 descriptor={descriptor}
                 indexKey={descriptor.name}

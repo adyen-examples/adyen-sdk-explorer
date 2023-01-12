@@ -1,13 +1,11 @@
-import { Box, Button, Divider, Grid, Typography } from '@mui/material';
-import { Fragment } from 'react';
-import { ListOptions, NavButtons } from './configSteps';
-import { Editor } from './configSteps/Editor';
+import { Box } from '@mui/material';
+import { ListOptions } from './configSteps';
 import type { ConfigPropTypes, UpdateConfig } from './types';
 import { Content } from './configSteps/Content';
 
-export const Config = ({ configuration, descriptors, step, setActiveStep, action, updateStore, content }: ConfigPropTypes) => {
-  const { profilePageContent } = content;
+export const Config = ({ configuration, descriptors, action, updateStore, content }: ConfigPropTypes) => {
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
+    console.log('UPDATE CONFIG ARGS', item, value, current);
     let newConfig = { ...configuration };
 
     if (value === null) {
@@ -20,16 +18,13 @@ export const Config = ({ configuration, descriptors, step, setActiveStep, action
     } else {
       newConfig = { ...newConfig, [item]: value };
     }
+    console.log('NEW CONFIG', newConfig);
     updateStore(newConfig, action);
-  };
-
-  const handleJsonEditorUpdate = (e: any) => {
-    updateStore(e.jsObject, action);
   };
 
   return (
     <Box>
-      <Content title={content.title} version={content.version} description={content.description} />
+      <Content title={content.title} subtitle={content.subtitle} version={content.version} description={content.description} />
       <ListOptions descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
     </Box>
   );

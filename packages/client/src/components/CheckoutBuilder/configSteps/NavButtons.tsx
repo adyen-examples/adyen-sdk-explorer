@@ -1,5 +1,4 @@
 import { Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
@@ -13,10 +12,9 @@ type NavButtonsProps = {
 };
 
 export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const stepsLength = Object.keys(steps).length;
-  
+
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
     switch (steps[step]) {
@@ -35,7 +33,7 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
   };
 
   const handleNext = () => {
-    runStepAction();   
+    runStepAction();
     dispatch(setActiveStep(step + 1));
   };
 

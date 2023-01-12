@@ -1,4 +1,3 @@
-import { EditRounded } from '@mui/icons-material';
 import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
@@ -15,7 +14,7 @@ export const Layout = ({ main: Main }: any) => {
   let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
-  const { state, error, data } = products;
+  const { error, data } = products;
 
   const dispatch = useAppDispatch();
 
@@ -50,7 +49,7 @@ export const Layout = ({ main: Main }: any) => {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Header drawerWidth={drawerWidth} />
-        <Sidebar drawerWidth={drawerWidth} products={data.products} />
+        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',
@@ -64,7 +63,7 @@ export const Layout = ({ main: Main }: any) => {
           }}
           component="main"
         >
-          <Main key={product} />
+          <Main txvariant={product} />
           {editor}
         </Box>
       </Box>
