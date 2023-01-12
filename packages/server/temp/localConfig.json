@@ -364,7 +364,29 @@
   "googlepay": [],
   "gopay_wallet": [],
   "grabpay_SG": [],
-  "ideal": [],
+  "ideal": [
+    {
+      "name": "showImage",
+      "type": "boolean",
+      "description": "Set to false to remove the bank logos from the iDEAL form.",
+      "defaultValue": true
+    },
+    {
+      "name": "issuer",
+      "type": "string",
+      "description": "Set to an iDEAL issuer ID to preselect a specific bank."
+    },
+    {
+      "name": "highlightedIssuers",
+      "type": "array",
+      "description": "Set to the iDEAL issuer IDs for banks you want to show on top of the dropdown menu. Added in v5.1.0"
+    },
+    {
+      "name": "placeholder",
+      "type": "object",
+      "description": "String to show for the dropdown menu text. Custom translation configuration overrides this value."
+    }
+  ],
   "doku_alfamart": [],
   "econtext_stores": [
     {
