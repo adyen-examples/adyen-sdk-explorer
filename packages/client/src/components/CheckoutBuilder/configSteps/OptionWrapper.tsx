@@ -4,7 +4,7 @@ import { Option } from './Option';
 import type { AddOrRemoveProp, HandleInput, Descriptor } from '../types';
 import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { styled } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
 import { LoginSharp } from '@mui/icons-material';
@@ -99,8 +99,8 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           <FormControlLabel
             control={
               <Checkbox
-                icon={<KeyboardArrowDownIcon />}
-                checkedIcon={<KeyboardArrowUpIcon />}
+                icon={<KeyboardArrowRightIcon />}
+                checkedIcon={<KeyboardArrowDownIcon />}
                 name={descriptor.name}
                 checked={value != undefined}
                 onChange={handleToggle}
@@ -108,12 +108,12 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
                 size="small"
               />
             }
-            label={<Typography variant="subtitle1">{descriptor.name}</Typography>}
+            label={<Typography variant="subtitle2">{descriptor.name}</Typography>}
           />
         </FormGroup>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2">
+        <Typography variant="h6">
           <div dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))} />
         </Typography>
       </Grid>

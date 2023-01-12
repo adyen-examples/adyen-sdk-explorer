@@ -18,11 +18,6 @@ export const themeOptions: any = {
   },
   typography: {
     fontFamily: 'Poppins, sans-serif',
-    h6: {
-      fontWeight: 500,
-      fontSize: '0.85rem',
-      fontFamily: 'sans-serif'
-    },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
@@ -49,6 +44,11 @@ export const themeOptions: any = {
       fontSize: '1rem',
       fontFamily: 'Poppins, sans-serif'
     },
+    h6: {
+      fontWeight: 500,
+      fontSize: '0.83rem',
+      fontFamily: 'sans-serif'
+    },
     caption: {
       color: '#69778C',
       fontSize: '0.8rem'
@@ -59,8 +59,8 @@ export const themeOptions: any = {
       fontFamily: 'Roboto, sans-serif'
     },
     subtitle2: {
-      fontWeight: 300,
-      fontSize: '.9rem',
+      fontWeight: 400,
+      fontSize: '.95rem',
       fontFamily: 'Roboto, sans-serif'
     }
   },

@@ -3,12 +3,11 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import content from '../../helpers/content.json';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { ColorlibStepIcon } from './ColorlibStepIcon';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
-import { useRedirect } from '../../hooks';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
 
