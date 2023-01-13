@@ -4,5 +4,6 @@
   "ACH Direct Debit": { "txvariant": "ach", "steps": ["checkout", "local", "sessions", "review"] },
   "Affirm": { "txvariant": "affirm", "steps": ["checkout", "local", "sessions", "review"] },
   "Bancontact": { "txvariant": "bcmc", "steps": ["checkout", "local", "sessions", "review"] },
-  "Ideal": { "txvariant": "ideal", "steps": ["checkout", "local", "sessions", "review"] }
+  "Ideal": { "txvariant": "ideal", "steps": ["checkout", "local", "sessions", "review"] },
+  "Afterpay": { "txvariant": "afterpaytouch", "steps": ["checkout", "sessions", "review"] }
 }

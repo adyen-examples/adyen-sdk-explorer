@@ -94,7 +94,14 @@ export const ConfigWrapper = () => {
         <Stepper activeStep={activeStep}>
           {steps.map((label: any) => (
             <Step key={label}>
-              <StepLabel StepIconComponent={ColorlibStepIcon} />
+              <StepLabel
+                StepIconProps={{
+                  classes: {
+                    text: label
+                  }
+                }}
+                StepIconComponent={ColorlibStepIcon}
+              />
             </Step>
           ))}
         </Stepper>
@@ -105,3 +112,4 @@ export const ConfigWrapper = () => {
     </Grid>
   );
 };
+// <StepLabel StepIconComponent={<ColorlibStepIcon step={label}/>} />

@@ -26,20 +26,24 @@ const ColorlibStepIconRoot = styled('div')<{
   })
 }));
 
-export const ColorlibStepIcon = (props: StepIconProps) => {
+export const ColorlibStepIcon = (props: any) => {
   const { active, completed, className } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <ShoppingCartIcon />,
-    2: <PaymentIcon />,
-    3: <CloudIcon />,
-    4: <ReceiptLongIcon />,
-    5: <ShoppingCartIcon />
+    checkout: <ShoppingCartIcon />,
+    local: <PaymentIcon />,
+    sessions: <CloudIcon />,
+    review: <ReceiptLongIcon />
   };
 
+  console.log('colorlibstepicon', props);
+
   return (
-    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-      {icons[String(props.icon)]}
-    </ColorlibStepIconRoot>
+    props &&
+    props.classes && (
+      <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+        {icons[String(props.classes.text)]}
+      </ColorlibStepIconRoot>
+    )
   );
 };

@@ -174,9 +174,27 @@
   "affirm": [
     {
       "name": "visibility",
-      "type": "object",
       "defaultValue": { "personalDetails": "hidden", "billingAddress": "readOnly", "deliveryAddress": "editable" },
-      "description": "Set the visibility attribute on specific fields."
+      "description": "Set the visibility attribute on specific fields.",
+      "properties": [
+        {
+          "description": "Shopper name, phone number, and email address.",
+          "maxLength": 3000,
+          "type": "string",
+          "name": "personalDetails"
+        },
+        {
+          "description": "The address where to send the invoice.",
+          "type": "string",
+          "name": "billingAddress"
+        },
+        {
+          "description": "The address where the purchased goods should be delivered.",
+          "maxLength": 3000,
+          "type": "string",
+          "name": "deliveryAddress"
+        }
+      ]
     }
   ],
   "afterpaytouch": [],
