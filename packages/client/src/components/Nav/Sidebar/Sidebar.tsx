@@ -31,6 +31,8 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
       sx={{
         flexShrink: 0,
         '& .MuiDrawer-paper': {
+          borderRight: 2,
+          borderColor: 'secondary.light',
           width: drawerWidth,
           boxSizing: 'border-box',
           bgcolor: 'background.paper',

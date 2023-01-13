@@ -4,16 +4,21 @@ export const themeOptions: any = {
     primary: {
       main: '#0066ff',
       gray: '#bdbdbd',
-      border: '#d2dae1'
+      border: '#d2dae1',
+      light: '#FFFFFF'
     },
     secondary: {
       //   main: '#09ae4c',dark blue #00112C
       main: '#00112C',
-      gray: '#F2F6F9'
+      gray: '#F2F6F9',
+      light: '#f3f6f9'
     },
     background: {
       paper: '#fff',
       default: '#fff'
+    },
+    info: {
+      main: '#0048b3'
     }
   },
   typography: {
@@ -37,12 +42,14 @@ export const themeOptions: any = {
     h4: {
       fontWeight: 600,
       fontSize: '1.1rem',
-      fontFamily: 'Poppins, sans-serif'
+      fontFamily: 'Poppins, sans-serif',
+      color: '#00112c'
     },
     h5: {
       fontWeight: 600,
       fontSize: '1rem',
-      fontFamily: 'Poppins, sans-serif'
+      fontFamily: 'Poppins, sans-serif',
+      color: '#00112c'
     },
     h6: {
       fontWeight: 500,

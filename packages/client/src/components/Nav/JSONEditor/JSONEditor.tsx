@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -30,12 +30,12 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   };
 
   const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
-    <React.Fragment>
+    <Box>
       {prefix && (
         <Box>
-          <Box sx={{ color: 'white' }}>
+          <Box sx={{ color: 'info.main' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{prefix}</code>
+              <code style={{ fontSize: '0.9rem' }}>{prefix}</code>
             </pre>
           </Box>
         </Box>
@@ -45,14 +45,14 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       </Box>
       {postfix && (
         <Box>
-          <Box sx={{ color: 'white' }}>
+          <Box sx={{ color: 'info.main' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{postfix}</code>
+              <code style={{ fontSize: '0.9rem' }}>{postfix}</code>
             </pre>
           </Box>
         </Box>
       )}
-    </React.Fragment>
+    </Box>
   );
 
   switch (steps[activeStep]) {
@@ -137,18 +137,15 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   }
 
   return (
-    <Box
-      sx={{
-        bgcolor: 'secondary.main',
-        mt: `${headerHeight}px`
-      }}
-    >
+    <Box>
       <Box
         sx={{
+          borderLeft: 2,
+          borderColor: 'secondary.light',
           position: 'fixed',
           top: 0,
           right: 0,
-          bgcolor: 'secondary.main',
+          bgcolor: 'primary.light',
           height: `calc(100% - ${headerHeight}px)`,
           mt: `${headerHeight}px`,
           width: `${editorWidth}px`,
@@ -161,6 +158,9 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           }
         }}
       >
+        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
+          <Typography variant="h5">Implementation</Typography>
+        </Box>
         <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
           {codeSnippets &&
             Object.entries(codeSnippets).map(([key, value]: any) => {
@@ -173,7 +173,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           item
           sx={{
             display: {
-              xs:'none',
+              xs: 'none',
               sm: 'none',
               md: 'block'
             }

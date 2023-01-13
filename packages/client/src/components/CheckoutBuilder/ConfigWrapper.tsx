@@ -99,7 +99,7 @@ export const ConfigWrapper = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid px={3} item xs={11}>
+      <Grid item xs={11}>
         {displayStep}
       </Grid>
     </Grid>

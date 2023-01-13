@@ -17,7 +17,9 @@ export const ReviewForm = ({ configuration, step, setActiveStep, content }: Revi
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />
-      <ComponentBase />
+      <Box px={7} my={5}>
+        <ComponentBase />
+      </Box>
     </Box>
   );
 };

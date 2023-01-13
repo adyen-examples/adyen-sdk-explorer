@@ -2,9 +2,7 @@ import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
-import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
-import { Sidebar } from './Sidebar/Sidebar';
 import { Navbar } from './Navbar/Navbar';
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
@@ -49,8 +47,6 @@ export const Layout = ({ main: Main }: any) => {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        {/* <Header drawerWidth={drawerWidth} />
-        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} /> */}
         <Navbar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{

@@ -1,5 +1,5 @@
 import JSONInput from 'react-json-editor-ajrm';
-import { dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
+import { dark_vscode_tribute, light_mitsuketa_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../types';
 import { Box } from '@mui/material';
 
@@ -17,8 +17,6 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
 
     if (jsObject && !error) {
       handleJsonEditorUpdate(jsObject);
-      console.log('handleJsonEditorUpdate', handleJsonEditorUpdate);
-      console.log('jsobject', jsObject);
     }
   };
 
@@ -32,11 +30,12 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}
-        colors={dark_vscode_tribute}
+        colors={light_mitsuketa_tribute}
         locale={localeEn}
         height="100%"
         width="100%"
         viewOnly={viewOnly}
+        style={{ body: { 'font-size': '0.8rem' } }}
       />
     </Box>
   );

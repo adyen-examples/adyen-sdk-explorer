@@ -68,7 +68,7 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
 
   return (
     <Box>
-      <Box sx={{ bgcolor: 'secondary.main', display: { xs: 'none', md: 'inline-block' } }}>
+      <Box sx={{ bgcolor: 'primary.light', display: { xs: 'none', md: 'inline-block' } }}>
         {step !== 0 && <Button onClick={handleBack}>Back</Button>}
         {step !== stepsLength - 1 && (
           <Button variant="contained" onClick={handleNext}>

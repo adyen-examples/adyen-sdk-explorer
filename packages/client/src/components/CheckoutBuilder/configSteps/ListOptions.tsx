@@ -69,7 +69,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
   };
 
   return (
-    <Grid container>
+    <Grid mt={2} px={7} container>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => {
           return (

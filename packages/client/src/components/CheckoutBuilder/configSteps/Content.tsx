@@ -11,38 +11,39 @@ interface ContentProps {
 
 export const Content = ({ title, subtitle, version, description }: ContentProps) => {
   return (
-    <Grid mt={1} container>
-      <Grid item xs={12}>
-        <Typography component={'span'} mt={2} mb={2} variant="h3">
-          {title}
-        </Typography>
+    <Box>
+      <Grid mt={2} container px={7}>
+        <Grid item xs={12}>
+          <Typography component={'span'} mt={2} mb={2} variant="h3">
+            {title}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} mt={2}>
+          <Typography variant="h6" gutterBottom>
+            {description}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} mt={2} sx={{ fontWeight: '500px' }}>
+          <Typography component={'span'} variant="body2">
+            {subtitle}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography component={'span'} variant="caption" sx={{ fontSize: '0.73rem' }}>
+            {version}
+          </Typography>
+          <IconButton
+            onClick={() => {
+              navigator.clipboard.writeText(`${version}`);
+            }}
+          >
+            <ContentCopyIcon sx={{ color: 'black', fontSize: 'small' }} />
+          </IconButton>
+        </Grid>
       </Grid>
-      <Grid item xs={12} mt={2}>
-        <Typography variant="h6" gutterBottom>
-          {description}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} mt={2} sx={{ fontWeight: '500px' }}>
-        <Typography component={'span'} variant="body2">
-          {subtitle}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography component={'span'} variant="caption" sx={{ fontSize: '0.73rem' }}>
-          {version}
-        </Typography>
-        <IconButton onClick={() => { navigator.clipboard.writeText(`${version}`) }}>
-          <ContentCopyIcon sx={{ color: 'black', fontSize: 'small' }} />
-        </IconButton>
-      </Grid>
-      <Grid item xs={12} mt={2}>
-        <Typography variant="h4" gutterBottom>
-          <Box>Parameters</Box>
-        </Typography>
-      </Grid>
-      <Grid pb={2} item xs={12}>
-        <Divider />
-      </Grid>
-    </Grid>
+      <Box px={7} py={1.5} mt={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
+        <Typography variant="h4">Parameters</Typography>
+      </Box>
+    </Box>
   );
 };
