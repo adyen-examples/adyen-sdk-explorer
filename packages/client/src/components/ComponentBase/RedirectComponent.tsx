@@ -3,6 +3,8 @@ import { useCheckout } from '../../hooks';
 import ConfigurationSession from './ConfigurationSession';
 import { useState } from 'react';
 import { Alerts } from '../CheckoutBuilder/Alerts';
+import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
+import { Box } from '@mui/material';
 
 const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const [queryParameters] = useSearchParams();
@@ -18,13 +20,15 @@ const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const [checkout] = useCheckout(sessions);
   const product = configuration.profile.product;
 
-  
-  console.log('This is the error: ', error );
-  
+  console.log('This is the error: ', error);
+
   if (error) {
-    console.log('Error Present');
-    
-    return <Alerts severityType={'error'} message={JSON.stringify(error)} />;
+    return (
+      <Box pt={3} sx={{ textAlign: 'center' }}>
+        <AdyenIdkIcon />
+        <Alerts severityType={'error'} message={JSON.stringify(error)} />
+      </Box>
+    );
   } else if (result) {
     return <Alerts severityType={result.status} message={result.resultCode} />;
   } else if (checkout) {
