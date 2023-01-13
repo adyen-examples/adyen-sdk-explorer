@@ -31,7 +31,7 @@ export const themeOptions: any = {
     },
     h3: {
       fontWeight: 600,
-      fontSize: '1.2rem',
+      fontSize: '1.4rem',
       fontFamily: 'Poppins, sans-serif'
     },
     h4: {

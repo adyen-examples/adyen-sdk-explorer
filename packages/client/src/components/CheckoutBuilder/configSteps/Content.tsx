@@ -13,7 +13,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
   return (
     <Grid mt={1} container>
       <Grid item xs={12}>
-        <Typography component={'span'} mt={2} mb={2} variant="h4">
+        <Typography component={'span'} mt={2} mb={2} variant="h3">
           {title}
         </Typography>
       </Grid>
