@@ -152,12 +152,12 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
       }}
     >
       {codeSnippets &&
-        Object.entries(codeSnippets).map(([key, value, index]: any) => {
+        Object.entries(codeSnippets).map(([key, value]: any, index) => {
           return codeBlock(value.prefix, value.postfix, configuration[key], index);
         })}
       <Grid sx={{ position: 'relative' }} item xs>
         <Grid
-          sx={{ height: '100%', position: 'absolute', bottom: '0', width: '100%' }}
+          sx={{ height: '100%', position: 'relative', bottom: '0', width: '100%' }}
           p={1}
           direction="row"
           container

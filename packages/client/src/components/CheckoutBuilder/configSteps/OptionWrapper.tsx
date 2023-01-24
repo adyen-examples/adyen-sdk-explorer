@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import { Grid, Checkbox, Typography, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import { Option } from './Option';
 import { ArrayOption } from './ArrayOption';
@@ -37,6 +37,13 @@ export interface OptionWrapperPropTypes {
 }
 
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
+  const [boolValue, setBoolValue] = useState(true);
+
+  const handleBool = (e: any) => {
+    setBoolValue(e.target.value);
+    handleInput(e.target.name, e.target.value);
+  };
+
   const handleToggle = (e: any) => {
     addOrRemoveProp(e.target.name);
   };
@@ -73,14 +80,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
     } else if (descriptor.type === 'boolean' && descriptor.name) {
       optionsDisplay = (
         <FormControl sx={{ width: '25%' }} size="small">
-          <Select
-            labelId="boolean-label"
-            id="boolean-select"
-            name={descriptor.name}
-            value={value}
-            onChange={(e: any) => handleInput(e, descriptor.name)}
-            input={<AdyenInput />}
-          >
+          <Select labelId="boolean-label" id="boolean-select" name={descriptor.name} value={boolValue} onChange={handleBool} input={<AdyenInput />}>
             <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
               true
             </MenuItem>
