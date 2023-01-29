@@ -3,7 +3,9 @@ import { Grid, Typography, TextField, FormControl, List, ListItem, IconButton, L
 import DeleteIcon from '@mui/icons-material/Delete';
 import { OptionPropTypes } from './Option';
 
-export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
+
+// temporarily changed type of prop to any instead of OptionPropTypes because I modified onChange prop name to onChanges because reserved word
+export const ArrayOption = ({ descriptor, onChanges, value, isChecked, current }: any) => {
   const [input, setInput] = useState('');
   const [listItems, setListItems] = useState<string[]>([]);
 
@@ -11,7 +13,7 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
     e.preventDefault();
     const newList = [...listItems, input];
     setListItems(newList);
-    onChange(descriptor.name, newList, current);
+    onChanges(descriptor.name, newList, current);
     setInput('');
   };
 
@@ -22,7 +24,7 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   const deleteItem = (target: string) => {
     const newList = listItems.filter(item => item !== target);
     setListItems(newList);
-    onChange(descriptor.name, newList, current);
+    onChanges(descriptor.name, newList, current);
   };
 
   let showListItems;
