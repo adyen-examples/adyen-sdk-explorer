@@ -40,15 +40,15 @@ export const themeOptions: any = {
       fontFamily: 'Poppins, sans-serif'
     },
     h4: {
-      fontWeight: 600,
+      fontWeight: 530,
       fontSize: '1.1rem',
-      fontFamily: 'Poppins, sans-serif',
+      fontFamily: 'sans-serif',
       color: '#00112c'
     },
     h5: {
-      fontWeight: 600,
+      fontWeight: 530,
       fontSize: '1rem',
-      fontFamily: 'Poppins, sans-serif',
+      fontFamily: 'sans-serif',
       color: '#00112c'
     },
     h6: {
