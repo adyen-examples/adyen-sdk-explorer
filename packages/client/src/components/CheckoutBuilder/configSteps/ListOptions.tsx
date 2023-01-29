@@ -1,7 +1,6 @@
-import { useState, Fragment } from 'react';
 import { Grid } from '@mui/material';
+import type { AddOrRemoveProp, Descriptor, HandleInput, UpdateConfig } from '../types';
 import { OptionWrapper } from './OptionWrapper';
-import type { UpdateConfig, AddOrRemoveProp, Descriptor, HandleInput } from '../types';
 
 interface ListOptionsProps {
   descriptors: Descriptor[];
@@ -19,7 +18,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
       });
     } else if (current.type === 'array' && current.items) {
       value = [];
-      if (current.items.constructor == Array) {
+      if (current.items.constructor === Array) {
         const arrayProto: { [key: string]: string } = {};
         current.items.forEach(({ name }: { name: string }) => {
           arrayProto[name] = '';
@@ -43,8 +42,12 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
         case 'integer':
           defaultValue = 0;
           break;
+        case 'array':
+          defaultValue = [];
+          break;
         default:
           defaultValue = '';
+          break;
       }
       return defaultValue;
     }
@@ -73,7 +76,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={descriptor.name}>
               <OptionWrapper
                 descriptor={descriptor}
                 indexKey={descriptor.name}

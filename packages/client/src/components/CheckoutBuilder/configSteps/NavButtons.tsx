@@ -1,9 +1,8 @@
-import { Box, Button, IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { onDeckActions } from '../../../app';
-import { useAppDispatch } from '../../../hooks';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box, Button, IconButton } from '@mui/material';
+import { onDeckActions } from '../../../app';
+import { useAppDispatch } from '../../../hooks';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
@@ -14,7 +13,6 @@ type NavButtonsProps = {
 };
 
 export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const stepsLength = Object.keys(steps).length;
 

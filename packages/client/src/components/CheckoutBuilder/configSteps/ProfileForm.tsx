@@ -1,20 +1,16 @@
 import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import React from 'react';
 import type { OnDeckPropType } from '../../../app/types';
 import { Content } from './Content';
 
 interface ProfileFormProps {
   configuration: OnDeckPropType;
-  step: number;
   action: any;
   updateStore: (value: any, action: ActionCreatorWithPayload<any>) => void;
-  setActiveStep: (step: number) => void;
   content: any;
 }
 
-export const ProfileForm = ({ configuration, step, setActiveStep, action, updateStore, content }: ProfileFormProps) => {
-  const { profilePageContent } = content;
+export const ProfileForm = ({ configuration, action, updateStore, content }: ProfileFormProps) => {
   const handleChange = (e: any) => {
     updateStore({ [e.target.name]: e.target.value }, action);
   };

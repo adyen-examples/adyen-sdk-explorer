@@ -32,8 +32,6 @@ export const ConfigWrapper = () => {
       <ProfileForm
         key="profile"
         configuration={profile}
-        step={activeStep}
-        setActiveStep={updateStep}
         action={updateProfileInfo}
         updateStore={updateStore}
         content={profilePageContent}
@@ -78,8 +76,6 @@ export const ConfigWrapper = () => {
     review: (
       <ReviewForm
         key="review"
-        step={activeStep}
-        setActiveStep={updateStep}
         configuration={{ checkout, local, sessions }}
         content={reviewPageContent}
       />

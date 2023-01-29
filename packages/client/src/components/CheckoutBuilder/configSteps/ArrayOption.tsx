@@ -1,11 +1,8 @@
-import { Fragment, useState, ChangeEvent } from 'react';
-import { Grid, Typography, TextField, FormControl, List, ListItem, IconButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { OptionPropTypes } from './Option';
+import { FormControl, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
+import { ChangeEvent, Fragment, useState } from 'react';
 
-
-// temporarily changed type of prop to any instead of OptionPropTypes because I modified onChange prop name to onChanges because reserved word
-export const ArrayOption = ({ descriptor, onChanges, value, isChecked, current }: any) => {
+export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: any) => {
   const [input, setInput] = useState('');
   const [listItems, setListItems] = useState<string[]>([]);
 
@@ -13,7 +10,7 @@ export const ArrayOption = ({ descriptor, onChanges, value, isChecked, current }
     e.preventDefault();
     const newList = [...listItems, input];
     setListItems(newList);
-    onChanges(descriptor.name, newList, current);
+    onChange(descriptor.name, newList, current);
     setInput('');
   };
 
@@ -24,7 +21,7 @@ export const ArrayOption = ({ descriptor, onChanges, value, isChecked, current }
   const deleteItem = (target: string) => {
     const newList = listItems.filter(item => item !== target);
     setListItems(newList);
-    onChanges(descriptor.name, newList, current);
+    onChange(descriptor.name, newList, current);
   };
 
   let showListItems;
