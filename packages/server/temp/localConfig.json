@@ -32,7 +32,8 @@
     },
     {
       "name": "instantPaymentTypes",
-      "description": "Moves payment methods to the top of the list of available payment methods. This is available for Apple Pay and Google Pay."
+      "description": "Moves payment methods to the top of the list of available payment methods. This is available for Apple Pay and Google Pay.",
+      "type": "array"
     }
   ],
   "card": [

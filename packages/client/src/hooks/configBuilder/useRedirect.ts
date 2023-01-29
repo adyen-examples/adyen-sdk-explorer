@@ -5,7 +5,7 @@ import { isConfigEmpty } from '../../helpers';
 import { useAppDispatch } from '../index';
 import { sdkExplorerActions } from '../../app';
 
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateStep } = onDeckActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateStep } = onDeckActions;
 const { updateExplorer } = sdkExplorerActions;
 
 export const useRedirect = (configuration: any) => {
