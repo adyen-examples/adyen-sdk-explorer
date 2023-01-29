@@ -36,8 +36,6 @@ export const ColorlibStepIcon = (props: any) => {
     review: <ReceiptLongIcon />
   };
 
-  console.log('colorlibstepicon', props);
-
   return (
     props &&
     props.classes && (

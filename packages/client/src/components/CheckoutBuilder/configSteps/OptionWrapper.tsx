@@ -78,7 +78,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
             id="boolean-select"
             name={descriptor.name}
             value={value}
-            onChange={(e: any) => handleInput(e, descriptor.name)}
+            onChange={(e: any) => handleInput(e.target.name, e.target.value, descriptor.name)}
             input={<AdyenInput />}
           >
             <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>

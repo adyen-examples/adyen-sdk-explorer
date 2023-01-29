@@ -67,9 +67,9 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     }
   };
 
-  const handleInput: HandleInput = (e, current) => {
-    handleUpdateConfig(e.target.name, e.target.value, current);
-  };
+  // const handleInput: HandleInput = (e, current) => {
+  //   handleUpdateConfig(e.target.name, e.target.value, current);
+  // };
 
   return (
     <Grid mt={2} px={7} container>
@@ -81,7 +81,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
                 descriptor={descriptor}
                 indexKey={descriptor.name}
                 addOrRemoveProp={addOrRemoveProp}
-                handleInput={handleInput}
+                handleInput={handleUpdateConfig}
                 value={configuration[descriptor.name]}
               />
             </Grid>

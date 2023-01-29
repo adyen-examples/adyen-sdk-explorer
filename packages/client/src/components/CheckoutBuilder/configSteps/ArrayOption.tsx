@@ -4,15 +4,11 @@ import { ChangeEvent, Fragment, useState } from 'react';
 
 export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: any) => {
   const [input, setInput] = useState('');
-  const [listItems, setListItems] = useState<string[]>([]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const newList = [...listItems, input];
-    setListItems(newList);
-    console.log(e.target.name, e.target.value);
-    
-    onChange(descriptor.name, newList, current);// this is where we set the state
+    const newList = [...value, input];
+    onChange(descriptor.name, newList, current);
     setInput('');
   };
 
@@ -21,17 +17,16 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   };
 
   const deleteItem = (target: string) => {
-    const newList = listItems.filter(item => item !== target);
-    setListItems(newList);
+    const newList = value.filter((item: any) => item !== target);
     onChange(descriptor.name, newList, current);
   };
 
-  let showListItems;
+  let showListItems = null;
 
-  if (listItems && listItems.length) {
+  if (value && value.length) {
     showListItems = (
       <List>
-        {listItems.map(item => (
+        {value.map((item: any) => (
           <ListItem
             key={item}
             secondaryAction={
