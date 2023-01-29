@@ -10,7 +10,9 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
     e.preventDefault();
     const newList = [...listItems, input];
     setListItems(newList);
-    onChange(descriptor.name, newList, current);
+    console.log(e.target.name, e.target.value);
+    
+    onChange(descriptor.name, newList, current);// this is where we set the state
     setInput('');
   };
 
