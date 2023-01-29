@@ -1,10 +1,7 @@
-import { Box, Drawer, List, ListItem, ListItemButton, Typography, Link, Grid } from '@mui/material';
-import * as React from 'react';
+import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 
 export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
   const { clearOnDeckInfo } = onDeckActions;
@@ -67,8 +64,8 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
             );
           }
           return (
-            <Box>
-              <ListItem key={product} disablePadding>
+            <Box key={product}>
+              <ListItem disablePadding>
                 <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
                   <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
                     {product}

@@ -19,8 +19,6 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
 
   let configuration: any = null;
   let updateConfiguration: any = null;
-  let codePrefix: any = null;
-  let codePostfix: any = null;
   let codeSnippets: any = null;
   let step: any = null;
 
@@ -29,8 +27,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
     setViewOnly(!viewOnly);
   };
 
-  const codeBlock = (prefix: string, postfix: string, configurationBlock: any) => (
-    <Box>
+  const codeBlock = (prefix: string, postfix: string, configurationBlock: any, index: number) => (
+    <Box key={`JSONEdit-${index}`}>
       {prefix && (
         <Box>
           <Box sx={{ color: 'info.main' }}>
@@ -163,8 +161,8 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
         </Box>
         <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
           {codeSnippets &&
-            Object.entries(codeSnippets).map(([key, value]: any) => {
-              return codeBlock(value.prefix, value.postfix, configuration[key]);
+            Object.entries(codeSnippets).map(([key, value, index]: any) => {
+              return codeBlock(value.prefix, value.postfix, configuration[key], index);
             })}
         </Box>
       </Box>

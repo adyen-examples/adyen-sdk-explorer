@@ -13,7 +13,7 @@ export const Layout = ({ main: Main }: any) => {
   let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
-  const { state, error, data } = products;
+  const { error, data } = products;
 
   const dispatch = useAppDispatch();
 

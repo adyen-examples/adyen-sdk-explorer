@@ -49,6 +49,7 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
                   {link.title}
                 </Button>
               ))}
+              <Button sx={{ color: '#08be52', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
             </Box>
           </Toolbar>
         </Box>
