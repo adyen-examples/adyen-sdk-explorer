@@ -1,6 +1,5 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import InfoIcon from '@mui/icons-material/Info';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { marked } from 'marked';
@@ -94,17 +93,9 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
     } else if (descriptor.type === 'object' && !descriptor.properties) {
       optionsDisplay = (
-        <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" sx={{ border: '3px solid', borderColor: '#cce0ff' }}>
-          <Grid item sx={{ bgcolor: '#cce0ff', color: 'primary.main', position: 'relative' }}>
-            <InfoIcon sx={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }} />
-            <Box component="span" sx={{ bgcolor: '#cce0ff' }}>
-              <InfoIcon sx={{ display: 'inline-block', visibility: 'hidden' }} />
-            </Box>
-          </Grid>
-          <Grid item p={2}>
-            <Typography variant="h6">Custom configuration use case. Use the JSON Editor pane.</Typography>
-          </Grid>
-        </Grid>
+        <Typography sx={{ color: 'rgb(255, 87, 34)', fontSize: '0.7rem' }} variant="caption">
+          Custom configuration. Please edit directly on the JSON Editor pane.
+        </Typography>
       );
     }
   }
