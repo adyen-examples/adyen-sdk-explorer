@@ -19,7 +19,7 @@ export const Option = ({ descriptor, onChange, value, isChecked, current }: Opti
         </Typography>
       }
       {
-        <Typography mx={1} sx={{ display: 'inline-block' }} variant="caption">
+        <Typography mx={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
           {descriptor.type}
         </Typography>
       }
@@ -27,10 +27,12 @@ export const Option = ({ descriptor, onChange, value, isChecked, current }: Opti
         <TextField
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
           value={value}
-          sx={{ width: '50%', display: 'block' }}
-          variant="standard"
+          sx={{ display: 'block', py: 0 }}
+          variant="filled"
           name={descriptor.name}
           id={descriptor.name}
+          size="small"
+          hiddenLabel
         />
       )}
     </Grid>

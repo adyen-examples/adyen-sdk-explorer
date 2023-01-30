@@ -1,7 +1,7 @@
 [
   {
     "description": "The amount of the payment.",
-    "type": "[string | integer] object",
+    "type": "object",
     "properties": [
       {
         "description": "The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).",

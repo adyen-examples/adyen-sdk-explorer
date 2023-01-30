@@ -121,7 +121,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
                 <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
                   {descriptor.name}
                 </Typography>
-                <Typography mx={1} sx={{ display: 'inline-block' }} variant="caption">
+                <Typography mx={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
                   {descriptor.type}
                 </Typography>
               </Box>
