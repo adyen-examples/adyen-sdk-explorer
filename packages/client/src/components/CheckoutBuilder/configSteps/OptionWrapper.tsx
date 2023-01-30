@@ -1,14 +1,12 @@
-import { Fragment } from 'react';
-import { Grid, Checkbox, Typography, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
-import { Option } from './Option';
-import { ArrayOption } from './ArrayOption';
-import type { AddOrRemoveProp, Descriptor } from '../types';
-import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import InfoIcon from '@mui/icons-material/Info';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { marked } from 'marked';
+import { Fragment } from 'react';
+import type { AddOrRemoveProp, Descriptor } from '../types';
+import { ArrayOption } from './ArrayOption';
+import { Option } from './Option';
 
 const AdyenInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {

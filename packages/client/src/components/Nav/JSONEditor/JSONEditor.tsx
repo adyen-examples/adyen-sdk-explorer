@@ -187,6 +187,6 @@ export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) 
           />
         </Grid>
       </Grid>
-    </Box>
+    </Grid>
   );
-};
+    };

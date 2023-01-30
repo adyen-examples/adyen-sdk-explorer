@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import { ListOptions } from './configSteps';
 import type { ConfigPropTypes, UpdateConfig } from './types';
 import { Content } from './configSteps/Content';
-import type { ConfigPropTypes, UpdateConfig } from './types';
 
 export const Config = ({ configuration, descriptors, action, updateStore, content }: ConfigPropTypes) => {
   const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
