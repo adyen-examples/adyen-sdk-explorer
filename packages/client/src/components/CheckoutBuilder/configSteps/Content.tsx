@@ -1,5 +1,4 @@
-import { Box, Divider, Grid, IconButton, Typography } from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 
 interface ContentProps {
   title: string;

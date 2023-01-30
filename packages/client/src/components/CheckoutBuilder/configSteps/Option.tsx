@@ -30,6 +30,7 @@ export const Option = ({ descriptor, onChange, value, isChecked, current }: Opti
           sx={{ display: 'block', py: 0 }}
           variant="filled"
           name={descriptor.name}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
           id={descriptor.name}
           size="small"
           hiddenLabel

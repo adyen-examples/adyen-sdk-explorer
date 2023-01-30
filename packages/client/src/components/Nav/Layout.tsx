@@ -48,7 +48,8 @@ export const Layout = ({ main: Main }: any) => {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Navbar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
+        <Header drawerWidth={drawerWidth} />
+        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',

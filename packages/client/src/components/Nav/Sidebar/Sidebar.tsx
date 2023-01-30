@@ -1,4 +1,4 @@
-import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
+import { Box, Drawer, List, ListItem, ListItemButton, Typography, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
@@ -66,10 +66,12 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           return (
             <Box key={product}>
               <ListItem disablePadding>
-                <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
-                  <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
-                    {product}
-                  </Typography>
+                <ListItemButton sx={buttonStyle}>
+                  <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick(products[product].txvariant)}>
+                    <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="body2">
+                      {product}
+                    </Typography>
+                  </Link>
                 </ListItemButton>
               </ListItem>
               {subcategory}

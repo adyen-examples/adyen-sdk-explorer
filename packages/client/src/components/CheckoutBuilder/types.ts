@@ -14,8 +14,8 @@ export interface ConfigPropTypes {
 
 export type UpdateConfig = (key: string, value: string | null, current?: any) => void;
 
-export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>) => void | undefined;
+export type AddOrRemoveProp = (name: string) => void | undefined;
 
-export type HandleInput = (e: ChangeEvent<HTMLInputElement>, current?: string) => void;
+export type HandleInput = (name: string, value: any, current?: string) => void;
 
 export type { Descriptor, OnDeckPropType };

@@ -135,39 +135,27 @@ export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) 
   }
 
   return (
-    <Box>
-      <Box
-        sx={{
-          borderLeft: 2,
-          borderColor: 'secondary.light',
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          bgcolor: 'primary.light',
-          height: `calc(100% - ${headerHeight}px)`,
-          mt: `${headerHeight}px`,
-          pb: `${navButtonHeight}px`,
-          width: `${editorWidth}px`,
-          display: {
-            xs: 'none',
-            sm: 'none',
-            md: 'block',
-            lg: 'block',
-            xl: 'block'
-          }
-        }}
-      >
-        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
-          <Typography variant="h5">Implementation</Typography>
-        </Box>
-        <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
-          {codeSnippets &&
-            Object.entries(codeSnippets).map(([key, value, index]: any) => {
-              return codeBlock(value.prefix, value.postfix, configuration[key], index);
-            })}
-        </Box>
-      </Box>
-      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
+    <Grid
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="stretch"
+      container
+      sx={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        bgcolor: 'secondary.main',
+        height: `calc(100% - ${headerHeight}px)`,
+        mt: `${headerHeight}px`,
+        width: `${editorWidth}px`,
+        overflow: 'scroll'
+      }}
+    >
+      {codeSnippets &&
+        Object.entries(codeSnippets).map(([key, value, index]: any) => {
+          return codeBlock(value.prefix, value.postfix, configuration[key], index);
+        })}
+      <Grid sx={{ position: 'relative' }} item xs>
         <Grid
           item
           sx={{

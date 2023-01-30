@@ -1,14 +1,14 @@
+import { Fragment } from 'react';
+import { Grid, Checkbox, Typography, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
+import { Option } from './Option';
+import { ArrayOption } from './ArrayOption';
+import type { AddOrRemoveProp, Descriptor } from '../types';
+import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import InfoIcon from '@mui/icons-material/Info';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { marked } from 'marked';
-import { Fragment } from 'react';
-import type { AddOrRemoveProp, Descriptor } from '../types';
-import { Option } from './Option';
-import { ArrayOption } from './ArrayOption';
-import { Box } from '@mui/system';
 
 const AdyenInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -39,8 +39,8 @@ export interface OptionWrapperPropTypes {
 }
 
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
-  const handleToggle = (e: any, checked: boolean) => {
-    addOrRemoveProp(e);
+  const handleToggle = (e: any) => {
+    addOrRemoveProp(e.target.name);
   };
 
   let optionsDisplay = null;
@@ -92,20 +92,6 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       );
     } else if (descriptor.type === 'array' && descriptor.name) {
       optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
-    } else if (descriptor.type === 'object' && !descriptor.properties) {
-      optionsDisplay = (
-        <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" sx={{ border: '3px solid', borderColor: '#cce0ff' }}>
-          <Grid item sx={{ bgcolor: '#cce0ff', color: 'primary.main', position: 'relative' }}>
-            <InfoIcon sx={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }} />
-            <Box component="span" sx={{ bgcolor: '#cce0ff' }}>
-              <InfoIcon sx={{ display: 'inline-block', visibility: 'hidden' }} />
-            </Box>
-          </Grid>
-          <Grid item p={2}>
-            <Typography variant="h6">Custom configuration use case. Use the JSON Editor pane.</Typography>
-          </Grid>
-        </Grid>
-      );
     }
   }
 

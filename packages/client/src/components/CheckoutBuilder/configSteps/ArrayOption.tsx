@@ -1,13 +1,16 @@
+import { Fragment, useState, ChangeEvent } from 'react';
+import { Grid, Typography, TextField, FormControl, List, ListItem, IconButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FormControl, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
-import { ChangeEvent, Fragment, useState } from 'react';
+import { OptionPropTypes } from './Option';
 
-export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: any) => {
+export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   const [input, setInput] = useState('');
+  const [listItems, setListItems] = useState<string[]>([]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const newList = [...value, input];
+    const newList = [...listItems, input];
+    setListItems(newList);
     onChange(descriptor.name, newList, current);
     setInput('');
   };
@@ -17,20 +20,21 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   };
 
   const deleteItem = (target: string) => {
-    const newList = value.filter((item: any) => item !== target);
+    const newList = listItems.filter(item => item !== target);
+    setListItems(newList);
     onChange(descriptor.name, newList, current);
   };
 
-  let showListItems = null;
+  let showListItems;
 
-  if (value && value.length) {
+  if (listItems && listItems.length) {
     showListItems = (
       <List>
-        {value.map((item: any) => (
+        {listItems.map(item => (
           <ListItem
             key={item}
             secondaryAction={
-              <IconButton sx={{ color: 'rgb(255, 87, 34)' }} edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
+              <IconButton edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
                 <DeleteIcon />
               </IconButton>
             }
@@ -45,8 +49,9 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   return (
     <Fragment>
       <form onSubmit={(e: any) => handleSubmit(e)}>
-        <FormControl size="small">
+        <FormControl sx={{ width: '25%' }} size="small">
           <Grid item xs={11}>
+            <Typography variant="body2">{descriptor.name}</Typography>
             {isChecked && (
               <TextField
                 name={descriptor.name}
@@ -54,10 +59,7 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
                 id={descriptor.name}
                 value={input}
                 fullWidth
-                variant="filled"
-                sx={{ py: 0 }}
-                size="small"
-                hiddenLabel
+                variant="standard"
               />
             )}
           </Grid>
