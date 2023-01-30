@@ -100,7 +100,7 @@ export const dark_vscode_tribute = {
 
 export const light_mitsuketa_tribute = {
     default: '#000000',
-    background: '#FCFDFD',
+    background: '#FFFFFF',
     background_warning: '#FEECEB',
     string: '#FA7921',
     number: '#7OCE35',

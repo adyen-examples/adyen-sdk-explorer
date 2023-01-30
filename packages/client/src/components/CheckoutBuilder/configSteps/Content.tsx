@@ -41,7 +41,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
         </Grid>
       </Grid>
       <Box px={7} py={1.5} mt={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
-        <Typography variant="h4">Parameters</Typography>
+        <Typography variant="h5">Configuration parameters</Typography>
       </Box>
     </Box>
   );

@@ -4,7 +4,7 @@ export const themeOptions: any = {
     primary: {
       main: '#0066ff',
       gray: '#bdbdbd',
-      border: '#d2dae1',
+      border: '#dce0e5',
       light: '#FFFFFF'
     },
     secondary: {
@@ -23,6 +23,11 @@ export const themeOptions: any = {
   },
   typography: {
     fontFamily: 'Poppins, sans-serif',
+    p: {
+      fontWeight: 500,
+      fontSize: '0.83rem',
+      fontFamily: 'sans-serif'
+    },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
@@ -40,13 +45,13 @@ export const themeOptions: any = {
       fontFamily: 'Poppins, sans-serif'
     },
     h4: {
-      fontWeight: 530,
+      fontWeight: 'bold',
       fontSize: '1.1rem',
       fontFamily: 'sans-serif',
       color: '#00112c'
     },
     h5: {
-      fontWeight: 530,
+      fontWeight: 'bold',
       fontSize: '1rem',
       fontFamily: 'sans-serif',
       color: '#00112c'

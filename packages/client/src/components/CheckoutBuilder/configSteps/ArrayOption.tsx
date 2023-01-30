@@ -30,7 +30,7 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
           <ListItem
             key={item}
             secondaryAction={
-              <IconButton edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
+              <IconButton sx={{color: 'rgb(255, 87, 34)'}} edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
                 <DeleteIcon />
               </IconButton>
             }
@@ -45,9 +45,8 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   return (
     <Fragment>
       <form onSubmit={(e: any) => handleSubmit(e)}>
-        <FormControl sx={{ width: '25%' }} size="small">
+        <FormControl sx={{ width: '50%' }} size="small">
           <Grid item xs={11}>
-            <Typography variant="body2">{descriptor.name}</Typography>
             {isChecked && (
               <TextField
                 name={descriptor.name}

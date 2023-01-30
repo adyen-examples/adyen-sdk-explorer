@@ -45,6 +45,9 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
         case 'array':
           defaultValue = [];
           break;
+        case 'object':
+          defaultValue = {};
+          break;
         default:
           defaultValue = '';
           break;
@@ -67,16 +70,12 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     }
   };
 
-  // const handleInput: HandleInput = (e, current) => {
-  //   handleUpdateConfig(e.target.name, e.target.value, current);
-  // };
-
   return (
-    <Grid mt={2} px={7} container>
+    <Grid px={7} container>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item xs={12} key={descriptor.name}>
+            <Grid item xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
               <OptionWrapper
                 descriptor={descriptor}
                 indexKey={descriptor.name}

@@ -13,15 +13,24 @@ export interface OptionPropTypes {
 export const Option = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   return (
     <Grid item xs={11}>
-      <Typography variant="body2">{descriptor.name}</Typography>
+      {
+        <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
+          {descriptor.name}
+        </Typography>
+      }
+      {
+        <Typography mx={1} sx={{ display: 'inline-block' }} variant="caption">
+          {descriptor.type}
+        </Typography>
+      }
       {isChecked && (
         <TextField
-          name={descriptor.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
-          id={descriptor.name}
           value={value}
-          fullWidth
+          sx={{ width: '50%', display: 'block' }}
           variant="standard"
+          name={descriptor.name}
+          id={descriptor.name}
         />
       )}
     </Grid>

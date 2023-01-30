@@ -10,6 +10,7 @@ const { updateProfileInfo } = onDeckActions;
 export const Layout = ({ main: Main }: any) => {
   const drawerWidth = 380;
   const headerHeight = 64;
+  const navButtonHeight= 40;
   let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
@@ -39,7 +40,7 @@ export const Layout = ({ main: Main }: any) => {
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
       editorWidth = 420;
-      editor = <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />;
+      editor = <JSONEditor navButtonHeight={navButtonHeight} headerHeight={headerHeight} editorWidth={editorWidth} />;
     } else if (!sdkExplorerProps && product) {
       return <h1>404: Page not found</h1>;
     }

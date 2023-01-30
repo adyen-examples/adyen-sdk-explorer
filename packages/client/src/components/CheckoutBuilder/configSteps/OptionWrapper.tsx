@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 import type { AddOrRemoveProp, Descriptor } from '../types';
 import { Option } from './Option';
 import { ArrayOption } from './ArrayOption';
+import { Box } from '@mui/system';
 
 const AdyenInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -51,7 +52,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
     if (descriptor.properties) {
       optionsDisplay = (
         <Fragment>
-          <Grid container sx={{ borderLeft: '1px solid', borderColor: 'primary.gray' }} pl={2}>
+          <Grid container sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'secondary.light' }} p={4}>
             {descriptor.properties.map((prop: Descriptor) => {
               return (
                 <Grid item xs={7} key={prop.name}>
@@ -90,6 +91,12 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       );
     } else if (descriptor.type === 'array' && descriptor.name) {
       optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
+    } else if (descriptor.type === 'object' && !descriptor.properties) {
+      optionsDisplay = (
+        <Typography sx={{ color: 'rgb(255, 87, 34)', fontSize: '0.7rem' }} variant="caption">
+          Custom configuration. Please edit directly on the JSON Editor pane.
+        </Typography>
+      );
     }
   }
 
@@ -109,14 +116,21 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
                 size="small"
               />
             }
-            label={<Typography variant="subtitle2">{descriptor.name}</Typography>}
+            label={
+              <Box>
+                <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
+                  {descriptor.name}
+                </Typography>
+                <Typography mx={1} sx={{ display: 'inline-block' }} variant="caption">
+                  {descriptor.type}
+                </Typography>
+              </Box>
+            }
           />
         </FormGroup>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h6">
-          <div dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))} />
-        </Typography>
+        <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
       </Grid>
       <Grid item xs={12}>
         {optionsDisplay}

@@ -8,7 +8,7 @@ import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
 
-export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
+export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) => {
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
@@ -146,6 +146,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           bgcolor: 'primary.light',
           height: `calc(100% - ${headerHeight}px)`,
           mt: `${headerHeight}px`,
+          pb: `${navButtonHeight}px`,
           width: `${editorWidth}px`,
           display: {
             xs: 'none',
@@ -156,7 +157,7 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
           }
         }}
       >
-        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
+        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
           <Typography variant="h5">Implementation</Typography>
         </Box>
         <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
