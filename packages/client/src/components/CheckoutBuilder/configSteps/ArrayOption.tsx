@@ -17,6 +17,8 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   };
 
   const deleteItem = (target: string) => {
+    console.log('target: ', target);
+    console.log('value: ', value);
     const newList = value.filter((item: any) => item !== target);
     onChange(descriptor.name, newList, current);
   };
