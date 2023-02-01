@@ -16,7 +16,9 @@
         "name": "value"
       }
     ],
-    "name": "amount"
+    "name": "amount",
+    "required": true,
+    "type": "object"
   },
   {
     "description": "Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).",
@@ -164,7 +166,8 @@
   {
     "description": "The merchant account identifier, with which you want to process the transaction.",
     "type": "string",
-    "name": "merchantAccount"
+    "name": "merchantAccount",
+    "required": true
   },
   {
     "additionalProperties": {
@@ -183,12 +186,14 @@
   {
     "description": "The reference to uniquely identify a payment.",
     "type": "string",
-    "name": "reference"
+    "name": "reference",
+    "required": true
   },
   {
     "description": "The URL to return to when a redirect payment is completed.",
     "type": "string",
-    "name": "returnUrl"
+    "name": "returnUrl",
+    "required": true
   },
   {
     "description": "The payment session data you need to pass to your front end.",

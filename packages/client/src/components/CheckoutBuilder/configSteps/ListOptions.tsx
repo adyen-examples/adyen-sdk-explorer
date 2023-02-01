@@ -1,6 +1,8 @@
-import { Grid } from '@mui/material';
-import type { AddOrRemoveProp, Descriptor, HandleInput, UpdateConfig } from '../types';
+import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import React from 'react';
+import type { AddOrRemoveProp, Descriptor, UpdateConfig } from '../types';
 import { OptionWrapper } from './OptionWrapper';
+import { ChangeEvent, Fragment, useState } from 'react';
 
 interface ListOptionsProps {
   descriptors: Descriptor[];
@@ -9,6 +11,31 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: ListOptionsProps) => {
+  const [filters, setFilters] = useState({
+    required: true,
+    optional: true
+  });
+
+  const { required, optional }: any = filters;
+
+  let displayDescriptors = null;
+
+  if (!required) {
+    displayDescriptors = descriptors.filter(descriptor => !descriptor.required);
+  } else if (!optional) {
+    displayDescriptors = descriptors.filter(descriptor => descriptor.required);
+  } else {
+    displayDescriptors = descriptors;
+  }
+
+  const handleToggle = (name: string) => {
+    if (name === 'Required') {
+      setFilters({ ...filters, required: !required });
+    } else if (name === 'Optional') {
+      setFilters({ ...filters, optional: !optional });
+    }
+  };
+
   const checkForNested = (current: Descriptor) => {
     let value: any = '';
     if (current.properties && current.properties.length) {
@@ -71,11 +98,58 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
   };
 
   return (
-    <Grid px={7} container>
-      {descriptors &&
-        descriptors.map((descriptor: Descriptor) => {
+    <Grid container>
+      <Grid item px={7} py={1.5} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
+        <Grid direction="row" justifyContent="space-between" container>
+          <Grid item>
+            <Typography variant="h5">Configuration parameters</Typography>
+          </Grid>
+          <Grid item>
+            <FormGroup row sx={{ '& .MuiCheckbox-root': { py: 0, px: 0.5 } }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    size="small"
+                    name="Required"
+                    checked={required}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      handleToggle(e.target.name);
+                    }}
+                    disabled={!optional}
+                  />
+                }
+                label={
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.65rem', color: '#00112c' }} variant="caption">
+                    Required
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    size="small"
+                    name="Optional"
+                    checked={optional}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      handleToggle(e.target.name);
+                    }}
+                    disabled={!required}
+                  />
+                }
+                label={
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.65rem', color: '#00112c' }} variant="caption">
+                    Optional
+                  </Typography>
+                }
+              />
+            </FormGroup>
+          </Grid>
+        </Grid>
+      </Grid>
+      {displayDescriptors &&
+        displayDescriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
+            <Grid item mx={7} xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
               <OptionWrapper
                 descriptor={descriptor}
                 indexKey={descriptor.name}

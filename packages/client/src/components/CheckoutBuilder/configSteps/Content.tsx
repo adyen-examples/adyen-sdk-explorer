@@ -40,9 +40,6 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
           </IconButton>
         </Grid>
       </Grid>
-      <Box px={7} py={1.5} mt={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
-        <Typography variant="h5">Configuration parameters</Typography>
-      </Box>
     </Box>
   );
 };
