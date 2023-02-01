@@ -131,17 +131,19 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       <Grid item xs={12}>
         <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
       </Grid>
-      <Grid item xs={12}>
-        <Checkbox
-          icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: '#06f' }}>Add parameter</Typography>}
-          checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
-          name={descriptor.name}
-          checked={value !== undefined}
-          onChange={handleToggle}
-          inputProps={{ 'aria-label': 'controlled' }}
-          sx={{ p: 0 }}
-        />
-      </Grid>
+      {descriptor.configure !== false && (
+        <Grid item xs={12}>
+          <Checkbox
+            icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: '#06f' }}>Add parameter</Typography>}
+            checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
+            name={descriptor.name}
+            checked={value !== undefined}
+            onChange={handleToggle}
+            inputProps={{ 'aria-label': 'controlled' }}
+            sx={{ p: 0 }}
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         {optionsDisplay}
       </Grid>
