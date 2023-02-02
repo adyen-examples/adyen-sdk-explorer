@@ -22,7 +22,7 @@ const ColorlibStepIconRoot = styled('div')<{
   margin: 0,
   alignItems: 'center',
   ...((ownerState.active || ownerState.completed) && {
-    color: '#0066ff'
+    color: 'rgb(10, 191, 83)'
   })
 }));
 

@@ -36,7 +36,7 @@
   },
   {
     "name": "paymentMethodsConfiguration",
-    "type": "boolean",
+    "type": "object",
     "required": false,
     "description": "Configuration for specific payment methods. The <a href=\"/payment-methods\">payment method guides</a> have configuration options specific to each payment method."
   },
