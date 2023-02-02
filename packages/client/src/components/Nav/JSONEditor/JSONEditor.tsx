@@ -1,6 +1,6 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
@@ -8,7 +8,7 @@ import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
 
-export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
+export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) => {
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
@@ -30,25 +30,25 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   const codeBlock = (prefix: string, postfix: string, configurationBlock: any, index: number) => (
     <Box key={`JSONEdit-${index}`}>
       {prefix && (
-        <Grid item xs="auto">
-          <Box sx={{ color: 'white' }}>
+        <Box>
+          <Box sx={{ color: 'info.main' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{prefix}</code>
+              <code style={{ fontSize: '0.9rem' }}>{prefix}</code>
             </pre>
           </Box>
-        </Grid>
+        </Box>
       )}
-      <Grid item xs="auto">
+      <Box>
         <Editor viewOnly={viewOnly} configuration={configurationBlock} handleJsonEditorUpdate={updateConfiguration} />
-      </Grid>
+      </Box>
       {postfix && (
-        <Grid item xs="auto">
-          <Box sx={{ color: 'white' }}>
+        <Box>
+          <Box sx={{ color: 'info.main' }}>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
-              <code style={{ fontSize: '13px' }}>{postfix}</code>
+              <code style={{ fontSize: '0.9rem' }}>{postfix}</code>
             </pre>
           </Box>
-        </Grid>
+        </Box>
       )}
     </Box>
   );
@@ -135,58 +135,70 @@ export const JSONEditor = ({ headerHeight, editorWidth }: any) => {
   }
 
   return (
-    <Grid
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="stretch"
-      container
-      sx={{
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bgcolor: 'secondary.main',
-        height: `calc(100% - ${headerHeight}px)`,
-        mt: `${headerHeight}px`,
-        width: `${editorWidth}px`,
-        overflow: 'scroll'
-      }}
-    >
-      {codeSnippets &&
-        Object.entries(codeSnippets).map(([key, value, index]: any) => {
-          return codeBlock(value.prefix, value.postfix, configuration[key], index);
-        })}
-      <Grid sx={{ position: 'relative' }} item xs>
+    <Box>
+      <Box
+        sx={{
+          borderLeft: 2,
+          borderColor: 'secondary.light',
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          bgcolor: 'primary.light',
+          height: `calc(100% - ${headerHeight}px)`,
+          mt: `${headerHeight}px`,
+          pb: `${navButtonHeight}px`,
+          width: `${editorWidth}px`,
+          display: {
+            xs: 'none',
+            sm: 'none',
+            md: 'block',
+            lg: 'block',
+            xl: 'block'
+          }
+        }}
+      >
+        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
+          <Typography variant="h5">Implementation</Typography>
+        </Box>
+        <Box sx={{ overflow: 'scroll', mb: `${headerHeight}px`, height: `calc(100% - ${headerHeight}px)` }}>
+          {codeSnippets &&
+            Object.entries(codeSnippets).map(([key, value, index]: any) => {
+              return codeBlock(value.prefix, value.postfix, configuration[key], index);
+            })}
+        </Box>
+      </Box>
+      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
         <Grid
-          sx={{ height: '100%', position: 'absolute', bottom: '0', width: '100%' }}
-          p={1}
-          direction="row"
-          container
-          justifyContent="space-between"
-          alignItems="flex-end"
+          item
+          sx={{
+            display: {
+              xs: 'none',
+              sm: 'none',
+              md: 'block'
+            }
+          }}
         >
-          <Grid item>
-            <Button
-              onClick={handleEdit}
-              sx={{
-                display: `${step === 'review' ? 'none' : 'inline-flex'}`,
-                bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
-                '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
-              }}
-              variant="contained"
-            >
-              {viewOnly ? 'Edit' : 'View Only'}
-            </Button>
-          </Grid>
-          <Grid item>
-            <NavButtons
-              steps={steps}
-              step={activeStep}
-              setActiveStep={updateStep}
-              configuration={step === 'review' ? configuration : configuration[step]}
-            />
-          </Grid>
+          <Button
+            onClick={handleEdit}
+            sx={{
+              display: `${step === 'review' ? 'none' : 'inline-block'}`,
+              bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
+              '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
+            }}
+            variant="contained"
+          >
+            {viewOnly ? 'Edit' : 'View Only'}
+          </Button>
+        </Grid>
+        <Grid item>
+          <NavButtons
+            steps={steps}
+            step={activeStep}
+            setActiveStep={updateStep}
+            configuration={step === 'review' ? configuration : configuration[step]}
+          />
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 };

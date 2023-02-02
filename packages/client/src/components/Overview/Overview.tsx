@@ -159,7 +159,7 @@ export const Overview = () => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap-reverse', justifyContent: 'space-between' }}>
         <Box
           component="div"
           sx={{ mt: 6, mb: 6, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
@@ -175,12 +175,11 @@ export const Overview = () => {
               <li>Component Configuration</li>
               <li>API Configuration</li>
             </ul>
-            This application will guide you in passing an optional configuration in the aforementioned implementation locations. Our SDK Explorer
+            This application will guide you in passing an optional configuration throughout the implementation checkpoints. Our SDK Explorer
             enables you to:
             <ul>
               <li>Quickly configure and construct an Adyen component to your specifications.</li>
               <li>Get up to speed on all of Adyen SDK's optional configurations.</li>
-              <li>Test a combination of optional configurations.</li>
             </ul>
           </Typography>
           <Typography variant="h5">Not sure where to start</Typography>
@@ -191,7 +190,10 @@ export const Overview = () => {
             </Link>
           </Typography>
         </Box>
-        <Box component="div" sx={{ alignItems: 'flex-end', width: '50%', display: { xs: 'none', sm: 'none', md: 'none', lg: 'inline-block' } }}>
+        <Box
+          component="div"
+          sx={{ alignItems: 'flex-end', alignSelf: 'flex-start', width: '50%', flex: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' } }}
+        >
           <AdyenLogo />
         </Box>
       </Box>

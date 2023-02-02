@@ -4,16 +4,16 @@ import { Content } from './Content';
 
 type ReviewFormProps = {
   configuration: object;
-  step: number;
-  setActiveStep: (step: number) => void;
   content: any;
 };
 
-export const ReviewForm = ({ content }: ReviewFormProps) => {
+export const ReviewForm = ({ configuration, content }: ReviewFormProps) => {
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />
-      <ComponentBase />
+      <Box px={7} my={5}>
+        <ComponentBase />
+      </Box>
     </Box>
   );
 };

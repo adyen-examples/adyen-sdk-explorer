@@ -2,15 +2,15 @@ import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
-import { Header } from './Header/Header';
 import { JSONEditor } from './JSONEditor/JSONEditor';
-import { Sidebar } from './Sidebar/Sidebar';
+import { Navbar } from './Navbar/Navbar';
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const drawerWidth = 380;
   const headerHeight = 64;
+  const navButtonHeight= 40;
   let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
@@ -40,7 +40,7 @@ export const Layout = ({ main: Main }: any) => {
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
       editorWidth = 420;
-      editor = <JSONEditor headerHeight={headerHeight} editorWidth={editorWidth} />;
+      editor = <JSONEditor navButtonHeight={navButtonHeight} headerHeight={headerHeight} editorWidth={editorWidth} />;
     } else if (!sdkExplorerProps && product) {
       return <h1>404: Page not found</h1>;
     }
@@ -48,24 +48,32 @@ export const Layout = ({ main: Main }: any) => {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Header drawerWidth={drawerWidth} />
-        <Sidebar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
+        <Navbar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',
             top: '0',
             bottom: '0',
-            width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
-            ml: `${drawerWidth}px`,
-            mr: `${editorWidth}px`,
+            ml: {
+              xs: 0,
+              md: 0,
+              lg: `${drawerWidth}px`,
+              xl: `${drawerWidth}px`
+            },
+            mr: {
+              xs: 0,
+              md: `${editorWidth}px`,
+              lg: `${editorWidth}px`,
+              xl: `${editorWidth}px`
+            },
             overflow: 'scroll',
             mt: `${headerHeight}px`
           }}
           component="main"
         >
           <Main txvariant={product} />
-          {editor}
         </Box>
+        {editor}
       </Box>
     );
   }

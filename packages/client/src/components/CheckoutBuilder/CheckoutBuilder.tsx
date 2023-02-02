@@ -6,7 +6,7 @@ const CheckoutBuilder = ({ txvariant }: any) => {
   useApi(`http://localhost:8080/api/configurations/${txvariant}`, 'GET');
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" disableGutters={true}>
       <Paper elevation={0}>
         <ConfigWrapper />
       </Paper>

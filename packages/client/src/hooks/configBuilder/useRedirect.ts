@@ -14,13 +14,13 @@ export const useRedirect = (configuration: any) => {
   const encodedConfig: any = localStorage.getItem('configuration');
   const encodedSDKState: any = localStorage.getItem('sdkExplorer');
   const dispatch = useAppDispatch();
-
+  
   useEffect(() => {
     if (redirectResult) {
       const storedConfig = JSON.parse(encodedConfig);
       const { checkout, local, sessions } = storedConfig;
       const storedSdkExplorerState = JSON.parse(encodedSDKState);
-      const { steps, step } = storedSdkExplorerState;
+      const {steps, step} = storedSdkExplorerState;
 
       if (isConfigEmpty(configuration)) {
         dispatch(updateCheckoutInfo(checkout));
@@ -28,8 +28,8 @@ export const useRedirect = (configuration: any) => {
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
         dispatch(updateStep(steps.length - 1));
-        dispatch(updateExplorer({ steps, step }));
+        dispatch(updateExplorer({steps, step}));
       }
     }
-  }, [configuration, dispatch, encodedConfig, encodedSDKState, redirectResult]);
+  }, []);
 };

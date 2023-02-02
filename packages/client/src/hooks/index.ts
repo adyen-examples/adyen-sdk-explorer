@@ -6,6 +6,7 @@ export type { InitializationRequest, EditableCheckoutConfigFields, CheckoutConfi
 export { useApi } from './useApi';
 export { useApiLocal } from './useApiLocal';
 export { useCheckout, useInitializeSession } from './checkout';
+export { useBuildOnDeck } from './configBuilder/useBuildOnDeck';
 export { useRedirect } from './configBuilder/useRedirect';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

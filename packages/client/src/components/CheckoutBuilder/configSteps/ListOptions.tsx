@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
+import type { AddOrRemoveProp, Descriptor, HandleInput, UpdateConfig } from '../types';
 import { OptionWrapper } from './OptionWrapper';
-import type { UpdateConfig, AddOrRemoveProp, Descriptor, HandleInput } from '../types';
 
 interface ListOptionsProps {
   descriptors: Descriptor[];
@@ -45,6 +45,9 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
         case 'array':
           defaultValue = [];
           break;
+        case 'object':
+          defaultValue = {};
+          break;
         default:
           defaultValue = '';
           break;
@@ -55,8 +58,9 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     return checkForNested(descriptor);
   };
 
-  const addOrRemoveProp: AddOrRemoveProp = name => {
-    const key: string = name;
+  const addOrRemoveProp: AddOrRemoveProp = e => {
+    const key: string = e.target.name;
+    console.log('KEY', key);
     const descriptor = descriptors.find(descriptor => descriptor.name === key);
     if (configuration && configuration.hasOwnProperty(key)) {
       handleUpdateConfig(key, null);
@@ -66,23 +70,17 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
     }
   };
 
-  const handleInput: HandleInput = (name, value, current) => {
-    handleUpdateConfig(name, value, current);
-  };
-
-  console.log('Descriptors: ', descriptors);
-
   return (
-    <Grid container>
+    <Grid px={7} container>
       {descriptors &&
         descriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item xs={12} key={descriptor.name}>
+            <Grid item xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
               <OptionWrapper
                 descriptor={descriptor}
                 indexKey={descriptor.name}
                 addOrRemoveProp={addOrRemoveProp}
-                handleInput={handleInput}
+                handleInput={handleUpdateConfig}
                 value={configuration[descriptor.name]}
               />
             </Grid>

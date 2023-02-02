@@ -318,7 +318,8 @@
         "name": "brandsConfiguration",
         "type": "object",
         "description": "Object where you can customize the icons for different brands.",
-        "defaultValue": {}
+        "defaultValue": {},
+        "properties": {}
       },
       {
         "name": "showBrandIcon",

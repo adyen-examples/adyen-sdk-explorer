@@ -3,12 +3,11 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import content from '../../helpers/content.json';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useRedirect } from '../../hooks';
 import type { RootState } from '../../store';
 import { ColorlibStepIcon } from './ColorlibStepIcon';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
-import { useRedirect } from '../../hooks';
 
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
 
@@ -33,8 +32,6 @@ export const ConfigWrapper = () => {
       <ProfileForm
         key="profile"
         configuration={profile}
-        step={activeStep}
-        setActiveStep={updateStep}
         action={updateProfileInfo}
         updateStore={updateStore}
         content={profilePageContent}
@@ -79,8 +76,6 @@ export const ConfigWrapper = () => {
     review: (
       <ReviewForm
         key="review"
-        step={activeStep}
-        setActiveStep={updateStep}
         configuration={{ checkout, local, sessions }}
         content={reviewPageContent}
       />
@@ -95,14 +90,22 @@ export const ConfigWrapper = () => {
         <Stepper activeStep={activeStep}>
           {steps.map((label: any) => (
             <Step key={label}>
-              <StepLabel StepIconComponent={ColorlibStepIcon} />
+              <StepLabel
+                StepIconProps={{
+                  classes: {
+                    text: label
+                  }
+                }}
+                StepIconComponent={ColorlibStepIcon}
+              />
             </Step>
           ))}
         </Stepper>
       </Grid>
-      <Grid px={3} item xs={11}>
+      <Grid item xs={11}>
         {displayStep}
       </Grid>
     </Grid>
   );
 };
+// <StepLabel StepIconComponent={<ColorlibStepIcon step={label}/>} />

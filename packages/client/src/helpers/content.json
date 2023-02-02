@@ -6,25 +6,25 @@
     "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuratiosn either on the main instance of Checkout, on the main instance of dropin, or in the API request. Build and export a configuration profile for future use."
   },
   "globalPageContent": {
-    "title": "Checkout Configuration",
+    "title": "Set a checkout configuration",
     "version": "Web Components/Drop-in v5.19.0",
-    "subtitle": "Main Instance",
+    "subtitle": "SDK Version",
     "description": "You must set global or component specific configuration on the main instance, or in the paymentMethodsConfiguration object. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "localPageContent": {
-    "title": "Component Configuration",
-    "subtitle": "Product Instance",
+    "title": "Set a component configuration",
+    "subtitle": "SDK Version",
     "version": "Web Components/Drop-in v5.19.0",
     "description": "Set a configuration that is specific to the component on the products instance. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "apiPageContent": {
-    "title": "API Configuration",
-    "subtitle": "Sessions",
-    "version": "Web Components/Drop-in v5.19.0",
+    "title": "Set an API configuration",
+    "subtitle": "Endpoint destination URL",
+    "version": "https://checkout-test.adyen.com/v69/sessions",
     "description": "Set a configuration at the API level to be passed on the /sessions endpoint. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "reviewPageContent": {
-    "title": "Review",
+    "title": "Review your build",
     "version": "Web Components/Drop-in v5.19.0",
     "subtitle": "Export",
     "description": "Review the component that was rendered based on your configuration. If you receive an error go back and reconfigure the SDK. If you would like to export your configuration, click the export button on the right hand side."

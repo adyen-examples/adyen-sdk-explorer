@@ -1,12 +1,14 @@
-import { Fragment } from 'react';
-import { Grid, Checkbox, Typography, FormGroup, FormControlLabel, Select, MenuItem, FormControl, InputBase } from '@mui/material';
-import { Option } from './Option';
-import { ArrayOption } from './ArrayOption';
-import type { AddOrRemoveProp, Descriptor } from '../types';
-import { marked } from 'marked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Box } from '@mui/system';
+import { marked } from 'marked';
+import { Fragment } from 'react';
+import type { AddOrRemoveProp, Descriptor } from '../types';
+import { ArrayOption } from './ArrayOption';
+import { Option } from './Option';
+import InfoIcon from '@mui/icons-material/Info';
 
 const AdyenInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -37,8 +39,8 @@ export interface OptionWrapperPropTypes {
 }
 
 export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
-  const handleToggle = (e: any) => {
-    addOrRemoveProp(e.target.name);
+  const handleToggle = (e: any, checked: boolean) => {
+    addOrRemoveProp(e);
   };
 
   let optionsDisplay = null;
@@ -51,7 +53,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
     if (descriptor.properties) {
       optionsDisplay = (
         <Fragment>
-          <Grid container sx={{ borderLeft: '1px solid', borderColor: 'primary.gray' }} pl={2}>
+          <Grid container sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'secondary.light' }} p={4}>
             {descriptor.properties.map((prop: Descriptor) => {
               return (
                 <Grid item xs={7} key={prop.name}>
@@ -78,7 +80,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
             id="boolean-select"
             name={descriptor.name}
             value={value}
-            onChange={(e: any) => handleInput(e, descriptor.name)}
+            onChange={(e: any) => handleInput(e.target.name, e.target.value, descriptor.name)}
             input={<AdyenInput />}
           >
             <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
@@ -90,33 +92,48 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
       );
     } else if (descriptor.type === 'array' && descriptor.name) {
       optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
+    } else if (descriptor.type === 'object' && !descriptor.properties) {
+      optionsDisplay = (
+        <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" sx={{ border: '3px solid', borderColor: '#cce0ff' }}>
+          <Grid item sx={{ bgcolor: '#cce0ff', color: 'primary.main', position: 'relative' }}>
+            <InfoIcon sx={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }} />
+            <Box component="span" sx={{ bgcolor: '#cce0ff' }}>
+              <InfoIcon sx={{ display: 'inline-block', visibility: 'hidden' }} />
+            </Box>
+          </Grid>
+          <Grid item p={2}>
+            <Typography variant="h6">Custom configuration use case. Use the JSON Editor pane.</Typography>
+          </Grid>
+        </Grid>
+      );
     }
   }
 
   return (
     <Grid direction="column" container key={indexKey}>
       <Grid item xs={12}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                icon={<KeyboardArrowDownIcon />}
-                checkedIcon={<KeyboardArrowUpIcon />}
-                name={descriptor.name}
-                checked={value !== undefined}
-                onChange={handleToggle}
-                inputProps={{ 'aria-label': 'controlled' }}
-                size="small"
-              />
-            }
-            label={<Typography variant="subtitle1">{descriptor.name}</Typography>}
-          />
-        </FormGroup>
+        <Box>
+          <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
+            {descriptor.name}
+          </Typography>
+          <Typography mx={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
+            {descriptor.type}
+          </Typography>
+        </Box>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2">
-          <div dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))} />
-        </Typography>
+        <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Checkbox
+          icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: 'rgb(255, 87, 34)' }}>Add parameter</Typography>}
+          checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
+          name={descriptor.name}
+          checked={value !== undefined}
+          onChange={handleToggle}
+          inputProps={{ 'aria-label': 'controlled' }}
+          sx={{ p: 0 }}
+        />
       </Grid>
       <Grid item xs={12}>
         {optionsDisplay}

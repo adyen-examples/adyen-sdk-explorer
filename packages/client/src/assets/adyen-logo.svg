@@ -28,10 +28,8 @@
             font-family="Fakt, Arial, sans-serif"
             font-size="13"
             y="20"
-            x="110"
+            x="116"
             stroke-width="0"
             fill="#09ae4c"
-          >
-            SDK
-          </text>
+          >SDK</text>
         </svg>

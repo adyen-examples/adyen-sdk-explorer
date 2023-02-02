@@ -1,4 +1,4 @@
-import { Box, Drawer, List, ListItem, ListItemButton, Typography, Link } from '@mui/material';
+import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
@@ -28,6 +28,8 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
       sx={{
         flexShrink: 0,
         '& .MuiDrawer-paper': {
+          borderRight: 2,
+          borderColor: 'secondary.light',
           width: drawerWidth,
           boxSizing: 'border-box',
           bgcolor: 'background.paper',
@@ -41,12 +43,10 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
       anchor="left"
     >
       <List>
-        <ListItemButton sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-          <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick('')}>
-            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="body2">
-              Home
-            </Typography>
-          </Link>
+        <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
+          <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="h6">
+            Home
+          </Typography>
         </ListItemButton>
         <ListItem>
           <Typography variant="h5">Online Payments</Typography>
@@ -66,12 +66,10 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           return (
             <Box key={product}>
               <ListItem disablePadding>
-                <ListItemButton sx={buttonStyle}>
-                  <Link sx={{ width: '100%' }} underline="none" onClick={(e: any) => handleClick(products[product].txvariant)}>
-                    <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="body2">
-                      {product}
-                    </Typography>
-                  </Link>
+                <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
+                  <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
+                    {product}
+                  </Typography>
                 </ListItemButton>
               </ListItem>
               {subcategory}

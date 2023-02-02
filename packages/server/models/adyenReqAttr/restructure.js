@@ -4,12 +4,28 @@ const fs = require('fs');
 // const { properties } = sessionsReq;
 
 const properties = require('./additionalData.json');
+const paymentMethodConfig = require('./schemas/paymentMethodConfig/properties.json');
 
 const extractNames = properties => {
   const names = Object.keys(properties);
   return names.map(name => {
     properties[name].name = name;
     return properties[name];
+  });
+};
+
+const restructurePaymentMethodConfigData = properties => {
+  const restructuredProperties = {};
+  properties.forEach(property => {
+    restructuredProperties[property.name] = property.properties;
+  });
+  return restructuredProperties;
+};
+
+const createProductsData = properties => {
+  const payload = {};
+  properties.forEach(property => {
+    restructuredProperties[property.name] = property.properties;
   });
 };
 
@@ -37,4 +53,13 @@ const createNewMapping = props => {
   });
 };
 
-createNewMapping(properties);
+const writeNewMapping = props => {
+  const json = restructurePaymentMethodConfigData(props);
+  console.log(json);
+  fs.writeFile('./results.json', JSON.stringify(json), err => {
+    if (err) console.error(err);
+  });
+};
+
+// createNewMapping(properties);
+writeNewMapping(paymentMethodConfig);

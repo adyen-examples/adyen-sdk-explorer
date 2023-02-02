@@ -4,7 +4,7 @@ import { Descriptor, HandleInput } from '../types';
 
 export interface OptionPropTypes {
   descriptor: Descriptor;
-  onChange: HandleInput;
+  onChange: any;
   value: string;
   isChecked: boolean;
   current?: string;
@@ -13,15 +13,26 @@ export interface OptionPropTypes {
 export const Option = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   return (
     <Grid item xs={11}>
-      <Typography variant="body2">{descriptor.name}</Typography>
+      {
+        <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
+          {descriptor.name}
+        </Typography>
+      }
+      {
+        <Typography mx={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
+          {descriptor.type}
+        </Typography>
+      }
       {isChecked && (
         <TextField
-          name={descriptor.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
-          id={descriptor.name}
           value={value}
-          fullWidth
-          variant="standard"
+          sx={{ display: 'block', py: 0 }}
+          variant="filled"
+          name={descriptor.name}
+          id={descriptor.name}
+          size="small"
+          hiddenLabel
         />
       )}
     </Grid>
