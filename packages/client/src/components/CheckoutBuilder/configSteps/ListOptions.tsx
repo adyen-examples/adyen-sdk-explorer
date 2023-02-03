@@ -99,7 +99,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
 
   return (
     <Grid container>
-      <Grid item px={7} py={1.5} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
+      <Grid item px={7} py={1.5} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
             <Typography variant="h5">Configuration parameters</Typography>
@@ -119,7 +119,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.65rem', color: '#00112c' }} variant="caption">
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: '#00112c', fontWeight: '300' }} variant="caption">
                     Required
                   </Typography>
                 }
@@ -137,7 +137,7 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.65rem', color: '#00112c' }} variant="caption">
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: '#00112c', fontWeight: '300' }} variant="caption">
                     Optional
                   </Typography>
                 }
