@@ -8,9 +8,10 @@ interface ListOptionsProps {
   descriptors: Descriptor[];
   configuration: any;
   handleUpdateConfig: UpdateConfig;
+  category: string;
 }
 
-export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: ListOptionsProps) => {
+export const ListOptions = ({ descriptors, configuration, handleUpdateConfig, category }: ListOptionsProps) => {
   const [filters, setFilters] = useState({
     required: true,
     optional: true
@@ -99,10 +100,10 @@ export const ListOptions = ({ descriptors, configuration, handleUpdateConfig }: 
 
   return (
     <Grid container>
-      <Grid item px={7} py={1.5} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
+      <Grid item px={7} py={2} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
-            <Typography variant="h5">Configuration parameters</Typography>
+            <Typography variant="h5">{category}</Typography>
           </Grid>
           <Grid item>
             <FormGroup row sx={{ '& .MuiCheckbox-root': { py: 0, px: 0.5 } }}>
