@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import ComponentBase from '../../ComponentBase/ComponentBase';
 import { Content } from './Content';
 
@@ -11,6 +11,20 @@ export const ReviewForm = ({ configuration, content }: ReviewFormProps) => {
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />
+      <Grid
+        direction="row"
+        justifyContent="space-between"
+        container
+        px={7}
+        py={2}
+        mt={2}
+        xs={12}
+        sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}
+      >
+        <Grid item>
+          <Typography variant="h5">Review & Export</Typography>
+        </Grid>
+      </Grid>
       <Box px={7} my={5}>
         <ComponentBase />
       </Box>

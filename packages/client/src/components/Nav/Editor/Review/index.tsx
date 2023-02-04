@@ -44,10 +44,34 @@ export const Review = ({ fixes, data }: ReviewProps) => {
         }}
       >
         <Tabs value={tab} onChange={handleChange} centered>
-          <Tab label={<Typography variant="h6">Code</Typography>} />
-          <Tab label={<Typography variant="h6">API</Typography>} />
-          <Tab label={<Typography variant="h6">State</Typography>} />
-          <Tab label={<Typography variant="h6">Style</Typography>} />
+          <Tab
+            label={
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                code
+              </Typography>
+            }
+          />
+          <Tab
+            label={
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                api
+              </Typography>
+            }
+          />
+          <Tab
+            label={
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                state
+              </Typography>
+            }
+          />
+          <Tab
+            label={
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                style
+              </Typography>
+            }
+          />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
@@ -74,7 +98,7 @@ export const Review = ({ fixes, data }: ReviewProps) => {
         <Input
           data={data.sessions}
           prefix={`Request:`}
-          postfix={`);`}
+          postfix={''}
           handleEditorUpdate={(value: any) => {
             console.log(value);
           }}
@@ -83,7 +107,7 @@ export const Review = ({ fixes, data }: ReviewProps) => {
         <Input
           data={data.sessionsResponse}
           prefix={`Response:`}
-          postfix={`);`}
+          postfix={''}
           handleEditorUpdate={(value: any) => {
             console.log(value);
           }}
