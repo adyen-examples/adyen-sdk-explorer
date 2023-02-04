@@ -11,7 +11,7 @@ interface ReviewProps {
 }
 
 export const Review = ({ fixes, data }: ReviewProps) => {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(2);
   const { checkout, local, sessions } = fixes;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

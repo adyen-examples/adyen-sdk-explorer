@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography, Tabs, Tab } from '@mui/material';
 import { fontSize } from '@mui/system';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
@@ -55,6 +55,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
   let editor = null;
   let step = null;
   let category = null;
+  let buildStep = null;
 
   switch (steps[activeStep]) {
     case 'checkout':
@@ -71,6 +72,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
       );
       category = 'Code';
       step = 'checkout';
+      buildStep = 0;
       break;
     case 'local':
       editor = (
@@ -86,6 +88,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
       );
       step = 'local';
       category = 'Code';
+      buildStep = 0;
       break;
     case 'sessions':
       editor = (
@@ -101,6 +104,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
       );
       step = 'sessions';
       category = 'API';
+      buildStep = 1;
       break;
     case 'review':
       editor = <Review data={{ profile, checkout, local, sessions, sessionsResponse }} fixes={fixes} />;
@@ -133,11 +137,49 @@ export const EditorWrapper = ({ dimensions }: any) => {
           }
         }}
       >
-        {category && (
-          <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
-            <Typography variant="h5">{category}</Typography>
-          </Box>
-        )}
+        <Box
+          sx={{
+            borderBottom: 1,
+            borderColor: 'divider',
+            bgcolor: 'secondary.gray',
+            '.MuiTabs-indicator': { bgcolor: 'secondary.main' },
+            '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
+          }}
+        >
+          {' '}
+          {category && (
+            <Tabs value={buildStep} centered>
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    code
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    api
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    state
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    style
+                  </Typography>
+                }
+              />
+            </Tabs>
+          )}
+        </Box>
         {editor}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
