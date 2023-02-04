@@ -23,7 +23,7 @@ export const Config = ({ configuration, descriptors, action, updateStore, conten
   return (
     <Box>
       <Content title={content.title} subtitle={content.subtitle} version={content.version} description={content.description} />
-      <ListOptions category={'Configuration parameters'} descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
+      <ListOptions category={'Parameters'} descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
     </Box>
   );
 };

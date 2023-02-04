@@ -34,12 +34,20 @@ export const Review = ({ fixes, data }: ReviewProps) => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          bgcolor: 'secondary.gray',
+          '.MuiTabs-indicator': { bgcolor: 'secondary.main' },
+          '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
+        }}
+      >
         <Tabs value={tab} onChange={handleChange} centered>
-          <Tab label="Code" />
-          <Tab label="API" />
-          <Tab label="State" />
-          <Tab label="Style" />
+          <Tab label={<Typography variant="h6">Code</Typography>} />
+          <Tab label={<Typography variant="h6">API</Typography>} />
+          <Tab label={<Typography variant="h6">State</Typography>} />
+          <Tab label={<Typography variant="h6">Style</Typography>} />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
