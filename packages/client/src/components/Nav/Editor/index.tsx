@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -52,13 +52,13 @@ export const EditorWrapper = ({ dimensions }: any) => {
 
   let editor = null;
   let step = null;
+  let category = null;
 
   switch (steps[activeStep]) {
     case 'checkout':
       editor = (
         <Input
           data={checkout}
-          category={'Implementation'}
           prefix={fixes.checkout.prefix}
           postfix={fixes.checkout.postfix}
           handleEditorUpdate={(value: any) => {
@@ -67,13 +67,13 @@ export const EditorWrapper = ({ dimensions }: any) => {
           viewOnly={viewOnly}
         />
       );
+      category = 'Implementation';
       step = 'checkout';
       break;
     case 'local':
       editor = (
         <Input
           data={local}
-          category={'Implementation'}
           prefix={fixes.local.prefix}
           postfix={fixes.local.postfix}
           handleEditorUpdate={(value: any) => {
@@ -83,12 +83,12 @@ export const EditorWrapper = ({ dimensions }: any) => {
         />
       );
       step = 'local';
+      category = 'Implementation';
       break;
     case 'sessions':
       editor = (
         <Input
           data={sessions}
-          category={'API'}
           prefix={fixes.sessions.prefix}
           postfix={fixes.sessions.postfix}
           handleEditorUpdate={(value: any) => {
@@ -98,12 +98,12 @@ export const EditorWrapper = ({ dimensions }: any) => {
         />
       );
       step = 'sessions';
+      category = 'API';
       break;
     case 'review':
       editor = (
         <Input
           data={checkout}
-          category={'checkout'}
           prefix={fixes.checkout.prefix}
           postfix={fixes.checkout.postfix}
           handleEditorUpdate={(value: any) => {
@@ -113,6 +113,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
         />
       );
       step = 'review';
+      category = 'Implementation';
       break;
     default:
       throw new Error('Unknown step');
@@ -141,6 +142,9 @@ export const EditorWrapper = ({ dimensions }: any) => {
           }
         }}
       >
+        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
+          <Typography variant="h5">{category}</Typography>
+        </Box>
         {editor}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>

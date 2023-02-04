@@ -2,7 +2,6 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import { Editor } from '../../../CheckoutBuilder/configSteps/Editor';
 
 interface InputProps {
-  category: string;
   prefix?: string;
   postfix?: string;
   data: any;
@@ -10,7 +9,7 @@ interface InputProps {
   viewOnly: boolean;
 }
 
-export const Input = ({ category, prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
+export const Input = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
   const codeBlock = (prefix: any, postfix: any, configurationBlock: any) => (
     <Box>
       {prefix && (
@@ -39,9 +38,6 @@ export const Input = ({ category, prefix, postfix, data, handleEditorUpdate, vie
 
   return (
     <Box>
-      <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
-        <Typography variant="h5">{category}</Typography>
-      </Box>
       <Box sx={{ overflow: 'scroll' }}>{codeBlock(prefix, postfix, data)}</Box>
     </Box>
   );
