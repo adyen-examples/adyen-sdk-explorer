@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Input } from './Input';
+import { Review } from './Review';
 
 interface EditorWrapperProps {
   dimensions: object;
@@ -67,7 +68,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
           viewOnly={viewOnly}
         />
       );
-      category = 'Implementation';
+      category = 'Code';
       step = 'checkout';
       break;
     case 'local':
@@ -83,7 +84,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
         />
       );
       step = 'local';
-      category = 'Implementation';
+      category = 'Code';
       break;
     case 'sessions':
       editor = (
@@ -101,19 +102,8 @@ export const EditorWrapper = ({ dimensions }: any) => {
       category = 'API';
       break;
     case 'review':
-      editor = (
-        <Input
-          data={checkout}
-          prefix={fixes.checkout.prefix}
-          postfix={fixes.checkout.postfix}
-          handleEditorUpdate={(value: any) => {
-            updateStore(value, updateSessionsInfo);
-          }}
-          viewOnly={viewOnly}
-        />
-      );
+      editor = <Review data={{ profile, checkout, local, sessions, sessionsResponse }} fixes={fixes} />;
       step = 'review';
-      category = 'Implementation';
       break;
     default:
       throw new Error('Unknown step');
@@ -142,9 +132,11 @@ export const EditorWrapper = ({ dimensions }: any) => {
           }
         }}
       >
-        <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
-          <Typography variant="h5">{category}</Typography>
-        </Box>
+        {category && (
+          <Box px={3} py={2} sx={{ backgroundColor: 'secondary.light' }}>
+            <Typography variant="h5">{category}</Typography>
+          </Box>
+        )}
         {editor}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
