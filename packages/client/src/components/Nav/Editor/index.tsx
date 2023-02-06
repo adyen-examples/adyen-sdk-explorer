@@ -9,6 +9,7 @@ import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Input } from './Input';
 import { Review } from './Review';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface EditorWrapperProps {
   dimensions: object;
@@ -26,9 +27,29 @@ export const EditorWrapper = ({ dimensions }: any) => {
   };
 
   const [viewOnly, setViewOnly] = useState(true);
+  const [tab, setTab] = useState(0);
+
   const handleEdit = () => {
     setViewOnly(!viewOnly);
   };
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTab(newValue);
+  };
+
+  function TabPanel(props: any) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
 
   const fixes = {
     checkout: {
@@ -60,54 +81,204 @@ export const EditorWrapper = ({ dimensions }: any) => {
   switch (steps[activeStep]) {
     case 'checkout':
       editor = (
-        <Input
-          data={checkout}
-          prefix={fixes.checkout.prefix}
-          postfix={fixes.checkout.postfix}
-          handleEditorUpdate={(value: any) => {
-            updateStore(value, updateCheckoutInfo);
-          }}
-          viewOnly={viewOnly}
-        />
+        <Box>
+          <Grid
+            justifyContent="space-between"
+            alignItems="flex-start"
+            px={5}
+            pt={'12px'}
+            pb={'11px'}
+            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
+            container
+          >
+            <Grid item xs={1}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                JS
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+            </Grid>
+          </Grid>
+          <Input
+            data={checkout}
+            prefix={fixes.checkout.prefix}
+            postfix={fixes.checkout.postfix}
+            handleEditorUpdate={(value: any) => {
+              updateStore(value, updateCheckoutInfo);
+            }}
+            viewOnly={viewOnly}
+          />
+        </Box>
       );
+      buildStep = 0;
       category = 'Code';
       step = 'checkout';
-      buildStep = 0;
       break;
     case 'local':
       editor = (
-        <Input
-          data={local}
-          prefix={fixes.local.prefix}
-          postfix={fixes.local.postfix}
-          handleEditorUpdate={(value: any) => {
-            updateStore(value, updateLocalInfo);
-          }}
-          viewOnly={viewOnly}
-        />
+        <Box>
+          <Grid
+            justifyContent="space-between"
+            alignItems="flex-start"
+            px={5}
+            pt={'12px'}
+            pb={'11px'}
+            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
+            container
+          >
+            <Grid item xs={1}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                JS
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+            </Grid>
+          </Grid>
+          <Input
+            data={local}
+            prefix={fixes.local.prefix}
+            postfix={fixes.local.postfix}
+            handleEditorUpdate={(value: any) => {
+              updateStore(value, updateLocalInfo);
+            }}
+            viewOnly={viewOnly}
+          />
+        </Box>
       );
+      buildStep = 0;
       step = 'local';
       category = 'Code';
-      buildStep = 0;
       break;
     case 'sessions':
       editor = (
-        <Input
-          data={sessions}
-          prefix={fixes.sessions.prefix}
-          postfix={fixes.sessions.postfix}
-          handleEditorUpdate={(value: any) => {
-            updateStore(value, updateSessionsInfo);
-          }}
-          viewOnly={viewOnly}
-        />
+        <Box>
+          <Grid
+            justifyContent="space-between"
+            alignItems="flex-start"
+            px={5}
+            pt={'12px'}
+            pb={'11px'}
+            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
+            container
+          >
+            <Grid item xs={1}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                API
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+            </Grid>
+          </Grid>
+          <Input
+            data={sessions}
+            prefix={fixes.sessions.prefix}
+            postfix={fixes.sessions.postfix}
+            handleEditorUpdate={(value: any) => {
+              updateStore(value, updateSessionsInfo);
+            }}
+            viewOnly={viewOnly}
+          />
+        </Box>
       );
+      buildStep = 1;
       step = 'sessions';
       category = 'API';
-      buildStep = 1;
       break;
     case 'review':
-      editor = <Review data={{ profile, checkout, local, sessions, sessionsResponse }} fixes={fixes} />;
+      editor = (
+        <Box>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: 'divider',
+              bgcolor: 'secondary.gray',
+              '.MuiTabs-indicator': { bgcolor: 'secondary.main' },
+              '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
+            }}
+          >
+            <Tabs onChange={handleChange} value={buildStep !== null ? buildStep : tab} centered>
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    JS
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    api
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    state
+                  </Typography>
+                }
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                    style
+                  </Typography>
+                }
+              />
+            </Tabs>
+          </Box>
+          <TabPanel value={tab} index={0}>
+            <Input
+              data={checkout}
+              prefix={`const checkout = await AdyenCheckout(`}
+              postfix={`);`}
+              handleEditorUpdate={(value: any) => {
+                console.log(value);
+              }}
+              viewOnly={true}
+            />
+            <Input
+              data={local}
+              prefix={`checkout.create('${profile.product}',`}
+              postfix={`);`}
+              handleEditorUpdate={(value: any) => {
+                console.log(value);
+              }}
+              viewOnly={true}
+            />
+          </TabPanel>
+          <TabPanel value={tab} index={1}>
+            <Input
+              data={sessions}
+              prefix={`Request:`}
+              postfix={''}
+              handleEditorUpdate={(value: any) => {
+                console.log(value);
+              }}
+              viewOnly={true}
+            />
+            <Input
+              data={sessionsResponse}
+              prefix={`Response:`}
+              postfix={''}
+              handleEditorUpdate={(value: any) => {
+                console.log(value);
+              }}
+              viewOnly={true}
+            />
+          </TabPanel>
+          <TabPanel value={tab} index={2}>
+            {'STATE'}
+          </TabPanel>
+          <TabPanel value={tab} index={3}>
+            {'STYLE'}
+          </TabPanel>
+        </Box>
+      );
+      buildStep = null;
       step = 'review';
       break;
     default:
@@ -137,49 +308,6 @@ export const EditorWrapper = ({ dimensions }: any) => {
           }
         }}
       >
-        <Box
-          sx={{
-            borderBottom: 1,
-            borderColor: 'divider',
-            bgcolor: 'secondary.gray',
-            '.MuiTabs-indicator': { bgcolor: 'secondary.main' },
-            '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
-          }}
-        >
-          {' '}
-          {category && (
-            <Tabs value={buildStep} centered>
-              <Tab
-                label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    code
-                  </Typography>
-                }
-              />
-              <Tab
-                label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    api
-                  </Typography>
-                }
-              />
-              <Tab
-                label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    state
-                  </Typography>
-                }
-              />
-              <Tab
-                label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    style
-                  </Typography>
-                }
-              />
-            </Tabs>
-          )}
-        </Box>
         {editor}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>

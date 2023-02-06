@@ -115,7 +115,7 @@ export const Review = ({ fixes, data }: ReviewProps) => {
         />
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        {JSON.stringify(sessions)}
+        {'STATE'}
       </TabPanel>
     </Box>
   );
