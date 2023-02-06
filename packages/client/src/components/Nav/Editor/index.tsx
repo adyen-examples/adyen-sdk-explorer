@@ -1,5 +1,5 @@
-import { Box, Button, Grid, Typography, Tabs, Tab } from '@mui/material';
-import { fontSize } from '@mui/system';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { Box, Button, Grid, Tab, Tabs, Typography, IconButton } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,8 +8,6 @@ import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Input } from './Input';
-import { Review } from './Review';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface EditorWrapperProps {
   dimensions: object;
@@ -97,7 +95,14 @@ export const EditorWrapper = ({ dimensions }: any) => {
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              <IconButton
+                sx={{ py: 0 }}
+                onClick={() => {
+                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
+                }}
+              >
+                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              </IconButton>
             </Grid>
           </Grid>
           <Input
@@ -133,7 +138,14 @@ export const EditorWrapper = ({ dimensions }: any) => {
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              <IconButton
+                sx={{ py: 0 }}
+                onClick={() => {
+                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
+                }}
+              >
+                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              </IconButton>
             </Grid>
           </Grid>
           <Input
@@ -169,7 +181,14 @@ export const EditorWrapper = ({ dimensions }: any) => {
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              <IconButton
+                sx={{ py: 0 }}
+                onClick={() => {
+                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
+                }}
+              >
+                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+              </IconButton>
             </Grid>
           </Grid>
           <Input
