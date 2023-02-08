@@ -1,5 +1,5 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { Box, Button, Grid, Tab, Tabs, Typography, IconButton } from '@mui/material';
+import { Box, Button, Grid, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -24,6 +24,9 @@ export const EditorWrapper = ({ dimensions }: any) => {
     dispatch(action(value));
   };
 
+  let multiTabEditor = null;
+  let step = steps[activeStep];
+
   const [viewOnly, setViewOnly] = useState(true);
   const [tab, setTab] = useState(0);
 
@@ -35,7 +38,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
     setTab(newValue);
   };
 
-  function TabPanel(props: any) {
+  const TabPanel = (props: any) => {
     const { children, value, index, ...other } = props;
 
     return (
@@ -47,167 +50,93 @@ export const EditorWrapper = ({ dimensions }: any) => {
         )}
       </div>
     );
-  }
+  };
 
-  const fixes = {
-    checkout: {
-      prefix: `
-  const checkout = await AdyenCheckout(`,
-      postfix: `    );
+  const SingleTabHeader = ({ title, clipboardText }: any) => {
+    return (
+      <Grid
+        justifyContent="space-between"
+        alignItems="flex-start"
+        px={5}
+        pt={'12px'}
+        pb={'11px'}
+        sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
+        container
+      >
+        <Grid item xs={1}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            {title}
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton
+            sx={{ py: 0 }}
+            onClick={() => {
+              navigator.clipboard.writeText(clipboardText);
+            }}
+          >
+            <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          </IconButton>
+        </Grid>
+      </Grid>
+    );
+  };
 
-  checkout.create('${profile.product}', {...});`
-    },
-    local: {
-      prefix: `
+  const SingleTab: any = ({ title, prefix, postfix, handleUpdate, viewOnly, data }: any) => {
+    return (
+      <Box>
+        <SingleTabHeader title={title} clipboardText={`${prefix + JSON.stringify(data) + postfix}`} />
+        <Input data={data} prefix={prefix} postfix={postfix} handleEditorUpdate={handleUpdate} viewOnly={viewOnly} />
+      </Box>
+    );
+  };
+
+  let singleTabData = null;
+  switch (step) {
+    case 'checkout':
+      singleTabData = {
+        title: 'JS',
+        prefix: `
+        const checkout = await AdyenCheckout(`,
+        postfix: `    );
+      
+        checkout.create('${profile.product}', {...});`,
+        handler: (value: any) => {
+          updateStore(value, updateCheckoutInfo);
+        },
+        payload: checkout
+      };
+      break;
+    case 'local':
+      singleTabData = {
+        title: 'JS',
+        prefix: `
+        const checkout = await AdyenCheckout({...});
+                
+        checkout.create('${profile.product}',`,
+        postfix: `    );`,
+        handler: (value: any) => {
+          updateStore(value, updateLocalInfo);
+        },
+        payload: local
+      };
+      break;
+    case 'sessions':
+      singleTabData = {
+        title: 'API',
+        prefix: `
   const checkout = await AdyenCheckout({...});
           
   checkout.create('${profile.product}',`,
-      postfix: `    );`
-    },
-    sessions: {
-      prefix: `
-  Request:`,
-      postfix: ''
-    }
-  };
-
-  let editor = null;
-  let step = null;
-  let category = null;
-  let buildStep = null;
-
-  switch (steps[activeStep]) {
-    case 'checkout':
-      editor = (
-        <Box>
-          <Grid
-            justifyContent="space-between"
-            alignItems="flex-start"
-            px={5}
-            pt={'12px'}
-            pb={'11px'}
-            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
-            container
-          >
-            <Grid item xs={1}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                JS
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton
-                sx={{ py: 0 }}
-                onClick={() => {
-                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
-                }}
-              >
-                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Input
-            data={checkout}
-            prefix={fixes.checkout.prefix}
-            postfix={fixes.checkout.postfix}
-            handleEditorUpdate={(value: any) => {
-              updateStore(value, updateCheckoutInfo);
-            }}
-            viewOnly={viewOnly}
-          />
-        </Box>
-      );
-      buildStep = 0;
-      category = 'Code';
-      step = 'checkout';
-      break;
-    case 'local':
-      editor = (
-        <Box>
-          <Grid
-            justifyContent="space-between"
-            alignItems="flex-start"
-            px={5}
-            pt={'12px'}
-            pb={'11px'}
-            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
-            container
-          >
-            <Grid item xs={1}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                JS
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton
-                sx={{ py: 0 }}
-                onClick={() => {
-                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
-                }}
-              >
-                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Input
-            data={local}
-            prefix={fixes.local.prefix}
-            postfix={fixes.local.postfix}
-            handleEditorUpdate={(value: any) => {
-              updateStore(value, updateLocalInfo);
-            }}
-            viewOnly={viewOnly}
-          />
-        </Box>
-      );
-      buildStep = 0;
-      step = 'local';
-      category = 'Code';
-      break;
-    case 'sessions':
-      editor = (
-        <Box>
-          <Grid
-            justifyContent="space-between"
-            alignItems="flex-start"
-            px={5}
-            pt={'12px'}
-            pb={'11px'}
-            sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
-            container
-          >
-            <Grid item xs={1}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                API
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton
-                sx={{ py: 0 }}
-                onClick={() => {
-                  navigator.clipboard.writeText(`${fixes.local.prefix + JSON.stringify(local) + fixes.local.postfix}`);
-                }}
-              >
-                <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Input
-            data={sessions}
-            prefix={fixes.sessions.prefix}
-            postfix={fixes.sessions.postfix}
-            handleEditorUpdate={(value: any) => {
-              updateStore(value, updateSessionsInfo);
-            }}
-            viewOnly={viewOnly}
-          />
-        </Box>
-      );
-      buildStep = 1;
-      step = 'sessions';
-      category = 'API';
+        postfix: `    );`,
+        handler: (value: any) => {
+          updateStore(value, updateSessionsInfo);
+        },
+        payload: sessions
+      };
       break;
     case 'review':
-      editor = (
+      multiTabEditor = (
         <Box>
           <Box
             sx={{
@@ -218,7 +147,7 @@ export const EditorWrapper = ({ dimensions }: any) => {
               '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
             }}
           >
-            <Tabs onChange={handleChange} value={buildStep !== null ? buildStep : tab} centered>
+            <Tabs onChange={handleChange} value={tab} centered>
               <Tab
                 label={
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
@@ -297,8 +226,6 @@ export const EditorWrapper = ({ dimensions }: any) => {
           </TabPanel>
         </Box>
       );
-      buildStep = null;
-      step = 'review';
       break;
     default:
       throw new Error('Unknown step');
@@ -327,7 +254,17 @@ export const EditorWrapper = ({ dimensions }: any) => {
           }
         }}
       >
-        {editor}
+        {singleTabData && (
+          <SingleTab
+            title={singleTabData.title}
+            prefix={singleTabData.prefix}
+            postfix={singleTabData.postfix}
+            handleUpdate={singleTabData.handler}
+            viewOnly={viewOnly}
+            data={singleTabData.payload}
+          />
+        )}
+        {multiTabEditor}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
         <Grid
