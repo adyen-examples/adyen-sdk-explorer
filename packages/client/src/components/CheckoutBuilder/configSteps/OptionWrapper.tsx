@@ -116,25 +116,34 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
           <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
             {descriptor.name}
           </Typography>
-          <Typography mx={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
-            {descriptor.type}
-          </Typography>
+          {descriptor.type && (
+            <Typography ml={1} sx={{ display: 'inline-block', fontSize: '0.75rem' }} variant="caption">
+              {descriptor.type}
+            </Typography>
+          )}
+          {descriptor.required && (
+            <Typography ml={1} sx={{ display: 'inline-block', fontSize: '0.75rem', color: '#ff9800' }} variant="caption">
+              Required
+            </Typography>
+          )}
         </Box>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
       </Grid>
-      <Grid item xs={12}>
-        <Checkbox
-          icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: 'rgb(255, 87, 34)' }}>Add parameter</Typography>}
-          checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
-          name={descriptor.name}
-          checked={value !== undefined}
-          onChange={handleToggle}
-          inputProps={{ 'aria-label': 'controlled' }}
-          sx={{ p: 0 }}
-        />
-      </Grid>
+      {descriptor.configure !== false && (
+        <Grid item xs={12}>
+          <Checkbox
+            icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: '#06f' }}>Add parameter</Typography>}
+            checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
+            name={descriptor.name}
+            checked={value !== undefined}
+            onChange={handleToggle}
+            inputProps={{ 'aria-label': 'controlled' }}
+            sx={{ p: 0 }}
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         {optionsDisplay}
       </Grid>

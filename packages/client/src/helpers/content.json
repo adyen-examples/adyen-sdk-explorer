@@ -3,13 +3,13 @@
     "title": "Profile",
     "version": "Web Components/Drop-in v5.19.0",
     "subtitle": "Product TxVariant",
-    "description": "The SDK instance accepts parameters related to itself. You must set global or component-specific configuratiosn either on the main instance of Checkout, on the main instance of dropin, or in the API request. Build and export a configuration profile for future use."
+    "description": "<p>Creates a configuration object for <a href='https://docs.adyen.com/online-payments/web-drop-in'>Web Drop-in</a> and <a href='https://docs.adyen.com/online-payments/web-components'>Web Components</a> integrations.</p> <p>The SDK instance accepts parameters related to itself. You must set global or component-specific configuratiosn either on the main instance of Checkout, on the main instance of dropin, or in the API request.</p> <p>Build and export a configuration profile for future use.</p>"
   },
   "globalPageContent": {
     "title": "Set a checkout configuration",
     "version": "Web Components/Drop-in v5.19.0",
     "subtitle": "SDK Version",
-    "description": "You must set global or component specific configuration on the main instance, or in the paymentMethodsConfiguration object. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
+    "description": "<p>Creates a configuration object for <a href='https://docs.adyen.com/online-payments/web-drop-in'>Web Drop-in</a> and <a href='https://docs.adyen.com/online-payments/web-components'>Web Components</a> integrations.</p> <p>The SDK instance accepts parameters related to <a href='https://docs.adyen.com/online-payments/web-drop-in/optional-configuration#optional-adyen-checkout-configuration'>itself</a>. You must set global or component-specific configuratiosn either on the main instance of Checkout, on the main instance of dropin, or in the API request.</p> <p>Build and export a configuration profile for future use.</p>"
   },
   "localPageContent": {
     "title": "Set a component configuration",

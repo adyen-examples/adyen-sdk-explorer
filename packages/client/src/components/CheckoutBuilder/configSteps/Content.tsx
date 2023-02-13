@@ -1,5 +1,6 @@
 import { Box, Divider, Grid, IconButton, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { marked } from 'marked';
 
 interface ContentProps {
   title: string;
@@ -9,6 +10,9 @@ interface ContentProps {
 }
 
 export const Content = ({ title, subtitle, version, description }: ContentProps) => {
+  const createMarkup = (description: any) => {
+    return { __html: description };
+  };
   return (
     <Box>
       <Grid mt={2} container px={7}>
@@ -18,9 +22,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
           </Typography>
         </Grid>
         <Grid item xs={12} mt={2}>
-          <Typography variant="h6" gutterBottom>
-            {description}
-          </Typography>
+          <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(description))} gutterBottom></Typography>
         </Grid>
         <Grid item xs={12} mt={2} sx={{ fontWeight: '500px' }}>
           <Typography component={'span'} variant="body2">
@@ -40,9 +42,6 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
           </IconButton>
         </Grid>
       </Grid>
-      <Box px={7} py={1.5} mt={2} sx={{ backgroundColor: 'secondary.light', boxShadow: 3 }}>
-        <Typography variant="h5">Configuration parameters</Typography>
-      </Box>
     </Box>
   );
 };
