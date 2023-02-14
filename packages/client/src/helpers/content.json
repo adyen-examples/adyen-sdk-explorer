@@ -24,7 +24,7 @@
     "description": "Set a configuration at the API level to be passed on the /sessions endpoint. Note, you can manually add additional key value pairs to this configuration by clicking the edit button."
   },
   "reviewPageContent": {
-    "title": "Review your build",
+    "title": "Checkout your build",
     "version": "Web Components/Drop-in v5.19.0",
     "subtitle": "Export",
     "description": "Review the component that was rendered based on your configuration. If you receive an error go back and reconfigure the SDK. If you would like to export your configuration, click the export button on the right hand side."

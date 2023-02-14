@@ -51,13 +51,13 @@ export const themeOptions: any = {
       color: '#00112c'
     },
     h5: {
-      fontWeight: 'bold',
-      fontSize: '1rem',
+      fontWeight: '550',
+      fontSize: '1.1rem',
       fontFamily: 'sans-serif',
       color: '#00112c'
     },
     h6: {
-      fontWeight: 500,
+      fontWeight: '520',
       fontSize: '0.83rem',
       fontFamily: 'sans-serif'
     },

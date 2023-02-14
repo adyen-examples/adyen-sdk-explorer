@@ -108,4 +108,3 @@ export const ConfigWrapper = () => {
     </Grid>
   );
 };
-// <StepLabel StepIconComponent={<ColorlibStepIcon step={label}/>} />
