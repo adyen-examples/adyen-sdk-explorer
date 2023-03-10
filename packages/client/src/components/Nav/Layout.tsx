@@ -20,7 +20,7 @@ export const Layout = ({ main: Main }: any) => {
   const dispatch = useAppDispatch();
 
   const pathParams = useParams();
-  const product: any = pathParams.component;
+  const product: string | undefined = pathParams.component;
 
   let editor = null;
 

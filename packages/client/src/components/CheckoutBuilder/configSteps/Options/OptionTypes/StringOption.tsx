@@ -1,16 +1,8 @@
 import { ChangeEvent } from 'react';
 import { Grid, Typography, TextField } from '@mui/material';
-import { Descriptor, HandleInput } from '../types';
+import type { OptionPropTypes } from './types';
 
-export interface OptionPropTypes {
-  descriptor: Descriptor;
-  onChange: any;
-  value: string;
-  isChecked: boolean;
-  current?: string;
-}
-
-export const Option = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
+export const StringOption = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
   return (
     <Grid item xs={11}>
       {

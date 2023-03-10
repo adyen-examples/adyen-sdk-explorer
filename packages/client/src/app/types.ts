@@ -1,29 +1,33 @@
-export type ConfigurationState = {
+export interface ConfigurationState {
   id: string;
   owner: string;
   name: string;
   version: number;
   configuration: string;
-};
+}
 
-export type UserState = {
+export interface UserState {
   id: string;
   username: string;
   configurations: [ConfigurationState] | [];
-};
+}
 
-export type OnDeckPropType = { [key: string]: any };
+export interface OnDeckPropType {
+  [key: string]: any;
+}
 
-export type OnDeckState = {
+export interface OnDeckState {
   profile: OnDeckPropType;
   checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
   sessionsResponse: OnDeckPropType | {};
+  isRedirect: boolean;
+  activeStep: number;
   [key: string]: any;
-};
+}
 
-export type Descriptor = {
+export interface Descriptor {
   name: string;
   description: string;
   properties?: [];
@@ -31,11 +35,18 @@ export type Descriptor = {
   type?: string;
   format?: string;
   [key: string]: any;
-};
+}
 
-export type DescriptorList = {
+export interface DescriptorList {
   checkout: Descriptor[] | [];
   local: Descriptor[] | [];
   sessions: Descriptor[] | [];
   [key: string]: Descriptor[] | [];
-};
+}
+
+export interface sdkExplorerState {
+  txvariant: string;
+  steps: [];
+  activeStep: number;
+  [key: string]: any;
+}

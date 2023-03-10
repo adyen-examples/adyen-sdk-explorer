@@ -1,100 +1,55 @@
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import React from 'react';
-import type { AddOrRemoveProp, Descriptor, UpdateConfig } from '../types';
-import { OptionWrapper } from './OptionWrapper';
 import { ChangeEvent, Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { OptionWrapper } from './OptionWrapper';
+import { onDeckActions } from '../../../../app';
+import type { RootState } from '../../../../store';
+import type { Descriptor } from '../../types';
 
 interface ListOptionsProps {
-  descriptors: Descriptor[];
+  name: string;
   configuration: any;
-  handleUpdateConfig: UpdateConfig;
   category: string;
 }
 
-export const ListOptions = ({ descriptors, configuration, handleUpdateConfig, category }: ListOptionsProps) => {
+export const ListOptions = ({ name, configuration, category }: ListOptionsProps) => {
+  const descriptors = useSelector((state: RootState) => state.descriptors);
   const [filters, setFilters] = useState({
     required: true,
     optional: true
   });
 
+  let actionToRun;
+
+  switch (name) {
+    case 'checkout':
+      actionToRun = onDeckActions.updateCheckoutInfo;
+      break;
+    case 'local':
+      actionToRun = onDeckActions.updateLocalInfo;
+      break;
+    case 'sessions':
+      actionToRun = onDeckActions.updateSessionsInfo;
+      break;
+    default:
+      actionToRun = false;
+      break;
+  }
+
   const { required, optional }: any = filters;
 
-  let displayDescriptors = null;
-
-  if (!required) {
-    displayDescriptors = descriptors.filter(descriptor => !descriptor.required);
-  } else if (!optional) {
-    displayDescriptors = descriptors.filter(descriptor => descriptor.required);
-  } else {
-    displayDescriptors = descriptors;
-  }
+  const displayDescriptors = descriptors[name].filter(descriptor => {
+    if (!required && !optional) {
+      return true;
+    }
+    return required ? descriptor.required : !descriptor.required;
+  });
 
   const handleToggle = (name: string) => {
     if (name === 'Required') {
       setFilters({ ...filters, required: !required });
     } else if (name === 'Optional') {
       setFilters({ ...filters, optional: !optional });
-    }
-  };
-
-  const checkForNested = (current: Descriptor) => {
-    let value: any = '';
-    if (current.properties && current.properties.length) {
-      value = {};
-      current.properties.forEach(({ name }: { name: string }) => {
-        value[name] = '';
-      });
-    } else if (current.type === 'array' && current.items) {
-      value = [];
-      if (current.items.constructor === Array) {
-        const arrayProto: { [key: string]: string } = {};
-        current.items.forEach(({ name }: { name: string }) => {
-          arrayProto[name] = '';
-        });
-        value.push(arrayProto);
-      }
-    }
-    return value;
-  };
-
-  const setDefaultType = (descriptor: Descriptor) => {
-    let defaultValue = null;
-    if (descriptor.type) {
-      switch (descriptor.type) {
-        case 'string':
-          defaultValue = '';
-          break;
-        case 'boolean':
-          defaultValue = true;
-          break;
-        case 'integer':
-          defaultValue = 0;
-          break;
-        case 'array':
-          defaultValue = [];
-          break;
-        case 'object':
-          defaultValue = {};
-          break;
-        default:
-          defaultValue = '';
-          break;
-      }
-      return defaultValue;
-    }
-
-    return checkForNested(descriptor);
-  };
-
-  const addOrRemoveProp: AddOrRemoveProp = e => {
-    const key: string = e.target.name;
-    console.log('KEY', key);
-    const descriptor = descriptors.find(descriptor => descriptor.name === key);
-    if (configuration && configuration.hasOwnProperty(key)) {
-      handleUpdateConfig(key, null);
-    } else {
-      const value = descriptor ? setDefaultType(descriptor) : '';
-      handleUpdateConfig(key, value);
     }
   };
 

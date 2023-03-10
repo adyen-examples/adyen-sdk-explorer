@@ -1,34 +1,11 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Checkbox, FormControl, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { marked } from 'marked';
 import { Fragment } from 'react';
-import type { AddOrRemoveProp, Descriptor } from '../types';
-import { ArrayOption } from './ArrayOption';
-import { Option } from './Option';
+import type { AddOrRemoveProp, Descriptor } from '../../types';
+import { ArrayOption } from './OptionTypes/ArrayOption';
+import { StringOption } from './OptionTypes/StringOption';
 import InfoIcon from '@mui/icons-material/Info';
-
-const AdyenInput = styled(InputBase)(({ theme }) => ({
-  '& .MuiInputBase-input': {
-    borderRadius: 0,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #0066ff',
-    fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
-    padding: '1px 1px 1px 1px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    fontFamily: theme.typography.subtitle2.fontFamily,
-    color: theme.palette.primary.main,
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
-    }
-  }
-}));
 
 export interface OptionWrapperPropTypes {
   value: any;
@@ -57,7 +34,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
             {descriptor.properties.map((prop: Descriptor) => {
               return (
                 <Grid item xs={7} key={prop.name}>
-                  <Option
+                  <StringOption
                     current={descriptor.name}
                     descriptor={prop}
                     onChange={handleInput}
@@ -71,7 +48,7 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
         </Fragment>
       );
     } else if (descriptor.type === 'string') {
-      optionsDisplay = <Option descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
+      optionsDisplay = <StringOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
     } else if (descriptor.type === 'boolean' && descriptor.name) {
       optionsDisplay = (
         <FormControl sx={{ width: '25%' }} size="small">
