@@ -2,5 +2,5 @@ export { AdyenInputTheme } from './AdyenInputTheme';
 export { ArrayOption } from './ArrayOption';
 export { BooleanOption } from './BooleanOption';
 export { ObjectOption } from './ObjectOption';
-export { StringOption } from './StringOption';
+export { NestedOption } from './NestedOption';
 export { TextInputField } from './TextInputField';

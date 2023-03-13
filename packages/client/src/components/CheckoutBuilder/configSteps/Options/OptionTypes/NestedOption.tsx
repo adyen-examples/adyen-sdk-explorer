@@ -4,7 +4,7 @@ import { TextInputField } from './TextInputField';
 import type { Descriptor } from '../../../types';
 import type { OptionPropTypes } from './types';
 
-export const StringOption = ({ descriptor, onChange, value }: OptionPropTypes) => {
+export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) => {
   return (
     <Fragment>
       <Grid container sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'secondary.light' }} p={4}>

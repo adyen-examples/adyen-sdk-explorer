@@ -7,11 +7,12 @@ type ReviewFormProps = {
   content: any;
 };
 
-export const ReviewForm = ({ configuration, content }: ReviewFormProps) => {
+export const ReviewForm = ({ content }: ReviewFormProps) => {
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />
       <Grid
+        item
         direction="row"
         justifyContent="space-between"
         container

@@ -3,6 +3,8 @@ import { Grid, Typography, TextField } from '@mui/material';
 import type { OptionPropTypes } from './types';
 
 export const TextInputField = ({ descriptor, onChange, value, isChecked, current }: OptionPropTypes) => {
+  let textInputFieldValue = value || '';
+
   return (
     <Grid item xs={11}>
       {
@@ -18,7 +20,7 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
       {isChecked && (
         <TextField
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
-          value={value}
+          value={textInputFieldValue}
           sx={{ display: 'block', py: 0 }}
           variant="filled"
           name={descriptor.name}

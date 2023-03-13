@@ -10,7 +10,7 @@ export const BooleanOption = ({ descriptor, value, onChange }: OptionPropTypes) 
         id="boolean-select"
         name={descriptor.name}
         value={value}
-        onChange={(e: any) => onChange(e.target.name, e.target.value, descriptor.name)}
+        onChange={(e: any) => onChange(e.target.name, e.target.value)}
         input={<AdyenInputTheme />}
       >
         <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>

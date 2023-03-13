@@ -59,3 +59,14 @@ export const deepEqual = (object1: any, object2: any) => {
   }
   return true;
 };
+
+export const compareConfigData = (prev: any, next: any) => {
+  if (!prev) {
+    return false;
+  }
+
+  const prevJson = JSON.stringify(prev);
+  const nextJson = JSON.stringify(next);
+
+  return prevJson === nextJson;
+};

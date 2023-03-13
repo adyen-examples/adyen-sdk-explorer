@@ -35,7 +35,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
         height="100%"
         width="100%"
         viewOnly={viewOnly}
-        style={{ body: { 'font-size': '0.8rem' } }}
+        style={{ body: { fontSize: '0.8rem' } }}
       />
     </Box>
   );

@@ -1,14 +1,6 @@
 import { Box } from '@mui/material';
 import { Editor } from '../Editor';
 
-interface InputProps {
-  prefix?: string;
-  postfix?: string;
-  data: any;
-  handleEditorUpdate: any;
-  viewOnly: boolean;
-}
-
 export const Input = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
   const codeBlock = (prefix: any, postfix: any) => (
     <Box>

@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
-import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
 
@@ -23,7 +23,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   const { required, optional }: { required: boolean; optional: boolean } = filters;
 
   const displayDescriptors = descriptors[name].filter(descriptor => {
-    if (!required && !optional) {
+    if (required && optional) {
       return true;
     }
     return required ? descriptor.required : !descriptor.required;

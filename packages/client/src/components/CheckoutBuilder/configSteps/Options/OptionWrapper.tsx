@@ -1,10 +1,11 @@
+import { useState, ChangeEvent } from 'react';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { marked } from 'marked';
 import { Box } from '@mui/system';
 import { Checkbox, Grid, Typography } from '@mui/material';
 import { useAppDispatch } from '../../../../hooks';
 import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
-import { ArrayOption, BooleanOption, ObjectOption, StringOption, TextInputField } from './OptionTypes';
+import { InitializeOption } from './InitializeOption';
 import type { Descriptor } from '../../types';
 
 export interface OptionWrapperPropTypes {
@@ -14,10 +15,13 @@ export interface OptionWrapperPropTypes {
 }
 
 export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapperPropTypes) => {
+  const [isChecked, setIsChecked] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleToggle = (e: any, checked: boolean) => {
-    addOrRemoveProp(e, descriptor, configuration, action);
+  const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    const toUpdate = addOrRemoveProp(e, descriptor, configuration);
+    dispatch(action(toUpdate));
+    setIsChecked(true);
   };
 
   const handleInput = (item: string, value: any, current: any) => {
@@ -25,27 +29,11 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
     dispatch(action(toUpdate));
   };
 
-  let optionsDisplay = null;
-
   const createMarkup = (description: any) => {
     return { __html: description };
   };
 
   const value = configuration[descriptor.name];
-
-  if (value !== undefined) {
-    if (descriptor.properties) {
-      optionsDisplay = <StringOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
-    } else if (descriptor.type === 'string') {
-      optionsDisplay = <TextInputField descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
-    } else if (descriptor.type === 'boolean' && descriptor.name) {
-      optionsDisplay = <BooleanOption descriptor={descriptor} onChange={handleInput} value={value} />;
-    } else if (descriptor.type === 'array' && descriptor.name) {
-      optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
-    } else if (descriptor.type === 'object' && !descriptor.properties) {
-      optionsDisplay = <ObjectOption />;
-    }
-  }
 
   return (
     <Grid direction="column" container>
@@ -75,16 +63,14 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
             icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: '#06f' }}>Add parameter</Typography>}
             checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
             name={descriptor.name}
-            checked={value !== undefined}
+            checked={isChecked}
             onChange={handleToggle}
             inputProps={{ 'aria-label': 'controlled' }}
             sx={{ p: 0 }}
           />
         </Grid>
       )}
-      <Grid item xs={12}>
-        {optionsDisplay}
-      </Grid>
+      {value !== undefined && <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />}
     </Grid>
   );
 };

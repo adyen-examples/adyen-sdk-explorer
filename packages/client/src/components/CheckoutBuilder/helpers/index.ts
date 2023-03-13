@@ -3,7 +3,7 @@ import type { Descriptor } from '../types';
 
 export type DefaultValue = string | boolean | number | any[] | Record<string, unknown> | null;
 export type HandleUpdateConfig = (configuration: any, key: string, value: DefaultValue, current?: any) => void;
-export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, descriptor: Descriptor, configuration: any, action: any) => void | undefined;
+export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, descriptor: Descriptor, configuration: any) => void | undefined;
 
 export const handleUpdateConfig: HandleUpdateConfig = (configuration, item, value, current): void => {
   let newConfig = { ...configuration };
@@ -22,15 +22,18 @@ export const handleUpdateConfig: HandleUpdateConfig = (configuration, item, valu
   return newConfig;
 };
 
-const checkForNested = (current: Descriptor): any => {
-  if (!current) {
+const checkForNested = (descriptor: Descriptor): any => {
+  if (!descriptor) {
     return '';
   }
-  if (current.properties && current.properties.length) {
-    return current.properties.reduce((acc, { name }) => ({ ...acc, [name]: '' }), {});
+  if (descriptor.type === 'object' && !descriptor.properties) {
+    return {};
   }
-  if (current.type === 'array' && current.items && current.items.constructor === Array) {
-    return [current.items.reduce((acc, { name }) => ({ ...acc, [name]: '' }), {})];
+  if (descriptor.properties && descriptor.properties.length) {
+    return descriptor.properties.reduce((acc, { name }) => ({ ...acc, [name]: '' }), {});
+  }
+  if (descriptor.type === 'array' && descriptor.items && descriptor.items.constructor === Array) {
+    return [descriptor.items.reduce((acc, { name }) => ({ ...acc, [name]: '' }), {})];
   }
   return '';
 };
@@ -64,13 +67,13 @@ const setDefaultType = (descriptor: Descriptor): DefaultValue => {
   return defaultValue;
 };
 
-export const addOrRemoveProp: AddOrRemoveProp = (e, descriptor, configuration, action) => {
+export const addOrRemoveProp: AddOrRemoveProp = (e, descriptor, configuration) => {
   const key = e.target.name;
 
   if (configuration && Object.prototype.hasOwnProperty.call(configuration, key)) {
-    handleUpdateConfig(configuration, key, null);
+    return handleUpdateConfig(configuration, key, null);
   } else {
     const value = descriptor ? setDefaultType(descriptor) : '';
-    handleUpdateConfig(configuration, key, value);
+    return handleUpdateConfig(configuration, key, value);
   }
 };
