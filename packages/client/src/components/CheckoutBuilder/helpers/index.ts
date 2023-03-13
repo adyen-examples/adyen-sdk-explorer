@@ -1,19 +1,11 @@
-import { useAppDispatch } from '../../../hooks';
 import type { ChangeEvent } from 'react';
-import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { Descriptor } from '../types';
 
 export type DefaultValue = string | boolean | number | any[] | Record<string, unknown> | null;
-export type UpdateConfig = (configuration: any, action: any, key: string, value: DefaultValue, current?: any) => void;
-export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, descriptors: Descriptor[], configuration: any, action: any) => void | undefined;
+export type HandleUpdateConfig = (configuration: any, key: string, value: DefaultValue, current?: any) => void;
+export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, descriptor: Descriptor, configuration: any, action: any) => void | undefined;
 
-const dispatch = useAppDispatch();
-
-export const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
-  dispatch(action(value));
-};
-
-export const handleUpdateConfig: UpdateConfig = (configuration, action, item, value, current): void => {
+export const handleUpdateConfig: HandleUpdateConfig = (configuration, item, value, current): void => {
   let newConfig = { ...configuration };
 
   if (value === null) {
@@ -26,7 +18,8 @@ export const handleUpdateConfig: UpdateConfig = (configuration, action, item, va
   } else {
     newConfig[item] = value;
   }
-  updateStore(newConfig, action);
+
+  return newConfig;
 };
 
 const checkForNested = (current: Descriptor): any => {
@@ -71,14 +64,13 @@ const setDefaultType = (descriptor: Descriptor): DefaultValue => {
   return defaultValue;
 };
 
-export const addOrRemoveProp: AddOrRemoveProp = (e, descriptors, configuration, action) => {
+export const addOrRemoveProp: AddOrRemoveProp = (e, descriptor, configuration, action) => {
   const key = e.target.name;
-  const descriptor = descriptors.find(d => d.name === key);
 
   if (configuration && Object.prototype.hasOwnProperty.call(configuration, key)) {
-    handleUpdateConfig(configuration, action, key, null);
+    handleUpdateConfig(configuration, key, null);
   } else {
     const value = descriptor ? setDefaultType(descriptor) : '';
-    handleUpdateConfig(configuration, action, key, value);
+    handleUpdateConfig(configuration, key, value);
   }
 };

@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { marked } from 'marked';
 

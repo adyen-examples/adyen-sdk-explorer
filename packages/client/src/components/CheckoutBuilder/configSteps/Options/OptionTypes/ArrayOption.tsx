@@ -1,6 +1,6 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import { FormControl, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
 import { ChangeEvent, Fragment, useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { FormControl, Grid, IconButton, List, ListItem, ListItemText, TextField } from '@mui/material';
 
 export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: any) => {
   const [input, setInput] = useState('');

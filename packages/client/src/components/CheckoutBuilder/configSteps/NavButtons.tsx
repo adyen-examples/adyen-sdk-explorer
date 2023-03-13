@@ -42,10 +42,6 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
     dispatch(setActiveStep(step - 1));
   };
 
-  const downloadJSON = () => {
-    alert('Downloading configuration');
-  };
-
   const exportToJson = () => {
     let filename = 'export.json';
     let contentType = 'application/json;charset=utf-8;';

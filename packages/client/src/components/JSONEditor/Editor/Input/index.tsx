@@ -1,5 +1,5 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
-import { Editor } from '../../../CheckoutBuilder/configSteps/Editor';
+import { Box } from '@mui/material';
+import { Editor } from '../Editor';
 
 interface InputProps {
   prefix?: string;
@@ -10,7 +10,7 @@ interface InputProps {
 }
 
 export const Input = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
-  const codeBlock = (prefix: any, postfix: any, configurationBlock: any) => (
+  const codeBlock = (prefix: any, postfix: any) => (
     <Box>
       {prefix && (
         <Box>
@@ -38,7 +38,7 @@ export const Input = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: a
 
   return (
     <Box>
-      <Box sx={{ overflow: 'scroll' }}>{codeBlock(prefix, postfix, data)}</Box>
+      <Box sx={{ overflow: 'scroll' }}>{codeBlock(prefix, postfix)}</Box>
     </Box>
   );
 };

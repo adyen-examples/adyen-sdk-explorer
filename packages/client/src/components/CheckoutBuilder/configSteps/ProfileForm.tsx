@@ -1,7 +1,7 @@
 import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import { Content } from './Content';
 import { onDeckActions } from '../../../app';
-import { updateStore } from '../helpers';
+import { useAppDispatch } from '../../../hooks';
 import type { OnDeckPropType } from '../../../app/types';
 import type { PageContentType } from '../helpers/content';
 
@@ -11,8 +11,10 @@ interface ProfileFormProps {
 }
 
 export const ProfileForm = ({ configuration, content }: ProfileFormProps) => {
+  const dispatch = useAppDispatch();
+
   const handleChange = (e: any) => {
-    updateStore({ [e.target.name]: e.target.value }, onDeckActions.updateProfileInfo);
+    dispatch(onDeckActions.updateProfileInfo({ product: e.target.value }));
   };
 
   return (

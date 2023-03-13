@@ -1,9 +1,9 @@
 import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { onDeckActions, sdkExplorerActions } from '../../app';
-import { useApiLocal, useAppDispatch } from '../../hooks';
-import { EditorWrapper } from './Editor';
-import { Navbar } from './Navbar/Navbar';
+import { onDeckActions, sdkExplorerActions } from '../app';
+import { useApiLocal, useAppDispatch } from '../hooks';
+import { EditorWrapper } from './JSONEditor/Editor';
+import { Navbar } from './Nav/Navbar/Navbar';
 
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;

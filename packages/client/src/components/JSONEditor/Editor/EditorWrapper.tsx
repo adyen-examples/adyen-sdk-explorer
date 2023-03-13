@@ -9,16 +9,22 @@ import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
 import { Input } from './Input';
 
-interface EditorWrapperProps {
-  dimensions: object;
+interface EditorDimensions {
+  buttonHeight: number;
+  headerHeight: number;
+  editorWidth: number;
 }
 
-export const EditorWrapper = ({ dimensions }: any) => {
+interface EditorWrapperProps {
+  dimensions: EditorDimensions;
+}
+
+export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { profile, checkout, local, sessions };
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));

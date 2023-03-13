@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { OnDeckState } from '../types';
+import type { OnDeckState, OnDeckPropType } from '../types';
 
 const initialState: OnDeckState = {
   profile: {
@@ -17,9 +17,8 @@ export const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
-    updateProfileInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const profile = { ...state.profile, ...action.payload };
-      return { ...state, profile };
+    updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
+      return { ...state, profile: action.payload };
     },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckState>) => {
       return { ...state, checkout: action.payload };

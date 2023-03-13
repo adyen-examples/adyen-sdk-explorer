@@ -6,7 +6,7 @@ import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../../CheckoutBuilder/configSteps';
-import { Editor } from '../../CheckoutBuilder/configSteps/Editor';
+import { Editor } from '../Editor';
 
 export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) => {
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);

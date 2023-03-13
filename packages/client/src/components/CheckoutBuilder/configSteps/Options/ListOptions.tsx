@@ -1,8 +1,8 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
-import { onDeckActions } from '../../../../app';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
 
@@ -10,33 +10,17 @@ interface ListOptionsProps {
   name: string;
   configuration: any;
   category: string;
+  action: ActionCreatorWithPayload<any>;
 }
 
-export const ListOptions = ({ name, configuration, category }: ListOptionsProps) => {
+export const ListOptions = ({ name, configuration, category, action }: ListOptionsProps) => {
   const descriptors = useSelector((state: RootState) => state.descriptors);
   const [filters, setFilters] = useState({
     required: true,
     optional: true
   });
 
-  let actionToRun;
-
-  switch (name) {
-    case 'checkout':
-      actionToRun = onDeckActions.updateCheckoutInfo;
-      break;
-    case 'local':
-      actionToRun = onDeckActions.updateLocalInfo;
-      break;
-    case 'sessions':
-      actionToRun = onDeckActions.updateSessionsInfo;
-      break;
-    default:
-      actionToRun = false;
-      break;
-  }
-
-  const { required, optional }: any = filters;
+  const { required, optional }: { required: boolean; optional: boolean } = filters;
 
   const displayDescriptors = descriptors[name].filter(descriptor => {
     if (!required && !optional) {
@@ -106,13 +90,7 @@ export const ListOptions = ({ name, configuration, category }: ListOptionsProps)
         displayDescriptors.map((descriptor: Descriptor) => {
           return (
             <Grid item mx={7} xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
-              <OptionWrapper
-                descriptor={descriptor}
-                indexKey={descriptor.name}
-                addOrRemoveProp={addOrRemoveProp}
-                handleInput={handleUpdateConfig}
-                value={configuration[descriptor.name]}
-              />
+              <OptionWrapper descriptor={descriptor} configuration={configuration} action={action} />
             </Grid>
           );
         })}

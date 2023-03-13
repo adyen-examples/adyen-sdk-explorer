@@ -1,7 +1,7 @@
 import { InputBase } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const AdyenInput = styled(InputBase)(({ theme }) => ({
+export const AdyenInputTheme = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderRadius: 0,
     position: 'relative',

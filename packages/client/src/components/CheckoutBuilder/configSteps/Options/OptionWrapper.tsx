@@ -1,23 +1,28 @@
-import { Checkbox, FormControl, Grid, InputBase, MenuItem, Select, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { marked } from 'marked';
-import { Fragment } from 'react';
-import type { AddOrRemoveProp, Descriptor } from '../../types';
-import { ArrayOption } from './OptionTypes/ArrayOption';
-import { StringOption } from './OptionTypes/StringOption';
-import InfoIcon from '@mui/icons-material/Info';
+import { Box } from '@mui/system';
+import { Checkbox, Grid, Typography } from '@mui/material';
+import { useAppDispatch } from '../../../../hooks';
+import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
+import { ArrayOption, BooleanOption, ObjectOption, StringOption, TextInputField } from './OptionTypes';
+import type { Descriptor } from '../../types';
 
 export interface OptionWrapperPropTypes {
-  value: any;
-  indexKey: string;
   descriptor: Descriptor;
-  addOrRemoveProp: AddOrRemoveProp;
-  handleInput: any; // need to change this to HandleInput from types
+  configuration: any;
+  action: ActionCreatorWithPayload<any>;
 }
 
-export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, handleInput }: OptionWrapperPropTypes) => {
+export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapperPropTypes) => {
+  const dispatch = useAppDispatch();
+
   const handleToggle = (e: any, checked: boolean) => {
-    addOrRemoveProp(e);
+    addOrRemoveProp(e, descriptor, configuration, action);
+  };
+
+  const handleInput = (item: string, value: any, current: any) => {
+    const toUpdate = handleUpdateConfig(configuration, item, value, current);
+    dispatch(action(toUpdate));
   };
 
   let optionsDisplay = null;
@@ -26,68 +31,24 @@ export const OptionWrapper = ({ descriptor, indexKey, value, addOrRemoveProp, ha
     return { __html: description };
   };
 
+  const value = configuration[descriptor.name];
+
   if (value !== undefined) {
     if (descriptor.properties) {
-      optionsDisplay = (
-        <Fragment>
-          <Grid container sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'secondary.light' }} p={4}>
-            {descriptor.properties.map((prop: Descriptor) => {
-              return (
-                <Grid item xs={7} key={prop.name}>
-                  <StringOption
-                    current={descriptor.name}
-                    descriptor={prop}
-                    onChange={handleInput}
-                    value={value[prop.name]}
-                    isChecked={value !== undefined}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Fragment>
-      );
-    } else if (descriptor.type === 'string') {
       optionsDisplay = <StringOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
+    } else if (descriptor.type === 'string') {
+      optionsDisplay = <TextInputField descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
     } else if (descriptor.type === 'boolean' && descriptor.name) {
-      optionsDisplay = (
-        <FormControl sx={{ width: '25%' }} size="small">
-          <Select
-            labelId="boolean-label"
-            id="boolean-select"
-            name={descriptor.name}
-            value={value}
-            onChange={(e: any) => handleInput(e.target.name, e.target.value, descriptor.name)}
-            input={<AdyenInput />}
-          >
-            <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
-              true
-            </MenuItem>
-            <MenuItem value={false as any}>false</MenuItem>
-          </Select>
-        </FormControl>
-      );
+      optionsDisplay = <BooleanOption descriptor={descriptor} onChange={handleInput} value={value} />;
     } else if (descriptor.type === 'array' && descriptor.name) {
       optionsDisplay = <ArrayOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={value !== undefined} />;
     } else if (descriptor.type === 'object' && !descriptor.properties) {
-      optionsDisplay = (
-        <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" sx={{ border: '3px solid', borderColor: '#cce0ff' }}>
-          <Grid item sx={{ bgcolor: '#cce0ff', color: 'primary.main', position: 'relative' }}>
-            <InfoIcon sx={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }} />
-            <Box component="span" sx={{ bgcolor: '#cce0ff' }}>
-              <InfoIcon sx={{ display: 'inline-block', visibility: 'hidden' }} />
-            </Box>
-          </Grid>
-          <Grid item p={2}>
-            <Typography variant="h6">Custom configuration use case. Use the JSON Editor pane.</Typography>
-          </Grid>
-        </Grid>
-      );
+      optionsDisplay = <ObjectOption />;
     }
   }
 
   return (
-    <Grid direction="column" container key={indexKey}>
+    <Grid direction="column" container>
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
