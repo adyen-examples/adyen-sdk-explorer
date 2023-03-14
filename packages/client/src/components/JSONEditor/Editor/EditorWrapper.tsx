@@ -17,12 +17,12 @@ interface EditorDimensions {
 
 interface EditorWrapperProps {
   dimensions: EditorDimensions;
+  steps: any;
 }
 
-export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
+export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
-  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const configuration: any = { profile, checkout, local, sessions };
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();

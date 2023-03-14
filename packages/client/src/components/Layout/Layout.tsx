@@ -11,11 +11,12 @@ const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const [sdkExplorerProps, setSdkExplorerProps] = useState<any>(null);
-  const [editorWidth, setEditorWidth] = useState(0);
 
   const drawerWidth = 380;
   const headerHeight = 64;
   const navButtonHeight = 40;
+
+  let editorWidth = 0;
 
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
   const { error, data } = products;
@@ -42,11 +43,21 @@ export const Layout = ({ main: Main }: any) => {
       dispatch(updateExplorer(sdkProps));
       dispatch(updateProfileInfo(activeProduct));
       setSdkExplorerProps(sdkProps);
-      setEditorWidth(420);
     }
   }, [data, dispatch, error, product]);
 
   if (!error && data) {
+    let editor;
+
+    if (sdkExplorerProps && product) {
+      editorWidth = 420;
+      editor = (
+        <EditorWrapper
+          dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }}
+          steps={sdkExplorerProps.steps}
+        />
+      );
+    }
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -75,9 +86,7 @@ export const Layout = ({ main: Main }: any) => {
         >
           <Main txvariant={product} />
         </Box>
-        {product && editorWidth && (
-          <EditorWrapper dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />
-        )}
+        {editor}
       </Box>
     );
   }
