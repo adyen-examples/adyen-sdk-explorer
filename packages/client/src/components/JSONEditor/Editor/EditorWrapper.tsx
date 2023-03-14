@@ -32,6 +32,8 @@ export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
 
   let multiTabEditor = null;
   let step = steps[activeStep];
+  console.log('STEPS:', steps);
+  console.log('ACTIVE STEP:', activeStep);
 
   const [viewOnly, setViewOnly] = useState(true);
   const [tab, setTab] = useState(0);

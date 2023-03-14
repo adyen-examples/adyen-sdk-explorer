@@ -46,7 +46,7 @@ export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey:
       try {
         const response = await fetch(url, requestOptions);
         const data = await response.json();
-        console.log(data);
+
         setPartialData(
           {
             state: 'SUCCESS',
