@@ -75,7 +75,9 @@ export const Layout = ({ main: Main }: any) => {
         >
           <Main txvariant={product} />
         </Box>
-        {editorWidth && <EditorWrapper dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
+        {product && editorWidth && (
+          <EditorWrapper dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />
+        )}
       </Box>
     );
   }

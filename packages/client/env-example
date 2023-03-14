@@ -1,0 +1,4 @@
+REACT_APP_CLIENT_URL='http://localhost:3000'
+REACT_APP_RETURN_URL_BASE='http://localhost:3000'
+REACT_APP_CLIENT_KEY='Your client key here'
+REACT_APP_MERCHANT_ACCOUNT='Your merchant account'
