@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { sdkExplorerState } from '../types';
+
+export interface sdkExplorerState {
+  txvariant: string;
+  steps: [];
+  activeStep: number;
+  [key: string]: any;
+}
 
 const initialState: sdkExplorerState = {
   txvariant: '',

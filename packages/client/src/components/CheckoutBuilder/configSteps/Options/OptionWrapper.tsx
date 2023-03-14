@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { marked } from 'marked';
 import { Box } from '@mui/system';
@@ -15,13 +15,11 @@ export interface OptionWrapperPropTypes {
 }
 
 export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapperPropTypes) => {
-  const [isChecked, setIsChecked] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
     const toUpdate = addOrRemoveProp(e, descriptor, configuration);
     dispatch(action(toUpdate));
-    setIsChecked(true);
   };
 
   const handleInput = (item: string, value: any, current: any) => {
@@ -34,6 +32,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
   };
 
   const value = configuration[descriptor.name];
+  const isChecked = value !== undefined;
 
   return (
     <Grid direction="column" container>
@@ -70,7 +69,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
           />
         </Grid>
       )}
-      {value !== undefined && <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />}
+      {isChecked && <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />}
     </Grid>
   );
 };

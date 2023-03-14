@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
-import { NavButtons } from '../../CheckoutBuilder/configSteps';
+import { NavButtons } from '../NavButtons';
 import { Input } from './Input';
 
 interface EditorDimensions {

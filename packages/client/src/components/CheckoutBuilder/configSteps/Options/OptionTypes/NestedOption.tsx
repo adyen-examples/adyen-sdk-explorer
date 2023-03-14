@@ -17,6 +17,7 @@ export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) =
                   descriptor={prop}
                   onChange={onChange}
                   value={value[prop.name]}
+                  subtitles={true}
                   isChecked={value !== undefined}
                 />
               </Grid>

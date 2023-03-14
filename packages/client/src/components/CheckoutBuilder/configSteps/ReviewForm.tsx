@@ -1,5 +1,5 @@
 import { Box, Typography, Grid } from '@mui/material';
-import ComponentBase from '../../ComponentBase/ComponentBase';
+import { ComponentBase } from '../../ComponentBuilder';
 import { Content } from './Content';
 
 type ReviewFormProps = {

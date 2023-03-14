@@ -26,11 +26,12 @@ export const Layout = ({ main: Main }: any) => {
 
   if (!error && data) {
     let sdkExplorerProps: any = null;
-    Object.keys(data.products).forEach(component => {
+
+    for (let component in data.products) {
       if (data.products[component].txvariant === product) {
         sdkExplorerProps = data.products[component];
       }
-    });
+    }
 
     if (sdkExplorerProps) {
       const txvariant = sdkExplorerProps.txvariant;

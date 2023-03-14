@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { ConfigurationState } from '../types';
+export interface ConfigurationState {
+  id: string;
+  owner: string;
+  name: string;
+  version: number;
+  configuration: string;
+}
 
 const initialState: ConfigurationState = {
   id: '',

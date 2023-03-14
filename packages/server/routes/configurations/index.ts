@@ -2,8 +2,6 @@ import { Router } from 'express';
 import { sessionsConfig } from '../../models';
 import { checkoutConfig, localConfig } from '../../temp';
 
-type PaymentMethodProperties = { [key: string]: any };
-
 const router = Router();
 
 router.get('/:txvariant', (req, res) => {

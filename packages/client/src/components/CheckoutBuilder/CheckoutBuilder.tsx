@@ -1,9 +1,38 @@
+import { useEffect } from 'react';
 import { Container, Paper } from '@mui/material';
-import { useApi } from '../../hooks';
+import { descriptorsActions } from '../../app';
+import { useAppDispatch } from '../../hooks';
 import { ConfigWrapper } from './ConfigWrapper';
+import type { RequestOptions } from '../../hooks/types';
+
+const { updateDescriptors } = descriptorsActions;
 
 const CheckoutBuilder = ({ txvariant }: any) => {
-  useApi(`http://localhost:8080/api/configurations/${txvariant}`, 'GET');
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const requestOptions: RequestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+
+    const makeRequest: () => void = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/configurations/${txvariant}`, requestOptions);
+        const data = await response.json();
+        console.log(data);
+        dispatch(updateDescriptors(data));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    makeRequest();
+
+    return () => {};
+  }, [dispatch, txvariant]);
 
   return (
     <Container maxWidth="lg" disableGutters={true}>

@@ -1,4 +1,4 @@
-import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { Content } from './Content';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
@@ -13,9 +13,7 @@ interface ProfileFormProps {
 export const ProfileForm = ({ configuration, content }: ProfileFormProps) => {
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: any) => {
-    dispatch(onDeckActions.updateProfileInfo({ product: e.target.value }));
-  };
+  const handleChange = (e: SelectChangeEvent<any>) => dispatch(onDeckActions.updateProfileInfo({ product: e.target.value }));
 
   return (
     <Box>
@@ -28,7 +26,7 @@ export const ProfileForm = ({ configuration, content }: ProfileFormProps) => {
           id="product-select"
           name="product"
           value={configuration.product}
-          onChange={handleChange}
+          onChange={e => handleChange(e)}
           label="Product"
         >
           <MenuItem value={'dropin'}>dropin</MenuItem>

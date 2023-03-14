@@ -17,7 +17,6 @@ export const ConfigWrapper = () => {
   const { profile, checkout, local, sessions, activeStep } = onDeck;
   useRedirect({ checkout, local, sessions });
 
-  let displayStep;
   const stepMap: any = {
     profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,
     checkout: <Config name="checkout" content={globalPageContent} configuration={checkout} action={updateCheckoutInfo} />,
@@ -26,7 +25,7 @@ export const ConfigWrapper = () => {
     review: <ReviewForm key="review" configuration={{ checkout, local, sessions }} content={reviewPageContent} />
   };
 
-  displayStep = stepMap[steps[activeStep]];
+  const displayStep = stepMap[steps[activeStep]];
 
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>

@@ -1,11 +1,11 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
-import { NavButtons } from '../../CheckoutBuilder/configSteps';
+import { NavButtons } from '../NavButtons';
 import { Editor } from '../Editor';
 
 export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) => {

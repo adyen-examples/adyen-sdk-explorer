@@ -1,17 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, onDeckReducer, descriptorsReducer, configurationReducer, sdkExplorerReducer } from './app';
+import { onDeckReducer, descriptorsReducer, configurationReducer, sdkExplorerReducer } from './app';
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
     onDeck: onDeckReducer,
     descriptors: descriptorsReducer,
     configuration: configurationReducer,
     sdkExplorer: sdkExplorerReducer
   }
 });
-
-console.info('STORE', store);
 
 export type RootState = ReturnType<typeof store.getState>;
 

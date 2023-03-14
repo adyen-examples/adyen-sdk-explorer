@@ -1,6 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { DescriptorList } from '../types';
+export interface Descriptor {
+  name: string;
+  description: string;
+  properties?: [];
+  items?: { type: string } | [];
+  type?: string;
+  format?: string;
+  [key: string]: any;
+}
+
+export interface DescriptorList {
+  checkout: Descriptor[] | [];
+  local: Descriptor[] | [];
+  sessions: Descriptor[] | [];
+  [key: string]: Descriptor[] | [];
+}
 
 const initialState: DescriptorList = {
   checkout: [],

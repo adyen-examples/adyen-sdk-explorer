@@ -1,5 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { OnDeckState, OnDeckPropType } from '../types';
+
+export interface OnDeckPropType {
+  [key: string]: any;
+}
+
+export interface OnDeckState {
+  profile: OnDeckPropType;
+  checkout: OnDeckPropType | {};
+  local: OnDeckPropType | {};
+  sessions: OnDeckPropType | {};
+  sessionsResponse: OnDeckPropType | {};
+  isRedirect: boolean;
+  activeStep: number;
+  [key: string]: any;
+}
 
 const initialState: OnDeckState = {
   profile: {
@@ -20,13 +34,13 @@ export const onDeckSlice = createSlice({
     updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       return { ...state, profile: action.payload };
     },
-    updateCheckoutInfo: (state, action: PayloadAction<OnDeckState>) => {
+    updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       return { ...state, checkout: action.payload };
     },
-    updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
+    updateLocalInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       return { ...state, local: action.payload };
     },
-    updateSessionsInfo: (state, action: PayloadAction<OnDeckState>) => {
+    updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       return { ...state, sessions: action.payload };
     },
     updateRedirectInfo: (state, action: PayloadAction<any>) => {
