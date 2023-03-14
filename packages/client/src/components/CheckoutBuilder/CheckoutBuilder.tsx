@@ -22,7 +22,7 @@ const CheckoutBuilder = ({ txvariant }: any) => {
       try {
         const response = await fetch(`http://localhost:8080/api/configurations/${txvariant}`, requestOptions);
         const data = await response.json();
-        console.log(data);
+
         dispatch(updateDescriptors(data));
       } catch (err) {
         console.error(err);

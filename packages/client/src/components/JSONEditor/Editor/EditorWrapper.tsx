@@ -22,8 +22,8 @@ interface EditorWrapperProps {
 export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
-  const configuration: any = { profile, checkout, local, sessions };
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
+  const configuration: any = { profile, checkout, local, sessions };
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
@@ -32,8 +32,6 @@ export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
 
   let multiTabEditor = null;
   let step = steps[activeStep];
-  console.log('STEPS:', steps);
-  console.log('ACTIVE STEP:', activeStep);
 
   const [viewOnly, setViewOnly] = useState(true);
   const [tab, setTab] = useState(0);
@@ -53,7 +51,7 @@ export const EditorWrapper = ({ dimensions }: EditorWrapperProps) => {
       <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography component={'span'}>{children}</Typography>
           </Box>
         )}
       </div>
