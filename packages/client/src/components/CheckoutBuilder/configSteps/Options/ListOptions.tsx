@@ -14,15 +14,15 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ name, configuration, category, action }: ListOptionsProps) => {
-  const descriptors = useSelector((state: RootState) => state.descriptors);
+  const optionDescriptors = useSelector((state: RootState) => state.descriptors[name]);
   const [filters, setFilters] = useState({
     required: true,
     optional: true
   });
 
-  const { required, optional }: { required: boolean; optional: boolean } = filters;
+  const { required, optional } = filters;
 
-  const displayDescriptors = descriptors[name].filter(descriptor => {
+  const displayDescriptors = optionDescriptors.filter(descriptor => {
     if (required && optional) {
       return true;
     }

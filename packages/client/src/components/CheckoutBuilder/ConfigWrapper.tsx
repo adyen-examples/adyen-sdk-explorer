@@ -17,7 +17,7 @@ export const ConfigWrapper = () => {
   const { profile, checkout, local, sessions, activeStep } = onDeck;
   useRedirect({ checkout, local, sessions });
 
-  const stepMap: any = {
+  const stepMap = {
     profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,
     checkout: <Config name="checkout" content={globalPageContent} configuration={checkout} action={updateCheckoutInfo} />,
     local: <Config name="local" content={localPageContent} configuration={local} action={updateLocalInfo} />,

@@ -1,25 +1,17 @@
-import type { ChangeEvent } from 'react';
 import type { Descriptor } from '../types';
 
 export type DefaultValue = string | boolean | number | any[] | Record<string, unknown> | null;
-export type HandleUpdateConfig = (configuration: any, key: string, value: DefaultValue, current?: any) => void;
-export type AddOrRemoveProp = (e: ChangeEvent<HTMLInputElement>, descriptor: Descriptor, configuration: any) => void | undefined;
+export type HandleUpdateConfig = (configuration: Record<string, any>, item: string, value: any, current: string) => Record<string, any>;
+export type AddOrRemoveProp = (configuration: Record<string, any>, item: string, descriptor: Descriptor) => Record<string, any>;
 
-export const handleUpdateConfig: HandleUpdateConfig = (configuration, item, value, current): void => {
-  let newConfig = { ...configuration };
-
-  if (value === null) {
-    delete newConfig[item];
-  } else if (current) {
-    newConfig[current] = {
-      ...newConfig[current],
+export const handleUpdateConfig: HandleUpdateConfig = (configuration, item, value, current) => {
+  return {
+    ...configuration,
+    [current]: {
+      ...configuration[current],
       [item]: value
-    };
-  } else {
-    newConfig[item] = value;
-  }
-
-  return newConfig;
+    }
+  };
 };
 
 const checkForNested = (descriptor: Descriptor): any => {
@@ -67,13 +59,15 @@ const setDefaultType = (descriptor: Descriptor): DefaultValue => {
   return defaultValue;
 };
 
-export const addOrRemoveProp: AddOrRemoveProp = (e, descriptor, configuration) => {
-  const key = e.target.name;
+export const addOrRemoveProp: AddOrRemoveProp = (configuration, item, descriptor) => {
+  const newConfig = { ...(configuration || {}) };
 
-  if (configuration && Object.prototype.hasOwnProperty.call(configuration, key)) {
-    return handleUpdateConfig(configuration, key, null);
+  if (newConfig[item]) {
+    delete newConfig[item];
   } else {
     const value = descriptor ? setDefaultType(descriptor) : '';
-    return handleUpdateConfig(configuration, key, value);
+    newConfig[item] = value;
   }
+
+  return newConfig;
 };

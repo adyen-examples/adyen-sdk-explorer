@@ -18,12 +18,17 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
   const dispatch = useAppDispatch();
 
   const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
-    const toUpdate = addOrRemoveProp(e, descriptor, configuration);
+    const toUpdate = addOrRemoveProp(configuration, e.target.name, descriptor);
     dispatch(action(toUpdate));
   };
 
   const handleInput = (item: string, value: any, current: any) => {
-    const toUpdate = handleUpdateConfig(configuration, item, value, current);
+    let toUpdate;
+    if (!!current) {
+      toUpdate = handleUpdateConfig(configuration, item, value, current);
+    } else {
+      toUpdate = { ...configuration, [item]: value };
+    }
     dispatch(action(toUpdate));
   };
 

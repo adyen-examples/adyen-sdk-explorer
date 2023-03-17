@@ -32,28 +32,28 @@ export const onDeckSlice = createSlice({
   initialState,
   reducers: {
     updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      return { ...state, profile: action.payload };
+      state.profile = action.payload;
     },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      return { ...state, checkout: action.payload };
+      state.checkout = action.payload;
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      return { ...state, local: action.payload };
+      state.local = action.payload;
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      return { ...state, sessions: action.payload };
+      state.sessions = action.payload;
     },
     updateRedirectInfo: (state, action: PayloadAction<any>) => {
-      return { ...state, isRedirect: action.payload };
+      state.isRedirect = action.payload;
     },
     updateStep: (state, action: PayloadAction<any>) => {
-      return { ...state, activeStep: action.payload };
+      state.activeStep = action.payload;
     },
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
-      return { ...state, sessionsResponse: action.payload };
+      state.sessionsResponse = action.payload;
     },
     clearOnDeckInfo: state => {
-      return initialState;
+      state = initialState;
     }
   }
 });
