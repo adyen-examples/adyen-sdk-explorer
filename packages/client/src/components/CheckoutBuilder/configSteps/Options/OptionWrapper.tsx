@@ -32,7 +32,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
     dispatch(action(toUpdate));
   };
 
-  const createMarkup = (description: any) => {
+  const createMarkup = (description: string) => {
     return { __html: description };
   };
 
