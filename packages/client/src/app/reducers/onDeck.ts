@@ -1,5 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { OnDeckState } from '../types';
+
+export interface OnDeckPropType {
+  [key: string]: any;
+}
+
+export interface OnDeckState {
+  profile: OnDeckPropType;
+  checkout: OnDeckPropType | {};
+  local: OnDeckPropType | {};
+  sessions: OnDeckPropType | {};
+  sessionsResponse: OnDeckPropType | {};
+  isRedirect: boolean;
+  activeStep: number;
+  [key: string]: any;
+}
 
 const initialState: OnDeckState = {
   profile: {
@@ -17,30 +31,29 @@ export const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
-    updateProfileInfo: (state, action: PayloadAction<OnDeckState>) => {
-      const profile = { ...state.profile, ...action.payload };
-      return { ...state, profile };
+    updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
+      state.profile = action.payload;
     },
-    updateCheckoutInfo: (state, action: PayloadAction<OnDeckState>) => {
-      return { ...state, checkout: action.payload };
+    updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
+      state.checkout = action.payload;
     },
-    updateLocalInfo: (state, action: PayloadAction<OnDeckState>) => {
-      return { ...state, local: action.payload };
+    updateLocalInfo: (state, action: PayloadAction<OnDeckPropType>) => {
+      state.local = action.payload;
     },
-    updateSessionsInfo: (state, action: PayloadAction<OnDeckState>) => {
-      return { ...state, sessions: action.payload };
+    updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
+      state.sessions = action.payload;
     },
     updateRedirectInfo: (state, action: PayloadAction<any>) => {
-      return { ...state, isRedirect: action.payload };
+      state.isRedirect = action.payload;
     },
     updateStep: (state, action: PayloadAction<any>) => {
-      return { ...state, activeStep: action.payload };
+      state.activeStep = action.payload;
     },
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
-      return { ...state, sessionsResponse: action.payload };
+      state.sessionsResponse = action.payload;
     },
     clearOnDeckInfo: state => {
-      return initialState;
+      state = initialState;
     }
   }
 });

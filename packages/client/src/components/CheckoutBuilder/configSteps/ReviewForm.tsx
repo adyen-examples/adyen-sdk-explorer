@@ -1,5 +1,5 @@
 import { Box, Typography, Grid } from '@mui/material';
-import ComponentBase from '../../ComponentBase/ComponentBase';
+import { ComponentBase } from '../../ComponentBuilder';
 import { Content } from './Content';
 
 type ReviewFormProps = {
@@ -7,11 +7,12 @@ type ReviewFormProps = {
   content: any;
 };
 
-export const ReviewForm = ({ configuration, content }: ReviewFormProps) => {
+export const ReviewForm = ({ content }: ReviewFormProps) => {
   return (
     <Box>
       <Content title={content.title} version={content.version} description={content.description} />
       <Grid
+        item
         direction="row"
         justifyContent="space-between"
         container

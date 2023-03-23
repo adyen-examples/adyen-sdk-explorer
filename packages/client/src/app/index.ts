@@ -1,6 +1,4 @@
 export {
-  userReducer,
-  userActions,
   onDeckReducer,
   onDeckActions,
   descriptorsReducer,
