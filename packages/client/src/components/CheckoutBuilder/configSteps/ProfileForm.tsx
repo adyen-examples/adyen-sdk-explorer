@@ -13,7 +13,7 @@ interface ProfileFormProps {
 export const ProfileForm = ({ configuration, content }: ProfileFormProps) => {
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: SelectChangeEvent<any>) => dispatch(onDeckActions.updateProfileInfo({ product: e.target.value }));
+  const handleChange = (e: SelectChangeEvent<any>) => dispatch(onDeckActions.updateTxVariant(e.target.value));
 
   return (
     <Box>

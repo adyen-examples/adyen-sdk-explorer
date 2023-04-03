@@ -9,9 +9,8 @@ import { NavButtons } from '../NavButtons';
 import { Editor } from '../Editor';
 
 export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) => {
-  const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
-  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
+  const { profile, checkout, local, sessions, sessionsResponse, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
   const dispatch = useAppDispatch();
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
@@ -54,13 +53,6 @@ export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) 
   );
 
   switch (steps[activeStep]) {
-    case 'profile':
-      configuration = { profile };
-      updateConfiguration = (value: any) => {
-        updateStore(value, updateProfileInfo);
-      };
-      step = 'profile';
-      break;
     case 'checkout':
       configuration = { checkout };
       updateConfiguration = (value: any) => {
@@ -191,12 +183,7 @@ export const JSONEditor = ({ headerHeight, editorWidth, navButtonHeight }: any) 
           </Button>
         </Grid>
         <Grid item>
-          <NavButtons
-            steps={steps}
-            step={activeStep}
-            setActiveStep={updateStep}
-            configuration={step === 'review' ? configuration : configuration[step]}
-          />
+          <NavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
         </Grid>
       </Grid>
     </Box>

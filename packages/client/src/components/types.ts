@@ -11,9 +11,9 @@ export type FormDataProps = {
 };
 
 export interface ConfigurationBaseProps {
-  global:any;
+  global: any;
   local: any;
-  profile: any;
+  txVariant: string;
   data: any;
   queryParameters: any;
   setState: any;

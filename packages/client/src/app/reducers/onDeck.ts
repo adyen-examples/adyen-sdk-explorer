@@ -1,39 +1,41 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type StepsType = 'checkout' | 'local' | 'sessions' | 'review';
+
 export interface OnDeckPropType {
   [key: string]: any;
 }
 
 export interface OnDeckState {
-  profile: OnDeckPropType;
   checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
   sessionsResponse: OnDeckPropType | {};
+  products: { [key: string]: { txVariant: string } };
+  txVariant: string;
   isRedirect: boolean;
   activeStep: number;
+  txvariant?: string;
+  steps: StepsType[];
   [key: string]: any;
 }
 
 const initialState: OnDeckState = {
-  profile: {
-    product: 'dropin'
-  },
   checkout: {},
   local: {},
   sessions: {},
   sessionsResponse: {},
-  isRedirect: false,
-  activeStep: 0
+  products: {},
+  txVariant: '',
+  steps: ['checkout', 'local', 'sessions', 'review'],
+  activeStep: 0,
+  isRedirect: false
 };
 
 export const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
-    updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      state.profile = action.payload;
-    },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.checkout = action.payload;
     },
@@ -43,17 +45,28 @@ export const onDeckSlice = createSlice({
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.sessions = action.payload;
     },
-    updateRedirectInfo: (state, action: PayloadAction<any>) => {
-      state.isRedirect = action.payload;
-    },
-    updateStep: (state, action: PayloadAction<any>) => {
-      state.activeStep = action.payload;
-    },
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
       state.sessionsResponse = action.payload;
     },
+    updateProductsInfo: (state, action: PayloadAction<any>) => {
+      state.products = action.payload;
+    },
+    updateTxVariant: (state, action: PayloadAction<string>) => {
+      state.profile = action.payload;
+    },
+    updateSteps: (state, action: PayloadAction<any>) => {
+      state.steps = action.payload;
+    },
+    updateActiveStep: (state, action: PayloadAction<any>) => {
+      state.activeStep = action.payload;
+    },
+    updateRedirectInfo: (state, action: PayloadAction<any>) => {
+      state.isRedirect = action.payload;
+    },
     clearOnDeckInfo: state => {
+      console.log('called');
       state = initialState;
+      console.log(state);
     }
   }
 });

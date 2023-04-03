@@ -3,24 +3,22 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Box, Button, IconButton } from '@mui/material';
 import { onDeckActions } from '../../app';
 import { useAppDispatch } from '../../hooks';
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
   steps: any;
   step: number;
   configuration: any;
-  setActiveStep: (step: number) => any;
 };
 
-export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
+export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   const dispatch = useAppDispatch();
+
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
 
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
     switch (steps[step]) {
-      case 'profile':
-        return dispatch(updateProfileInfo(configuration));
       case 'checkout':
         return dispatch(updateCheckoutInfo(configuration));
       case 'local':
@@ -35,11 +33,11 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
 
   const handleNext = () => {
     runStepAction();
-    dispatch(setActiveStep(step + 1));
+    dispatch(updateActiveStep(step + 1));
   };
 
   const handleBack = () => {
-    dispatch(setActiveStep(step - 1));
+    dispatch(updateActiveStep(step - 1));
   };
 
   const exportToJson = () => {

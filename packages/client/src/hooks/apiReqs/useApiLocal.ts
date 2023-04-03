@@ -1,35 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { AllowedMethods, RequestOptions } from '../types';
 
-interface DataState {
-  state: string;
-  error?: any;
-  data?: any;
-}
-
-// moved outside of hook to avoid infinite re-renders and an accurate dependency array
-
-const setPartialData = (partialData: DataState, callback: Function) =>
-  callback((prevState: DataState) => ({
-    ...prevState,
-    ...partialData
-  }));
-
 export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey: string = '', body?: any) => {
-  const [data, setData] = useState<DataState>({
-    state: 'LOADING',
-    error: null,
-    data: null
-  });
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    setPartialData(
-      {
-        state: 'LOADING'
-      },
-      setData
-    );
-
     const requestOptions: RequestOptions = {
       method,
       headers: {
@@ -47,26 +22,15 @@ export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey:
         const response = await fetch(url, requestOptions);
         const data = await response.json();
 
-        setPartialData(
-          {
-            state: 'SUCCESS',
-            data
-          },
-          setData
-        );
+        setData(data);
       } catch (err) {
         console.error(err);
-        setPartialData(
-          {
-            state: 'ERROR',
-            error: 'fetch failed'
-          },
-          setData
-        );
       }
     };
 
     makeRequest();
+
+    return () => {};
   }, [url, method, apiKey, body]);
 
   return [data];

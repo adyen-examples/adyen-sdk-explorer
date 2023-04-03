@@ -11,10 +11,7 @@ import type { RootState } from '../../store';
 const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 export const ConfigWrapper = () => {
-  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const onDeck = useSelector((state: RootState) => state.onDeck);
-
-  const { profile, checkout, local, sessions, activeStep } = onDeck;
+  const { profile, checkout, local, sessions, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
   useRedirect({ checkout, local, sessions });
 
   const stepMap = {
