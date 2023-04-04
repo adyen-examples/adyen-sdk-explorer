@@ -9,7 +9,7 @@ import type { RequestOptions } from '../../hooks/types';
 const { updateDescriptors } = descriptorsActions;
 const { clearOnDeckInfo } = onDeckActions;
 
-const CheckoutBuilder = ({ txvariant }: any) => {
+const CheckoutBuilder = ({ txvariant }: string) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
