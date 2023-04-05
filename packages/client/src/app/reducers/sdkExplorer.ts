@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState: any = {
+export interface sdkExplorerState {
+  txvariant: string;
+  steps: [];
+  activeStep: number;
+  [key: string]: any;
+}
+
+const initialState: sdkExplorerState = {
   txvariant: '',
   steps: [],
   activeStep: 0
@@ -14,13 +21,13 @@ export const sdkExplorerSlice = createSlice({
       return { ...state, ...action.payload };
     },
     updateTxVariantInfo: (state, action: PayloadAction<any>) => {
-      return {...state, txvariant: action.payload};
+      return { ...state, txvariant: action.payload };
     },
     updateStepsInfo: (state, action: PayloadAction<any>) => {
-        return {...state, steps: action.payload};
+      return { ...state, steps: action.payload };
     },
     updateActiveStepInfo: (state, action: PayloadAction<any>) => {
-        return {...state, activeStep: action.payload};
+      return { ...state, activeStep: action.payload };
     },
     clearExplorer: state => {
       return initialState;

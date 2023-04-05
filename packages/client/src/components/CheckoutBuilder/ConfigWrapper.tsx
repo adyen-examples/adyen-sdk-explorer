@@ -1,88 +1,31 @@
 import { Grid, Step, StepLabel, Stepper } from '@mui/material';
-import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
-import content from '../../helpers/content.json';
-import { useAppDispatch, useRedirect } from '../../hooks';
-import type { RootState } from '../../store';
+import { useRedirect } from '../../hooks';
 import { ColorlibStepIcon } from './ColorlibStepIcon';
 import { Config } from './Config';
 import { ProfileForm, ReviewForm } from './configSteps';
+import { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent } from './helpers/content';
+import type { RootState } from '../../store';
 
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 export const ConfigWrapper = () => {
-  const descriptors = useSelector((state: RootState) => state.descriptors);
-  const { txvariant, steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
-  const dispatch = useAppDispatch();
-  const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
-    dispatch(action(value));
-  };
+  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
+  const onDeck = useSelector((state: RootState) => state.onDeck);
 
-  const { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent }: any = content;
-
+  const { profile, checkout, local, sessions, activeStep } = onDeck;
   useRedirect({ checkout, local, sessions });
 
-  console.info('STORE', JSON.stringify({ profile, checkout, local, sessions, activeStep, txvariant, steps }));
-
-  let displayStep;
-  const stepMap: any = {
-    profile: (
-      <ProfileForm
-        key="profile"
-        configuration={profile}
-        action={updateProfileInfo}
-        updateStore={updateStore}
-        content={profilePageContent}
-      />
-    ),
-    checkout: (
-      <Config
-        key="checkout"
-        configuration={checkout}
-        descriptors={descriptors.checkout}
-        step={activeStep}
-        setActiveStep={updateStep}
-        action={updateCheckoutInfo}
-        updateStore={updateStore}
-        content={globalPageContent}
-      />
-    ),
-    local: (
-      <Config
-        key="local"
-        configuration={local}
-        descriptors={descriptors.local}
-        step={activeStep}
-        setActiveStep={updateStep}
-        action={updateLocalInfo}
-        updateStore={updateStore}
-        content={localPageContent}
-      />
-    ),
-    sessions: (
-      <Config
-        key="sessions"
-        configuration={sessions}
-        descriptors={descriptors.sessions}
-        step={activeStep}
-        setActiveStep={updateStep}
-        action={updateSessionsInfo}
-        updateStore={updateStore}
-        content={apiPageContent}
-      />
-    ),
-    review: (
-      <ReviewForm
-        key="review"
-        configuration={{ checkout, local, sessions }}
-        content={reviewPageContent}
-      />
-    )
+  const stepMap = {
+    profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,
+    checkout: <Config name="checkout" content={globalPageContent} configuration={checkout} action={updateCheckoutInfo} />,
+    local: <Config name="local" content={localPageContent} configuration={local} action={updateLocalInfo} />,
+    sessions: <Config name="sessions" content={apiPageContent} configuration={sessions} action={updateSessionsInfo} />,
+    review: <ReviewForm key="review" configuration={{ checkout, local, sessions }} content={reviewPageContent} />
   };
 
-  displayStep = stepMap[steps[activeStep]];
+  const displayStep = stepMap[steps[activeStep]];
 
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>

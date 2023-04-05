@@ -47,26 +47,6 @@
     "description": "Indicates if you're sending <a href=\"/online-payments/analytics-and-data-tracking\">analytics data</a> to Adyen. Default: <strong>true</strong>."
   },
   {
-    "description": "The amount of the payment.",
-    "type": "object",
-    "properties": [
-      {
-        "description": "The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).",
-        "maxLength": 3,
-        "minLength": 3,
-        "type": "string",
-        "name": "currency"
-      },
-      {
-        "description": "The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).",
-        "format": "int64",
-        "type": "integer",
-        "name": "value"
-      }
-    ],
-    "name": "amount"
-  },
-  {
     "name": "showPayButton",
     "description": "Show or hides a Pay Button for each payment method. Defaults to true. The Pay button triggers the onSubmit event when payment details are valid. If you want to disable the button and then trigger the submit flow on your own, set this to false and call the .submit() method from your own button implementation. PayPal Smart Payment Buttons doesn't support the .submit() method.",
     "type": "boolean"

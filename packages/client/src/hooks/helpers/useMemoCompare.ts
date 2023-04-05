@@ -1,16 +1,18 @@
 import { useRef, useEffect } from 'react';
 
-export const useMemoCompare = (next: any, compare: (prev: any, next: any) => any) => {
-    const previousRef = useRef<any>();
-    const previous = previousRef.current;
+// compares objects that are hook dependencies to prevent infinite re-renders
 
-    const isEqual = compare(previous, next);
+export const useMemoCompare = (next: any) => {
+  const previousRef = useRef<any>();
+  const previous = previousRef.current;
 
-    useEffect(() => {
-        if (!isEqual) {
-            previousRef.current = next;
-        }
-    });
+  const isEqual = JSON.stringify(next) === JSON.stringify(previous);
 
-    return isEqual ? previous : next;
+  useEffect(() => {
+    if (!isEqual) {
+      previousRef.current = next;
+    }
+  });
+
+  return isEqual ? previous : next;
 };

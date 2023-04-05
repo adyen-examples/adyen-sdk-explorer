@@ -167,7 +167,7 @@ export const Overview = () => {
           <Typography variant="h2">
             Welcome to <br /> Adyen's SDK Explorer
           </Typography>
-          <Typography sx={{ mt: 3 }} variant="body2">
+          <Typography component={'span'} sx={{ mt: 3 }} variant="body2">
             With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, and customizations. You can
             pass an optional configuration to satisfy your business needs in the following implementation checkpoints:
             <ul>
@@ -175,8 +175,8 @@ export const Overview = () => {
               <li>Component Configuration</li>
               <li>API Configuration</li>
             </ul>
-            This application will guide you in passing an optional configuration throughout the implementation checkpoints. Our SDK Explorer
-            enables you to:
+            This application will guide you in passing an optional configuration throughout the implementation checkpoints. Our SDK Explorer enables
+            you to:
             <ul>
               <li>Quickly configure and construct an Adyen component to your specifications.</li>
               <li>Get up to speed on all of Adyen SDK's optional configurations.</li>

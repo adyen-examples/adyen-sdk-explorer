@@ -42,6 +42,7 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {links.map((link: any) => (
                 <Button
+                  key={link.title}
                   href={link.url}
                   sx={{ color: '#394962', ml: 3, borderColor: '#bdbdbd' }}
                   variant={`${link.title === 'Test Account' ? 'outlined' : 'text'}`}

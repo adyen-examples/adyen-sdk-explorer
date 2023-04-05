@@ -1,51 +1,37 @@
-import AdyenCheckout from '@adyen/adyen-web';
-import { useEffect, useState } from 'react';
-import { compareSessionData } from '../../helpers';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { isConfigEmpty } from '../../helpers';
+import { useAppDispatch } from '../index';
 import { useMemoCompare } from '../helpers/useMemoCompare';
-import type { CheckoutConfig, EditableCheckoutConfigFields } from '../types';
+import { onDeckActions, sdkExplorerActions } from '../../app';
 
-export const useRedirect = (options: EditableCheckoutConfigFields) => {
-  const [checkout, setCheckout] = useState<any>(null);
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateStep } = onDeckActions;
+const { updateExplorer } = sdkExplorerActions;
 
-  // creates ref and uses data compare callback to decide if re-rendering should occur.  Without this, there is an infinite loop.
-  const opts = useMemoCompare(options, compareSessionData);
+export const useRedirect = (configuration: any) => {
+  const [queryParameters] = useSearchParams();
+  const redirectResult = queryParameters.get('redirectResult');
+  const encodedConfig: any = localStorage.getItem('configuration');
+  const encodedSDKState: any = localStorage.getItem('sdkExplorer');
+  const dispatch = useAppDispatch();
 
-  // TODO: This config will be brought in from front end. Add as argument above
+  const componentConfig = useMemoCompare(configuration);
+  const storedConfig = useMemoCompare(JSON.parse(encodedConfig));
+  const storedSdkExplorerState = useMemoCompare(JSON.parse(encodedSDKState));
+
   useEffect(() => {
-    const { session: sessionInfo, redirectResult } = options;
+    if (redirectResult) {
+      const { checkout, local, sessions } = storedConfig;
+      const { steps, step } = storedSdkExplorerState;
 
-    let session;
-
-    if (redirectResult && redirectResult.redirectSessionId) {
-      session = { id: redirectResult.redirectSessionId };
-    } else if (sessionInfo) {
-      session = sessionInfo;
+      if (isConfigEmpty(componentConfig)) {
+        dispatch(updateCheckoutInfo(checkout));
+        dispatch(updateLocalInfo(local));
+        dispatch(updateSessionsInfo(sessions));
+        dispatch(updateRedirectInfo(true));
+        dispatch(updateStep(steps.length - 1));
+        dispatch(updateExplorer({ steps, step }));
+      }
     }
-
-    const configuration: CheckoutConfig = {
-      ...options,
-      ...session,
-      onPaymentCompleted: (result, component) => {
-        console.info(result, component);
-      },
-      onError: (error, component) => {
-        console.error(error.name, error.message, error.stack, component);
-      }
-    };
-
-    const initializeCheckout: (config: object) => void = async config => {
-      const component = await AdyenCheckout(config);
-      if (redirectResult && redirectResult.redirectResult && redirectResult.redirectSessionId) {
-        component.submitDetails({
-          details: { redirectResult: redirectResult.redirectResult }
-        });
-      }
-
-      setCheckout(component);
-    };
-
-    initializeCheckout(configuration);
-  }, [opts]);
-
-  return [checkout];
+  }, [redirectResult, componentConfig, storedConfig, storedSdkExplorerState, dispatch]);
 };

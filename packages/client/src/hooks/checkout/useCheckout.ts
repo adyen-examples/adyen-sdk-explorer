@@ -6,14 +6,14 @@ export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
 
   useEffect(() => {
-    let checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
+    const checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);
       setCheckout(component);
     };
 
     initializeCheckout(checkoutOptions);
-  }, []);
+  }, [configuration.checkoutConfig]);
 
   return [checkout];
 };

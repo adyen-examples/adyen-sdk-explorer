@@ -1,29 +1,22 @@
 import { Box } from '@mui/material';
 import { ListOptions } from './configSteps';
 import { Content } from './configSteps/Content';
-import type { ConfigPropTypes, UpdateConfig } from './types';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import type { OnDeckPropType } from '../../app/types';
+import type { PageContentType } from './helpers/content';
 
-export const Config = ({ configuration, descriptors, action, updateStore, content }: ConfigPropTypes) => {
-  const handleUpdateConfig: UpdateConfig = (item, value, current): void => {
-    let newConfig = { ...configuration };
+export interface ConfigPropTypes {
+  name: string;
+  content: PageContentType;
+  configuration: OnDeckPropType;
+  action: ActionCreatorWithPayload<any>;
+}
 
-    if (value === null) {
-      delete newConfig[item];
-    } else if (current && 'boolean' == typeof value) {
-      newConfig = { ...newConfig, [current]: value };
-    } else if (current && 'string' == typeof value) {
-      let newCurrent = { ...newConfig[current], [item]: value };
-      newConfig = { ...newConfig, [current]: newCurrent };
-    } else {
-      newConfig = { ...newConfig, [item]: value };
-    }
-    updateStore(newConfig, action);
-  };
-
+export const Config = ({ name, content, configuration, action }: ConfigPropTypes) => {
   return (
     <Box>
       <Content title={content.title} subtitle={content.subtitle} version={content.version} description={content.description} />
-      <ListOptions category={'Parameters'} descriptors={descriptors} configuration={configuration} handleUpdateConfig={handleUpdateConfig} />
+      <ListOptions category={'Parameters'} name={name} configuration={configuration} action={action} />
     </Box>
   );
 };

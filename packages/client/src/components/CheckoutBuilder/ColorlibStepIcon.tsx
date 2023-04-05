@@ -1,12 +1,7 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import BiotechIcon from '@mui/icons-material/Biotech';
-import CodeIcon from '@mui/icons-material/Code';
-import PublicIcon from '@mui/icons-material/Public';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import { StepIconProps } from '@mui/material/StepIcon';
 import { styled } from '@mui/material/styles';
 
 const ColorlibStepIconRoot = styled('div')<{

@@ -1,6 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { DescriptorList } from '../types';
+export interface Descriptor {
+  name: string;
+  description: string;
+  properties?: [];
+  items?: { type: string } | [];
+  type?: string;
+  format?: string;
+  [key: string]: any;
+}
+
+export interface DescriptorList {
+  checkout: Descriptor[] | [];
+  local: Descriptor[] | [];
+  sessions: Descriptor[] | [];
+  [key: string]: Descriptor[] | [];
+}
 
 const initialState: DescriptorList = {
   checkout: [],
@@ -13,13 +28,12 @@ export const descriptorsSlice = createSlice({
   initialState,
   reducers: {
     updateDescriptors: (state, action: PayloadAction<DescriptorList>) => {
-      const checkout = [...new Set([...action.payload.checkoutConfig])];
-      const local = [...new Set([...action.payload.localConfig])];
-      const sessions = [...new Set([...action.payload.sessionsConfig])];
-      return { ...state, checkout, local, sessions };
+      state.checkout = [...new Set([...action.payload.checkoutConfig])];
+      state.local = [...new Set([...action.payload.localConfig])];
+      state.sessions = [...new Set([...action.payload.sessionsConfig])];
     },
     clearDescriptorInfo: state => {
-      return initialState;
+      state = initialState;
     }
   }
 });
