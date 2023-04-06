@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../../hooks';
 import type { RootState } from '../../../store';
 import { NavButtons } from '../NavButtons';
 import { Input } from './Input';
+import { StyleEditor } from './StyleEditor';
 
 interface EditorDimensions {
   buttonHeight: number;
@@ -103,10 +104,10 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
       singleTabData = {
         title: 'JS',
         prefix: `
-        const checkout = await AdyenCheckout(`,
+    const checkout = await AdyenCheckout(`,
         postfix: `    );
       
-        checkout.create('${profile.product}', {...});`,
+    checkout.create('${profile.product}', {...});`,
         handler: (value: any) => {
           updateStore(value, updateCheckoutInfo);
         },
@@ -117,9 +118,9 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
       singleTabData = {
         title: 'JS',
         prefix: `
-        const checkout = await AdyenCheckout({...});
+    const checkout = await AdyenCheckout({...});
                 
-        checkout.create('${profile.product}',`,
+    checkout.create('${profile.product}',`,
         postfix: `    );`,
         handler: (value: any) => {
           updateStore(value, updateLocalInfo);
@@ -131,10 +132,8 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
       singleTabData = {
         title: 'API',
         prefix: `
-  const checkout = await AdyenCheckout({...});
-          
-  checkout.create('${profile.product}',`,
-        postfix: `    );`,
+    Request:`,
+        postfix: '',
         handler: (value: any) => {
           updateStore(value, updateSessionsInfo);
         },
@@ -225,10 +224,10 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
             />
           </TabPanel>
           <TabPanel value={tab} index={2}>
-            {'STATE'}
+            {'STYLE'}
           </TabPanel>
           <TabPanel value={tab} index={3}>
-            {'STYLE'}
+            <StyleEditor />
           </TabPanel>
         </Box>
       );
