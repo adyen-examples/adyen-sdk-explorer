@@ -51,8 +51,8 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     return (
       <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
         {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography component={'span'}>{children}</Typography>
+          <Box>
+            <Box component={'span'}>{children}</Box>
           </Box>
         )}
       </div>
