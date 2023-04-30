@@ -31,6 +31,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     dispatch(action(value));
   };
 
+  console.log('profile, checkout, local, sessions, sessionsResponse, activeStep: ', profile, checkout, local, sessions, sessionsResponse, activeStep);
   let multiTabEditor = null;
   let step = steps[activeStep];
 
@@ -109,6 +110,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
       
     checkout.create('${profile.product}', {...});`,
         handler: (value: any) => {
+          console.log('updating store');
           updateStore(value, updateCheckoutInfo);
         },
         payload: checkout
@@ -123,6 +125,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     checkout.create('${profile.product}',`,
         postfix: `    );`,
         handler: (value: any) => {
+          console.log('updating store');
           updateStore(value, updateLocalInfo);
         },
         payload: local
@@ -135,6 +138,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     Request:`,
         postfix: '',
         handler: (value: any) => {
+          console.log('updating store');
           updateStore(value, updateSessionsInfo);
         },
         payload: sessions

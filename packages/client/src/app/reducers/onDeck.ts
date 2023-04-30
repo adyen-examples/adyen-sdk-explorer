@@ -19,7 +19,7 @@ const initialState: OnDeckState = {
   profile: {
     product: 'dropin'
   },
-  checkout: {},
+  checkout: { locale: 'en', test: 'test' },
   local: {},
   sessions: {},
   sessionsResponse: {},
@@ -27,7 +27,7 @@ const initialState: OnDeckState = {
   activeStep: 0
 };
 
-export const onDeckSlice = createSlice({
+const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
@@ -36,9 +36,11 @@ export const onDeckSlice = createSlice({
     },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.checkout = action.payload;
+      console.log('updateCheckoutInfo called');
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.local = action.payload;
+      console.log('updateLocalInfo called');
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.sessions = action.payload;
@@ -52,8 +54,12 @@ export const onDeckSlice = createSlice({
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
       state.sessionsResponse = action.payload;
     },
-    clearOnDeckInfo: state => {
-      state = initialState;
+    // clearOnDeckInfo: state => {
+    //   state = initialState;
+    //   console.log('the new state', state);
+    // }
+    clearOnDeckInfo: (state, action: PayloadAction<any>) => {
+      state = action.payload;
     }
   }
 });

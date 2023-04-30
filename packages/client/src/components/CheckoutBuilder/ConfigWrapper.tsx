@@ -12,10 +12,11 @@ const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckAction
 
 export const ConfigWrapper = () => {
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const onDeck = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
 
-  const { profile, checkout, local, sessions, activeStep } = onDeck;
   useRedirect({ checkout, local, sessions });
+
+  console.log('profile, checkout, local, sessions, activeStep: ', profile, checkout, local, sessions, activeStep, 'ConfigWrapper.tsx: 20');
 
   const stepMap = {
     profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,

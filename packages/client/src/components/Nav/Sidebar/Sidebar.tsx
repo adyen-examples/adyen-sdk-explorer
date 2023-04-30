@@ -19,9 +19,9 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
     color: '#000000'
   };
 
-  const handleClick = (txvariant: any) => {
+  const handleClick = async (txvariant: any) => {
+    await dispatch(clearOnDeckInfo({ local: { another: 'teadf' } }));
     navigate(`/${txvariant}`);
-    dispatch(clearOnDeckInfo());
   };
   return (
     <Drawer

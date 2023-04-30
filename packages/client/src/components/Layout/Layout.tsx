@@ -11,6 +11,7 @@ const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const [sdkExplorerProps, setSdkExplorerProps] = useState<any>(null);
+  console.log('Layout rendered');
 
   const drawerWidth = 380;
   const headerHeight = 64;
@@ -39,7 +40,6 @@ export const Layout = ({ main: Main }: any) => {
       if (sdkProps) {
         activeProduct = { product: sdkProps.txvariant };
       }
-
       dispatch(updateExplorer(sdkProps));
       dispatch(updateProfileInfo(activeProduct));
       setSdkExplorerProps(sdkProps);
