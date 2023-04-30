@@ -19,7 +19,7 @@ const initialState: OnDeckState = {
   profile: {
     product: 'dropin'
   },
-  checkout: { locale: 'en', test: 'test' },
+  checkout: {},
   local: {},
   sessions: {},
   sessionsResponse: {},
@@ -54,12 +54,8 @@ const onDeckSlice = createSlice({
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
       state.sessionsResponse = action.payload;
     },
-    // clearOnDeckInfo: state => {
-    //   state = initialState;
-    //   console.log('the new state', state);
-    // }
-    clearOnDeckInfo: (state, action: PayloadAction<any>) => {
-      state = action.payload;
+    clearOnDeckInfo: state => {
+      state = initialState;
     }
   }
 });

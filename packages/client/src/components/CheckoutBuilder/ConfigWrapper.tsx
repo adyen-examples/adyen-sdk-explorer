@@ -16,8 +16,6 @@ export const ConfigWrapper = () => {
 
   useRedirect({ checkout, local, sessions });
 
-  console.log('profile, checkout, local, sessions, activeStep: ', profile, checkout, local, sessions, activeStep, 'ConfigWrapper.tsx: 20');
-
   const stepMap = {
     profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,
     checkout: <Config name="checkout" content={globalPageContent} configuration={checkout} action={updateCheckoutInfo} />,

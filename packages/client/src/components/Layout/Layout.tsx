@@ -10,15 +10,13 @@ const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
-  const [sdkExplorerProps, setSdkExplorerProps] = useState<any>(null);
-  console.log('Layout rendered');
-
   const drawerWidth = 380;
   const headerHeight = 64;
   const navButtonHeight = 40;
-
   let editorWidth = 0;
 
+  let sdkExplorerProps: any = null;
+  
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
   const { error, data } = products;
 
@@ -27,24 +25,20 @@ export const Layout = ({ main: Main }: any) => {
   const pathParams = useParams();
   const product: any = pathParams.component;
 
-  useEffect(() => {
-    if (!error && data) {
-      let sdkProps: any = null;
-      let activeProduct: any = null;
-      for (let component in data.products) {
-        if (data.products[component].txvariant === product) {
-          sdkProps = data.products[component];
-        }
+  if (!error && data) {
+    let activeProduct: any = null;
+    for (let component in data.products) {
+      if (data.products[component].txvariant === product) {
+        sdkExplorerProps = data.products[component];
       }
-
-      if (sdkProps) {
-        activeProduct = { product: sdkProps.txvariant };
-      }
-      dispatch(updateExplorer(sdkProps));
-      dispatch(updateProfileInfo(activeProduct));
-      setSdkExplorerProps(sdkProps);
     }
-  }, [data, dispatch, error, product]);
+
+    if (sdkExplorerProps) {
+      activeProduct = { product: sdkExplorerProps.txvariant };
+    }
+    dispatch(updateExplorer(sdkExplorerProps));
+    dispatch(updateProfileInfo(activeProduct));
+  }
 
   if (!error && data) {
     let editor;
