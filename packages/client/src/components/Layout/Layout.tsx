@@ -2,7 +2,7 @@ import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
-import { EditorWrapper } from '../JSONEditor/Editor';
+import { EditorWrapper } from '../EditorBar';
 import { Navbar } from '../Nav/Navbar/Navbar';
 import { useEffect } from 'react';
 

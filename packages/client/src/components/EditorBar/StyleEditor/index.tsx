@@ -1,4 +1,4 @@
-import { Input } from '../Input';
+import { Input } from '../EditorPrePostFix';
 import { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 

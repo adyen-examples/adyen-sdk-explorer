@@ -1,8 +1,8 @@
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Box, Button, IconButton } from '@mui/material';
-import { onDeckActions } from '../../app';
-import { useAppDispatch } from '../../hooks';
+import { onDeckActions } from '../../../app';
+import { useAppDispatch } from '../../../hooks';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {

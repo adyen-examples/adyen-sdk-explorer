@@ -3,11 +3,11 @@ import { Box, Button, Grid, IconButton, Tab, Tabs, Typography } from '@mui/mater
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { onDeckActions } from '../../../app';
-import { useAppDispatch } from '../../../hooks';
-import type { RootState } from '../../../store';
-import { NavButtons } from '../NavButtons';
-import { Input } from './Input';
+import { onDeckActions } from '../../app';
+import { useAppDispatch } from '../../hooks';
+import type { RootState } from '../../store';
+import { NavButtons } from './NavButtons';
+import { Input } from './EditorPrePostFix';
 import { StyleEditor } from './StyleEditor';
 
 interface EditorDimensions {
