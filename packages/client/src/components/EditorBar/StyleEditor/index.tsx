@@ -32,11 +32,11 @@ export const StyleEditor = (props: any) => {
         handleEditorUpdate={(value: any) => {
           console.log(value);
         }}
-        viewOnly={false}
+        viewOnly={true}
       />
       <Box>
-        <Box sx={{ border: 1, borderColor: 'divider', bgcolor: 'secondary.gray' }}>
-          <Typography sx={{ fontSize: '.7rem', color: 'black', px: 2 }} variant="caption">
+        <Box sx={{ border: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+          <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
             PALETTE
           </Typography>
         </Box>

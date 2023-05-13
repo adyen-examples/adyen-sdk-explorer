@@ -2,7 +2,7 @@ import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
-import { EditorWrapper } from '../EditorBar';
+import { EditorBar } from '../EditorBar';
 import { Navbar } from '../Nav/Navbar/Navbar';
 import { useEffect } from 'react';
 
@@ -44,7 +44,7 @@ export const Layout = ({ main: Main }: any) => {
     if (sdkExplorerProps) {
       editorWidth = 420;
       editor = (
-        <EditorWrapper
+        <EditorBar
           dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }}
           steps={sdkExplorerProps.steps}
         />

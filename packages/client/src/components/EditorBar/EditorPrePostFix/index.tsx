@@ -6,7 +6,7 @@ export const EditorPrePostFix = ({ prefix, postfix, data, handleEditorUpdate, vi
     <Box>
       {prefix && (
         <Box>
-          <Box sx={{ color: 'info.main' }}>
+          <Box>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
               <code style={{ fontSize: '0.9rem' }}>{prefix}</code>
             </pre>
@@ -18,7 +18,7 @@ export const EditorPrePostFix = ({ prefix, postfix, data, handleEditorUpdate, vi
       </Box>
       {postfix && (
         <Box>
-          <Box sx={{ color: 'info.main' }}>
+          <Box>
             <pre style={{ marginTop: '0px', marginBottom: '0px' }}>
               <code style={{ fontSize: '0.9rem' }}>{postfix}</code>
             </pre>

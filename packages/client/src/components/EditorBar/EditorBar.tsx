@@ -21,7 +21,7 @@ interface EditorWrapperProps {
   steps: any;
 }
 
-export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
+export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { profile, checkout, local, sessions, sessionsResponse, activeStep } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { profile, checkout, local, sessions };
@@ -61,21 +61,26 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
 
   const SingleTabHeader = ({ title, clipboardText }: any) => {
     return (
-      <Grid
-        justifyContent="space-between"
-        alignItems="flex-start"
-        px={5}
-        pt={'12px'}
-        pb={'11px'}
-        sx={{ backgroundColor: 'secondary.light', borderBottom: 1, borderColor: 'rgba(0, 0, 0, 0.12)' }}
-        container
-      >
-        <Grid item xs={1}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            {title}
-          </Typography>
+      <Grid justifyContent="space-between" alignItems="flex-start" sx={{ bgcolor: 'primary.light', px: 4, pt: 1 }} container>
+        <Grid item xs={6}>
+          <Box
+            sx={{
+              bgcolor: '#00112C',
+              px: 1,
+              py: 1,
+              display: 'inline-block',
+              width: '80px',
+              textAlign: 'center',
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5
+            }}
+          >
+            <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+              {title}
+            </Typography>
+          </Box>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={6} sx={{ textAlign: 'right' }}>
           <IconButton
             sx={{ py: 0 }}
             onClick={() => {
@@ -148,41 +153,63 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
         <Box>
           <Box
             sx={{
-              borderBottom: 1,
-              borderColor: 'divider',
-              bgcolor: 'secondary.gray',
-              '.MuiTabs-indicator': { bgcolor: 'secondary.main' },
-              '.MuiTab-root.Mui-selected': { color: 'secondary.main' }
+              bgcolor: 'secondary.light',
+              pt: 1,
+              borderColor: 'primary.light',
+              '.MuiTabs-indicator': { display: 'none' },
+              '.MuiButtonBase-root': {
+                minHeight: '0px',
+                height: '35px'
+              },
+              '.MuiTabs-root': {
+                minHeight: '0px'
+              },
+              '.MuiTab-root.Mui-selected': {
+                bgcolor: '#00112C',
+                color: 'primary.light',
+                borderTop: 1,
+                borderLeft: 1,
+                borderRight: 1,
+                borderColor: 'primary.light',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                width: '80px',
+                fontWeight: 'bold'
+              }
             }}
           >
             <Tabs onChange={handleChange} value={tab} centered>
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    JS
+                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                    js
                   </Typography>
                 }
+                sx={{ color: '#00112C' }}
               />
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
                     style
                   </Typography>
                 }
+                sx={{ color: '#00112C' }}
               />
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    state
-                  </Typography>
-                }
-              />
-              <Tab
-                label={
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
                     api
                   </Typography>
                 }
+                sx={{ color: '#00112C' }}
+              />
+              <Tab
+                label={
+                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                    state
+                  </Typography>
+                }
+                sx={{ color: '#00112C' }}
               />
             </Tabs>
           </Box>
@@ -248,7 +275,8 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
           position: 'fixed',
           top: 0,
           right: 0,
-          bgcolor: 'primary.light',
+          bgcolor: '#00112C',
+          color: 'secondary.light',
           height: `calc(100% - ${headerHeight}px)`,
           mt: `${headerHeight}px`,
           pb: `${buttonHeight}px`,

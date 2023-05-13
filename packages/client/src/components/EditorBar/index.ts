@@ -1,2 +1,2 @@
 export { Editor } from './Editor';
-export { EditorWrapper } from './EditorBar';
+export { EditorBar } from './EditorBar';

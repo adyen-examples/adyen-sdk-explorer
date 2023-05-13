@@ -1,5 +1,5 @@
 import JSONInput from 'react-json-editor-ajrm';
-import { light_mitsuketa_tribute, localeEn } from '../../../helpers/jsonEditor';
+import { light_mitsuketa_tribute, dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../../CheckoutBuilder/types';
 import { Box } from '@mui/material';
 
@@ -30,7 +30,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}
-        colors={light_mitsuketa_tribute}
+        colors={dark_vscode_tribute}
         locale={localeEn}
         height="100%"
         width="100%"
