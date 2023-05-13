@@ -1,32 +1,40 @@
-import { useEffect, useState } from 'react';
 import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { onDeckActions, sdkExplorerActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
 import { EditorWrapper } from '../JSONEditor/Editor';
 import { Navbar } from '../Nav/Navbar/Navbar';
+import { useEffect } from 'react';
 
 const { updateExplorer } = sdkExplorerActions;
 const { updateProfileInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
+  const dispatch = useAppDispatch();
+
   const drawerWidth = 380;
   const headerHeight = 64;
   const navButtonHeight = 40;
   let editorWidth = 0;
 
-  let sdkExplorerProps: any = null;
-  
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
   const { error, data } = products;
-
-  const dispatch = useAppDispatch();
-
   const pathParams = useParams();
   const product: any = pathParams.component;
 
+  let editor = null;
+  let sdkExplorerProps: any = null;
+  let activeProduct: any = null;
+
+  useEffect(() => {
+    if (sdkExplorerProps) {
+      activeProduct = { product: sdkExplorerProps.txvariant };
+      dispatch(updateExplorer(sdkExplorerProps));
+      dispatch(updateProfileInfo(activeProduct));
+    }
+  }, [product]);
+
   if (!error && data) {
-    let activeProduct: any = null;
     for (let component in data.products) {
       if (data.products[component].txvariant === product) {
         sdkExplorerProps = data.products[component];
@@ -34,16 +42,6 @@ export const Layout = ({ main: Main }: any) => {
     }
 
     if (sdkExplorerProps) {
-      activeProduct = { product: sdkExplorerProps.txvariant };
-    }
-    dispatch(updateExplorer(sdkExplorerProps));
-    dispatch(updateProfileInfo(activeProduct));
-  }
-
-  if (!error && data) {
-    let editor;
-
-    if (sdkExplorerProps && product) {
       editorWidth = 420;
       editor = (
         <EditorWrapper
@@ -51,7 +49,12 @@ export const Layout = ({ main: Main }: any) => {
           steps={sdkExplorerProps.steps}
         />
       );
+    } else if (product !== undefined) {
+      return <h1>404: Page not found</h1>;
     }
+  }
+
+  if (!error && data) {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -84,10 +87,5 @@ export const Layout = ({ main: Main }: any) => {
       </Box>
     );
   }
-
-  if (!sdkExplorerProps && product) {
-    return <h1>404: Page not found</h1>;
-  }
-
   return <Box>...Loading</Box>;
 };

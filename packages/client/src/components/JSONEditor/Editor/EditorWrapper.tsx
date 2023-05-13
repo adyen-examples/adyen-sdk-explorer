@@ -31,7 +31,6 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     dispatch(action(value));
   };
 
-  console.log('profile, checkout, local, sessions, sessionsResponse, activeStep: ', profile, checkout, local, sessions, sessionsResponse, activeStep);
   let multiTabEditor = null;
   let step = steps[activeStep];
 

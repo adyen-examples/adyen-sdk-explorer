@@ -16,9 +16,7 @@ export interface OnDeckState {
 }
 
 const initialState: OnDeckState = {
-  profile: {
-    product: 'dropin'
-  },
+  profile: {},
   checkout: {},
   local: {},
   sessions: {},
@@ -36,11 +34,9 @@ const onDeckSlice = createSlice({
     },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.checkout = action.payload;
-      console.log('updateCheckoutInfo called');
     },
     updateLocalInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.local = action.payload;
-      console.log('updateLocalInfo called');
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.sessions = action.payload;
@@ -54,9 +50,7 @@ const onDeckSlice = createSlice({
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
       state.sessionsResponse = action.payload;
     },
-    clearOnDeckInfo: state => {
-      state = initialState;
-    }
+    clearOnDeckInfo: () => initialState
   }
 });
 
