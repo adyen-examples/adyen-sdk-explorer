@@ -4,3 +4,13 @@ MVP:
 3. Payment Method configuration JSON object passthrough
 4. CSS override box
 5. "API Explorer" box - API Call and component configuration
+
+
+Open Items:
+1. Add style component to EditorBar
+2. Add state component to EditorBar
+3. Fix redirect bug 
+4. Add loading tab
+5. Add Global Error component
+6. Clean up backend (ie remove unused code)
+7. Add documentation for initial MVP payment methods

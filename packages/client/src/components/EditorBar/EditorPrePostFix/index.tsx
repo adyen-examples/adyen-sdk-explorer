@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { Editor } from '../Editor';
 
-export const Input = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
+export const EditorPrePostFix = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
   const codeBlock = (prefix: any, postfix: any) => (
     <Box>
       {prefix && (

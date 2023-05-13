@@ -7,7 +7,7 @@ import { onDeckActions } from '../../app';
 import { useAppDispatch } from '../../hooks';
 import type { RootState } from '../../store';
 import { NavButtons } from './NavButtons';
-import { Input } from './EditorPrePostFix';
+import { EditorPrePostFix } from './EditorPrePostFix';
 import { StyleEditor } from './StyleEditor';
 
 interface EditorDimensions {
@@ -93,7 +93,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
     return (
       <Box>
         <SingleTabHeader title={title} clipboardText={`${prefix + JSON.stringify(data) + postfix}`} />
-        <Input data={data} prefix={prefix} postfix={postfix} handleEditorUpdate={handleUpdate} viewOnly={viewOnly} />
+        <EditorPrePostFix data={data} prefix={prefix} postfix={postfix} handleEditorUpdate={handleUpdate} viewOnly={viewOnly} />
       </Box>
     );
   };
@@ -166,7 +166,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
               <Tab
                 label={
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    api
+                    style
                   </Typography>
                 }
               />
@@ -180,14 +180,14 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
               <Tab
                 label={
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    style
+                    api
                   </Typography>
                 }
               />
             </Tabs>
           </Box>
           <TabPanel value={tab} index={0}>
-            <Input
+            <EditorPrePostFix
               data={checkout}
               prefix={`const checkout = await AdyenCheckout(`}
               postfix={`);`}
@@ -196,7 +196,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
               }}
               viewOnly={true}
             />
-            <Input
+            <EditorPrePostFix
               data={local}
               prefix={`checkout.create('${profile.product}',`}
               postfix={`);`}
@@ -207,7 +207,10 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
             />
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            <Input
+            <StyleEditor />
+          </TabPanel>
+          <TabPanel value={tab} index={2}>
+            <EditorPrePostFix
               data={sessions}
               prefix={`Request:`}
               postfix={''}
@@ -216,7 +219,7 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
               }}
               viewOnly={true}
             />
-            <Input
+            <EditorPrePostFix
               data={sessionsResponse}
               prefix={`Response:`}
               postfix={''}
@@ -226,11 +229,8 @@ export const EditorWrapper = ({ dimensions, steps }: EditorWrapperProps) => {
               viewOnly={true}
             />
           </TabPanel>
-          <TabPanel value={tab} index={2}>
-            {'STYLE'}
-          </TabPanel>
           <TabPanel value={tab} index={3}>
-            <StyleEditor />
+            {'STYLE'}
           </TabPanel>
         </Box>
       );
