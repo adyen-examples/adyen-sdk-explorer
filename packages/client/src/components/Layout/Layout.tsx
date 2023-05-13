@@ -32,7 +32,7 @@ export const Layout = ({ main: Main }: any) => {
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
     }
-  }, [product]);
+  }, [product, data]);
 
   if (!error && data) {
     for (let component in data.products) {
