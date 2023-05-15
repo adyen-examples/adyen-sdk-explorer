@@ -75,7 +75,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               borderTopRightRadius: 5
             }}
           >
-            <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+            <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: 'bold' }}>
               {title}
             </Typography>
           </Box>
@@ -181,7 +181,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
             <Tabs onChange={handleChange} value={tab} centered>
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 0 ? 'bold' : 'normal'}` }}>
                     js
                   </Typography>
                 }
@@ -189,7 +189,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               />
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 1 ? 'bold' : 'normal'}` }}>
                     style
                   </Typography>
                 }
@@ -197,7 +197,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               />
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 2 ? 'bold' : 'normal'}` }}>
                     api
                   </Typography>
                 }
@@ -205,7 +205,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               />
               <Tab
                 label={
-                  <Typography variant="h6" sx={{ fontSize: '.75rem' }}>
+                  <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 3 ? 'bold' : 'normal'}` }}>
                     state
                   </Typography>
                 }

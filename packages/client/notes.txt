@@ -14,3 +14,8 @@ Open Items:
 5. Add Global Error component
 6. Clean up backend (ie remove unused code)
 7. Add documentation for initial MVP payment methods
+8. Add import functionality, so that you may import a configuration
+9. Update home page to include relevant and specific documentation. For example, summarize steps
+10. Create tests for QA
+11. Add default values or config, and explain potential errors if you misconfigure.
+12. Launch fast and iterate messaging

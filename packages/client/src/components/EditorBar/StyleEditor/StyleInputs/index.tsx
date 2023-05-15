@@ -28,22 +28,21 @@ export const StyleInputs = (props: any) => {
           case 'color':
             styleType = (
               <Box>
-                <HuePicker color={style[cssProperty]} />
+                <HuePicker color={style[cssProperty]} width={'100%'} />
               </Box>
             );
             break;
           case 'input':
             styleType = (
               <Box>
-                <TextField id="outlined-basic" label="Outlined" variant="standard" />
+                <TextField focused fullWidth id="outlined-basic" variant="standard" />
               </Box>
             );
             break;
           case 'select':
             styleType = (
               <Box>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <FormControl focused fullWidth size="small" variant="standard">
                   <Select labelId="select-font" value={style[cssProperty]} label="Font">
                     {styleTypes[cssProperty].values.map((value: any) => {
                       return <MenuItem value={value}>{value}</MenuItem>;
@@ -58,11 +57,18 @@ export const StyleInputs = (props: any) => {
         }
 
         return (
-          <Box key={cssProperty} sx={{ px: 2 }}>
-            <Typography sx={{ fontSize: '.65rem', color: 'black' }} variant="caption">
+          <Box key={cssProperty}>
+            <Typography sx={{ fontSize: '.65rem', color: 'primary.light' }} variant="caption">
               {cssProperty}
             </Typography>
-            {styleType}
+            <Box
+              sx={{
+                color: 'primary.light !important',
+                '.MuiInput-root': { fontSize: '.9rem', color: 'primary.light', svg: { color: 'primary.light' } }
+              }}
+            >
+              {styleType}
+            </Box>
           </Box>
         );
       })}
