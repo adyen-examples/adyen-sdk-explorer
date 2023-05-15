@@ -1,7 +1,8 @@
 import { Box } from '@mui/material';
 import { Editor } from '../Editor';
 
-export const EditorPrePostFix = ({ prefix, postfix, data, handleEditorUpdate, viewOnly }: any) => {
+export const EditorPrePostFix = (props: any) => {
+  const { prefix, postfix, data, handleEditorUpdate, viewOnly, ...other } = props;
   const codeBlock = (prefix: any, postfix: any) => (
     <Box>
       {prefix && (
@@ -29,7 +30,7 @@ export const EditorPrePostFix = ({ prefix, postfix, data, handleEditorUpdate, vi
   );
 
   return (
-    <Box>
+    <Box {...other}>
       <Box sx={{ overflow: 'scroll' }}>{codeBlock(prefix, postfix)}</Box>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Slider } from '@mui/material';
 import { HuePicker } from 'react-color';
 
 export const StyleInputs = (props: any) => {
@@ -11,12 +11,12 @@ export const StyleInputs = (props: any) => {
     color: {
       type: 'color'
     },
+    'font-size': {
+      type: 'input'
+    },
     'font-family': {
       type: 'select',
       values: ['Roboto, Helvetica, Arial, sans-serif', 'Arial, Helvetica, sans-serif']
-    },
-    'font-size': {
-      type: 'input'
     }
   };
 
@@ -35,7 +35,7 @@ export const StyleInputs = (props: any) => {
           case 'input':
             styleType = (
               <Box>
-                <TextField focused fullWidth id="outlined-basic" variant="standard" />
+                <Slider aria-label="font size" />
               </Box>
             );
             break;

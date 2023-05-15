@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Collapse } from '@mui/material';
 import { useState } from 'react';
 import { StyleInputs } from '../StyleInputs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -25,11 +25,11 @@ export const StyleDrawers = (props: any) => {
           </Box>
         </Button>
       </Box>
-      {open && (
+      <Collapse orientation="vertical" in={open} timeout={300}>
         <Box sx={{ px: '5%', py: '2%' }}>
           <StyleInputs style={style[sdkClass]} />
         </Box>
-      )}
+      </Collapse>
     </Box>
   );
 };

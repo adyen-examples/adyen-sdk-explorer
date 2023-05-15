@@ -40,8 +40,8 @@ export const StyleEditor = (props: any) => {
             PALETTE
           </Typography>
         </Box>
-        {Object.keys(style).map((sdkClass: any) => {
-          return <StyleDrawers sdkClass={sdkClass} style={style} />;
+        {Object.keys(style).map((sdkClass: any, i: any) => {
+          return <StyleDrawers sdkClass={sdkClass} style={style} key={i} />;
         })}
       </Box>
     </Box>

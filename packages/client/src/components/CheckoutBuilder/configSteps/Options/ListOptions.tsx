@@ -39,7 +39,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
 
   return (
     <Grid container>
-      <Grid item px={7} py={2} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
+      <Grid item px={7} py={1.2} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0, zIndex: 2 }}>
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
             <Typography variant="h5">{category}</Typography>
