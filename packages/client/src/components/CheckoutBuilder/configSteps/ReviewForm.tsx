@@ -17,10 +17,10 @@ export const ReviewForm = ({ content }: ReviewFormProps) => {
         justifyContent="space-between"
         container
         px={7}
-        py={2}
+        py={1.2}
         mt={2}
         xs={12}
-        sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}
+        sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0, zIndex: 1 }}
       >
         <Grid item>
           <Typography variant="h5">Review & Export</Typography>

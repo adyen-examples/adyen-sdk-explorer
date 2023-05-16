@@ -1,12 +1,12 @@
-import { ChangeEvent } from 'react';
+import { Checkbox, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { marked } from 'marked';
-import { Box } from '@mui/system';
-import { Checkbox, Grid, Typography } from '@mui/material';
+import { ChangeEvent } from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
-import { InitializeOption } from './InitializeOption';
 import type { Descriptor } from '../../types';
+import { InitializeOption } from './InitializeOption';
 
 export interface OptionWrapperPropTypes {
   descriptor: Descriptor;
@@ -19,7 +19,6 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
 
   const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
     const toUpdate = addOrRemoveProp(configuration, e.target.name, descriptor);
-    console.log('toUpdate', toUpdate);
     dispatch(action(toUpdate));
   };
 
