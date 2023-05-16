@@ -19,6 +19,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
 
   const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
     const toUpdate = addOrRemoveProp(configuration, e.target.name, descriptor);
+    console.log('toUpdate', toUpdate);
     dispatch(action(toUpdate));
   };
 

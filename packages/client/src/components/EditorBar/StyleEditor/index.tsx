@@ -27,15 +27,22 @@ export const StyleEditor = (props: any) => {
 
   return (
     <Box sx={{ p: 0 }}>
-      <EditorPrePostFix
-        data={style}
-        handleEditorUpdate={(value: any) => {
-          console.log(value);
-        }}
-        viewOnly={true}
-      />
+      <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+        <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+          STYLE
+        </Typography>
+      </Box>
       <Box>
-        <Box sx={{ border: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+        <EditorPrePostFix
+          data={style}
+          handleEditorUpdate={(value: any) => {
+            console.log(value);
+          }}
+          viewOnly={true}
+        />
+      </Box>
+      <Box>
+        <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
           <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
             PALETTE
           </Typography>

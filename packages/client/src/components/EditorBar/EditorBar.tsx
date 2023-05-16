@@ -115,7 +115,6 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
       
     checkout.create('${profile.product}', {...});`,
         handler: (value: any) => {
-          console.log('updating store');
           updateStore(value, updateCheckoutInfo);
         },
         payload: checkout
@@ -191,7 +190,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               <Tab
                 label={
                   <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 1 ? 'bold' : 'normal'}` }}>
-                    style
+                    css
                   </Typography>
                 }
                 sx={{ color: '#00112C' }}
@@ -207,7 +206,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
               <Tab
                 label={
                   <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: `${tab === 3 ? 'bold' : 'normal'}` }}>
-                    state
+                    logs
                   </Typography>
                 }
                 sx={{ color: '#00112C' }}
@@ -217,24 +216,31 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
           <TabPanel value={tab} index={0}>
             <Slide timeout={150} direction="right" in={tab === 0 && Object.keys(sessionsResponse).length > 0}>
               <Box>
-                <EditorPrePostFix
-                  data={checkout}
-                  prefix={`const checkout = await AdyenCheckout(`}
-                  postfix={`);`}
-                  handleEditorUpdate={(value: any) => {
-                    console.log(value);
-                  }}
-                  viewOnly={true}
-                />
-                <EditorPrePostFix
-                  data={local}
-                  prefix={`checkout.create('${profile.product}',`}
-                  postfix={`);`}
-                  handleEditorUpdate={(value: any) => {
-                    console.log(value);
-                  }}
-                  viewOnly={true}
-                />
+                <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+                  <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                    CODE
+                  </Typography>
+                </Box>
+                <Box sx={{ px: 1 }}>
+                  <EditorPrePostFix
+                    data={checkout}
+                    prefix={`const checkout = await AdyenCheckout(`}
+                    postfix={`);`}
+                    handleEditorUpdate={(value: any) => {
+                      console.log(value);
+                    }}
+                    viewOnly={true}
+                  />
+                  <EditorPrePostFix
+                    data={local}
+                    prefix={`checkout.create('${profile.product}',`}
+                    postfix={`);`}
+                    handleEditorUpdate={(value: any) => {
+                      console.log(value);
+                    }}
+                    viewOnly={true}
+                  />
+                </Box>
               </Box>
             </Slide>
           </TabPanel>
@@ -248,19 +254,25 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
           <TabPanel value={tab} index={2}>
             <Slide timeout={150} direction="right" in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
               <Box>
+                <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+                  <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                    REQUEST
+                  </Typography>
+                </Box>
                 <EditorPrePostFix
                   data={sessions}
-                  prefix={`Request:`}
-                  postfix={''}
                   handleEditorUpdate={(value: any) => {
                     console.log(value);
                   }}
                   viewOnly={true}
                 />
+                <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C', borderLeft: 0 }}>
+                  <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                    RESPONSE
+                  </Typography>
+                </Box>
                 <EditorPrePostFix
                   data={sessionsResponse}
-                  prefix={`Response:`}
-                  postfix={''}
                   handleEditorUpdate={(value: any) => {
                     console.log(value);
                   }}
@@ -272,7 +284,11 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
           <TabPanel value={tab} index={3}>
             <Slide timeout={150} direction="right" in={tab === 3 && Object.keys(sessionsResponse).length > 0}>
               <Box>
-                <Typography>Hello world!</Typography>
+                <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
+                  <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                    STATE
+                  </Typography>
+                </Box>
               </Box>
             </Slide>
           </TabPanel>
@@ -291,6 +307,8 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
           overflow: 'scroll',
           top: 0,
           right: 0,
+          borderRight: 1,
+          borderBottom: 1,
           bgcolor: '#00112C',
           color: 'secondary.light',
           height: `calc(100% - ${headerHeight}px)`,

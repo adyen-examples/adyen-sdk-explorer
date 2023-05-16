@@ -14,7 +14,7 @@ export const StyleDrawers = (props: any) => {
 
   return (
     <Box>
-      <Box sx={{ border: 1, borderColor: 'secondary.light', bgcolor: '#00112C' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'secondary.light', bgcolor: '#00112C' }}>
         <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2 }} onClick={drawerHandler}>
           <Typography sx={{ fontSize: '.65rem', color: 'secondary.light' }} variant="caption">
             {sdkClass}
