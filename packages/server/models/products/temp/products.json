@@ -1,9 +1,0 @@
-{
-  "Drop-in": { "txvariant": "dropin" },
-  "Cards": { "txvariant": "card" },
-  "ACH Direct Debit": { "txvariant": "ach" },
-  "Affirm": { "txvariant": "affirm" },
-  "Afterpay": { "txvariant": "afterpaytouch" },
-  "Bancontact": { "txvariant": "bcmc" },
-  "Ideal": { "txvariant": "ideal" }
-}
