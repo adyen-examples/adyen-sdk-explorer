@@ -14,7 +14,6 @@ const theme = createTheme(themeOptions);
 const Application = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log('calling');
     const requestOptions: RequestOptions = {
       method: 'GET',
       headers: {
@@ -24,7 +23,7 @@ const Application = () => {
 
     const makeRequest: () => void = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/products`, requestOptions);
+        const response = await fetch(`${API_URL}/checkout/paymentMethods`, requestOptions);
         const data = await response.json();
         dispatch(updateProductsInfo(data));
       } catch (err) {

@@ -13,7 +13,7 @@ export interface ComponentConfig {
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
-  const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
+  const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'checkout/sessionStart' });
   const pathParams = useParams();
   const product: string | undefined = pathParams.component;
 

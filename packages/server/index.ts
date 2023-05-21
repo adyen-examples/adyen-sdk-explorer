@@ -5,7 +5,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import { PORT, CLIENT_ORIGIN } from './config';
-import { productsRouter, sessionsRouter, paymentsRouter } from './routes';
+import { checkoutRouter } from './routes';
 
 export const app = express();
 app.use(express.json());
@@ -32,9 +32,7 @@ app.get('/:component', (req, res) => {
   res.sendFile('index.html', { root });
 });
 
-app.use('/api/sessions', sessionsRouter);
-app.use('/api/payments', paymentsRouter);
-app.use('/api/products', productsRouter);
+app.use('/api/checkout', checkoutRouter);
 
 app.listen(PORT, () => {
   console.log('Your app is listening on port', PORT);

@@ -64,9 +64,7 @@ export const onDeckSlice = createSlice({
       state.isRedirect = action.payload;
     },
     clearOnDeckInfo: state => {
-      console.log('called');
       state = initialState;
-      console.log(state);
     }
   }
 });

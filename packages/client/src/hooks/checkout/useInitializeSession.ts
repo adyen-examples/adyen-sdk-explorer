@@ -40,9 +40,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
           setError(errorMessage);
         } else {
           const sessions = new ConfigurationSession({ ...componentConfig, data: parsedResponse, setState: { error: setError, result: setResult } });
-          console.log(sessions.checkoutConfig);
           let component = await AdyenCheckout(sessions.checkoutConfig);
-          console.log(component);
           localStorage.setItem('componentConfig', JSON.stringify(componentConfig));
           localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));
           setCheckout(component);
