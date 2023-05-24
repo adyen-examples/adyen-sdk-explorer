@@ -5,13 +5,13 @@ import { HuePicker } from 'react-color';
 import { StyleDrawers } from './StyleDrawers';
 
 const defaultStyle = {
-  'adyen-checkout__payment-method': {
+  '.adyen-checkout__payment-method': {
     'background-color': '#fff',
     color: '#000',
     'font-family': 'Roboto, Helvetica, Arial, sans-serif',
     'font-size': '1rem'
   },
-  'adyen-checkout__payment-method--selected': {
+  '.adyen-checkout__payment-method--selected': {
     'background-color': '#fff',
     color: '#000',
     'font-family': 'Roboto, Helvetica, Arial, sans-serif',

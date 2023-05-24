@@ -12,7 +12,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
     bgcolor: 'primary.main',
     borderRadius: 1,
     color: '#FFFFFF',
-    '&:hover': { bgcolor: 'primary.main' }
+    opacity: '1 !important',
   };
   const nonselectedButtonStyle = {
     '&:hover': { bgcolor: 'rgba(0, 102, 255, 0.12)', borderRadius: 1 },
@@ -66,7 +66,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           return (
             <Box key={product}>
               <ListItem disablePadding>
-                <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
+                <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
                   <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
                     {product}
                   </Typography>

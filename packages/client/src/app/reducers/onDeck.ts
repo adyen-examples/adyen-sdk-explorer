@@ -22,7 +22,8 @@ const initialState: OnDeckState = {
   sessions: {},
   sessionsResponse: {},
   isRedirect: false,
-  activeStep: 0
+  activeStep: 0,
+  style: {}
 };
 
 const onDeckSlice = createSlice({
@@ -49,6 +50,9 @@ const onDeckSlice = createSlice({
     },
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
       state.sessionsResponse = action.payload;
+    },
+    updateStyleInfo: (state, action: PayloadAction<any>) => {
+      state.style = action.payload;
     },
     clearOnDeckInfo: () => initialState
   }
