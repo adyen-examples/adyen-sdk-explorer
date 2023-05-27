@@ -19,4 +19,5 @@ Open Items:
 10. Create tests for QA
 11. Add default values or config, and explain potential errors if you misconfigure.
 12. Launch fast and iterate messaging
-13. There is a bug when you double click a tab it will set the txvariant as undefined
+13. (done) There is a bug when you double click a tab it will set the txvariant as undefined
+14. Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs

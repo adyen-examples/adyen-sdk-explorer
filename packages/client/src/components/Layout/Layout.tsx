@@ -5,9 +5,10 @@ import { useApiLocal, useAppDispatch } from '../../hooks';
 import { EditorBar } from '../EditorBar';
 import { Navbar } from '../Nav/Navbar/Navbar';
 import { useEffect } from 'react';
+import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
 
 const { updateExplorer } = sdkExplorerActions;
-const { updateProfileInfo } = onDeckActions;
+const { updateProfileInfo, updateStyleInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const dispatch = useAppDispatch();
@@ -31,6 +32,12 @@ export const Layout = ({ main: Main }: any) => {
       activeProduct = { product: sdkExplorerProps.txvariant };
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
+
+      if (product === 'dropin') {
+        dispatch(updateStyleInfo(defaultDropinStyle));
+      } else {
+        dispatch(updateStyleInfo(defaultComponentStyle));
+      }
     }
   }, [product, data]);
 

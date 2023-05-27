@@ -24,7 +24,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
     <Box
       sx={{
         svg: { display: `${viewOnly ? 'none' : 'block'}` },
-        '[name="labels"]': { visibility: `${viewOnly ? 'hidden !important' : 'visible !important'}` }
+        '[name="labels"]': { display: `${viewOnly ? 'none !important' : 'block !important'}` }
       }}
     >
       <JSONInput

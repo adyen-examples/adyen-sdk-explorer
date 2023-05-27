@@ -12,6 +12,7 @@ export interface OnDeckState {
   sessionsResponse: OnDeckPropType | {};
   isRedirect: boolean;
   activeStep: number;
+  style: OnDeckPropType | {};
   [key: string]: any;
 }
 
@@ -52,7 +53,7 @@ const onDeckSlice = createSlice({
       state.sessionsResponse = action.payload;
     },
     updateStyleInfo: (state, action: PayloadAction<any>) => {
-      state.style = action.payload;
+      state.style = { ...state.style, ...action.payload };
     },
     clearOnDeckInfo: () => initialState
   }

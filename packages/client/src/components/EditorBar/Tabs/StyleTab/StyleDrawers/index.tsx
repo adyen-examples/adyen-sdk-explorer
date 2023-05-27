@@ -1,11 +1,11 @@
-import { Box, Button, Typography, Collapse } from '@mui/material';
-import { useState } from 'react';
-import { StyleInputs } from '../StyleInputs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Box, Button, Collapse, Typography } from '@mui/material';
+import { useState } from 'react';
+import { StyleInputs } from '../StyleInputs';
 
 export const StyleDrawers = (props: any) => {
-  const { sdkClass, style } = props;
+  const { sdkClass, myStyle } = props;
   const [open, setToOpen]: any = useState(false);
 
   const drawerHandler = () => {
@@ -27,7 +27,7 @@ export const StyleDrawers = (props: any) => {
       </Box>
       <Collapse orientation="vertical" in={open} timeout={300}>
         <Box sx={{ px: '5%', py: '2%' }}>
-          <StyleInputs style={style[sdkClass]} />
+          <StyleInputs targetClass={sdkClass} style={myStyle[sdkClass]} />
         </Box>
       </Collapse>
     </Box>

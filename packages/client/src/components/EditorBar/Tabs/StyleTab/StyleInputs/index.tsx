@@ -1,8 +1,12 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Slider } from '@mui/material';
 import { HuePicker } from 'react-color';
+import { onDeckActions } from '../../../../../app';
+import { useAppDispatch } from '../../../../../hooks';
 
 export const StyleInputs = (props: any) => {
-  const { style } = props;
+  const { style, targetClass, ...other } = props;
+  const { updateStyleInfo } = onDeckActions;
+  const dispatch = useAppDispatch();
 
   const styleTypes: any = {
     'background-color': {
@@ -21,14 +25,20 @@ export const StyleInputs = (props: any) => {
   };
 
   return (
-    <Box>
-      {Object.keys(style).map((cssProperty: any) => {
+    <Box {...other}>
+      {Object.keys(style).map((cssProperty: any, i) => {
         let styleType = null;
         switch (styleTypes[cssProperty].type) {
           case 'color':
             styleType = (
               <Box>
-                <HuePicker color={style[cssProperty]} width={'100%'} />
+                <HuePicker
+                  color={style[cssProperty]}
+                  width={'100%'}
+                  onChangeComplete={e => {
+                    dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: e.hex } }));
+                  }}
+                />
               </Box>
             );
             break;
@@ -44,8 +54,12 @@ export const StyleInputs = (props: any) => {
               <Box>
                 <FormControl focused fullWidth size="small" variant="standard">
                   <Select labelId="select-font" value={style[cssProperty]} label="Font">
-                    {styleTypes[cssProperty].values.map((value: any) => {
-                      return <MenuItem value={value}>{value}</MenuItem>;
+                    {styleTypes[cssProperty].values.map((value: any, i: any) => {
+                      return (
+                        <MenuItem value={value} key={i}>
+                          {value}
+                        </MenuItem>
+                      );
                     })}
                   </Select>
                 </FormControl>
@@ -57,7 +71,7 @@ export const StyleInputs = (props: any) => {
         }
 
         return (
-          <Box key={cssProperty}>
+          <Box key={i}>
             <Typography sx={{ fontSize: '.65rem', color: 'primary.light' }} variant="caption">
               {cssProperty}
             </Typography>
