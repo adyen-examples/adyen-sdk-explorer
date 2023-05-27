@@ -55,7 +55,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
 
     initialize();
-  }, [componentConfig, endpoint, steps, activeStep, dispatch]);
+  }, [activeStep]);
 
   return [checkout, result, error];
 };

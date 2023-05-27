@@ -9,6 +9,7 @@ export interface ComponentConfig {
   checkout: OnDeckPropType;
   local: OnDeckPropType;
   sessions: OnDeckPropType;
+  style: any;
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
@@ -37,5 +38,9 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
       );
     }
   }
-  return <div id="checkout"></div>;
+  return (
+    <Box sx={configuration?.style}>
+      <div id="checkout"></div>
+    </Box>
+  );
 };

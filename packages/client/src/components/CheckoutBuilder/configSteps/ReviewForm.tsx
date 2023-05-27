@@ -26,7 +26,7 @@ export const ReviewForm = ({ content }: ReviewFormProps) => {
           <Typography variant="h5">Review & Export</Typography>
         </Grid>
       </Grid>
-      <Box px={7} my={5}>
+      <Box p={5}>
         <ComponentBase />
       </Box>
     </Box>

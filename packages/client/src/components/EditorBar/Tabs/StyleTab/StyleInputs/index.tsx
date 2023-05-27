@@ -9,18 +9,21 @@ export const StyleInputs = (props: any) => {
   const dispatch = useAppDispatch();
 
   const styleTypes: any = {
-    'background-color': {
+    backgroundColor: {
       type: 'color'
     },
     color: {
       type: 'color'
     },
-    'font-size': {
+    fontSize: {
       type: 'input'
     },
-    'font-family': {
+    fontFamily: {
       type: 'select',
-      values: ['Roboto, Helvetica, Arial, sans-serif', 'Arial, Helvetica, sans-serif']
+      values: ['Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Poppins, sans-serif']
+    },
+    transition: {
+      type: 'none'
     }
   };
 
@@ -45,7 +48,13 @@ export const StyleInputs = (props: any) => {
           case 'input':
             styleType = (
               <Box>
-                <Slider aria-label="font size" />
+                <Slider
+                  aria-label="font size"
+                  onChange={(e, value) => {
+                    dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: value } }));
+                  }}
+                  max={40}
+                />
               </Box>
             );
             break;
@@ -53,7 +62,15 @@ export const StyleInputs = (props: any) => {
             styleType = (
               <Box>
                 <FormControl focused fullWidth size="small" variant="standard">
-                  <Select labelId="select-font" value={style[cssProperty]} label="Font">
+                  <Select
+                    labelId="select-font"
+                    value={style[cssProperty]}
+                    label="Font"
+                    defaultValue="Roboto"
+                    onChange={e => {
+                      dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: e.target.value } }));
+                    }}
+                  >
                     {styleTypes[cssProperty].values.map((value: any, i: any) => {
                       return (
                         <MenuItem value={value} key={i}>

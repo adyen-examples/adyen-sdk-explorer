@@ -36,5 +36,9 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     checkout.create(product, configuration.local).mount('#checkout');
   }
 
-  return <div id="checkout"></div>;
+  return (
+    <Box sx={configuration?.style}>
+      <div id="checkout"></div>
+    </Box>
+  );
 };

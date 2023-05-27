@@ -1,23 +1,26 @@
 export const defaultDropinStyle = {
-  '.adyen-checkout__dropin': {
-    'background-color': '#fff',
-    color: '#000',
-    'font-family': 'Roboto, Helvetica, Arial, sans-serif',
-    'font-size': '1rem'
+  '.adyen-checkout__payment-method': {
+    backgroundColor: '#fff',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: '1rem'
   },
   '.adyen-checkout__payment-method--selected': {
-    'background-color': '#fff',
+    backgroundColor: '#fff',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: '1rem'
+  },
+  '.adyen-checkout__label__text': {
     color: '#000',
-    'font-family': 'Roboto, Helvetica, Arial, sans-serif',
-    'font-size': '1rem'
+    fontSize: '1rem',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif'
   }
 };
 
 export const defaultComponentStyle = {
   '[class^="adyen-checkout"]': {
-    'background-color': '#fff',
+    backgroundColor: '#fff',
     color: '#000',
-    'font-family': 'Roboto, Helvetica, Arial, sans-serif',
-    'font-size': '1rem'
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: '1rem'
   }
 };

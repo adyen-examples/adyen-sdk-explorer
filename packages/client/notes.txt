@@ -21,3 +21,5 @@ Open Items:
 12. Launch fast and iterate messaging
 13. (done) There is a bug when you double click a tab it will set the txvariant as undefined
 14. Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
+15. Add MUI stretch component and add more transition styling to color
+16. (fixed) We are sending another session request each time we modify the css. 
