@@ -35,7 +35,6 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
     const initialize: () => void = async () => {
       try {
-        console.log('initialize session');
         const response = await fetch(`${API_URL}/${endpoint}`, requestOptions);
         const parsedResponse = await response.json();
         if (parsedResponse.error) {

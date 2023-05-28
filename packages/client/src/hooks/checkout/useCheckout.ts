@@ -13,7 +13,7 @@ export const useCheckout = (configuration: any) => {
     };
 
     initializeCheckout(checkoutOptions);
-  }, [configuration.checkoutConfig]);
+  }, []);
 
   return [checkout];
 };

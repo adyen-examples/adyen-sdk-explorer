@@ -13,7 +13,6 @@ const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckAction
 export const ConfigWrapper = () => {
   const { steps } = useSelector((state: RootState) => state.sdkExplorer);
   const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
-  console.log('Active step about to call useRedirect');
   useRedirect({ checkout, local, sessions });
 
   const stepMap = {

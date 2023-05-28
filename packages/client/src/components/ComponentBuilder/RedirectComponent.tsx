@@ -17,10 +17,9 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
     setState: { error: setError, result: setResult }
   });
+  console.log('sessions', sessions);
   const [checkout] = useCheckout(sessions);
   const product = configuration.profile.product;
-
-  console.log('This is the error: ', error);
 
   if (error) {
     return (
