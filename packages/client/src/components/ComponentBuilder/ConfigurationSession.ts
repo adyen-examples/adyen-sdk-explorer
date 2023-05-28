@@ -82,10 +82,20 @@ export class ConfigurationSession<P extends ConfigurationSessionProps = any> ext
       this.setError(value);
     }
   }
-  public onChange(state: any, element: object): void {
-    console.info(state, element);
+  public onChange(state: any, element: any): void {
+    // this.setAdyenState(state);
+    console.log('onchange called: state', state);
+    console.log('onchange called: element', element);
+    element?.dropinRef?.props?.onReady((e: any) => {
+      console.log('dropin ready');
+    });
+  }
+  public onReady(state: any, element: object): void {
+    // this.setAdyenState(state);
+    console.log('onready');
   }
   public onValid(state: any, element: object): void {
+    console.log('onvalid valled');
     console.info(state, element);
   }
 }

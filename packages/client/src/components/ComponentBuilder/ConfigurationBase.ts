@@ -22,7 +22,7 @@ export class ConfigurationBase<P extends ConfigurationBaseProps> {
     return this.props.checkout;
   }
   get local() {
-    return this.props.local;
+    return { ...this.props.local, onChange: this.props.setState.adyenState };
   }
   get data() {
     return this.props.data;

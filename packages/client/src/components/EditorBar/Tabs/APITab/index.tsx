@@ -1,8 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
+import { useEffect, useState } from 'react';
 
 export const APITab = (props: any) => {
   const { sessions, sessionsResponse } = props;
+
   return (
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>

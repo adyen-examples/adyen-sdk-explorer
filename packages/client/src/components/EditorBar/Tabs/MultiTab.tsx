@@ -9,7 +9,7 @@ import { StateTab } from './StateTab';
 
 export const MultiTab: any = (props: any) => {
   const [tab, setTab] = useState(0);
-  const { checkout, local, profile, sessions, sessionsResponse, ...other } = props;
+  const { checkout, local, profile, sessions, sessionsResponse, adyenState, ...other } = props;
   const MultiTabStyle = {
     bgcolor: 'secondary.light',
     pt: 1,
@@ -102,7 +102,7 @@ export const MultiTab: any = (props: any) => {
       <TabPanel value={tab} index={3}>
         <Slide timeout={150} direction="right" in={tab === 3 && Object.keys(sessionsResponse).length > 0}>
           <Box>
-            <StateTab />
+            <StateTab adyenComponent={adyenState}/>
           </Box>
         </Slide>
       </TabPanel>

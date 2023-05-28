@@ -4,6 +4,7 @@ import { Layout } from './Layout';
 import { Overview } from './Overview/Overview';
 
 const ApplicationRouter = () => {
+  console.log('ApplicationRouter called');
   return (
     <Routes>
       <Route path="/" element={<Layout main={Overview} />} />

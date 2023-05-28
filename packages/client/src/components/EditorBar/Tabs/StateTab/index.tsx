@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 export const StateTab = (props: any) => {
   const { adyenComponent, ...other } = props;
-
+  console.log('adyenComponent', adyenComponent);
   return (
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>

@@ -27,6 +27,7 @@ export const Layout = ({ main: Main }: any) => {
   let sdkExplorerProps: any = null;
   let activeProduct: any = null;
 
+  console.log('layout called')
   useEffect(() => {
     if (sdkExplorerProps) {
       activeProduct = { product: sdkExplorerProps.txvariant };

@@ -23,3 +23,4 @@ Open Items:
 14. Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
 15. Add MUI stretch component and add more transition styling to color
 16. (fixed) We are sending another session request each time we modify the css. 
+17. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency

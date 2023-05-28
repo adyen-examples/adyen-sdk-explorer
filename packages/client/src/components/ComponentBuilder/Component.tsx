@@ -27,7 +27,14 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
     return <Alerts severityType={result.status} message={result.resultCode} />;
   } else if (checkout) {
     try {
-      checkout.create(product, configuration.local).mount('#checkout');
+      checkout
+        .create(product, {
+          ...configuration.local,
+          onSelect: (e: any) => {
+            console.log('onready fired');
+          }
+        })
+        .mount('#checkout');
     } catch (error: any) {
       console.error(error);
       return (

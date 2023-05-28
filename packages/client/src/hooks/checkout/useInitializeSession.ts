@@ -35,13 +35,21 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
     const initialize: () => void = async () => {
       try {
+        console.log('initialize session');
         const response = await fetch(`${API_URL}/${endpoint}`, requestOptions);
         const parsedResponse = await response.json();
         if (parsedResponse.error) {
           const errorMessage = parsedResponse.error;
           setError(errorMessage);
         } else {
-          const sessions = new ConfigurationSession({ ...componentConfig, data: parsedResponse, setState: { error: setError, result: setResult } });
+          const sessions = new ConfigurationSession({
+            ...componentConfig,
+            data: parsedResponse,
+            setState: {
+              error: setError,
+              result: setResult
+            }
+          });
           let component = await AdyenCheckout(sessions.checkoutConfig);
           localStorage.setItem('componentConfig', JSON.stringify(componentConfig));
           localStorage.setItem('sdkExplorer', JSON.stringify({ steps, activeStep }));

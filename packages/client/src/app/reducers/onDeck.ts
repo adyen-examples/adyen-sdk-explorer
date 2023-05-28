@@ -13,6 +13,7 @@ export interface OnDeckState {
   isRedirect: boolean;
   activeStep: number;
   style: OnDeckPropType | {};
+  adyenState: OnDeckPropType | {};
   [key: string]: any;
 }
 
@@ -24,7 +25,8 @@ const initialState: OnDeckState = {
   sessionsResponse: {},
   isRedirect: false,
   activeStep: 0,
-  style: {}
+  style: {},
+  adyenState: {}
 };
 
 const onDeckSlice = createSlice({
@@ -54,6 +56,9 @@ const onDeckSlice = createSlice({
     },
     updateStyleInfo: (state, action: PayloadAction<any>) => {
       state.style = { ...state.style, ...action.payload };
+    },
+    updateAdyenStateInfo: (state, action: PayloadAction<any>) => {
+      state.adyenState = action.payload;
     },
     clearOnDeckInfo: () => initialState
   }
