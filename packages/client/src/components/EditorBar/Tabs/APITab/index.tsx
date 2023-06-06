@@ -1,40 +1,44 @@
 import { Box, Typography } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { APIDrawer } from './APIDrawer';
+
+declare global {
+  interface Window {
+    data: any;
+  }
+}
 
 export const APITab = (props: any) => {
   const { sessions, sessionsResponse } = props;
+  const [apiLogs, setApiLogs] = useState<any[]>([]);
+
+  useEffect(() => {
+    let apiStack = window?.data?.apiStack ? window?.data?.apiStack : null;
+    let updateAPIStack = () => {
+      const currentAPIStack = window?.data?.apiStack ? window?.data?.apiStack : [];
+      console.log('calling setApiLogs');
+      setApiLogs([...currentAPIStack]);
+    };
+
+    if (apiStack) {
+      setApiLogs(apiStack);
+    }
+    window.addEventListener('api', updateAPIStack, false);
+
+    return () => {
+      window.removeEventListener('api', updateAPIStack, false);
+    };
+  }, []);
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
-        <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
-          REQUEST
-        </Typography>
-      </Box>
-      <Box p={3}>
-        <EditorPrePostFix
-          data={sessions}
-          handleEditorUpdate={(value: any) => {
-            console.log(value);
-          }}
-          viewOnly={true}
-        />
-      </Box>
-      <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C', borderLeft: 0 }}>
-        <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
-          RESPONSE
-        </Typography>
-      </Box>
-      <Box p={3}>
-        <EditorPrePostFix
-          data={sessionsResponse}
-          handleEditorUpdate={(value: any) => {
-            console.log(value);
-          }}
-          viewOnly={true}
-        />
-      </Box>
+      {apiLogs.length > 0 &&
+        apiLogs.map((apiLog, i) => (
+          <Box key={i}>
+            <APIDrawer {...apiLog} />
+          </Box>
+        ))}
     </Box>
   );
 };

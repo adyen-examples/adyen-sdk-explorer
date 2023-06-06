@@ -1,16 +1,16 @@
 import AdyenCheckout from '@adyen/adyen-web';
 import { useEffect, useState } from 'react';
-import { ConfigurationSession } from '../../components/ComponentBuilder/ConfigurationSession';
-import { API_URL, CLIENT_URL } from '../../config';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
-import { useAppDispatch } from '../../hooks';
-import { useMemoCompare } from '../helpers/useMemoCompare';
-import type { RootState } from '../../store';
-import type { RequestOptions } from '../types';
 import type { ComponentConfig } from '../../components/ComponentBuilder';
+import { ConfigurationSession } from '../../components/ComponentBuilder/ConfigurationSession';
+import { API_URL, CLIENT_URL } from '../../config';
+import { useAppDispatch } from '../../hooks';
+import type { RootState } from '../../store';
+import { useMemoCompare } from '../helpers/useMemoCompare';
+import type { RequestOptions } from '../types';
 
-const { updateSessionsResponseInfo } = onDeckActions;
+const { updateSessionsResponseInfo, updateAdyenStateInfo } = onDeckActions;
 
 export const useInitializeSession = ({ configuration, endpoint }: { configuration: ComponentConfig; endpoint: string }) => {
   const [checkout, setCheckout] = useState<any>(null);
@@ -35,6 +35,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
     const initialize: () => void = async () => {
       try {
+        console.log('initialize session running');
         const response = await fetch(`${API_URL}/${endpoint}`, requestOptions);
         const parsedResponse = await response.json();
         if (parsedResponse.error) {
@@ -46,7 +47,10 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
             data: parsedResponse,
             setState: {
               error: setError,
-              result: setResult
+              result: setResult,
+              adyenState: (data: any) => {
+                dispatch(updateAdyenStateInfo(data));
+              }
             }
           });
           let component = await AdyenCheckout(sessions.checkoutConfig);
@@ -62,7 +66,12 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
 
     initialize();
+    return () => {
+      setCheckout(null);
+      setError(null);
+      setResult(null);
+    };
   }, [activeStep]);
 
-  return [checkout, result, error];
+  return [checkout, result, error, activeStep];
 };

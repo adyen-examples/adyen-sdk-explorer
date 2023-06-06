@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Slider } from '@mui/material';
+import { Box, FormControl, MenuItem, Select, Slider, Typography } from '@mui/material';
 import { HuePicker } from 'react-color';
 import { onDeckActions } from '../../../../../app';
 import { useAppDispatch } from '../../../../../hooks';

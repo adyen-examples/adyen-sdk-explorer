@@ -36,4 +36,7 @@ export class ConfigurationBase<P extends ConfigurationBaseProps> {
   get setResult() {
     return this.props.setState.result;
   }
+  get setAdyenState() {
+    return this.props.setState.adyenState;
+  }
 }

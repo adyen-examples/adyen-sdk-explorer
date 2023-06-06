@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
 import type { OnDeckPropType } from '../CheckoutBuilder/types';
+import { useEffect } from 'react';
 
 export interface ComponentConfig {
   profile: OnDeckPropType;
@@ -13,41 +14,43 @@ export interface ComponentConfig {
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
-  const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
+  const [checkout, result, error, activeStep] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
   const product = configuration.profile.product;
+  let componentWrapper = null;
 
-  if (error) {
-    return (
-      <Box pt={3} sx={{ textAlign: 'center' }}>
-        <AdyenIdkIcon />
-        <Alerts severityType={'error'} message={JSON.stringify(error)} />
-      </Box>
-    );
-  } else if (result) {
-    return <Alerts severityType={result.status} message={result.resultCode} />;
-  } else if (checkout) {
-    try {
-      checkout
-        .create(product, {
-          ...configuration.local,
-          onSelect: (e: any) => {
-            console.log('onready fired');
-          }
-        })
-        .mount('#checkout');
-    } catch (error: any) {
-      console.error(error);
-      return (
+  useEffect(() => {
+    if (error) {
+      componentWrapper = (
         <Box pt={3} sx={{ textAlign: 'center' }}>
           <AdyenIdkIcon />
-          <Alerts severityType={'error'} message={error.message ? error.message : 'Error creating component'} />
+          <Alerts severityType={'error'} message={JSON.stringify(error)} />
         </Box>
       );
+    } else if (result) {
+      componentWrapper = <Alerts severityType={result.status} message={result.resultCode} />;
+    } else if (checkout) {
+      try {
+        checkout
+          .create(product, {
+            ...configuration.local
+          })
+          .mount('#checkout');
+      } catch (error: any) {
+        console.error(error);
+        componentWrapper = (
+          <Box pt={3} sx={{ textAlign: 'center' }}>
+            <AdyenIdkIcon />
+            <Alerts severityType={'error'} message={error.message ? error.message : 'Error creating component'} />
+          </Box>
+        );
+      }
     }
-  }
+  }, [checkout, result, error, activeStep]);
+
   return (
     <Box sx={configuration?.style}>
       <div id="checkout"></div>
+      {componentWrapper}
     </Box>
   );
 };

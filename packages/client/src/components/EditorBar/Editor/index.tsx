@@ -1,17 +1,24 @@
+import { Box } from '@mui/material';
 import JSONInput from 'react-json-editor-ajrm';
 import { light_mitsuketa_tribute, dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../../CheckoutBuilder/types';
-import { Box } from '@mui/material';
 
 type EditorProps = {
   configuration: OnDeckPropType;
   handleJsonEditorUpdate: (e: any) => void;
   viewOnly: boolean;
+  color?: string;
 };
 
 type HandleChange = (e: any) => void;
 
-export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
+export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color }: EditorProps) => {
+  let editorTheme = dark_vscode_tribute;
+
+  if (color && color === 'light') {
+    editorTheme = light_mitsuketa_tribute;
+  }
+
   const handleChange: HandleChange = e => {
     const { error, jsObject } = e;
 
@@ -30,7 +37,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}
-        colors={dark_vscode_tribute}
+        colors={editorTheme}
         locale={localeEn}
         height="100%"
         width="100%"

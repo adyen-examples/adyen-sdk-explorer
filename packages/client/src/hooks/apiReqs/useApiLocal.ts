@@ -21,7 +21,6 @@ export const useApiLocal = (url: string, method: AllowedMethods = 'GET', apiKey:
     error: null,
     data: null
   });
-  console.log('called useApiLocal');
 
   useEffect(() => {
     setPartialData(

@@ -1,11 +1,10 @@
 import { Box, Slide, Tab, Tabs, Typography } from '@mui/material';
 import { useState } from 'react';
-import { EditorPrePostFix } from '../EditorPrePostFix';
+import { APITab } from './APITab';
 import { CodeTab } from './CodeTab';
+import { StateTab } from './StateTab';
 import { StyleEditor } from './StyleTab';
 import { TabPanel } from './TabPanel';
-import { APITab } from './APITab';
-import { StateTab } from './StateTab';
 
 export const MultiTab: any = (props: any) => {
   const [tab, setTab] = useState(0);

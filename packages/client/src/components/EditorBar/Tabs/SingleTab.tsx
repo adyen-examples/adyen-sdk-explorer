@@ -1,9 +1,9 @@
-import { EditorPrePostFix } from '../EditorPrePostFix';
-import { Grid, Box, Typography, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { EditorPrePostFix } from '../EditorPrePostFix';
 
 export const SingleTab = (props: any) => {
   const { viewOnly, step, profile, checkout, local, sessions, ...other } = props;
@@ -46,7 +46,7 @@ export const SingleTab = (props: any) => {
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
   };
-  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateStep } = onDeckActions;
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
   let singleTabData = null;
   switch (step) {
@@ -93,7 +93,7 @@ checkout.create('${profile.product}',`,
   }
 
   return (
-    <Box>
+    <Box {...other}>
       <SingleTabHeader
         title={singleTabData?.title}
         clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}

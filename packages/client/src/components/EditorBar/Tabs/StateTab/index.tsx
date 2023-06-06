@@ -1,7 +1,9 @@
 import { Box, Typography } from '@mui/material';
+import { EditorPrePostFix } from '../../EditorPrePostFix';
+
 export const StateTab = (props: any) => {
   const { adyenComponent, ...other } = props;
-  console.log('adyenComponent', adyenComponent);
+
   return (
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
@@ -9,9 +11,17 @@ export const StateTab = (props: any) => {
           STATE
         </Typography>
       </Box>
-      {/* <Box p={3}>
-        <Typography>as;djlfhasdjfhasdl;fha;sdlfha;sdhjf as;dlfhas;ldjfhasdlfjal;skdjf;lkasdjf;lkasdjf;lkajsd;fljasd;lkfjasldjkf;ksdjf</Typography>
-      </Box> */}
+      {adyenComponent && (
+        <Box px={2}>
+          <EditorPrePostFix
+            data={adyenComponent}
+            handleEditorUpdate={(value: any) => {
+              console.log(value);
+            }}
+            viewOnly={true}
+          />
+        </Box>
+      )}
     </Box>
   );
 };
