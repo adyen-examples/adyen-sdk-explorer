@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Collapse } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -35,7 +35,7 @@ export const APIDrawer = (props: any) => {
             {!open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: 'secondary.light' }} />}
           </Box>
         </Button>
-        {open && (
+        <Collapse orientation="vertical" in={open} timeout={300}>
           <Box pb={3}>
             {request?.method && (
               <Box>
@@ -60,7 +60,7 @@ export const APIDrawer = (props: any) => {
             )}
             {request?.body && (
               <Box px={2}>
-                <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: 'secondary.dark' }}>
+                <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: '#00112C' }}>
                   <EditorPrePostFix
                     data={JSON.parse(request.body)}
                     handleEditorUpdate={(value: any) => {
@@ -77,7 +77,7 @@ export const APIDrawer = (props: any) => {
               </Typography>
             </Box>
             <Box px={2}>
-              <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: 'secondary.dark' }}>
+              <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: '#00112C' }}>
                 <EditorPrePostFix
                   data={response}
                   handleEditorUpdate={(value: any) => {
@@ -88,7 +88,7 @@ export const APIDrawer = (props: any) => {
               </Box>
             </Box>
           </Box>
-        )}
+        </Collapse>
       </Box>
     </Box>
   );

@@ -89,7 +89,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
             }}
             variant="contained"
           >
-            {viewOnly ? 'Edit' : 'View Only'}
+            <Box sx={{ fontSize: '15px', verticalAlign: 'middle', display: 'inline-block' }}>{viewOnly ? 'Edit' : 'View'}</Box>
           </Button>
         </Grid>
         <Grid item>

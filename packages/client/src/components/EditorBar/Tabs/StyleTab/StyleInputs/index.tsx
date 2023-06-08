@@ -66,7 +66,7 @@ export const StyleInputs = (props: any) => {
                     labelId="select-font"
                     value={style[cssProperty]}
                     label="Font"
-                    defaultValue="Roboto"
+                    defaultValue="Roboto, Helvetica, Arial, sans-serif"
                     onChange={e => {
                       dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: e.target.value } }));
                     }}

@@ -1,4 +1,4 @@
-import { Box, Slide, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Slide, Tab, Tabs, Typography, Fade } from '@mui/material';
 import { useState } from 'react';
 import { APITab } from './APITab';
 import { CodeTab } from './CodeTab';
@@ -78,32 +78,32 @@ export const MultiTab: any = (props: any) => {
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
-        <Slide timeout={150} direction="right" in={tab === 0 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 0 && Object.keys(sessionsResponse).length > 0}>
           <Box>
             <CodeTab checkout={checkout} local={local} profile={profile} />
           </Box>
-        </Slide>
+        </Fade>
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <Slide timeout={150} direction="right" in={tab === 1 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 1 && Object.keys(sessionsResponse).length > 0}>
           <Box>
             <StyleEditor />
           </Box>
-        </Slide>
+        </Fade>
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        <Slide timeout={150} direction="right" in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
           <Box>
             <APITab sessions={sessions} sessionsResponse={sessionsResponse} />
           </Box>
-        </Slide>
+        </Fade>
       </TabPanel>
       <TabPanel value={tab} index={3}>
-        <Slide timeout={150} direction="right" in={tab === 3 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 3 && Object.keys(sessionsResponse).length > 0}>
           <Box>
-            <StateTab adyenComponent={adyenState}/>
+            <StateTab adyenComponent={adyenState} />
           </Box>
-        </Slide>
+        </Fade>
       </TabPanel>
     </Box>
   );

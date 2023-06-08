@@ -74,11 +74,8 @@ export class ConfigurationSession<P extends ConfigurationSessionProps = any> ext
       message = error.message;
       value = { message: message };
     }
-    console.log('Value: ', value);
 
     if (this.setError) {
-      console.log('Setting Error');
-      console.log('value is ', value);
       this.setError(value);
     }
   }

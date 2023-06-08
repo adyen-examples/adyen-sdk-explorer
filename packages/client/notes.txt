@@ -8,7 +8,7 @@ MVP:
 
 Open Items:
 1. (complete) Add style component to EditorBar
-2. Add state component to EditorBar
+2. (complete)Add state component to EditorBar
 3. (complete) Fix redirect bug 
 4. Add loading tab
 5. Add Global Error component
@@ -16,9 +16,10 @@ Open Items:
 7. Add documentation for initial MVP payment methods
 9. Update home page to include relevant and specific documentation. For example, summarize steps
 10. Create tests for QA
-11. Add default values or config, and explain potential errors if you misconfigure.
+11. (Complete: note to be combined with 17) Add default values or config, and explain potential errors if you misconfigure.
 12. Launch fast and iterate messaging
-13. (done) There is a bug when you double click a tab it will set the txvariant as undefined
-14. Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
-16. (fixed) We are sending another session request each time we modify the css. 
-17. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
+13. (complete) There is a bug when you double click a tab it will set the txvariant as undefined
+14. (complete) Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
+16. (complete) We are sending another session request each time we modify the css. 
+17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
+18. (complete) Bug introduced that doesnt display the error component

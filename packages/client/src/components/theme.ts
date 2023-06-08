@@ -15,7 +15,8 @@ export const themeOptions: any = {
     },
     background: {
       paper: '#fff',
-      default: '#fff'
+      default: '#fff',
+      elevation: 20
     },
     info: {
       main: '#0048b3'

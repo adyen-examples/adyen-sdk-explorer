@@ -4,9 +4,14 @@ import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import { EditorPrePostFix } from '../EditorPrePostFix';
+import { SingleCodeTab } from './CodeTab/SingleCodeTab';
+import { APIDrawer } from './APITab/APIDrawer';
+import { API_URL } from '../../../config';
+import { SingleAPITab } from './APITab/SingleAPITab';
 
 export const SingleTab = (props: any) => {
   const { viewOnly, step, profile, checkout, local, sessions, ...other } = props;
+
   const SingleTabHeader = ({ title, clipboardText }: any) => {
     return (
       <Grid justifyContent="space-between" alignItems="flex-start" sx={{ bgcolor: 'secondary.light', px: 4, pt: 1 }} container>
@@ -98,20 +103,8 @@ checkout.create('${profile.product}',`,
         title={singleTabData?.title}
         clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}
       />
-      <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
-        <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
-          {singleTabData?.subtitle}
-        </Typography>
-      </Box>
-      <Box p={3}>
-        <EditorPrePostFix
-          data={singleTabData?.payload}
-          prefix={singleTabData?.prefix}
-          postfix={singleTabData?.postfix}
-          handleEditorUpdate={singleTabData?.handler}
-          viewOnly={viewOnly}
-        />
-      </Box>
+      {(step === 'checkout' || step === 'local') && <SingleCodeTab {...singleTabData} viewOnly={viewOnly} />}
+      {step === 'sessions' && <SingleAPITab {...singleTabData} viewOnly={viewOnly} />}
     </Box>
   );
 };

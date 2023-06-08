@@ -5,11 +5,6 @@ export const CodeTab = (props: any) => {
   const { checkout, local, profile, ...other } = props;
   return (
     <Box {...other}>
-      <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
-        <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
-          CODE
-        </Typography>
-      </Box>
       <Box p={3}>
         <Box>
           <EditorPrePostFix

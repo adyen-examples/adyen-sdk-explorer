@@ -19,16 +19,7 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
   let componentWrapper = null;
 
   useEffect(() => {
-    if (error) {
-      componentWrapper = (
-        <Box pt={3} sx={{ textAlign: 'center' }}>
-          <AdyenIdkIcon />
-          <Alerts severityType={'error'} message={JSON.stringify(error)} />
-        </Box>
-      );
-    } else if (result) {
-      componentWrapper = <Alerts severityType={result.status} message={result.resultCode} />;
-    } else if (checkout) {
+    if (checkout) {
       try {
         checkout
           .create(product, {
@@ -36,6 +27,7 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
           })
           .mount('#checkout');
       } catch (error: any) {
+        //here need you need to send to global error handler
         console.error(error);
         componentWrapper = (
           <Box pt={3} sx={{ textAlign: 'center' }}>
@@ -45,12 +37,24 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
         );
       }
     }
-  }, [checkout, result, error, activeStep]);
+  }, [checkout]);
+
+  if (error) {
+    return (
+      <Box sx={{ textAlign: 'center' }}>
+        <Alerts severityType={'error'} message={JSON.stringify(error)} />
+        <Box pt={2}>
+          <AdyenIdkIcon />
+        </Box>
+      </Box>
+    );
+  } else if (result) {
+    return <Alerts severityType={result.status} message={result.resultCode} />;
+  }
 
   return (
     <Box sx={configuration?.style}>
       <div id="checkout"></div>
-      {componentWrapper}
     </Box>
   );
 };

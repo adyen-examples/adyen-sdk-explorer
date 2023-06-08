@@ -1,6 +1,6 @@
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Box, Button, IconButton } from '@mui/material';
+import { Box, Button, IconButton, Stack } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
@@ -62,19 +62,27 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
 
   return (
     <Box>
-      <Box sx={{ bgcolor: '#00112C', display: { xs: 'none', md: 'inline-block' } }}>
-        {step !== 0 && <Button onClick={handleBack}>Back</Button>}
+      <Stack spacing={1} direction="row" sx={{ background: 'transparent', display: { xs: 'none', md: 'inline-block' } }}>
+        {step !== 0 && (
+          <Button sx={{ bgcolor: '#00112C', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }} variant="outlined" onClick={handleBack}>
+            Back
+          </Button>
+        )}
         {step !== stepsLength - 1 && (
-          <Button variant="outlined" onClick={handleNext}>
+          <Button variant="contained" onClick={handleNext}>
             Next
           </Button>
         )}
         {step === stepsLength - 1 && (
-          <Button variant="contained" onClick={exportToJson}>
+          <Button
+            sx={{ bgcolor: '#ff5722', '&:hover': { bgcolor: '#8B4000' } }}
+            variant="contained"
+            onClick={exportToJson}
+          >
             Export
           </Button>
         )}
-      </Box>
+      </Stack>
       <Box sx={{ position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } }}>
         <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleBack}>
           <NavigateBeforeIcon />
