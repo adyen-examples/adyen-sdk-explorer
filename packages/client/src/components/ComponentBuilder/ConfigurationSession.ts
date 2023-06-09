@@ -61,6 +61,7 @@ export class ConfigurationSession<P extends ConfigurationSessionProps = any> ext
           status = 'error';
           break;
         default:
+          status = 'warning';
           break;
       }
       this.setResult({ status: status, resultCode: resultCode });

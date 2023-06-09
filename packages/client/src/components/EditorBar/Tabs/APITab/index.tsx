@@ -1,6 +1,5 @@
-import { Box, Typography } from '@mui/material';
-import { EditorPrePostFix } from '../../EditorPrePostFix';
-import { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { APIDrawer } from './APIDrawer';
 
 declare global {
@@ -10,7 +9,6 @@ declare global {
 }
 
 export const APITab = (props: any) => {
-  const { sessions, sessionsResponse } = props;
   const [apiLogs, setApiLogs] = useState<any[]>([]);
 
   useEffect(() => {

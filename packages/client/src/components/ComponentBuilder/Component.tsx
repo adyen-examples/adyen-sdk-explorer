@@ -14,30 +14,23 @@ export interface ComponentConfig {
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
-  const [checkout, result, error, activeStep] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
-  const product = configuration.profile.product;
-  let componentWrapper = null;
-
+  const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
+  const { profile, local } = configuration;
+  const { product } = profile;
   useEffect(() => {
     if (checkout) {
       try {
         checkout
           .create(product, {
-            ...configuration.local
+            ...local
           })
           .mount('#checkout');
       } catch (error: any) {
         //here need you need to send to global error handler
         console.error(error);
-        componentWrapper = (
-          <Box pt={3} sx={{ textAlign: 'center' }}>
-            <AdyenIdkIcon />
-            <Alerts severityType={'error'} message={error.message ? error.message : 'Error creating component'} />
-          </Box>
-        );
       }
     }
-  }, [checkout]);
+  }, [checkout, product, local]);
 
   if (error) {
     return (

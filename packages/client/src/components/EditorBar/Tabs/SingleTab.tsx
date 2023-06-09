@@ -3,11 +3,8 @@ import { Box, Grid, IconButton, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import { EditorPrePostFix } from '../EditorPrePostFix';
-import { SingleCodeTab } from './CodeTab/SingleCodeTab';
-import { APIDrawer } from './APITab/APIDrawer';
-import { API_URL } from '../../../config';
 import { SingleAPITab } from './APITab/SingleAPITab';
+import { SingleCodeTab } from './CodeTab/SingleCodeTab';
 
 export const SingleTab = (props: any) => {
   const { viewOnly, step, profile, checkout, local, sessions, ...other } = props;

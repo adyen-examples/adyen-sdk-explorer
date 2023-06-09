@@ -1,4 +1,4 @@
-import { Box, Slide, Tab, Tabs, Typography, Fade } from '@mui/material';
+import { Box, Fade, Tab, Tabs, Typography } from '@mui/material';
 import { useState } from 'react';
 import { APITab } from './APITab';
 import { CodeTab } from './CodeTab';
@@ -92,7 +92,7 @@ export const MultiTab: any = (props: any) => {
         </Fade>
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        <Fade timeout={500} in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={200} in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
           <Box>
             <APITab sessions={sessions} sessionsResponse={sessionsResponse} />
           </Box>

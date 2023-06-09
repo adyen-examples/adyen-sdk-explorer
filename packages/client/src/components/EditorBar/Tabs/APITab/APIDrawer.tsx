@@ -51,6 +51,16 @@ export const APIDrawer = (props: any) => {
                 </Typography>
               </Box>
             )}
+            {queryParameters && (
+              <Box>
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light', display: 'block' }} variant="caption">
+                  {'QUERY PARAMETERS:'}
+                </Typography>
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                  {queryParameters}
+                </Typography>
+              </Box>
+            )}
             {request?.body && (
               <Box>
                 <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">

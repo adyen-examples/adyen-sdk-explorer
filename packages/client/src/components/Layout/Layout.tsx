@@ -25,9 +25,9 @@ export const Layout = ({ main: Main }: any) => {
 
   let editor = null;
   let sdkExplorerProps: any = null;
-  let activeProduct: any = null;
 
   useEffect(() => {
+    let activeProduct: any = null;
     if (sdkExplorerProps) {
       activeProduct = { product: sdkExplorerProps.txvariant };
       dispatch(updateExplorer(sdkExplorerProps));
@@ -39,7 +39,8 @@ export const Layout = ({ main: Main }: any) => {
         dispatch(updateStyleInfo(defaultComponentStyle));
       }
     }
-  }, [product, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product, data, dispatch]);
 
   if (!error && data) {
     for (let component in data.products) {

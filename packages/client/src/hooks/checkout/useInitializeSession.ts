@@ -70,7 +70,8 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       setError(null);
       setResult(null);
     };
-  }, [activeStep]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStep, endpoint, dispatch]);
 
-  return [checkout, result, error, activeStep];
+  return [checkout, result, error];
 };

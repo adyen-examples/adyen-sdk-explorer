@@ -5,7 +5,7 @@ export const StateTab = (props: any) => {
   const { adyenComponent, ...other } = props;
 
   return (
-    <Box>
+    <Box {...other}>
       <Box>
         <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
           STATE

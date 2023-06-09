@@ -1,8 +1,9 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
 
 export const CodeTab = (props: any) => {
   const { checkout, local, profile, ...other } = props;
+
   return (
     <Box {...other}>
       <Box p={3}>

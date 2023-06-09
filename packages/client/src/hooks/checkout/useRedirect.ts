@@ -10,11 +10,12 @@ const { updateExplorer } = sdkExplorerActions;
 export const useRedirect = (configuration: any) => {
   const [queryParameters] = useSearchParams();
   const redirectResult = queryParameters.get('redirectResult');
-  const encodedConfig: any = localStorage.getItem('componentConfig');
-  const encodedSDKState: any = localStorage.getItem('sdkExplorer');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const encodedConfig: any = localStorage.getItem('componentConfig');
+    const encodedSDKState: any = localStorage.getItem('sdkExplorer');
+
     if (redirectResult) {
       const storedConfig = JSON.parse(encodedConfig);
       const { checkout, local, sessions, style } = storedConfig;
@@ -30,5 +31,5 @@ export const useRedirect = (configuration: any) => {
         dispatch(updateExplorer({ steps, step }));
       }
     }
-  }, []);
+  }, [redirectResult, configuration, dispatch]);
 };
