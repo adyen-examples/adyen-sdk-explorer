@@ -21,7 +21,7 @@ export const Layout = ({ main: Main }: any) => {
   const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
   const { error, data } = products;
   const pathParams = useParams();
-  const product: any = pathParams.component;
+  const product: string | undefined = pathParams.component;
 
   let editor = null;
   let sdkExplorerProps: any = null;

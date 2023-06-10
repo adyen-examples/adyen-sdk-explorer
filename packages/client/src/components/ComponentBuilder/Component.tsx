@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { useInitializeSession } from '../../hooks';
 import { Box } from '@mui/material';
 import { Alerts } from '../CheckoutBuilder/Alerts';
@@ -6,7 +7,7 @@ import type { OnDeckPropType } from '../CheckoutBuilder/types';
 import { useEffect } from 'react';
 
 export interface ComponentConfig {
-  profile: OnDeckPropType;
+  txVariant: string;
   checkout: OnDeckPropType;
   local: OnDeckPropType;
   sessions: OnDeckPropType;
