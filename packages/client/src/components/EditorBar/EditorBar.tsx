@@ -20,7 +20,7 @@ interface EditorWrapperProps {
 
 export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
-  const { profile, checkout, local, sessions, sessionsResponse, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { profile, checkout, local, sessions };
   const { updateStep } = onDeckActions;
 
@@ -58,16 +58,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
           <SingleTab viewOnly={viewOnly} step={step} profile={profile} checkout={checkout} local={local} sessions={sessions} />
         )}
-        {step === 'review' && (
-          <MultiTab
-            profile={profile}
-            checkout={checkout}
-            local={local}
-            sessions={sessions}
-            sessionsResponse={sessionsResponse}
-            adyenState={adyenState}
-          />
-        )}
+        {step === 'review' && <MultiTab profile={profile} checkout={checkout} local={local} adyenState={adyenState} />}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
         <Grid

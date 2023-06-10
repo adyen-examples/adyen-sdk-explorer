@@ -8,7 +8,7 @@ import { TabPanel } from './TabPanel';
 
 export const MultiTab: any = (props: any) => {
   const [tab, setTab] = useState(0);
-  const { checkout, local, profile, sessions, sessionsResponse, adyenState, ...other } = props;
+  const { checkout, local, profile, adyenState, ...other } = props;
   const MultiTabStyle = {
     bgcolor: 'secondary.light',
     pt: 1,
@@ -78,28 +78,28 @@ export const MultiTab: any = (props: any) => {
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
-        <Fade timeout={500} in={tab === 0 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 0}>
           <Box>
             <CodeTab checkout={checkout} local={local} profile={profile} />
           </Box>
         </Fade>
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <Fade timeout={500} in={tab === 1 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 1}>
           <Box>
             <StyleEditor />
           </Box>
         </Fade>
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        <Fade timeout={200} in={tab === 2 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={200} in={tab === 2}>
           <Box>
-            <APITab sessions={sessions} sessionsResponse={sessionsResponse} />
+            <APITab />
           </Box>
         </Fade>
       </TabPanel>
       <TabPanel value={tab} index={3}>
-        <Fade timeout={500} in={tab === 3 && Object.keys(sessionsResponse).length > 0}>
+        <Fade timeout={500} in={tab === 3}>
           <Box>
             <StateTab adyenComponent={adyenState} />
           </Box>

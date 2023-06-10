@@ -27,7 +27,7 @@ export const APIDrawer = (props: any) => {
     <Box {...other}>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
         <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2 }} onClick={handleClick}>
-          <Typography sx={{ fontSize: '.7rem', color: 'primary.light' }} variant="caption">
+          <Typography noWrap={true} sx={{ fontSize: '.7rem', color: 'primary.light' }} variant="caption">
             {path}
           </Typography>
           <Box sx={{ color: 'black' }}>
