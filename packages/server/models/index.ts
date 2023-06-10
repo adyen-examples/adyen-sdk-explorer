@@ -1,4 +1,5 @@
-export { User, Configuration } from './users';
-export { additionalData, sessionsConfig, paymentMethodDetails, paymentMethodProperties } from './adyenReqAttr';
-export {products} from './products'
-export type { UserDocument, ConfigurationDocument } from './types';
+import additionalData from './additionalData.json';
+import * as paymentMethodDetails from './paymentRequestProps';
+
+export { additionalData, paymentMethodDetails };
+export { checkoutProps, paymentMethodProps, sessionsProps } from './checkoutBuilderProps';

@@ -37,6 +37,16 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     }
   };
 
+  let emptyDisplay;
+
+  if (!displayDescriptors || !displayDescriptors.length) {
+    emptyDisplay = (
+      <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
+        <Typography variant="h5">No Payment Method Configurations Available</Typography>
+      </Grid>
+    );
+  }
+
   return (
     <Grid container>
       <Grid item px={7} py={2} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
@@ -94,6 +104,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
             </Grid>
           );
         })}
+      {emptyDisplay}
     </Grid>
   );
 };

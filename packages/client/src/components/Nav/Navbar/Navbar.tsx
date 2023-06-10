@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { AppBar, Box, Button, Toolbar, IconButton, Drawer } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
-import { useState } from 'react';
 
 export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);

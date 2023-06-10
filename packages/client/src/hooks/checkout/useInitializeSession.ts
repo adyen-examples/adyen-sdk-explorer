@@ -18,20 +18,18 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
   const [result, setResult] = useState(null);
 
   const dispatch = useAppDispatch();
-  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const { activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { steps, activeStep } = useSelector((state: RootState) => state.onDeck);
 
   const componentConfig = useMemoCompare(configuration);
 
   useEffect(() => {
-    const { sessions, profile } = componentConfig;
-    const txvariant = profile.product;
+    const { sessions, txVariant } = componentConfig;
     const requestOptions: RequestOptions = {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${txvariant}` })
+      body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${txVariant}` })
     };
     const initialize: () => void = async () => {
       try {

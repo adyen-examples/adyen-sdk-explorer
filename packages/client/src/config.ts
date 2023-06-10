@@ -1,4 +1,4 @@
-export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 export const RETURN_URL_BASE = process.env.REACT_APP_RETURN_URL_BASE || 'http://localhost:3000';
 export const CLIENT_KEY = process.env.REACT_APP_CLIENT_KEY || 'test_CTOT7ZHBDVAHBHIABJ63CUQW7QMVDQFD';
 export const ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT || 'test';
