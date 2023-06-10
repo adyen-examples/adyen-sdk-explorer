@@ -1,7 +1,11 @@
 import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { onDeckActions } from '../../../app';
+import { useAppDispatch } from '../../../hooks';
 
 export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
+  const { clearOnDeckInfo } = onDeckActions;
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const selectedButtonStyle = {
@@ -47,7 +51,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
         <ListItem>
           <Typography variant="h5">Online Payments</Typography>
         </ListItem>
-        {Object.keys(products).map((product: any) => {
+        {Object.keys(products).map((product: any, index: number) => {
           let subcategory = null;
           const selected = products[product].txVariant === page;
           const buttonStyle = selected ? selectedButtonStyle : nonselectedButtonStyle;
@@ -62,7 +66,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           return (
             <Box key={product}>
               <ListItem disablePadding>
-                <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txvariant)}>
+                <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
                   <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
                     {product}
                   </Typography>

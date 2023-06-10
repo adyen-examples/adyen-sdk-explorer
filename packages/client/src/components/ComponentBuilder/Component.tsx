@@ -7,17 +7,18 @@ import type { OnDeckPropType } from '../CheckoutBuilder/types';
 import { useEffect } from 'react';
 
 export interface ComponentConfig {
-  txVariant: string;
   checkout: OnDeckPropType;
   local: OnDeckPropType;
   sessions: OnDeckPropType;
   style: any;
+  profile: any;
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
   const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
   const { profile, local } = configuration;
   const { product } = profile;
+
   useEffect(() => {
     if (checkout) {
       try {

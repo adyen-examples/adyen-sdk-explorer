@@ -23,7 +23,7 @@ export const ConfigWrapper = () => {
     review: <ReviewForm key="review" configuration={{ checkout, local, sessions }} content={reviewPageContent} />
   };
 
-  const displayStep = stepMap[steps[activeStep]];
+  const displayStep: any = stepMap[steps[activeStep]];
 
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>

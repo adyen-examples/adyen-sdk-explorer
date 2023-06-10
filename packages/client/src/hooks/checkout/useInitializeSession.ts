@@ -22,7 +22,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
   const { activeStep } = useSelector((state: RootState) => state.onDeck);
 
   const componentConfig = useMemoCompare(configuration);
-
+  
   useEffect(() => {
     const { sessions, profile } = componentConfig;
     const txvariant = profile.product;
@@ -35,7 +35,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
     };
     const initialize: () => void = async () => {
       try {
-        const response = await fetch(`${API_URL}/${endpoint}`, requestOptions);
+        const response = await fetch(`${API_URL}/api/checkout/sessionStart`, requestOptions);
         const parsedResponse = await response.json();
         if (parsedResponse.error) {
           const errorMessage = parsedResponse.error;

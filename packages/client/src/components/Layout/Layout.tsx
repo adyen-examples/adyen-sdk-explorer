@@ -18,8 +18,8 @@ export const Layout = ({ main: Main }: any) => {
   const navButtonHeight = 40;
   let editorWidth = 0;
 
-  const [products]: any = useApiLocal('http://localhost:8080/api/products', 'GET');
-  const { error, data } = products;
+  const [products]: any = useApiLocal('http://localhost:8080/api/checkout/paymentMethods', 'GET');
+  const { error, data }: any = products;
   const pathParams = useParams();
   const product: string | undefined = pathParams.component;
 
@@ -29,7 +29,8 @@ export const Layout = ({ main: Main }: any) => {
   useEffect(() => {
     let activeProduct: any = null;
     if (sdkExplorerProps) {
-      activeProduct = { product: sdkExplorerProps.txvariant };
+      sdkExplorerProps.steps = ['checkout', 'local', 'sessions', 'review'];
+      activeProduct = { product: sdkExplorerProps.txVariant };
       dispatch(updateExplorer(sdkExplorerProps));
       dispatch(updateProfileInfo(activeProduct));
 
@@ -43,18 +44,19 @@ export const Layout = ({ main: Main }: any) => {
   }, [product, data, dispatch]);
 
   if (!error && data) {
-    for (let component in data.products) {
-      if (data.products[component].txvariant === product) {
-        sdkExplorerProps = data.products[component];
+    for (let component in data as { [key: string]: { txvariant: String } }) {
+      console.log('looping component', component);
+      if (data[component].txVariant === product) {
+        sdkExplorerProps = data[component];
       }
     }
-
+    console.log('sdkExplorerProps', sdkExplorerProps);
     if (sdkExplorerProps) {
       editorWidth = 420;
       editor = (
         <EditorBar
           dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }}
-          steps={sdkExplorerProps.steps}
+          steps={['checkout', 'local', 'sessions', 'review']}
         />
       );
     } else if (product !== undefined) {
@@ -66,7 +68,7 @@ export const Layout = ({ main: Main }: any) => {
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Navbar drawerWidth={drawerWidth} products={data.products} headerHeight={headerHeight} page={product} />
+        <Navbar drawerWidth={drawerWidth} products={data} headerHeight={headerHeight} page={product} />
         <Box
           sx={{
             position: 'fixed',

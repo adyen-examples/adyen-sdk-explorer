@@ -27,7 +27,8 @@ export const useRedirect = (configuration: any) => {
         dispatch(updateAdyenStateInfo(style));
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
-        dispatch(updateActiveStep(steps.length - 1));
+        dispatch(updateStep(steps.length - 1));
+        dispatch(updateExplorer({ steps, step }));
       }
     }
   }, [redirectResult, configuration, dispatch]);

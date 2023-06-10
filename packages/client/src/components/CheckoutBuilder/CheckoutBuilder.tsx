@@ -21,7 +21,7 @@ const CheckoutBuilder = ({ txvariant }: any) => {
 
     const makeRequest: () => void = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/configurations/${txvariant}`, requestOptions);
+        const response = await fetch(`${API_URL}/api/checkout/paymentMethods/${txvariant}`, requestOptions);
         const data = await response.json();
 
         dispatch(updateDescriptors(data));
