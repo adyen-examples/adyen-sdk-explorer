@@ -36,7 +36,10 @@ const CheckoutBuilder = ({ txvariant }: any) => {
   }, [dispatch, txvariant]);
 
   return (
-    <Container maxWidth={false} disableGutters={true}>
+    <Container
+      maxWidth={false}
+      disableGutters={true}
+    >
       <Paper elevation={0}>
         <ConfigWrapper />
       </Paper>

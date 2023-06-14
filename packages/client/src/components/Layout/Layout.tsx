@@ -45,7 +45,6 @@ export const Layout = ({ main: Main }: any) => {
 
   if (!error && data) {
     for (let component in data as { [key: string]: { txvariant: String } }) {
-      console.log('looping component', component);
       if (data[component].txVariant === product) {
         sdkExplorerProps = data[component];
       }
@@ -66,7 +65,7 @@ export const Layout = ({ main: Main }: any) => {
 
   if (!error && data) {
     return (
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         <Navbar drawerWidth={drawerWidth} products={data} headerHeight={headerHeight} page={product} />
         <Box
