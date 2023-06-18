@@ -14,14 +14,14 @@ export const StyleDrawers = (props: any) => {
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: 'secondary.light', bgcolor: '#00112C' }}>
+      <Box sx={{ borderBottom: 1, borderColor: '#00112C', bgcolor: 'secondary.light' }}>
         <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2 }} onClick={drawerHandler}>
-          <Typography sx={{ fontSize: '.65rem', color: 'secondary.light' }} variant="caption">
+          <Typography sx={{ fontSize: '.65rem', color: '#00112C' }} variant="caption">
             {sdkClass}
           </Typography>
           <Box sx={{ ml: 5, color: 'black' }}>
-            {!open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: 'secondary.light' }} />}
-            {open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: 'secondary.light' }} />}
+            {!open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
+            {open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
           </Box>
         </Button>
       </Box>

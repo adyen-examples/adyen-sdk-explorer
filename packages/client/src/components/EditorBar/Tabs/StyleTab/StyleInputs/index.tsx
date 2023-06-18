@@ -89,13 +89,13 @@ export const StyleInputs = (props: any) => {
 
         return (
           <Box key={i}>
-            <Typography sx={{ fontSize: '.65rem', color: 'primary.light' }} variant="caption">
+            <Typography sx={{ fontSize: '.65rem', color: '#00112C' }} variant="caption">
               {cssProperty}
             </Typography>
             <Box
               sx={{
                 color: 'primary.light !important',
-                '.MuiInput-root': { fontSize: '.9rem', color: 'primary.light', svg: { color: 'primary.light' } }
+                '.MuiInput-root': { fontSize: '.9rem', color: '#00112C', svg: { color: 'primary.light' } }
               }}
             >
               {styleType}

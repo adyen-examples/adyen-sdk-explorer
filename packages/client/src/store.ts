@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { onDeckReducer, descriptorsReducer, configurationReducer, sdkExplorerReducer } from './app';
+import { onDeckReducer, descriptorsReducer, configurationReducer } from './app';
 
 export const store = configureStore({
   reducer: {
     onDeck: onDeckReducer,
     descriptors: descriptorsReducer,
-    configuration: configurationReducer,
-    sdkExplorer: sdkExplorerReducer
+    configuration: configurationReducer
   }
 });
 

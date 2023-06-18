@@ -12,11 +12,8 @@ export class ConfigurationBase<P extends ConfigurationBaseProps> {
   protected formatProps(props: P) {
     return props || {};
   }
-  get profile() {
-    return this.props.profile;
-  }
   get product() {
-    return this.props.profile.product;
+    return this.props.txVariant;
   }
   get global() {
     return this.props.checkout;

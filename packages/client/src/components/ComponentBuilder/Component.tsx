@@ -11,13 +11,14 @@ export interface ComponentConfig {
   local: OnDeckPropType;
   sessions: OnDeckPropType;
   style: any;
-  profile: any;
+  txVariant: string;
 }
 
 export const Component = ({ configuration }: { configuration: ComponentConfig }) => {
   const [checkout, result, error] = useInitializeSession({ configuration, endpoint: 'api/sessions/sessionStart' });
-  const { profile, local } = configuration;
-  const { product } = profile;
+  const { local } = configuration;
+  const pathParams = useParams();
+  const product: string | undefined = pathParams.component;
 
   useEffect(() => {
     if (checkout) {

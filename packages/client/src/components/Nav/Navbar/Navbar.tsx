@@ -28,7 +28,13 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
       <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
         <Box
           bgcolor="white"
-          sx={{ borderBottom: 1, borderColor: 'primary.border', boxShadow: 3, px: 2, '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } } }}
+          sx={{
+            borderBottom: 1,
+            borderColor: 'primary.border',
+            boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+            px: 2,
+            '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } }
+          }}
         >
           <Toolbar sx={{ justifyContent: { xs: 'start', md: 'start', lg: 'space-between', xl: 'space-between' } }}>
             <Box sx={{ color: 'secondary.gray', display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' } }}>

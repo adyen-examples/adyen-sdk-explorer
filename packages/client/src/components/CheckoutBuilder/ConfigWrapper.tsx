@@ -11,8 +11,7 @@ import type { RootState } from '../../store';
 const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 export const ConfigWrapper = () => {
-  const { steps } = useSelector((state: RootState) => state.sdkExplorer);
-  const { profile, checkout, local, sessions, activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { profile, checkout, local, sessions, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
   useRedirect({ checkout, local, sessions });
 
   const stepMap = {
@@ -24,7 +23,7 @@ export const ConfigWrapper = () => {
   };
 
   const displayStep: any = stepMap[steps[activeStep]];
-
+  console.log('ConfigWrapper:: activeStep:: ', activeStep);
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
       <Grid item xs={1} sx={{ width: '65%' }}>

@@ -18,6 +18,7 @@ export interface ConfigurationBaseProps {
   queryParameters: any;
   setState: any;
   checkout: any;
+  txVariant: string;
 }
 
 export interface ConfigurationSessionProps extends ConfigurationBaseProps {

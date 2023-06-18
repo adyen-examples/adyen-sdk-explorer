@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { onDeckActions, sdkExplorerActions } from '../../app';
+import { onDeckActions } from '../../app';
 import { isConfigEmpty } from '../../helpers';
 import { useAppDispatch } from '../index';
 
-const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateAdyenStateInfo, updateStep } = onDeckActions;
-const { updateExplorer } = sdkExplorerActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateAdyenStateInfo, updateActiveStep } = onDeckActions;
 
 export const useRedirect = (configuration: any) => {
   const [queryParameters] = useSearchParams();
@@ -27,8 +26,7 @@ export const useRedirect = (configuration: any) => {
         dispatch(updateAdyenStateInfo(style));
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
-        dispatch(updateStep(steps.length - 1));
-        dispatch(updateExplorer({ steps, step }));
+        dispatch(updateActiveStep(steps.length - 1));
       }
     }
   }, [redirectResult, configuration, dispatch]);

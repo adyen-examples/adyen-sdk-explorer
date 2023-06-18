@@ -7,15 +7,20 @@ import { SingleAPITab } from './APITab/SingleAPITab';
 import { SingleCodeTab } from './CodeTab/SingleCodeTab';
 
 export const SingleTab = (props: any) => {
-  const { viewOnly, step, profile, checkout, local, sessions, ...other } = props;
-
+  const { viewOnly, step, txVariant, checkout, local, sessions, ...other } = props;
+  console.log('SingleTab:: txVariant', txVariant);
   const SingleTabHeader = ({ title, clipboardText }: any) => {
     return (
-      <Grid justifyContent="space-between" alignItems="flex-start" sx={{ bgcolor: 'secondary.light', px: 4, pt: 1 }} container>
+      <Grid
+        justifyContent="space-between"
+        alignItems="flex-start"
+        sx={{ bgcolor: 'secondary.light', px: 4, pt: 1, boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)' }}
+        container
+      >
         <Grid item xs={6}>
           <Box
             sx={{
-              bgcolor: '#00112C',
+              bgcolor: 'secondary.light',
               px: 1,
               py: 1,
               display: 'inline-block',
@@ -23,7 +28,7 @@ export const SingleTab = (props: any) => {
               textAlign: 'center',
               borderTopLeftRadius: 4,
               borderTopRightRadius: 4,
-              color: 'primary.light'
+              color: 'secondary.main'
             }}
           >
             <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: 'bold' }}>
@@ -56,7 +61,7 @@ export const SingleTab = (props: any) => {
       singleTabData = {
         title: 'JS',
         prefix: 'const checkout = await AdyenCheckout(',
-        postfix: `); checkout.create('${profile.product}', {...});`,
+        postfix: `); checkout.create('${txVariant}', {...});`,
         handler: (value: any) => {
           updateStore(value, updateCheckoutInfo);
         },
@@ -70,7 +75,7 @@ export const SingleTab = (props: any) => {
         prefix: `const checkout = await AdyenCheckout({...});
 
         
-checkout.create('${profile.product}',`,
+checkout.create('${txVariant}',`,
         postfix: ');',
         handler: (value: any) => {
           console.log('updating store');

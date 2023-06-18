@@ -20,9 +20,11 @@ interface EditorWrapperProps {
 
 export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
-  const { profile, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
-  const configuration: any = { profile, checkout, local, sessions };
-  const { updateStep } = onDeckActions;
+  const { txVariant, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
+  const configuration: any = { txVariant, checkout, local, sessions };
+  const { updateActiveStep } = onDeckActions;
+
+  console.log('EditorBar:: txVariant', txVariant);
 
   let step = steps[activeStep];
 
@@ -31,8 +33,10 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     overflow: 'scroll',
     top: 0,
     right: 0,
-    bgcolor: '#00112C',
-    color: 'secondary.light',
+    borderLeft: 2,
+    borderColor: 'secondary.light',
+    bgcolor: 'primary.light',
+    color: 'secondary.main',
     height: `calc(100% - ${headerHeight}px)`,
     mt: `${headerHeight}px`,
     pb: `${buttonHeight}px`,
@@ -56,9 +60,9 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     <Box>
       <Box sx={style}>
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
-          <SingleTab viewOnly={viewOnly} step={step} profile={profile} checkout={checkout} local={local} sessions={sessions} />
+          <SingleTab viewOnly={viewOnly} step={step} txVariant={txVariant} checkout={checkout} local={local} sessions={sessions} />
         )}
-        {step === 'review' && <MultiTab profile={profile} checkout={checkout} local={local} adyenState={adyenState} />}
+        {step === 'review' && <MultiTab txVariant={txVariant} checkout={checkout} local={local} adyenState={adyenState} />}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
         <Grid
@@ -84,12 +88,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
           </Button>
         </Grid>
         <Grid item>
-          <NavButtons
-            steps={steps}
-            step={activeStep}
-            setActiveStep={updateStep}
-            configuration={step === 'review' ? configuration : configuration[step]}
-          />
+          <NavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
         </Grid>
       </Grid>
     </Box>

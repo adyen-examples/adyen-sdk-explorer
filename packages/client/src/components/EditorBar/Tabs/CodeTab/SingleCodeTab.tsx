@@ -6,7 +6,7 @@ export const SingleCodeTab = (props: any) => {
   return (
     <Box {...other}>
       <Box sx={{ m: 2 }}>
-        <EditorPrePostFix data={payload} prefix={prefix} postfix={postfix} handleEditorUpdate={handler} viewOnly={viewOnly} />
+        <EditorPrePostFix color="light" data={payload} prefix={prefix} postfix={postfix} handleEditorUpdate={handler} viewOnly={viewOnly} />
       </Box>
     </Box>
   );

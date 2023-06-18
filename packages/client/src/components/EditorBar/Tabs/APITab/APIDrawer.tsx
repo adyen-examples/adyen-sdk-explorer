@@ -25,52 +25,52 @@ export const APIDrawer = (props: any) => {
   };
   return (
     <Box {...other}>
-      <Box sx={{ borderBottom: 1, borderColor: 'primary.light', bgcolor: '#00112C' }}>
-        <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2 }} onClick={handleClick}>
-          <Typography noWrap={true} sx={{ fontSize: '.7rem', color: 'primary.light' }} variant="caption">
+      <Box sx={{ borderBottom: 1, borderColor: '#00112C', bgcolor: 'primary.light' }}>
+        <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2,bgcolor: 'secondary.light' }} onClick={handleClick}>
+          <Typography noWrap={true} sx={{ fontSize: '.7rem', color: '#00112C' }} variant="caption">
             {path}
           </Typography>
           <Box sx={{ color: 'black' }}>
-            {open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: 'secondary.light' }} />}
-            {!open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: 'secondary.light' }} />}
+            {open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
+            {!open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
           </Box>
         </Button>
         <Collapse orientation="vertical" in={open} timeout={300}>
           <Box pb={3}>
             {request?.method && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
                   {`METHOD: ${request.method}`}
                 </Typography>
               </Box>
             )}
             {status && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
                   {`STATUS: ${'' + status}`}
                 </Typography>
               </Box>
             )}
             {queryParameters && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light', display: 'block' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C', display: 'block' }} variant="caption">
                   {'QUERY PARAMETERS:'}
                 </Typography>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
                   {queryParameters}
                 </Typography>
               </Box>
             )}
             {request?.body && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
                   {`REQUEST: `}
                 </Typography>
               </Box>
             )}
             {request?.body && (
               <Box px={2}>
-                <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: '#00112C' }}>
+                <Box sx={{ border: 1, borderRadius: 1, borderColor: '#00112C', px: 1, bgcolor: '#00112C' }}>
                   <EditorPrePostFix
                     data={JSON.parse(request.body)}
                     handleEditorUpdate={(value: any) => {
@@ -82,18 +82,19 @@ export const APIDrawer = (props: any) => {
               </Box>
             )}
             <Box>
-              <Typography sx={{ fontSize: '.7rem', px: 2, color: 'primary.light' }} variant="caption">
+              <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
                 {`RESPONSE:`}
               </Typography>
             </Box>
             <Box px={2}>
-              <Box sx={{ border: 1, borderRadius: 1, borderColor: 'primary.light', px: 1, bgcolor: '#00112C' }}>
+              <Box>
                 <EditorPrePostFix
                   data={response}
                   handleEditorUpdate={(value: any) => {
                     console.log(value);
                   }}
                   viewOnly={true}
+                  color="light"
                 />
               </Box>
             </Box>

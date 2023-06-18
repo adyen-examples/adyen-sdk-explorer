@@ -33,7 +33,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           width: drawerWidth,
           boxSizing: 'border-box',
           bgcolor: 'background.paper',
-          mt: `calc(${headerHeight}px + 5px)`,
+          mt: `calc(${headerHeight}px + 8px)`,
           height: `calc(100% - ${headerHeight}px)`,
           pt: 2,
           px: 3

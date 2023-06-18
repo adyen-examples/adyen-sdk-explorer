@@ -8,10 +8,11 @@ import { TabPanel } from './TabPanel';
 
 export const MultiTab: any = (props: any) => {
   const [tab, setTab] = useState(0);
-  const { checkout, local, profile, adyenState, ...other } = props;
+  const { checkout, local, txVariant, adyenState, ...other } = props;
   const MultiTabStyle = {
     bgcolor: 'secondary.light',
     pt: 1,
+    boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
     borderColor: 'primary.light',
     '.MuiTabs-indicator': { display: 'none' },
     '.MuiButtonBase-root': {
@@ -22,12 +23,9 @@ export const MultiTab: any = (props: any) => {
       minHeight: '0px'
     },
     '.MuiTab-root.Mui-selected': {
-      bgcolor: '#00112C',
-      color: 'primary.light',
-      borderTop: 1,
-      borderLeft: 1,
-      borderRight: 1,
-      borderColor: 'primary.light',
+      color: '#00112C',
+      borderBottom: 1,
+      borderColor: '#00112C',
       borderTopLeftRadius: 5,
       borderTopRightRadius: 5,
       width: '80px',
@@ -80,7 +78,7 @@ export const MultiTab: any = (props: any) => {
       <TabPanel value={tab} index={0}>
         <Fade timeout={500} in={tab === 0}>
           <Box>
-            <CodeTab checkout={checkout} local={local} profile={profile} />
+            <CodeTab checkout={checkout} local={local} txVariant={txVariant} />
           </Box>
         </Fade>
       </TabPanel>

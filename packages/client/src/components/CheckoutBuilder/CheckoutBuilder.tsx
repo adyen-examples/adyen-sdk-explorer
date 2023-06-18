@@ -8,7 +8,7 @@ import type { RequestOptions } from '../../hooks/types';
 
 const { updateDescriptors } = descriptorsActions;
 
-const CheckoutBuilder = ({ txvariant }: any) => {
+const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

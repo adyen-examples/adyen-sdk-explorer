@@ -20,7 +20,13 @@ export const ReviewForm = ({ content }: ReviewFormProps) => {
         py={1.2}
         mt={2}
         xs={12}
-        sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0, zIndex: 1 }}
+        sx={{
+          backgroundColor: 'secondary.light',
+          boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1
+        }}
       >
         <Grid item>
           <Typography variant="h5">Review & Export</Typography>

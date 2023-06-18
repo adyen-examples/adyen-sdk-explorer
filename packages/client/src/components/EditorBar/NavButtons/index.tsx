@@ -3,24 +3,21 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Box, Button, IconButton, Stack } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-const { updateProfileInfo, updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo } = onDeckActions;
 
 type NavButtonsProps = {
   steps: any;
   step: number;
   configuration: any;
-  setActiveStep: (step: number) => any;
 };
 
-export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavButtonsProps) => {
+export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   const dispatch = useAppDispatch();
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
 
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
     switch (steps[step]) {
-      case 'profile':
-        return dispatch(updateProfileInfo(configuration));
       case 'checkout':
         return dispatch(updateCheckoutInfo(configuration));
       case 'local':
@@ -35,11 +32,11 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
 
   const handleNext = () => {
     runStepAction();
-    dispatch(setActiveStep(step + 1));
+    dispatch(updateActiveStep(step + 1));
   };
 
   const handleBack = () => {
-    dispatch(setActiveStep(step - 1));
+    dispatch(updateActiveStep(step - 1));
   };
 
   const exportToJson = () => {
@@ -64,7 +61,7 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
     <Box>
       <Stack spacing={1} direction="row" sx={{ background: 'transparent', display: { xs: 'none', md: 'inline-block' } }}>
         {step !== 0 && (
-          <Button sx={{ bgcolor: '#00112C', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }} variant="outlined" onClick={handleBack}>
+          <Button sx={{ bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }} variant="outlined" onClick={handleBack}>
             Back
           </Button>
         )}
@@ -74,11 +71,7 @@ export const NavButtons = ({ steps, step, setActiveStep, configuration }: NavBut
           </Button>
         )}
         {step === stepsLength - 1 && (
-          <Button
-            sx={{ bgcolor: '#ff5722', '&:hover': { bgcolor: '#8B4000' } }}
-            variant="contained"
-            onClick={exportToJson}
-          >
+          <Button sx={{ bgcolor: '#ff5722', '&:hover': { bgcolor: '#8B4000' } }} variant="contained" onClick={exportToJson}>
             Export
           </Button>
         )}

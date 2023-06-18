@@ -1,14 +1,13 @@
 import { Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { onDeckActions, sdkExplorerActions } from '../../app';
+import { onDeckActions } from '../../app';
 import { useApiLocal, useAppDispatch } from '../../hooks';
 import { EditorBar } from '../EditorBar';
 import { Navbar } from '../Nav/Navbar/Navbar';
 import { useEffect } from 'react';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
 
-const { updateExplorer } = sdkExplorerActions;
-const { updateProfileInfo, updateStyleInfo } = onDeckActions;
+const { updateTxVariant, updateStyleInfo, updateProductsInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const dispatch = useAppDispatch();
@@ -30,9 +29,10 @@ export const Layout = ({ main: Main }: any) => {
     let activeProduct: any = null;
     if (sdkExplorerProps) {
       sdkExplorerProps.steps = ['checkout', 'local', 'sessions', 'review'];
-      activeProduct = { product: sdkExplorerProps.txVariant };
-      dispatch(updateExplorer(sdkExplorerProps));
-      dispatch(updateProfileInfo(activeProduct));
+      // activeProduct = { product: sdkExplorerProps.txVariant };
+      console.log('Layout:: sdkExplorerProps.txVariant', sdkExplorerProps.txVariant);
+      dispatch(updateProductsInfo(sdkExplorerProps));
+      dispatch(updateTxVariant(sdkExplorerProps.txVariant));
 
       if (product === 'dropin') {
         dispatch(updateStyleInfo(defaultDropinStyle));
@@ -46,10 +46,11 @@ export const Layout = ({ main: Main }: any) => {
   if (!error && data) {
     for (let component in data as { [key: string]: { txvariant: String } }) {
       if (data[component].txVariant === product) {
-        sdkExplorerProps = data[component];
+        let componentDescriptors: object = data[component];
+        sdkExplorerProps = { ...componentDescriptors };
       }
     }
-    console.log('sdkExplorerProps', sdkExplorerProps);
+
     if (sdkExplorerProps) {
       editorWidth = 420;
       editor = (
@@ -65,7 +66,7 @@ export const Layout = ({ main: Main }: any) => {
 
   if (!error && data) {
     return (
-      <Box sx={{ display: 'flex'}}>
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Navbar drawerWidth={drawerWidth} products={data} headerHeight={headerHeight} page={product} />
         <Box

@@ -27,13 +27,15 @@ export const themeOptions: any = {
     p: {
       fontWeight: 500,
       fontSize: '0.83rem',
-      fontFamily: 'sans-serif'
+      fontFamily: 'sans-serif',
+      color: '#394962'
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
       fontWeight: 400,
-      lineHeight: 1.8
+      lineHeight: 1.8,
+      color: '#394962'
     },
     h2: {
       fontWeight: 600,

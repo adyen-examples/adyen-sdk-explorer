@@ -30,7 +30,13 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color 
   return (
     <Box
       sx={{
+        my: 2,
+        p: 1,
+        bgcolor: `${color === 'light' ? '#f3f6f9' : '#00112C'}`,
+        borderColor: `${color === 'light' ? '#00112C' : 'primary.light'}`,
+        border: 1,
         svg: { display: `${viewOnly ? 'none' : 'block'}` },
+        borderRadius: 2,
         '[name="labels"]': { display: `${viewOnly ? 'none !important' : 'block !important'}` }
       }}
     >

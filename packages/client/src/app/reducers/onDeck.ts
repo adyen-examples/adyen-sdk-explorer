@@ -4,27 +4,34 @@ export interface OnDeckPropType {
   [key: string]: any;
 }
 
+export type StepsType = 'checkout' | 'local' | 'sessions' | 'review';
+
 export interface OnDeckState {
-  profile: OnDeckPropType;
   checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
   sessionsResponse: OnDeckPropType | {};
+  products: { [key: string]: { txVariant: string } };
+  txVariant: string;
   isRedirect: boolean;
   activeStep: number;
   style: OnDeckPropType | {};
   adyenState: OnDeckPropType | {};
+  txvariant?: string;
+  steps: StepsType[];
   [key: string]: any;
 }
 
 const initialState: OnDeckState = {
-  profile: {},
   checkout: {},
   local: {},
   sessions: {},
   sessionsResponse: {},
-  isRedirect: false,
+  products: {},
+  txVariant: '',
+  steps: ['checkout', 'local', 'sessions', 'review'],
   activeStep: 0,
+  isRedirect: false,
   style: {},
   adyenState: {}
 };
@@ -33,9 +40,6 @@ const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
-    updateProfileInfo: (state, action: PayloadAction<OnDeckPropType>) => {
-      state.profile = action.payload;
-    },
     updateCheckoutInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.checkout = action.payload;
     },
@@ -48,7 +52,13 @@ const onDeckSlice = createSlice({
     updateRedirectInfo: (state, action: PayloadAction<any>) => {
       state.isRedirect = action.payload;
     },
-    updateStep: (state, action: PayloadAction<any>) => {
+    updateTxVariant: (state, action: PayloadAction<string>) => {
+      state.txVariant = action.payload;
+    },
+    updateSteps: (state, action: PayloadAction<any>) => {
+      state.steps = action.payload;
+    },
+    updateActiveStep: (state, action: PayloadAction<any>) => {
       state.activeStep = action.payload;
     },
     updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
@@ -59,6 +69,9 @@ const onDeckSlice = createSlice({
     },
     updateAdyenStateInfo: (state, action: PayloadAction<any>) => {
       state.adyenState = action.payload;
+    },
+    updateProductsInfo: (state, action: PayloadAction<any>) => {
+      state.products = action.payload;
     },
     clearOnDeckInfo: () => initialState
   }
