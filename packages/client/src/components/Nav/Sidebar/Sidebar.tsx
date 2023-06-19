@@ -12,7 +12,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
     bgcolor: 'primary.main',
     borderRadius: 1,
     color: '#FFFFFF',
-    opacity: '1 !important',
+    opacity: '1 !important'
   };
   const nonselectedButtonStyle = {
     '&:hover': { bgcolor: 'rgba(0, 102, 255, 0.12)', borderRadius: 1 },

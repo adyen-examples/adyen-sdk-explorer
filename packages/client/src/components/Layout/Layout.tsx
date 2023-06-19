@@ -30,7 +30,6 @@ export const Layout = ({ main: Main }: any) => {
     if (sdkExplorerProps) {
       sdkExplorerProps.steps = ['checkout', 'local', 'sessions', 'review'];
       // activeProduct = { product: sdkExplorerProps.txVariant };
-      console.log('Layout:: sdkExplorerProps.txVariant', sdkExplorerProps.txVariant);
       dispatch(updateProductsInfo(sdkExplorerProps));
       dispatch(updateTxVariant(sdkExplorerProps.txVariant));
 
@@ -56,7 +55,7 @@ export const Layout = ({ main: Main }: any) => {
       editor = (
         <EditorBar
           dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }}
-          steps={['checkout', 'local', 'sessions', 'review']}
+          steps={['sessions', 'checkout', 'local', 'review']}
         />
       );
     } else if (product !== undefined) {

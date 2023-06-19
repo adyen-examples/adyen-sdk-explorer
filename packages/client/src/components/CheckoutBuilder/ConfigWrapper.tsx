@@ -23,7 +23,6 @@ export const ConfigWrapper = () => {
   };
 
   const displayStep: any = stepMap[steps[activeStep]];
-  console.log('ConfigWrapper:: activeStep:: ', activeStep);
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
       <Grid item xs={1} sx={{ width: '65%' }}>

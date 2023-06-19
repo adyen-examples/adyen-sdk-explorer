@@ -1,8 +1,10 @@
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { Box, Button, IconButton, Stack } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 type NavButtonsProps = {
   steps: any;
@@ -12,7 +14,8 @@ type NavButtonsProps = {
 
 export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   const dispatch = useAppDispatch();
-  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
+  const navigate = useNavigate();
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, resetOnDeckInfo } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
 
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
@@ -59,22 +62,39 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
 
   return (
     <Box>
-      <Stack spacing={1} direction="row" sx={{ background: 'transparent', display: { xs: 'none', md: 'inline-block' } }}>
-        {step !== 0 && (
-          <Button sx={{ bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }} variant="outlined" onClick={handleBack}>
-            Back
-          </Button>
-        )}
-        {step !== stepsLength - 1 && (
-          <Button variant="contained" onClick={handleNext}>
-            Next
-          </Button>
-        )}
+      <Stack direction="row" justifyContent="space-between" spacing={1}>
         {step === stepsLength - 1 && (
-          <Button sx={{ bgcolor: '#ff5722', '&:hover': { bgcolor: '#8B4000' } }} variant="contained" onClick={exportToJson}>
-            Export
-          </Button>
+          <IconButton
+            sx={{ py: 0 }}
+            onClick={() => {
+              dispatch(resetOnDeckInfo());
+              navigate(`/${configuration.txVariant}`);
+            }}
+          >
+            <AutorenewIcon sx={{ fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }} />
+          </IconButton>
         )}
+        <Box>
+          {step !== 0 && (
+            <Button
+              sx={{ bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }}
+              variant="outlined"
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+          )}
+          {step !== stepsLength - 1 && (
+            <Button sx={{ ml: 0.5 }} variant="contained" onClick={handleNext}>
+              Next
+            </Button>
+          )}
+          {step === stepsLength - 1 && (
+            <Button sx={{ ml: 0.5, bgcolor: 'rgb(10, 191, 83)', '&:hover': { bgcolor: '#026440' } }} variant="contained" onClick={exportToJson}>
+              Export
+            </Button>
+          )}
+        </Box>
       </Stack>
       <Box sx={{ position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } }}>
         <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleBack}>

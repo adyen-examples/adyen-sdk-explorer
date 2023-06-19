@@ -29,7 +29,7 @@ const initialState: OnDeckState = {
   sessionsResponse: {},
   products: {},
   txVariant: '',
-  steps: ['checkout', 'local', 'sessions', 'review'],
+  steps: ['sessions', 'checkout', 'local', 'review'],
   activeStep: 0,
   isRedirect: false,
   style: {},
@@ -72,6 +72,10 @@ const onDeckSlice = createSlice({
     },
     updateProductsInfo: (state, action: PayloadAction<any>) => {
       state.products = action.payload;
+    },
+    resetOnDeckInfo: state => {
+      let { style, txVariant } = state;
+      return { ...initialState, style, txVariant };
     },
     clearOnDeckInfo: () => initialState
   }

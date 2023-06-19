@@ -15,7 +15,7 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
   };
   return (
     <Box>
-      <Grid mt={2} container px={7}>
+      <Grid mt={2} container px={7} sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
         <Grid item xs={12}>
           <Typography component={'span'} mt={2} mb={2} variant="h3">
             {title}
@@ -24,8 +24,8 @@ export const Content = ({ title, subtitle, version, description }: ContentProps)
         <Grid item xs={12} mt={2}>
           <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(description))} gutterBottom></Typography>
         </Grid>
-        <Grid item xs={12} mt={2} sx={{ fontWeight: '500px' }}>
-          <Typography component={'span'} variant="body2">
+        <Grid item xs={12} mt={2}>
+          <Typography component={'span'} variant="subtitle2" sx={{ fontWeight: 'bold', fontSize: '.85rem' }}>
             {subtitle}
           </Typography>
         </Grid>

@@ -16,8 +16,7 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   const [error, setError] = useState(null);
   const [result, setResult] = useState<any>(null);
   const dispatch = useAppDispatch();
-  const { local, profile } = configuration;
-  const { product } = profile;
+  const { local, txVariant } = configuration;
   const sessions = new ConfigurationSession({
     ...configuration,
     queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
@@ -34,9 +33,9 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   useEffect(() => {
     if (checkout && !error) {
       checkout.submitDetails({ details: { redirectResult: redirectResult } });
-      checkout.create(product, local).mount('#checkout');
+      checkout.create(txVariant, local).mount('#checkout');
     }
-  }, [checkout, product, local, redirectResult, error]);
+  }, [checkout, txVariant, local, redirectResult, error]);
 
   if (error) {
     return (

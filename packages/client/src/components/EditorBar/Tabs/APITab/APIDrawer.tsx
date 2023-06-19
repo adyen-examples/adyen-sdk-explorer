@@ -26,7 +26,7 @@ export const APIDrawer = (props: any) => {
   return (
     <Box {...other}>
       <Box sx={{ borderBottom: 1, borderColor: '#00112C', bgcolor: 'primary.light' }}>
-        <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2,bgcolor: 'secondary.light' }} onClick={handleClick}>
+        <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2, bgcolor: 'secondary.light' }} onClick={handleClick}>
           <Typography noWrap={true} sx={{ fontSize: '.7rem', color: '#00112C' }} variant="caption">
             {path}
           </Typography>
@@ -70,13 +70,14 @@ export const APIDrawer = (props: any) => {
             )}
             {request?.body && (
               <Box px={2}>
-                <Box sx={{ border: 1, borderRadius: 1, borderColor: '#00112C', px: 1, bgcolor: '#00112C' }}>
+                <Box>
                   <EditorPrePostFix
                     data={JSON.parse(request.body)}
                     handleEditorUpdate={(value: any) => {
                       console.log(value);
                     }}
                     viewOnly={true}
+                    color="light"
                   />
                 </Box>
               </Box>

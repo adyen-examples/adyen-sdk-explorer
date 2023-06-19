@@ -27,7 +27,7 @@ export const localPageContent: PageContentType = {
     'Set a configuration that is specific to the component on the products instance. Note, you can manually add additional key value pairs to this configuration by clicking the edit button.'
 };
 export const apiPageContent: PageContentType = {
-  title: 'Set an API configuration',
+  title: 'Set your API parameters',
   subtitle: 'Endpoint destination URL',
   version: 'https://checkout-test.adyen.com/v69/sessions',
   description:

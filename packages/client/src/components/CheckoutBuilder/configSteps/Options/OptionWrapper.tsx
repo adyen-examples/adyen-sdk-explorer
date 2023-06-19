@@ -40,7 +40,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
   const isChecked = value !== undefined;
 
   return (
-    <Grid direction="column" container>
+    <Grid direction="column" container sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ display: 'inline-block' }} variant="subtitle2">

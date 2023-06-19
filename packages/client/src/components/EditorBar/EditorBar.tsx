@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
@@ -6,6 +6,8 @@ import type { RootState } from '../../store';
 import { NavButtons } from './NavButtons';
 import { MultiTab } from './Tabs/MultiTab';
 import { SingleTab } from './Tabs/SingleTab';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockIcon from '@mui/icons-material/Lock';
 
 interface EditorDimensions {
   buttonHeight: number;
@@ -23,8 +25,6 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
   const { txVariant, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { txVariant, checkout, local, sessions };
   const { updateActiveStep } = onDeckActions;
-
-  console.log('EditorBar:: txVariant', txVariant);
 
   let step = steps[activeStep];
 
@@ -65,29 +65,21 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
         {step === 'review' && <MultiTab txVariant={txVariant} checkout={checkout} local={local} adyenState={adyenState} />}
       </Box>
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
-        <Grid
-          item
-          sx={{
-            display: {
-              xs: 'none',
-              sm: 'none',
-              md: 'block'
-            }
-          }}
-        >
-          <Button
-            onClick={handleEdit}
-            sx={{
-              display: `${step === 'review' ? 'none' : 'inline-block'}`,
-              bgcolor: `${viewOnly ? '#0abf53' : '#ff5722'}`,
-              '&:hover': { bgcolor: `${viewOnly ? '#388e3c' : '#bf360c'}` }
-            }}
-            variant="contained"
-          >
-            <Box sx={{ fontSize: '15px', verticalAlign: 'middle', display: 'inline-block' }}>{viewOnly ? 'Edit' : 'View'}</Box>
-          </Button>
-        </Grid>
-        <Grid item>
+        {step !== 'review' && (
+          <Grid item xs={1}>
+            <IconButton
+              onClick={handleEdit}
+              sx={{
+                bgcolor: 'primary.light',
+                color: 'rgb(10, 191, 83)',
+                elevation: 0
+              }}
+            >
+              {viewOnly ? <LockIcon /> : <LockOpenIcon />}
+            </IconButton>
+          </Grid>
+        )}
+        <Grid item xs={step === 'review' ? 12 : false}>
           <NavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
         </Grid>
       </Grid>

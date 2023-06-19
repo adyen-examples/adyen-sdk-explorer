@@ -1,20 +1,23 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
-import { useAppDispatch } from '../../../hooks';
 import { SingleAPITab } from './APITab/SingleAPITab';
 import { SingleCodeTab } from './CodeTab/SingleCodeTab';
+import { useAppDispatch } from '../../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 export const SingleTab = (props: any) => {
   const { viewOnly, step, txVariant, checkout, local, sessions, ...other } = props;
-  console.log('SingleTab:: txVariant', txVariant);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const SingleTabHeader = ({ title, clipboardText }: any) => {
     return (
       <Grid
         justifyContent="space-between"
         alignItems="flex-start"
-        sx={{ bgcolor: 'secondary.light', px: 4, pt: 1, boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)' }}
+        sx={{ bgcolor: 'secondary.light', px: 4, pt: 0.8, boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)' }}
         container
       >
         <Grid item xs={6}>
@@ -25,18 +28,25 @@ export const SingleTab = (props: any) => {
               py: 1,
               display: 'inline-block',
               width: '80px',
-              textAlign: 'center',
-              borderTopLeftRadius: 4,
-              borderTopRightRadius: 4,
+              textAlign: 'left',
               color: 'secondary.main'
             }}
           >
-            <Typography variant="h6" sx={{ fontSize: '.75rem', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '0.95rem', color: '#00112c' }}>
               {title}
             </Typography>
           </Box>
         </Grid>
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
+          <IconButton
+            sx={{ py: 0 }}
+            onClick={() => {
+              dispatch(resetOnDeckInfo());
+              navigate(`/${txVariant}`);
+            }}
+          >
+            <AutorenewIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          </IconButton>
           <IconButton
             sx={{ py: 0 }}
             onClick={() => {
@@ -49,11 +59,11 @@ export const SingleTab = (props: any) => {
       </Grid>
     );
   };
-  const dispatch = useAppDispatch();
+
   const updateStore = (value: any, action: ActionCreatorWithPayload<any>): void => {
     dispatch(action(value));
   };
-  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, resetOnDeckInfo } = onDeckActions;
 
   let singleTabData = null;
   switch (step) {
@@ -78,7 +88,6 @@ export const SingleTab = (props: any) => {
 checkout.create('${txVariant}',`,
         postfix: ');',
         handler: (value: any) => {
-          console.log('updating store');
           updateStore(value, updateLocalInfo);
         },
         payload: local,
@@ -87,10 +96,9 @@ checkout.create('${txVariant}',`,
       break;
     case 'sessions':
       singleTabData = {
-        title: 'API',
+        title: 'Request',
         postfix: '',
         handler: (value: any) => {
-          console.log('updating store');
           updateStore(value, updateSessionsInfo);
         },
         payload: sessions,

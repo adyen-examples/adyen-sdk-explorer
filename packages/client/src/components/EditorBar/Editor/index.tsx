@@ -35,9 +35,10 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color 
         bgcolor: `${color === 'light' ? '#f3f6f9' : '#00112C'}`,
         borderColor: `${color === 'light' ? '#00112C' : 'primary.light'}`,
         border: 1,
-        svg: { display: `${viewOnly ? 'none' : 'block'}` },
+        svg: { display: 'none' },
         borderRadius: 2,
-        '[name="labels"]': { display: `${viewOnly ? 'none !important' : 'block !important'}` }
+        '[name="labels"]': { width: '35px !important' },
+        minHeight: '25vh'
       }}
     >
       <JSONInput
