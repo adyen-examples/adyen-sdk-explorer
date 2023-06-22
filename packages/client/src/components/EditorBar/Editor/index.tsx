@@ -36,7 +36,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color 
         borderColor: `${color === 'light' ? '#00112C' : 'primary.light'}`,
         border: 1,
         svg: { display: 'none' },
-        borderRadius: 2,
+        borderRadius: 1,
         '[name="labels"]': { width: '35px !important' },
         minHeight: '25vh'
       }}

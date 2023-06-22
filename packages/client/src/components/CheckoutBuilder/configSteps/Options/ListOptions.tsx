@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
+import { ObjectOption } from './OptionTypes';
 
 interface ListOptionsProps {
   name: string;
@@ -41,9 +42,9 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
 
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
-      <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
-        <Typography variant="h5">No Payment Method Configurations Available</Typography>
-      </Grid>
+      <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
+        <ObjectOption content="No documented configurations at this layer. Use editor pane for custom fields." />
+      </Box>
     );
   }
 

@@ -7,7 +7,11 @@ import type { OptionPropTypes } from './types';
 export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) => {
   return (
     <Fragment>
-      <Grid container sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'secondary.light' }} p={4}>
+      <Grid
+        container
+        sx={{ border: '1px solid', borderColor: 'primary.border', borderRadius: 1, bgcolor: 'primary.light', input: { bgcolor: 'secondary.light' } }}
+        p={4}
+      >
         {descriptor.properties &&
           descriptor.properties.map((prop: Descriptor) => {
             return (

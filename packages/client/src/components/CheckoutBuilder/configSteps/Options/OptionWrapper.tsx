@@ -59,7 +59,10 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
+        <Typography
+          variant="h6"
+          dangerouslySetInnerHTML={descriptor?.description ? createMarkup(marked.parse(descriptor.description)) : undefined}
+        ></Typography>
       </Grid>
       {descriptor.configure !== false && (
         <Grid item xs={12}>
@@ -74,7 +77,11 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
           />
         </Grid>
       )}
-      {isChecked && <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />}
+      {isChecked && (
+        <Box>
+          <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />
+        </Box>
+      )}
     </Grid>
   );
 };

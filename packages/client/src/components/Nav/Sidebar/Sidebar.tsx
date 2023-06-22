@@ -49,7 +49,9 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           </Typography>
         </ListItemButton>
         <ListItem>
-          <Typography variant="h5">Online Payments</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+            ONLINE PAYMENTS
+          </Typography>
         </ListItem>
         {Object.keys(products).map((product: any, index: number) => {
           let subcategory = null;
@@ -59,7 +61,9 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           if (product === 'Drop-in') {
             subcategory = (
               <ListItem>
-                <Typography variant="h5">Components</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+                  COMPONENTS
+                </Typography>
               </ListItem>
             );
           }
@@ -67,7 +71,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
             <Box key={product}>
               <ListItem disablePadding>
                 <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
-                  <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
+                  <Typography sx={{ ml: 2, color: `${selected ? 'white' : 'black'}` }} variant="h6">
                     {product}
                   </Typography>
                 </ListItemButton>
