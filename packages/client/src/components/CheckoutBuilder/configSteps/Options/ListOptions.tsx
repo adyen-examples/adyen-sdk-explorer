@@ -43,7 +43,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
-        <ObjectOption content="No documented configurations at this layer. Use editor pane for custom fields." />
+        <ObjectOption content="No configurations found. Use editor pane for custom fields." />
       </Box>
     );
   }

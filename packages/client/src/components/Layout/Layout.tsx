@@ -1,11 +1,11 @@
 import { Box, CssBaseline } from '@mui/material';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
-import { useApiLocal, useAppDispatch } from '../../hooks';
+import { useApi, useAppDispatch } from '../../hooks';
 import { EditorBar } from '../EditorBar';
-import { Navbar } from '../Nav/Navbar/Navbar';
-import { useEffect } from 'react';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
+import { Navbar } from '../Nav/Navbar/Navbar';
 
 const { updateTxVariant, updateStyleInfo, updateProductsInfo } = onDeckActions;
 
@@ -17,8 +17,8 @@ export const Layout = ({ main: Main }: any) => {
   const navButtonHeight = 40;
   let editorWidth = 0;
 
-  const [products]: any = useApiLocal('http://localhost:8080/api/checkout/paymentMethods', 'GET');
-  const { error, data }: any = products;
+  const { data, loading, error } = useApi('api/checkout/paymentMethods', 'GET');
+
   const pathParams = useParams();
   const product: string | undefined = pathParams.component;
 
@@ -29,7 +29,6 @@ export const Layout = ({ main: Main }: any) => {
     let activeProduct: any = null;
     if (sdkExplorerProps) {
       sdkExplorerProps.steps = ['checkout', 'local', 'sessions', 'review'];
-      // activeProduct = { product: sdkExplorerProps.txVariant };
       dispatch(updateProductsInfo(sdkExplorerProps));
       dispatch(updateTxVariant(sdkExplorerProps.txVariant));
 
@@ -47,6 +46,7 @@ export const Layout = ({ main: Main }: any) => {
       if (data[component].txVariant === product) {
         let componentDescriptors: object = data[component];
         sdkExplorerProps = { ...componentDescriptors };
+        console.log('setting sdkExplorerProps')
       }
     }
 
