@@ -19,7 +19,7 @@ export const useRedirect = (configuration: any) => {
       const storedConfig = JSON.parse(encodedConfig);
       const { checkout, local, sessions, style } = storedConfig;
       const storedSdkExplorerState = JSON.parse(encodedSDKState);
-      const { steps, step } = storedSdkExplorerState;
+      const { steps} = storedSdkExplorerState;
       if (isConfigEmpty(configuration)) {
         dispatch(updateCheckoutInfo(checkout));
         dispatch(updateLocalInfo(local));

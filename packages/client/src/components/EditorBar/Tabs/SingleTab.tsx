@@ -1,12 +1,12 @@
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
+import { useAppDispatch } from '../../../hooks';
 import { SingleAPITab } from './APITab/SingleAPITab';
 import { SingleCodeTab } from './CodeTab/SingleCodeTab';
-import { useAppDispatch } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
 
 export const SingleTab = (props: any) => {
   const { viewOnly, step, txVariant, checkout, local, sessions, ...other } = props;

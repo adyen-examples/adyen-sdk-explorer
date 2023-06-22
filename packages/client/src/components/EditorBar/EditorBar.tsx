@@ -1,13 +1,12 @@
-import { Box, Button, Grid, IconButton } from '@mui/material';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { Box, Grid, IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { onDeckActions } from '../../app';
 import type { RootState } from '../../store';
 import { NavButtons } from './NavButtons';
 import { MultiTab } from './Tabs/MultiTab';
 import { SingleTab } from './Tabs/SingleTab';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import LockIcon from '@mui/icons-material/Lock';
 
 interface EditorDimensions {
   buttonHeight: number;
@@ -24,7 +23,6 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { txVariant, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { txVariant, checkout, local, sessions };
-  const { updateActiveStep } = onDeckActions;
 
   let step = steps[activeStep];
 

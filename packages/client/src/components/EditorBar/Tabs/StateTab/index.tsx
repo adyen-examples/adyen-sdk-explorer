@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
 
 export const StateTab = (props: any) => {

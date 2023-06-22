@@ -27,3 +27,4 @@ Open Items:
 20.(complete)  Merge useApi hook
 21. Fix number type options input
 22. Move clearOnDeck from sidebar
+23. Add 404 page

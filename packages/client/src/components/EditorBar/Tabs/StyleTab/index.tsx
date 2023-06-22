@@ -1,4 +1,4 @@
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
 import { StyleDrawers } from './StyleDrawers';
