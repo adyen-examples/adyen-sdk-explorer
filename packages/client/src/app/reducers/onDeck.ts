@@ -77,7 +77,10 @@ const onDeckSlice = createSlice({
       let { style, txVariant } = state;
       return { ...initialState, style, txVariant };
     },
-    clearOnDeckInfo: () => initialState
+    clearOnDeckInfo: state => {
+      let { products } = state;
+      return { ...initialState, products };
+    }
   }
 });
 

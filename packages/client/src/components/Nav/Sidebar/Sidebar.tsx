@@ -2,9 +2,12 @@ import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/ma
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
-export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
+export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const { clearOnDeckInfo } = onDeckActions;
+  const { products } = useSelector((state: RootState) => state.onDeck);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

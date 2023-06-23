@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
-import { useApi, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
+import type { RootState } from '../../store';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
 import { LayoutContent } from './LayoutContent';
 
@@ -9,37 +11,45 @@ const { updateTxVariant, updateStyleInfo } = onDeckActions;
 
 export const Layout = ({ main: Main }: any) => {
   const dispatch = useAppDispatch();
-  const { data, error } = useApi('api/checkout/paymentMethods', 'GET');
-  const pathParams = useParams();
-  const product: string | undefined = pathParams.component;
-  const isHome = product === undefined ? true : false;
-  let sdkExplorerProps: any = null;
+  const { products } = useSelector((state: RootState) => state.onDeck);
+  const { component } = useParams();
+  const productParam: string | undefined = component;
+  const isHome = productParam === undefined ? true : false;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (sdkExplorerProps) {
-      dispatch(updateTxVariant(sdkExplorerProps.txVariant));
+    if (!isEmpty(products) && pathParamInProducts(products, productParam) && !isHome) {
+      dispatch(updateTxVariant(productParam as string));
 
-      if (product === 'dropin') {
+      if (productParam === 'dropin') {
         dispatch(updateStyleInfo(defaultDropinStyle));
       } else {
         dispatch(updateStyleInfo(defaultComponentStyle));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product, data, dispatch]);
+  }, [productParam, products, dispatch]);
 
-  if (!error && data) {
-    for (let component in data as { [key: string]: { txvariant: String } }) {
-      if (data[component].txVariant === product) {
-        let componentDescriptors: object = data[component];
-        sdkExplorerProps = componentDescriptors ? { ...componentDescriptors } : null;
+  const pathParamInProducts = (products: any, productParam: any) => {
+    if (productParam === undefined) return false;
+
+    for (let component in products as { [key: string]: { txVariant: String } }) {
+      if (products[component].txVariant === productParam) {
+        return true;
       }
     }
+    return false;
+  };
 
-    if (sdkExplorerProps || isHome) {
-      return <LayoutContent main={Main} selectedProduct={product} products={data} />;
+  const isEmpty = (obj: object) => {
+    return Object.keys(obj).length === 0;
+  };
+
+  if (!isEmpty(products)) {
+    if (!pathParamInProducts(products, productParam) && !isHome) {
+      navigate('/error');
     } else {
-      return <h1>404: Page not found</h1>;
+      return <LayoutContent main={Main} selectedProduct={productParam} />;
     }
   }
 

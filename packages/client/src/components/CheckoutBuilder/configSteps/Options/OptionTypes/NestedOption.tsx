@@ -18,9 +18,9 @@ export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) =
         p={3}
       >
         {descriptor.properties &&
-          descriptor.properties.map((prop: Descriptor) => {
+          descriptor.properties.map((prop: Descriptor, i: number) => {
             return (
-              <Box>
+              <Box key={i}>
                 <Grid item xs={12}>
                   <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
                     {prop.name}

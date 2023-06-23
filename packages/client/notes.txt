@@ -28,3 +28,4 @@ Open Items:
 21. Fix number type options input
 22. Move clearOnDeck from sidebar
 23. Add 404 page
+24. Set Ideal to pending then return and reset state bricks site, unable to reset whenever there is a result code

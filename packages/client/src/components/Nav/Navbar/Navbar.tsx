@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { useState } from 'react';
 
-export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
+export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const links = [
@@ -62,11 +62,11 @@ export const Navbar = ({ drawerWidth, products, headerHeight, page }: any) => {
         </Box>
       </AppBar>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' } }}>
-        <Sidebar drawerWidth={drawerWidth} products={products} headerHeight={headerHeight} page={page} />
+        <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
       </Box>
       <Box>
         <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu}>
-          <Sidebar drawerWidth={drawerWidth} products={products} headerHeight={'-5'} page={page} />
+          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>
