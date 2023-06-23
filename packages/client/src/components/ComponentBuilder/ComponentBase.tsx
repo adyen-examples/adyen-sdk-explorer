@@ -4,8 +4,7 @@ import { RedirectComponent } from './RedirectComponent';
 import type { RootState } from '../../store';
 
 export const ComponentBase = () => {
-  const globalStateDeck = useSelector((state: RootState) => state.onDeck);
-  const { txVariant, checkout, local, sessions, isRedirect, style } = globalStateDeck;
+  const { txVariant, checkout, local, sessions, isRedirect, style } = useSelector((state: RootState) => state.onDeck);
   const configuration = { txVariant, checkout, local, sessions, style };
 
   if (isRedirect) {

@@ -31,8 +31,8 @@ export const APIDrawer = (props: any) => {
             {path}
           </Typography>
           <Box sx={{ color: 'black' }}>
-            {open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
-            {!open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
+            {open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
+            {!open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
           </Box>
         </Button>
         <Collapse orientation="vertical" in={open} timeout={300}>

@@ -61,6 +61,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
       <Grid item xs={12}>
         <Typography
           variant="h6"
+          sx={{ '> p': { mb: '0.3rem', mt: '0.3rem' } }}
           dangerouslySetInnerHTML={descriptor?.description ? createMarkup(marked.parse(descriptor.description)) : undefined}
         ></Typography>
       </Grid>

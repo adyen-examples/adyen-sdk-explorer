@@ -113,7 +113,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
       {displayDescriptors &&
         displayDescriptors.map((descriptor: Descriptor) => {
           return (
-            <Grid item mx={7} xs={12} pt={3} pb={2} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
+            <Grid item mx={7} xs={12} py={3} key={descriptor.name} sx={{ borderBottom: 1, borderColor: 'primary.border' }}>
               <OptionWrapper descriptor={descriptor} configuration={configuration} action={action} />
             </Grid>
           );
