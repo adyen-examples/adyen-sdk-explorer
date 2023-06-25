@@ -24,6 +24,12 @@ export const StyleInputs = (props: any) => {
     },
     transition: {
       type: 'none'
+    },
+    padding: {
+      type: 'none'
+    },
+    border: {
+      type: 'none'
     }
   };
 

@@ -18,10 +18,11 @@ export const defaultDropinStyle = {
 
 export const defaultComponentStyle = {
   '[class^="adyen-checkout__"]': {
-    backgroundColor: '#fff',
-    color: '#000',
+    backgroundColor: '#00112C',
+    color: '#fff',
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    padding:'0.2rem'
   },
   '[class^="adyen-checkout__input"]': {
     backgroundColor: '#fff'

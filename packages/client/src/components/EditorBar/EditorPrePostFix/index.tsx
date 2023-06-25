@@ -6,7 +6,7 @@ export const EditorPrePostFix = (props: any) => {
 
   return (
     <Box sx={{ overflow: 'scroll' }} {...other}>
-      <Box>
+      <Box mt={0}>
         {prefix && (
           <Box>
             <Box>
@@ -16,9 +16,7 @@ export const EditorPrePostFix = (props: any) => {
             </Box>
           </Box>
         )}
-        <Box>
-          <Editor color={color} viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
-        </Box>
+        <Editor color={color} viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
         {postfix && (
           <Box>
             <Box>
