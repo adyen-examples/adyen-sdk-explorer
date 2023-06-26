@@ -13,8 +13,14 @@ export const SessionsContent = () => {
         </Grid>
         <Grid item xs={12} mt={1}>
           <Typography variant="h6">
-            Creates a payment session for <Link href="https://docs.adyen.com/online-payments/web-drop-in">Web Drop-in</Link> and{' '}
-            <Link href="https://docs.adyen.com/online-payments/web-components">Web Components</Link> integrations.
+            Create a payment session for your{' '}
+            <Link
+              href="https://docs.adyen.com/api-explorer/Checkout/70/post/sessions"
+              sx={{ bgcolor: 'secondary.light', px: 1, py: 0.5, borderRadius: 1, color: '#4C4E52' }}
+            >
+              {txVariant}
+            </Link>{' '}
+            integration.
             <br />
             <br /> The response contains encrypted payment session data. The front end then uses the session data to make any required server-side
             calls for the payment flow.
@@ -55,7 +61,7 @@ export const SessionsContent = () => {
                 <br /> "reference": "YOUR_PAYMENT_REFERENCE",
                 <br /> "countryCode": "NL"
               </Box>
-              <br /> &#125;'
+              &#125;'
             </code>
           </Box>
         </Grid>

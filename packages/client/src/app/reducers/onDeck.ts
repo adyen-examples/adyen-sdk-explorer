@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { defaultDropinStyle, defaultComponentStyle } from '../../components/EditorBar/Tabs/StyleTab/defaultStyles';
 
 export interface OnDeckPropType {
   [key: string]: any;
@@ -74,8 +75,9 @@ const onDeckSlice = createSlice({
       state.products = action.payload;
     },
     resetOnDeckInfo: state => {
-      let { style, txVariant } = state;
-      return { ...initialState, style, txVariant };
+      const { products, txVariant } = state;
+      const style = txVariant === 'dropin' ? defaultDropinStyle : defaultComponentStyle;
+      return { ...initialState, style, products, txVariant };
     },
     clearOnDeckInfo: state => {
       let { products } = state;
@@ -85,4 +87,3 @@ const onDeckSlice = createSlice({
 });
 
 export const { actions, reducer } = onDeckSlice;
-

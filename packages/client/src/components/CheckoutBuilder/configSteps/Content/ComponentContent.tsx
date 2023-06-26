@@ -50,7 +50,7 @@ export const ComponentContent = () => {
         </Grid>
         <Grid item xs={12} mt={3}>
           <Typography component={'span'} variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
-            Create a {txVariant} configuration
+            Create {txVariant} configuration
           </Typography>
         </Grid>
         <Grid item xs={12} mt={1}>

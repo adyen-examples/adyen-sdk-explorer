@@ -1,10 +1,11 @@
 import { Container, Paper } from '@mui/material';
 import { useEffect } from 'react';
-import { descriptorsActions } from '../../app';
+import { descriptorsActions, onDeckActions } from '../../app';
 import { useApi, useAppDispatch } from '../../hooks';
 import { ConfigWrapper } from './ConfigWrapper';
 
 const { updateDescriptors } = descriptorsActions;
+const { resetOnDeckInfo } = onDeckActions;
 
 const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
 
   useEffect(() => {
     if (data) {
+      dispatch(resetOnDeckInfo());
       dispatch(updateDescriptors(data));
     }
   }, [dispatch, data]);

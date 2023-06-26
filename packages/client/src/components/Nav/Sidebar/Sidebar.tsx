@@ -1,14 +1,10 @@
 import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { onDeckActions } from '../../../app';
-import { useAppDispatch } from '../../../hooks';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../../store';
 
 export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
-  const { clearOnDeckInfo } = onDeckActions;
   const { products } = useSelector((state: RootState) => state.onDeck);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const selectedButtonStyle = {
@@ -23,7 +19,6 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   };
 
   const handleClick = (txvariant: any) => {
-    dispatch(clearOnDeckInfo());
     navigate(`/${txvariant}`);
   };
   return (

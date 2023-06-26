@@ -5,29 +5,34 @@ MVP:
 4. (Complete) CSS override box
 5. (Complete) "API Explorer" box - API Call and component configuration
 
-
-Open Items:
+Complete:
 1. (complete) Add style component to EditorBar
 2. (complete)Add state component to EditorBar
 3. (complete) Fix redirect bug 
-4. Add loading tab
-5. Add Global Error component
 6. (Complete) Clean up backend (ie remove unused code)
-7. Update steps documentation.
-9. Update home page to include relevant and specific documentation. For example, summarize steps
-10. Create tests for QA
-11. (Complete: note to be combined with 17) Add default values or config, and explain potential errors if you misconfigure.
-12. Launch fast and iterate messaging
-13. (complete) There is a bug when you double click a tab it will set the txvariant as undefined
-14. (complete) Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
-16. (complete) We are sending another session request each time we modify the css. 
-17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
-18. (complete) Bug introduced that doesnt display the error component
-19. (complete) Add button to reset config, alongside button to edit 
+7. (Complete) Update steps documentation.
+11.(Complete: note to be combined with 17) Add default values or config, and explain potential errors if you misconfigure.
+13.(complete) There is a bug when you double click a tab it will set the txvariant as undefined
+14.(complete) Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
+16.(complete) We are sending another session request each time we modify the css. 
+18.(complete) Bug introduced that doesnt display the error component
+19.(complete) Add button to reset config, alongside button to edit 
 20.(complete)  Merge useApi hook
+7. (Complete) Update steps documentation.
+24. (Complete) Fix reset button functionality
+29.(Complete)  Update landing page
+9. (Complete) Update home page to include relevant and specific documentation. For example, summarize steps
+25. (Complete) Change the color of the editor background when user clicks on the lock icon
+22. (Complete) Move clearOnDeck from sidebar
+29. (Complete) Add txvariant on sessions page
+27. (Complete) Bug when you add environment
+23. (Complete) Add 404 page
+
+Open Items:
+4. Add loading component
+5. Add Global Error component
+10. Create tests for QA
+17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
 21. Fix number type options input
-22. Move clearOnDeck from sidebar
-23. Add 404 page
-24. Set Ideal to pending then return and reset state bricks site, unable to reset whenever there is a result code
-25. Change the color of the editor background when user clicks on the lock icon
 26. Add floating button that scrolls to the parameters section
+28. Refactor CSS

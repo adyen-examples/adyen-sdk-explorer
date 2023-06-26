@@ -26,6 +26,8 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
 
   let step = steps[activeStep];
 
+  const [viewOnly, setViewOnly] = useState(true);
+
   let style = {
     position: 'fixed',
     overflow: 'scroll',
@@ -48,7 +50,11 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     }
   };
 
-  const [viewOnly, setViewOnly] = useState(true);
+  const editJSONStyle = {
+    '#editor': {
+      border: 2
+    },
+  };
 
   const handleEdit = () => {
     setViewOnly(!viewOnly);
@@ -56,7 +62,7 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
 
   return (
     <Box>
-      <Box sx={style}>
+      <Box sx={viewOnly ? style : { ...style, ...editJSONStyle }}>
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
           <SingleTab viewOnly={viewOnly} step={step} txVariant={txVariant} checkout={checkout} local={local} sessions={sessions} />
         )}

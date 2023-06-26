@@ -1,31 +1,36 @@
+import CloudIcon from '@mui/icons-material/Cloud';
+import PaymentIcon from '@mui/icons-material/Payment';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Box, Divider, Link, Typography } from '@mui/material';
-import { ReactComponent as AdyenAuthenticateLogo } from '../../assets/adyen-authenticate-logo.svg';
-import { ReactComponent as AdyenHandleLogo } from '../../assets/adyen-handle-logo.svg';
-import { ReactComponent as AdyenLogo } from '../../assets/adyen-study-icon.svg';
-import { ReactComponent as AdyenVersionLogo } from '../../assets/adyen-version-logo.svg';
-import { LogosGrid } from './LogosGrid';
 import { LinksGrid } from './LinksGrid';
+import { LogosGrid } from './LogosGrid';
 
-export const Overview = () => {
+export const LandingPage = () => {
   const logos = [
     {
-      title: 'Authenticate',
-      link: 'https://docs.adyen.com/development-resources/api-authentication',
-      description:
-        'Each API request that you make to Adyen is processed through an API credential linked to your company account, and each client is associated with one set of API credentials.',
-      svg: () => <AdyenAuthenticateLogo />
+      title: 'Step 1:',
+      link: 'https://docs.adyen.com/online-payments/build-your-integration?platform=Web&integration=Drop-in&tab=npm_recommended__1&version=5.43.0#create-payment-session',
+      description: 'Create a payment session',
+      svg: () => <CloudIcon />
     },
     {
-      title: 'Version',
-      link: 'https://docs.adyen.com/development-resources/versioning',
-      description: `Adyen's SDK is open source and available to the public to contribute.`,
-      svg: () => <AdyenVersionLogo />
+      title: 'Step 2:',
+      link: 'https://docs.adyen.com/online-payments/build-your-integration?platform=Web&integration=Drop-in&tab=npm_recommended__1&version=5.43.0#set-up',
+      description: 'Create an instance of checkout',
+      svg: () => <ShoppingCartIcon />
     },
     {
-      title: 'Error handling',
-      link: 'https://docs.adyen.com/development-resources/response-handling',
-      description: 'After instantiating an Adyen solution to your front end, you receive a an error event handler.',
-      svg: () => <AdyenHandleLogo />
+      title: 'Step 3:',
+      link: 'https://docs.adyen.com/online-payments/build-your-integration?platform=Web&integration=Drop-in&tab=npm_recommended__1&version=5.43.0#initialize-the-payment-session',
+      description: 'Initialize the payment session',
+      svg: () => <PaymentIcon />
+    },
+    {
+      title: 'Step 4:',
+      link: 'https://docs.adyen.com/online-payments/build-your-integration?platform=Web&integration=Drop-in&tab=npm_recommended__1&version=5.43.0#test-and-go-live',
+      description: 'Test and go live',
+      svg: () => <ReceiptLongIcon />
     }
   ];
 
@@ -162,10 +167,12 @@ export const Overview = () => {
       <Box sx={{ display: 'flex', flexWrap: 'wrap-reverse', justifyContent: 'space-between' }}>
         <Box
           component="div"
-          sx={{ mt: 6, mb: 6, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
+          sx={{ mt: 6, mb: 2, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
         >
           <Typography variant="h2">
-            Welcome to <br /> Adyen's SDK Explorer
+            Welcome to Adyen's
+            <br />
+            web SDK Explorer
           </Typography>
           <Typography component={'span'} sx={{ mt: 3 }} variant="body2">
             With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, and customizations. You can
@@ -194,11 +201,21 @@ export const Overview = () => {
           component="div"
           sx={{ alignItems: 'flex-end', alignSelf: 'flex-start', width: '50%', flex: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' } }}
         >
-          <AdyenLogo />
+          <img src="https://adyen.getbynder.com/m/be33b14ac185e59/original/help-collections-hero.svg" alt="A girl picking books from a bookshelf." />
         </Box>
       </Box>
       <Divider />
-      <LogosGrid logos={logos} />
+      <LogosGrid
+        logos={logos}
+        sx={{
+          bgcolor: 'primary.light',
+          px: 2,
+          color: 'primary.light',
+          '#logo': { color: 'rgb(10, 191, 83)' },
+          '#step-title': { color: '#00112C' },
+          '#step-description': { color: '#00112C' }
+        }}
+      />
       <Divider />
       <LinksGrid links={links} />
     </Box>
