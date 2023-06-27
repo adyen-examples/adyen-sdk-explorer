@@ -28,19 +28,19 @@
     "process": "^0.11.10",
     "prop-types": "15.7.2",
     "react": "17.0.2",
+    "react-color": "^2.19.3",
     "react-dom": "17.0.2",
     "react-json-editor-ajrm": "^2.5.13",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^5.0.1",
-    "request": "^2.88.2",
-    "request-promise": "^0.0.1"
+    "react-scripts": "4.0.3"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/marked": "^4.0.5",
     "@types/node": "^17.0.15",
     "@types/react": "17.0.3",
+    "@types/react-color": "^3.0.6",
     "@types/react-dom": "17.0.3",
     "@types/react-json-editor-ajrm": "^2.5.3",
     "@types/react-redux": "^7.1.23",

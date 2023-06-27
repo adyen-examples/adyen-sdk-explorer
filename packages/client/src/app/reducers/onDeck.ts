@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export type StepsType = 'checkout' | 'local' | 'sessions' | 'review';
+import { defaultDropinStyle, defaultComponentStyle } from '../../components/EditorBar/Tabs/StyleTab/defaultStyles';
 
 export interface OnDeckPropType {
   [key: string]: any;
 }
+
+export type StepsType = 'checkout' | 'local' | 'sessions' | 'review';
 
 export interface OnDeckState {
   checkout: OnDeckPropType | {};
@@ -15,6 +16,8 @@ export interface OnDeckState {
   txVariant: string;
   isRedirect: boolean;
   activeStep: number;
+  style: OnDeckPropType | {};
+  adyenState: OnDeckPropType | {};
   txvariant?: string;
   steps: StepsType[];
   [key: string]: any;
@@ -27,12 +30,14 @@ const initialState: OnDeckState = {
   sessionsResponse: {},
   products: {},
   txVariant: '',
-  steps: ['checkout', 'local', 'sessions', 'review'],
+  steps: ['sessions', 'checkout', 'local', 'review'],
   activeStep: 0,
-  isRedirect: false
+  isRedirect: false,
+  style: {},
+  adyenState: {}
 };
 
-export const onDeckSlice = createSlice({
+const onDeckSlice = createSlice({
   name: 'onDeck',
   initialState,
   reducers: {
@@ -45,14 +50,11 @@ export const onDeckSlice = createSlice({
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.sessions = action.payload;
     },
-    updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
-      state.sessionsResponse = action.payload;
-    },
-    updateProductsInfo: (state, action: PayloadAction<any>) => {
-      state.products = action.payload;
+    updateRedirectInfo: (state, action: PayloadAction<any>) => {
+      state.isRedirect = action.payload;
     },
     updateTxVariant: (state, action: PayloadAction<string>) => {
-      state.profile = action.payload;
+      state.txVariant = action.payload;
     },
     updateSteps: (state, action: PayloadAction<any>) => {
       state.steps = action.payload;
@@ -60,11 +62,26 @@ export const onDeckSlice = createSlice({
     updateActiveStep: (state, action: PayloadAction<any>) => {
       state.activeStep = action.payload;
     },
-    updateRedirectInfo: (state, action: PayloadAction<any>) => {
-      state.isRedirect = action.payload;
+    updateSessionsResponseInfo: (state, action: PayloadAction<any>) => {
+      state.sessionsResponse = action.payload;
+    },
+    updateStyleInfo: (state, action: PayloadAction<any>) => {
+      state.style = { ...state.style, ...action.payload };
+    },
+    updateAdyenStateInfo: (state, action: PayloadAction<any>) => {
+      state.adyenState = action.payload;
+    },
+    updateProductsInfo: (state, action: PayloadAction<any>) => {
+      state.products = action.payload;
+    },
+    resetOnDeckInfo: state => {
+      const { products, txVariant } = state;
+      const style = txVariant === 'dropin' ? defaultDropinStyle : defaultComponentStyle;
+      return { ...initialState, style, products, txVariant };
     },
     clearOnDeckInfo: state => {
-      state = initialState;
+      let { products } = state;
+      return { ...initialState, products };
     }
   }
 });

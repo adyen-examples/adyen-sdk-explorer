@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { onDeckActions } from '../../app';
+import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
+import { useAppDispatch, useCheckout } from '../../hooks';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 import { ConfigurationSession } from './ConfigurationSession';
-import { useCheckout } from '../../hooks';
-import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
+
+const { updateAdyenStateInfo } = onDeckActions;
 
 export const RedirectComponent = ({ configuration }: { configuration: any }) => {
   const [queryParameters] = useSearchParams();
@@ -12,29 +15,46 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     sessionId: any = queryParameters.get('sessionId');
   const [error, setError] = useState(null);
   const [result, setResult] = useState<any>(null);
+  const dispatch = useAppDispatch();
+  const { local, txVariant } = configuration;
   const sessions = new ConfigurationSession({
     ...configuration,
     queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
-    setState: { error: setError, result: setResult }
+    setState: {
+      error: setError,
+      result: setResult,
+      adyenState: (data: any) => {
+        dispatch(updateAdyenStateInfo(data));
+      }
+    }
   });
   const [checkout] = useCheckout(sessions);
-  const product = configuration.profile.product;
 
-  console.log('This is the error: ', error);
+  useEffect(() => {
+    if (checkout && !error) {
+      checkout.submitDetails({ details: { redirectResult: redirectResult } });
+      checkout.create(txVariant, local).mount('#checkout');
+    }
+  }, [checkout, txVariant, local, redirectResult, error]);
 
   if (error) {
     return (
-      <Box pt={3} sx={{ textAlign: 'center' }}>
-        <AdyenIdkIcon />
+      <Box sx={{ textAlign: 'center' }}>
         <Alerts severityType={'error'} message={JSON.stringify(error)} />
+        <AdyenIdkIcon />
       </Box>
     );
   } else if (result) {
-    return <Alerts severityType={result.status} message={result.resultCode} />;
-  } else if (checkout) {
-    checkout.submitDetails(sessions.redirectResult);
-    checkout.create(product, configuration.local).mount('#checkout');
+    return (
+      <Box>
+        <Alerts severityType={result?.status} message={result?.resultCode} />
+      </Box>
+    );
   }
 
-  return <div id="checkout"></div>;
+  return (
+    <Box sx={configuration?.style}>
+      <div id="checkout"></div>
+    </Box>
+  );
 };

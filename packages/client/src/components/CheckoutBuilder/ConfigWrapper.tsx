@@ -2,11 +2,10 @@ import { Grid, Step, StepLabel, Stepper } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import { useRedirect } from '../../hooks';
+import type { RootState } from '../../store';
 import { ColorlibStepIcon } from './ColorlibStepIcon';
 import { Config } from './Config';
-import { ProfileForm, ReviewForm } from './configSteps';
-import { profilePageContent, globalPageContent, localPageContent, apiPageContent, reviewPageContent } from './helpers/content';
-import type { RootState } from '../../store';
+import { ReviewContent } from './configSteps/Content/ReviewContent';
 
 const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
@@ -15,15 +14,13 @@ export const ConfigWrapper = () => {
   useRedirect({ checkout, local, sessions });
 
   const stepMap = {
-    profile: <ProfileForm key="profile" content={profilePageContent} configuration={profile} />,
-    checkout: <Config name="checkout" content={globalPageContent} configuration={checkout} action={updateCheckoutInfo} />,
-    local: <Config name="local" content={localPageContent} configuration={local} action={updateLocalInfo} />,
-    sessions: <Config name="sessions" content={apiPageContent} configuration={sessions} action={updateSessionsInfo} />,
-    review: <ReviewForm key="review" configuration={{ checkout, local, sessions }} content={reviewPageContent} />
+    checkout: <Config name="checkout" configuration={checkout} action={updateCheckoutInfo} />,
+    local: <Config name="local" configuration={local} action={updateLocalInfo} />,
+    sessions: <Config name="sessions" configuration={sessions} action={updateSessionsInfo} />,
+    review: <ReviewContent/>
   };
 
-  const displayStep = stepMap[steps[activeStep]];
-
+  const displayStep: any = stepMap[steps[activeStep]];
   return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
       <Grid item xs={1} sx={{ width: '65%' }}>

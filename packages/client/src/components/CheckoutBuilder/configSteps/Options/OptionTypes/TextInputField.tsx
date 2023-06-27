@@ -32,12 +32,12 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
         <TextField
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
           value={textInputFieldValue}
-          sx={{ display: 'block', py: 0 }}
-          variant="filled"
+          variant="outlined"
           name={descriptor.name}
           id={descriptor.name}
           size="small"
           hiddenLabel
+          sx={{ bgcolor: 'secondary.light' }}
         />
       )}
     </Grid>

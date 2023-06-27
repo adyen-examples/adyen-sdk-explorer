@@ -1,35 +1,33 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { onDeckActions } from '../../app';
 import { isConfigEmpty } from '../../helpers';
 import { useAppDispatch } from '../index';
-import { useMemoCompare } from '../helpers/useMemoCompare';
-import { onDeckActions } from '../../app';
 
-const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateAdyenStateInfo, updateActiveStep } = onDeckActions;
 
 export const useRedirect = (configuration: any) => {
   const [queryParameters] = useSearchParams();
   const redirectResult = queryParameters.get('redirectResult');
-  const encodedConfig: any = localStorage.getItem('configuration');
-  const encodedSDKState: any = localStorage.getItem('sdkExplorer');
   const dispatch = useAppDispatch();
 
-  const componentConfig = useMemoCompare(configuration);
-  const storedConfig = useMemoCompare(JSON.parse(encodedConfig));
-  const storedSdkExplorerState = useMemoCompare(JSON.parse(encodedSDKState));
-
   useEffect(() => {
-    if (redirectResult) {
-      const { checkout, local, sessions } = storedConfig;
-      const { steps } = storedSdkExplorerState;
+    const encodedConfig: any = localStorage.getItem('componentConfig');
+    const encodedSDKState: any = localStorage.getItem('sdkExplorer');
 
-      if (isConfigEmpty(componentConfig)) {
+    if (redirectResult) {
+      const storedConfig = JSON.parse(encodedConfig);
+      const { checkout, local, sessions, style } = storedConfig;
+      const storedSdkExplorerState = JSON.parse(encodedSDKState);
+      const { steps} = storedSdkExplorerState;
+      if (isConfigEmpty(configuration)) {
         dispatch(updateCheckoutInfo(checkout));
         dispatch(updateLocalInfo(local));
+        dispatch(updateAdyenStateInfo(style));
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
         dispatch(updateActiveStep(steps.length - 1));
       }
     }
-  }, [redirectResult, componentConfig, storedConfig, storedSdkExplorerState, dispatch]);
+  }, [redirectResult, configuration, dispatch]);
 };

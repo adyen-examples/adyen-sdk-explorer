@@ -13,7 +13,8 @@ export const useCheckout = (configuration: any) => {
     };
 
     initializeCheckout(checkoutOptions);
-  }, [configuration.checkoutConfig]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return [checkout];
 };

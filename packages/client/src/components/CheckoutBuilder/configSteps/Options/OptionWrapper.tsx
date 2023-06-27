@@ -1,12 +1,12 @@
-import { ChangeEvent } from 'react';
+import { Checkbox, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { marked } from 'marked';
-import { Box } from '@mui/system';
-import { Checkbox, Grid, Typography } from '@mui/material';
+import { ChangeEvent } from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
-import { InitializeOption } from './InitializeOption';
 import type { Descriptor } from '../../types';
+import { InitializeOption } from './InitializeOption';
 
 export interface OptionWrapperPropTypes {
   descriptor: Descriptor;
@@ -40,7 +40,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
   const isChecked = value !== undefined;
 
   return (
-    <Grid direction="column" container>
+    <Grid direction="column" container sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
@@ -59,7 +59,11 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h6" dangerouslySetInnerHTML={createMarkup(marked.parse(descriptor.description))}></Typography>
+        <Typography
+          variant="h6"
+          sx={{ '> p': { mb: '0.3rem', mt: '0.3rem' } }}
+          dangerouslySetInnerHTML={descriptor?.description ? createMarkup(marked.parse(descriptor.description)) : undefined}
+        ></Typography>
       </Grid>
       {descriptor.configure !== false && (
         <Grid item xs={12}>
@@ -74,7 +78,11 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
           />
         </Grid>
       )}
-      {isChecked && <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />}
+      {isChecked && (
+        <Box>
+          <InitializeOption descriptor={descriptor} onChange={handleInput} value={value} isChecked={isChecked} />
+        </Box>
+      )}
     </Grid>
   );
 };

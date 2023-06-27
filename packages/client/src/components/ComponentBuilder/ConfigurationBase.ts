@@ -19,7 +19,7 @@ export class ConfigurationBase<P extends ConfigurationBaseProps> {
     return this.props.checkout;
   }
   get local() {
-    return this.props.local;
+    return { ...this.props.local, onChange: this.props.setState.adyenState };
   }
   get data() {
     return this.props.data;
@@ -32,5 +32,8 @@ export class ConfigurationBase<P extends ConfigurationBaseProps> {
   }
   get setResult() {
     return this.props.setState.result;
+  }
+  get setAdyenState() {
+    return this.props.setState.adyenState;
   }
 }

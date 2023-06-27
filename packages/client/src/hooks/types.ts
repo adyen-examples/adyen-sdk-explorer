@@ -5,7 +5,7 @@ export type InitializationRequest = {
   amount: PaymentAmount;
   returnUrl: string;
   reference: string;
-  expiresAt?: string;
+  expiresAt?: Date;
   countryCode?: string;
   shopperLocale?: string;
   shopperEmail?: string;

@@ -61,6 +61,7 @@ export class ConfigurationSession<P extends ConfigurationSessionProps = any> ext
           status = 'error';
           break;
         default:
+          status = 'warning';
           break;
       }
       this.setResult({ status: status, resultCode: resultCode });
@@ -74,18 +75,19 @@ export class ConfigurationSession<P extends ConfigurationSessionProps = any> ext
       message = error.message;
       value = { message: message };
     }
-    console.log('Value: ', value);
 
     if (this.setError) {
-      console.log('Setting Error');
-      console.log('value is ', value);
       this.setError(value);
     }
   }
-  public onChange(state: any, element: object): void {
-    console.info(state, element);
+  public onChange(state: any, element: any): void {
+    this.setAdyenState({ ...state.data });
+  }
+  public onReady(state: any, element: object): void {
+    console.log('onready');
   }
   public onValid(state: any, element: object): void {
+    console.log('onvalid valled');
     console.info(state, element);
   }
 }

@@ -1,21 +1,35 @@
 import { Box } from '@mui/material';
-import { ListOptions } from './configSteps';
-import { Content } from './configSteps/Content';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import type { OnDeckPropType } from '../../app/types';
-import type { PageContentType } from './helpers/content';
+import { ListOptions } from './configSteps';
+import { CheckoutContent } from './configSteps/Content/CheckoutContent';
+import { ComponentContent } from './configSteps/Content/ComponentContent';
+import { SessionsContent } from './configSteps/Content/SessionsContent';
 
 export interface ConfigPropTypes {
   name: string;
-  content: PageContentType;
   configuration: OnDeckPropType;
   action: ActionCreatorWithPayload<any>;
 }
 
-export const Config = ({ name, content, configuration, action }: ConfigPropTypes) => {
+export const Config = ({ name, configuration, action }: ConfigPropTypes) => {
+  let pageContent = null;
+  switch (name) {
+    case 'sessions':
+      pageContent = <SessionsContent />;
+      break;
+    case 'checkout':
+      pageContent = <CheckoutContent />;
+      break;
+    case 'local':
+      pageContent = <ComponentContent />;
+      break;
+    default:
+      console.error('No content for this page');
+  }
   return (
     <Box>
-      <Content title={content.title} subtitle={content.subtitle} version={content.version} description={content.description} />
+      {pageContent}
       <ListOptions category={'Parameters'} name={name} configuration={configuration} action={action} />
     </Box>
   );

@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
+import { ObjectOption } from './OptionTypes';
 
 interface ListOptionsProps {
   name: string;
@@ -41,15 +42,28 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
 
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
-      <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
-        <Typography variant="h5">No Payment Method Configurations Available</Typography>
-      </Grid>
+      <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
+        <ObjectOption content="No configurations found. Use editor pane for custom fields." />
+      </Box>
     );
   }
 
   return (
     <Grid container>
-      <Grid item px={7} py={2} mt={2} xs={12} sx={{ backgroundColor: 'secondary.light', boxShadow: 3, position: 'sticky', top: 0 }}>
+      <Grid
+        item
+        px={7}
+        py={1.4}
+        mt={2}
+        xs={12}
+        sx={{
+          backgroundColor: 'secondary.light',
+          boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1
+        }}
+      >
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
             <Typography variant="h5">{category}</Typography>

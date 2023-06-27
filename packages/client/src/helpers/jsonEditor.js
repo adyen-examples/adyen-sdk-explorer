@@ -100,10 +100,10 @@ export const dark_vscode_tribute = {
 
 export const light_mitsuketa_tribute = {
     default: '#000000',
-    background: '#FFFFFF',
+    background: '#f3f6f9',
     background_warning: '#FEECEB',
-    string: '#FA7921',
-    number: '#7OCE35',
+    string: '#07863a',
+    number: '#FA7921',
     colon: '#49B8F7',
     keys: '#0048b3',
     keys_whiteSpace: '#835FB6',

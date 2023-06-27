@@ -15,7 +15,8 @@ export const themeOptions: any = {
     },
     background: {
       paper: '#fff',
-      default: '#fff'
+      default: '#fff',
+      elevation: 20
     },
     info: {
       main: '#0048b3'
@@ -26,13 +27,15 @@ export const themeOptions: any = {
     p: {
       fontWeight: 500,
       fontSize: '0.83rem',
-      fontFamily: 'sans-serif'
+      fontFamily: 'sans-serif',
+      color: '#394962'
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
       fontWeight: 400,
-      lineHeight: 1.8
+      lineHeight: 1.8,
+      color: '#394962'
     },
     h2: {
       fontWeight: 600,
@@ -48,18 +51,18 @@ export const themeOptions: any = {
       fontWeight: 'bold',
       fontSize: '1.1rem',
       fontFamily: 'sans-serif',
-      color: '#00112c'
+      color: '#394962'
     },
     h5: {
       fontWeight: '550',
       fontSize: '1.1rem',
       fontFamily: 'sans-serif',
-      color: '#00112c'
     },
     h6: {
-      fontWeight: '520',
-      fontSize: '0.83rem',
-      fontFamily: 'sans-serif'
+      fontWeight: '530',
+      fontSize: '0.85rem',
+      fontFamily: 'sans-serif',
+      color: '#394962'
     },
     caption: {
       color: '#69778C',

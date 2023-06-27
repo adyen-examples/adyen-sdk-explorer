@@ -12,6 +12,37 @@
       rel="stylesheet"
     />
     <title>SDK Explorer | Adyen Docs</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Implementation Team" />
+    <meta name="description" content="Build your own checkout" />
+    <meta property="og:image" content="https://docs.adyen.com/user/themes/adyen-docs/images/favicon.ico" />
+    <link data-n-head="ssr" rel="shortcut icon" type="image/x-icon" href="https://docs.adyen.com/user/themes/adyen-docs/images/favicon.ico">
+    <script>
+      {
+        (() => {
+          try {
+            const { fetch: originalFetch } = window;
+            window.data = window.data || {};
+            window.data.apiStack = [];
+            window.fetch = async (...args) => {
+              let [resource, config] = args;
+              const response = await originalFetch(resource, config);
+              const copyResponse = response.clone();
+              const copyResponseJSON = await copyResponse.json();
+              let log = { url: resource, request: config, response: copyResponseJSON, status: response.status };
+              if (resource.includes(window.location.hostname) || resource.includes('adyen.com')) {
+                window.data.apiStack.push(log);
+                let event = new Event('api', log);
+                window.dispatchEvent(event);
+              }
+              return response;
+            };
+          } catch (e) {
+            console.error('Error while overriding fetch: ', e);
+          }
+        })();
+      }
+    </script>
   </head>
 
   <body>

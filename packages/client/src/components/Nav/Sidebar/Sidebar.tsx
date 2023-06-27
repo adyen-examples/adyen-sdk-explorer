@@ -1,21 +1,24 @@
 import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { RootState } from '../../../store';
 
-export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
+export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
+  const { products } = useSelector((state: RootState) => state.onDeck);
   const navigate = useNavigate();
 
   const selectedButtonStyle = {
     bgcolor: 'primary.main',
     borderRadius: 1,
     color: '#FFFFFF',
-    '&:hover': { bgcolor: 'primary.main' }
+    opacity: '1 !important'
   };
   const nonselectedButtonStyle = {
     '&:hover': { bgcolor: 'rgba(0, 102, 255, 0.12)', borderRadius: 1 },
     color: '#000000'
   };
 
-  const handleClick = (txvariant: string) => {
+  const handleClick = (txvariant: any) => {
     navigate(`/${txvariant}`);
   };
   return (
@@ -28,7 +31,7 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           width: drawerWidth,
           boxSizing: 'border-box',
           bgcolor: 'background.paper',
-          mt: `calc(${headerHeight}px + 5px)`,
+          mt: `calc(${headerHeight}px + 8px)`,
           height: `calc(100% - ${headerHeight}px)`,
           pt: 2,
           px: 3
@@ -44,9 +47,11 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           </Typography>
         </ListItemButton>
         <ListItem>
-          <Typography variant="h5">Online Payments</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+            ONLINE PAYMENTS
+          </Typography>
         </ListItem>
-        {Object.keys(products).map((product: any) => {
+        {Object.keys(products).map((product: any, index: number) => {
           let subcategory = null;
           const selected = products[product].txVariant === page;
           const buttonStyle = selected ? selectedButtonStyle : nonselectedButtonStyle;
@@ -54,15 +59,17 @@ export const Sidebar = ({ products, page, drawerWidth, headerHeight }: any) => {
           if (product === 'Drop-in') {
             subcategory = (
               <ListItem>
-                <Typography variant="h5">Components</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+                  COMPONENTS
+                </Typography>
               </ListItem>
             );
           }
           return (
             <Box key={product}>
               <ListItem disablePadding>
-                <ListItemButton sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
-                  <Typography sx={{ color: `${selected ? 'white' : 'black'}` }} variant="h6">
+                <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
+                  <Typography sx={{ ml: 2, color: `${selected ? 'white' : 'black'}` }} variant="h6">
                     {product}
                   </Typography>
                 </ListItemButton>

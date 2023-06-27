@@ -1,6 +1,38 @@
 MVP:
-1. Configuration of component - Version, Drop-in, Card, etc...
-2. Configuration of intial call (session, paymentMethods)
-3. Payment Method configuration JSON object passthrough
-4. CSS override box
-5. "API Explorer" box - API Call and component configuration
+1. (Complete) Configuration of component - Version, Drop-in, Card, etc...
+2. (Complete) Configuration of intial call (session, paymentMethods)
+3. (Complete) Payment Method configuration JSON object passthrough
+4. (Complete) CSS override box
+5. (Complete) "API Explorer" box - API Call and component configuration
+
+Complete:
+1. (complete) Add style component to EditorBar
+2. (complete)Add state component to EditorBar
+3. (complete) Fix redirect bug 
+6. (Complete) Clean up backend (ie remove unused code)
+7. (Complete) Update steps documentation.
+11.(Complete: note to be combined with 17) Add default values or config, and explain potential errors if you misconfigure.
+13.(complete) There is a bug when you double click a tab it will set the txvariant as undefined
+14.(complete) Hook onto Adyen xhr call and log them under APIs with response code and dropdown to inspect the logs
+16.(complete) We are sending another session request each time we modify the css. 
+18.(complete) Bug introduced that doesnt display the error component
+19.(complete) Add button to reset config, alongside button to edit 
+20.(complete)  Merge useApi hook
+7. (Complete) Update steps documentation.
+24. (Complete) Fix reset button functionality
+29.(Complete)  Update landing page
+9. (Complete) Update home page to include relevant and specific documentation. For example, summarize steps
+25. (Complete) Change the color of the editor background when user clicks on the lock icon
+22. (Complete) Move clearOnDeck from sidebar
+29. (Complete) Add txvariant on sessions page
+27. (Complete) Bug when you add environment
+23. (Complete) Add 404 page
+
+Open Items:
+4. Add loading component
+5. Add Global Error component
+10. Create tests for QA
+17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
+21. Fix number type options input
+26. Add floating button that scrolls to the parameters section
+28. Refactor CSS

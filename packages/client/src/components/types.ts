@@ -11,13 +11,14 @@ export type FormDataProps = {
 };
 
 export interface ConfigurationBaseProps {
-  global: any;
+  global:any;
   local: any;
-  txVariant: string;
+  profile: any;
   data: any;
   queryParameters: any;
   setState: any;
   checkout: any;
+  txVariant: string;
 }
 
 export interface ConfigurationSessionProps extends ConfigurationBaseProps {

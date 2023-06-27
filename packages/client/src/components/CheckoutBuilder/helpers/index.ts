@@ -62,7 +62,7 @@ const setDefaultType = (descriptor: Descriptor): DefaultValue => {
 export const addOrRemoveProp: AddOrRemoveProp = (configuration, item, descriptor) => {
   const newConfig = { ...(configuration || {}) };
 
-  if (newConfig[item]) {
+  if (item in newConfig) {
     delete newConfig[item];
   } else {
     const value = descriptor ? setDefaultType(descriptor) : '';

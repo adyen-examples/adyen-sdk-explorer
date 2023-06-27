@@ -7,6 +7,7 @@ interface InitializeOptionProps {
   onChange: (item: string, value: any, current?: any) => void;
   value: any;
   isChecked: boolean;
+  sx?: object;
 }
 
 export const InitializeOption = (props: InitializeOptionProps) => {
@@ -22,7 +23,7 @@ export const InitializeOption = (props: InitializeOptionProps) => {
   } else if (descriptor.type === 'array' && descriptor.name) {
     optionsDisplay = <ArrayOption {...props} />;
   } else if (descriptor.type === 'object' && !descriptor.properties) {
-    optionsDisplay = <ObjectOption />;
+    optionsDisplay = <ObjectOption content="Custom configuration use case. Use the JSON Editor pane." />;
   }
 
   return (

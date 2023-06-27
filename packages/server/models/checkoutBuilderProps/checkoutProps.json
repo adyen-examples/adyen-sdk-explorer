@@ -10,7 +10,7 @@
     "name": "clientKey",
     "type": "string",
     "required": true,
-    "description": "A public key linked to your API credential, used for <a href=\"/development-resources/client-side-authentication\">client-side authentication</a>.",
+    "description": "A public key linked to your API credential, used for <a href=\"https://docs.adyen.com/development-resources/client-side-authentication\">client-side authentication</a>.",
     "configure": false
   },
   {
@@ -18,7 +18,7 @@
     "type": "string",
     "configure": false,
     "required": true,
-    "description": "Use <strong>test</strong>. When you're ready to accept live payments, change the value to one of our <a href=\"/online-payments/web-drop-in#test-and-go-live\">live environments</a>.&nbsp;"
+    "description": "Use <strong>test</strong>. When you're ready to accept live payments, change the value to one of our <a href=\"https://docs.adyen.com/online-payments/web-drop-in#test-and-go-live\">live environments</a>.&nbsp;"
   },
   {
     "name": "onPaymentCompleted(result, component)",
@@ -38,13 +38,13 @@
     "name": "paymentMethodsConfiguration",
     "type": "object",
     "required": false,
-    "description": "Configuration for specific payment methods. The <a href=\"/payment-methods\">payment method guides</a> have configuration options specific to each payment method."
+    "description": "Configuration for specific payment methods. The <a href=\"https://docs.adyen.com/payment-methods\">payment method guides</a> have configuration options specific to each payment method."
   },
   {
     "name": "analytics.enabled",
     "type": "boolean",
     "required": false,
-    "description": "Indicates if you're sending <a href=\"/online-payments/analytics-and-data-tracking\">analytics data</a> to Adyen. Default: <strong>true</strong>."
+    "description": "Indicates if you're sending <a href=\"https://docs.adyen.com/online-payments/analytics-and-data-tracking\">analytics data</a> to Adyen. Default: <strong>true</strong>."
   },
   {
     "name": "showPayButton",
