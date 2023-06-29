@@ -24,6 +24,8 @@ export const InitializeOption = (props: InitializeOptionProps) => {
     optionsDisplay = <ArrayOption {...props} />;
   } else if (descriptor.type === 'object' && !descriptor.properties) {
     optionsDisplay = <ObjectOption content="Custom configuration use case. Use the JSON Editor pane." />;
+  } else if (descriptor.type === 'integer') {
+    optionsDisplay = <TextInputField {...props} type="number" />;
   }
 
   return (
