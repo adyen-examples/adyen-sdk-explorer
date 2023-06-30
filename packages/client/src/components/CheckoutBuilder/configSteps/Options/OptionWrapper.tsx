@@ -24,7 +24,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
 
   const handleInput = (item: string, value: any, current: any) => {
     let toUpdate;
-    if (!!current) {
+    if (current) {
       toUpdate = handleUpdateConfig(configuration, item, value, current);
     } else {
       toUpdate = { ...configuration, [item]: value };

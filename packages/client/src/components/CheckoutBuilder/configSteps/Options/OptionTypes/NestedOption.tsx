@@ -43,6 +43,7 @@ export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) =
                     value={value[prop.name]}
                     subtitles={false}
                     isChecked={value !== undefined}
+                    type={prop.type === 'integer' ? 'number' : 'text'}
                   />
                 </Grid>
               </Box>

@@ -5,11 +5,11 @@ import type { OptionPropTypes } from './types';
 
 interface TextInputFieldProps extends OptionPropTypes {
   subtitles?: boolean;
+  type: 'number' | 'text' | undefined;
 }
 
-export const TextInputField = ({ descriptor, onChange, value, isChecked, current, subtitles }: TextInputFieldProps) => {
-  let textInputFieldValue = value || '';
-
+export const TextInputField = ({ descriptor, onChange, value, isChecked, current, subtitles, type }: TextInputFieldProps) => {
+  let textInputFieldValue = value !== undefined ? value : '';
   let additionalLabels;
 
   if (subtitles) {
@@ -30,13 +30,17 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
       {additionalLabels}
       {isChecked && (
         <TextField
-          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.name, e.target.value, current)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            let value = type === 'number' ? Number(e.target.value) : e.target.value;
+            onChange(e.target.name, value, current);
+          }}
           value={textInputFieldValue}
           variant="outlined"
           name={descriptor.name}
           id={descriptor.name}
           size="small"
           hiddenLabel
+          type={type === 'number' ? 'number' : 'text'}
           sx={{ bgcolor: 'secondary.light' }}
         />
       )}
