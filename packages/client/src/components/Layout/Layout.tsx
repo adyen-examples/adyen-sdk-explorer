@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../hooks';
 import type { RootState } from '../../store';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
 import { LayoutContent } from './LayoutContent';
+import { ErrorBoundary } from 'react-error-boundary';
+import { NotFound } from '../Error/NotFound';
 
 const { updateTxVariant, updateStyleInfo } = onDeckActions;
 
@@ -49,7 +51,11 @@ export const Layout = ({ main: Main }: any) => {
     if (!pathParamInProducts(products, productParam) && !isHome) {
       navigate('/error');
     } else {
-      return <LayoutContent main={Main} selectedProduct={productParam} />;
+      return (
+        <ErrorBoundary fallback={<NotFound />}>
+          <LayoutContent main={Main} selectedProduct={productParam} />
+        </ErrorBoundary>
+      );
     }
   }
 
