@@ -27,12 +27,12 @@ Complete:
 29. (Complete) Add txvariant on sessions page
 27. (Complete) Bug when you add environment
 23. (Complete) Add 404 page
+21.(complete) Add number type options input
 
 Open Items:
 5. Add Global Error component
 10. Create tests for QA
 17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
-21. Add number type options input
 28. Refactor CSS
 
 Nice to haves:

@@ -54,7 +54,8 @@
         "name": "shopperInteractionDevice"
       }
     ],
-    "name": "applicationInfo"
+    "name": "applicationInfo",
+    "type": "object"
   },
   {
     "description": "The address where to send the invoice.",
