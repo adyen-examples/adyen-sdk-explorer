@@ -5,7 +5,7 @@ import type { OptionPropTypes } from './types';
 
 interface TextInputFieldProps extends OptionPropTypes {
   subtitles?: boolean;
-  type: string;
+  type: 'number' | 'text' | undefined;
 }
 
 export const TextInputField = ({ descriptor, onChange, value, isChecked, current, subtitles, type }: TextInputFieldProps) => {
