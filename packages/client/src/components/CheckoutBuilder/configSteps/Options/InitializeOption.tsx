@@ -17,7 +17,7 @@ export const InitializeOption = (props: InitializeOptionProps) => {
   if (descriptor.properties) {
     optionsDisplay = <NestedOption {...props} />;
   } else if (descriptor.type === 'string') {
-    optionsDisplay = <TextInputField {...props} />;
+    optionsDisplay = <TextInputField {...props} type="text"/>;
   } else if (descriptor.type === 'boolean' && descriptor.name) {
     optionsDisplay = <BooleanOption {...props} />;
   } else if (descriptor.type === 'array' && descriptor.name) {

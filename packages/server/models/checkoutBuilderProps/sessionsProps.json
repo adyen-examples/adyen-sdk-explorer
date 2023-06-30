@@ -93,7 +93,8 @@
         "name": "street"
       }
     ],
-    "name": "billingAddress"
+    "name": "billingAddress",
+    "type": "object"
   },
   {
     "description": "The delay between the authorisation and scheduled auto-capture, specified in hours.",
@@ -155,7 +156,8 @@
         "name": "street"
       }
     ],
-    "name": "deliveryAddress"
+    "name": "deliveryAddress",
+    "type": "object"
   },
   {
     "description": "The date the session expires in [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.",
@@ -230,7 +232,8 @@
         "name": "lastName"
       }
     ],
-    "name": "shopperName"
+    "name": "shopperName",
+    "type": "object"
   },
   {
     "description": "Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.\n> Your reference must not include personally identifiable information (PII), for example name or email address.",
