@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
 import { useAppDispatch } from '../../hooks';
 import type { RootState } from '../../store';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
-import { LayoutContent } from './LayoutContent';
-import { ErrorBoundary } from 'react-error-boundary';
 import { NotFound } from '../Error/NotFound';
+import { LayoutContent } from './LayoutContent';
 
 const { updateTxVariant, updateStyleInfo } = onDeckActions;
 

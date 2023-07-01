@@ -1,4 +1,4 @@
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { ReactComponent as AdyenPageNotFound } from '../../assets/adyen-page-not-found.svg';
 import { CLIENT_URL } from '../../config';
 export const NotFound = () => {
