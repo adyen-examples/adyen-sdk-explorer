@@ -36,6 +36,7 @@ Open Items:
 28. Refactor CSS
 29. GCash bug => redirect to gcash, come back, then choose another txvariant on left hand panel
 30. Unmount the adyen component
+31. Validate the data in sessions matches api explorer, and review local and checkout docs.
 
 Nice to haves:
 26. Add floating button that scrolls to the parameters section

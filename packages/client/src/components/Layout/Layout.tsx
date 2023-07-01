@@ -47,17 +47,13 @@ export const Layout = ({ main: Main }: any) => {
     return Object.keys(obj).length === 0;
   };
 
-  if (!isEmpty(products)) {
-    if (!pathParamInProducts(products, productParam) && !isHome) {
-      navigate('/error');
-    } else {
-      return (
-        <ErrorBoundary fallback={<NotFound />}>
-          <LayoutContent main={Main} selectedProduct={productParam} />
-        </ErrorBoundary>
-      );
-    }
+  if (!isEmpty(products) && !pathParamInProducts(products, productParam) && !isHome) {
+    navigate('/error');
   }
-
-  return null;
+  
+  return (
+    <ErrorBoundary fallback={<NotFound />}>
+      <LayoutContent main={Main} selectedProduct={productParam} />
+    </ErrorBoundary>
+  );
 };
