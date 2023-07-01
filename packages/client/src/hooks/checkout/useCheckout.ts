@@ -6,13 +6,20 @@ export const useCheckout = (configuration: any) => {
   const [checkout, setCheckout] = useState<any>(null);
 
   useEffect(() => {
+    let ignore = false;
     const checkoutOptions: CheckoutConfig = configuration.checkoutConfig;
     const initializeCheckout: (config: object) => void = async config => {
       const component = await AdyenCheckout(config);
-      setCheckout(component);
+      if (!ignore) {
+        setCheckout(component);
+      }
     };
 
     initializeCheckout(checkoutOptions);
+    return () => {
+      setCheckout(null);
+      ignore = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

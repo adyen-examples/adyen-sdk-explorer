@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useInitializeSession } from '../../hooks';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { Alerts } from '../CheckoutBuilder/Alerts';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
 import type { OnDeckPropType } from '../CheckoutBuilder/types';
@@ -50,6 +50,11 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
 
   return (
     <Box sx={configuration?.style}>
+      {!checkout && (
+        <Box sx={{ textAlign: 'center', mt: '10vh' }}>
+          <CircularProgress />
+        </Box>
+      )}
       <div id="checkout"></div>
     </Box>
   );

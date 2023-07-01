@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
@@ -31,29 +31,38 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   const [checkout] = useCheckout(sessions);
 
   useEffect(() => {
-    if (checkout && !error) {
+    let ignore = false;
+    if (checkout && !error && !ignore) {
+      console.log('RedirectComponent:: useEffect');
       checkout.submitDetails({ details: { redirectResult: redirectResult } });
-      checkout.create(txVariant, local).mount('#checkout');
     }
-  }, [checkout, txVariant, local, redirectResult, error]);
+    return () => {
+      setError(null);
+      setResult(null);
+      ignore = true;
+    };
+  }, [checkout, error]);
 
-  if (error) {
+  if (result) {
+    return (
+      <Box>
+        <Alerts severityType={result?.status} message={result?.resultCode} />
+      </Box>
+    );
+  } else if (error) {
     return (
       <Box sx={{ textAlign: 'center' }}>
         <Alerts severityType={'error'} message={JSON.stringify(error)} />
         <AdyenIdkIcon />
       </Box>
     );
-  } else if (result) {
-    return (
-      <Box>
-        <Alerts severityType={result?.status} message={result?.resultCode} />
-      </Box>
-    );
   }
 
   return (
     <Box sx={configuration?.style}>
+      <Box sx={{ textAlign: 'center', mt: '10vh' }}>
+        <CircularProgress />
+      </Box>
       <div id="checkout"></div>
     </Box>
   );
