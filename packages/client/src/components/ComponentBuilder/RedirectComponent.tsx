@@ -16,7 +16,6 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   const [error, setError] = useState(null);
   const [result, setResult] = useState<any>(null);
   const dispatch = useAppDispatch();
-  const { local, txVariant } = configuration;
   const sessions = new ConfigurationSession({
     ...configuration,
     queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
@@ -33,14 +32,15 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   useEffect(() => {
     let ignore = false;
     if (checkout && !error && !ignore) {
-      console.log('RedirectComponent:: useEffect');
       checkout.submitDetails({ details: { redirectResult: redirectResult } });
     }
+
     return () => {
       setError(null);
       setResult(null);
       ignore = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkout, error]);
 
   if (result) {

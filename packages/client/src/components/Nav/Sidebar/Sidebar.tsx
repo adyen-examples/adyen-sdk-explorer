@@ -42,6 +42,11 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
       variant="permanent"
       anchor="left"
     >
+      {productsKeys.length === 0 && (
+        <Box sx={{ textAlign: 'center', mt: '40vh' }}>
+          <CircularProgress />
+        </Box>
+      )}
       {productsKeys.length > 0 && (
         <List>
           <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
@@ -83,9 +88,6 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
           })}
         </List>
       )}
-      <Box sx={{ textAlign: 'center', mt: '40vh' }}>
-        <CircularProgress />
-      </Box>
     </Drawer>
   );
 };
