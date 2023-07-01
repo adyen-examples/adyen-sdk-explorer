@@ -56,7 +56,7 @@ export const ReviewContent = () => {
           <Typography variant="h5">Review & Export</Typography>
         </Grid>
       </Grid>
-      <Box p={5}>
+      <Box>
         <ComponentBase />
       </Box>
     </Box>

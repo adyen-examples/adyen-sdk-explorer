@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box, Collapse, LinearProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
@@ -29,6 +29,30 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   });
   const [checkout] = useCheckout(sessions);
 
+  const showMessages = () => {
+    return (
+      <Box>
+        <Collapse orientation="vertical" in={!!error || !!result} timeout={700}>
+          {error && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Alerts severityType={'error'} message={JSON.stringify(error)} />
+            </Box>
+          )}
+          {result && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Alerts severityType={result.status} message={result.resultCode} />
+            </Box>
+          )}
+        </Collapse>
+        {error && (
+          <Box sx={{ textAlign: 'center', mt: 2 }}>
+            <AdyenIdkIcon />
+          </Box>
+        )}
+      </Box>
+    );
+  };
+
   useEffect(() => {
     let ignore = false;
     if (checkout && !error && !ignore) {
@@ -43,27 +67,10 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkout, error]);
 
-  if (result) {
-    return (
-      <Box>
-        <Alerts severityType={result?.status} message={result?.resultCode} />
-      </Box>
-    );
-  } else if (error) {
-    return (
-      <Box sx={{ textAlign: 'center' }}>
-        <Alerts severityType={'error'} message={JSON.stringify(error)} />
-        <AdyenIdkIcon />
-      </Box>
-    );
-  }
-
   return (
     <Box sx={configuration?.style}>
-      <Box sx={{ textAlign: 'center', mt: '10vh' }}>
-        <CircularProgress />
-      </Box>
-      <div id="checkout"></div>
+      {showMessages()}
+      {!error && !result && <LinearProgress />}
     </Box>
   );
 };
