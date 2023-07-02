@@ -1,10 +1,11 @@
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { Box, Button, IconButton, Stack } from '@mui/material';
+import { Box, Button, IconButton, Stack, Dialog, DialogContent, Typography, DialogActions } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 type NavButtonsProps = {
   steps: any;
@@ -17,6 +18,7 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   const navigate = useNavigate();
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, resetOnDeckInfo } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
+  const [open, setOpen] = useState(false);
 
   // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
@@ -67,13 +69,41 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
           <IconButton
             sx={{ py: 0 }}
             onClick={() => {
-              dispatch(resetOnDeckInfo());
-              navigate(`/${configuration.txVariant}`);
+              setOpen(true);
             }}
           >
             <AutorenewIcon sx={{ fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }} />
           </IconButton>
         )}
+        <Dialog
+          open={open}
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          <DialogContent>
+            <Typography variant="h6">Are you sure you want to reset the configuration? All changes will be lost.</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              No
+            </Button>
+            <Button
+              onClick={() => {
+                setOpen(false);
+                dispatch(resetOnDeckInfo());
+                navigate(`/${configuration.txVariant}`);
+              }}
+              autoFocus
+            >
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Box>
           {step !== 0 && (
             <Button
