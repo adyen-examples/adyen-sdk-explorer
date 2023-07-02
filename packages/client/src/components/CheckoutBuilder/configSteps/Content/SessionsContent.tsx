@@ -1,11 +1,11 @@
 import { Box, Typography, Grid, Link } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useAutoScroll } from '../../../../hooks';
+import { useScrollToTop } from '../../../../hooks';
 
 export const SessionsContent = () => {
   const { txVariant } = useSelector((state: any) => state.onDeck);
-  useAutoScroll('#main-content');
+  useScrollToTop('#main-content');
   return (
     <Box>
       <Grid mt={2} container px={7} sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
