@@ -1,6 +1,8 @@
 import { Box, Typography, Grid, Link } from '@mui/material';
+import { useAutoScroll } from '../../../../hooks';
 
 export const CheckoutContent = () => {
+  useAutoScroll('#main-content');
   return (
     <Box>
       <Grid mt={2} container px={7} sx={{ a: { color: '#06f', textDecoration: 'none' } }}>

@@ -19,6 +19,7 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
       <CssBaseline />
       <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
       <Box
+        id="main-content"
         sx={{
           position: 'fixed',
           top: '0',

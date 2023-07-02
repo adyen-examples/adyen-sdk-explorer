@@ -27,6 +27,7 @@ export const Config = ({ name, configuration, action }: ConfigPropTypes) => {
     default:
       console.error('No content for this page');
   }
+
   return (
     <Box>
       {pageContent}
