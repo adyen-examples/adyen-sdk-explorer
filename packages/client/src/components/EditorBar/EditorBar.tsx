@@ -50,19 +50,13 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     }
   };
 
-  const editJSONStyle = {
-    '#editor': {
-      border: 2
-    },
-  };
-
   const handleEdit = () => {
     setViewOnly(!viewOnly);
   };
 
   return (
     <Box>
-      <Box sx={viewOnly ? style : { ...style, ...editJSONStyle }}>
+      <Box sx={style}>
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
           <SingleTab viewOnly={viewOnly} step={step} txVariant={txVariant} checkout={checkout} local={local} sessions={sessions} />
         )}
