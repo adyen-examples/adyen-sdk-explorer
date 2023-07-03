@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Link } from '@mui/material';
+import { Box, Grid, Link, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useScrollToTop } from '../../../../hooks';
 

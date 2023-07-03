@@ -1,11 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box } from '@mui/material';
+import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box, Fab } from '@mui/material';
 import { OptionWrapper } from './OptionWrapper';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
 import { ObjectOption } from './OptionTypes';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useIsInViewPort } from '../../../../hooks';
 
 interface ListOptionsProps {
   name: string;
@@ -20,6 +22,8 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     required: true,
     optional: true
   });
+  const parametersRef = useRef<any>(null);
+  const isInViewport = useIsInViewPort(parametersRef);
 
   const { required, optional } = filters;
 
@@ -50,8 +54,27 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
 
   return (
     <Grid container>
+      {!isInViewport && (
+        <Box sx={{ position: 'fixed', bottom: 10, left: '43%', textAlign: 'center', zIndex: 2 }}>
+          <Fab
+            variant="extended"
+            size="medium"
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <Typography variant="caption" sx={{ color: 'primary.light' }}>
+              {name} Parameters
+            </Typography>
+            <KeyboardArrowDownIcon />
+          </Fab>
+        </Box>
+      )}
       <Grid
         item
+        ref={parametersRef}
         px={7}
         py={1.4}
         mt={2}
