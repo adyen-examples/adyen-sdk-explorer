@@ -4,7 +4,7 @@ import { onDeckActions } from '../../app';
 import { isConfigEmpty } from '../../helpers';
 import { useAppDispatch } from '../index';
 
-const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateAdyenStateInfo, updateActiveStep } = onDeckActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, updateStyleInfo } = onDeckActions;
 
 export const useRedirect = (configuration: any) => {
   const [queryParameters] = useSearchParams();
@@ -19,15 +19,17 @@ export const useRedirect = (configuration: any) => {
       const storedConfig = JSON.parse(encodedConfig);
       const { checkout, local, sessions, style } = storedConfig;
       const storedSdkExplorerState = JSON.parse(encodedSDKState);
-      const { steps} = storedSdkExplorerState;
+      const { steps } = storedSdkExplorerState;
       if (isConfigEmpty(configuration)) {
         dispatch(updateCheckoutInfo(checkout));
         dispatch(updateLocalInfo(local));
-        dispatch(updateAdyenStateInfo(style));
         dispatch(updateSessionsInfo(sessions));
         dispatch(updateRedirectInfo(true));
         dispatch(updateActiveStep(steps.length - 1));
+        dispatch(updateStyleInfo(style));
       }
     }
-  }, [redirectResult, configuration, dispatch]);
+  }, [redirectResult, configuration]);
+  // I think adding dispatch here is causeing us to set the globalstate isRedirect to true
+  // I need to update the adyen state when I mount the redirect component
 };

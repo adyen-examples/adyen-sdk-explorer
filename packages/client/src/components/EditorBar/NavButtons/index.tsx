@@ -28,8 +28,8 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
       case 'local':
         return dispatch(updateLocalInfo(configuration));
       case 'sessions':
-        dispatch(updateRedirectInfo(false));
-        return dispatch(updateSessionsInfo(configuration));
+        dispatch(updateSessionsInfo(configuration));
+        return dispatch(updateRedirectInfo(false));
       default:
         throw new Error('Unknown step');
     }
