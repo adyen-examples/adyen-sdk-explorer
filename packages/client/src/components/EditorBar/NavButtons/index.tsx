@@ -1,11 +1,11 @@
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { Box, Button, IconButton, Stack, Dialog, DialogContent, Typography, DialogActions } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 type NavButtonsProps = {
   steps: any;
@@ -20,7 +20,6 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   const stepsLength = Object.keys(steps).length;
   const [open, setOpen] = useState(false);
 
-  // This is important we are saying that updating redirectinfo to false is always done on sessions, it should be done on step before review
   const runStepAction = () => {
     switch (steps[step]) {
       case 'checkout':
@@ -28,7 +27,8 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
       case 'local':
         return dispatch(updateLocalInfo(configuration));
       case 'sessions':
-        dispatch(updateSessionsInfo(configuration));
+        return dispatch(updateSessionsInfo(configuration));
+      case 'review':
         return dispatch(updateRedirectInfo(false));
       default:
         throw new Error('Unknown step');
@@ -41,6 +41,7 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   };
 
   const handleBack = () => {
+    runStepAction();
     dispatch(updateActiveStep(step - 1));
   };
 

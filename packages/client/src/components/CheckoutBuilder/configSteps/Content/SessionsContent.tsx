@@ -1,6 +1,5 @@
-import { Box, Typography, Grid, Link } from '@mui/material';
+import { Box, Grid, Link, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { useScrollToTop } from '../../../../hooks';
 
 export const SessionsContent = () => {

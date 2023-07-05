@@ -7,5 +7,5 @@ export const useScrollToTop = (selector: string) => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [selector]);
 };

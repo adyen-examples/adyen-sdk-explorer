@@ -35,10 +35,8 @@ Complete:
 37. (Complete) Add message when you click the lock icon, that warns that the fields can be directed edited.
 38. (Complete) Add message when you click reset on editorbar.
 26. (Complete) Add floating button that scrolls to the parameters section
-
-36. (Complete) Fix bug where after redirect > back step > review page, the redirect component is mounted instead of component
 37. (Complete) Bug where gcash > redirect back > nav to home page > Choose payment method (Issue is coming from redirect component, we need to cleanup on unmount)
-32. (In progress) Fix bug where the state logs on the redirect are the css objects
+
 
 Open Items:
 17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
@@ -47,9 +45,9 @@ Open Items:
 34. Ensure it is responsive
 35. Update review tab with links
 38. In initializeSession add steps to component config and remove dependencies from use Redirect hook
-
-
-
-
+32. (In progress) Fix bug where the state logs on the redirect are the css objects
+36. (In progress) Fix bug where after redirect > back step > review page, the redirect component is mounted instead of component
+37. Bug when you redirect to an expired session. Try: http://localhost:3000/gcash?sessionId=CSD2AB9EC79C414450&redirectResult=X3XtfGC7%21H4sIAAAAAAAA%2F3VT207jMBD9lzyTYMdpLpVWqzYNlC2X0tBWSEjItd0mInWC7YAK4t93DCl0QftiyzNnLufM%2BNVRgpdKMDOlu62QZkQNdfqvDmWPLdjVgLG6leaMO30SkCgMjhzKeWnKWtLqE9yaolalFnywtei0VUpItnP6znQ8dY6gyGMrtBl0SWdiLSxAAMBHPkERCjAOEEYxQjhBOIYb2WeYRGF4kOA9PUTFSRKBmUqzLiWVrKRVrRvPlFtA0W0DkK%2BofTtpzcVnS997XtCqFfvMb%2BDvSr067Dubpw%2BoRVpgUy6E0iCI04%2FQkbNSVPKu1IZRXUAEKwR7qFuTFlRKUYFnKVZg3wrFwGQ6lcE%2BFgr4AK5i9QHgUDHN6ZpyvQY3ENgA%2F2qqm0PE6eQyvJj8uY6im9NeHvsHAv6Y3b61XGjLwdMftx24k%2BYjfzBMsjRK0gAHQQ9Z4aqqfiaj3AeAUSDEV5dn0oiNoraA97TXxInQe%2F1GUOPW0rUzgnrgWNNK%2Fy%2Fc7BrLJB1n6eRqfnOfZ3l%2BdnVpJ6OEaZWcKytjYUyj%2B3fHd8d7Hrqom0Yo1wBbj%2FKdkB6rtz%2F8X4Zu8WfvWX9vmpL%2FOp0Oe9GQnAz9DM4gixPoUosKvongQzvfg9l2Cc9rRivbspDuPLf2h1J2a9C0K%2B%2FJ92Ifh4REuNdDPRwkxEtJQvh1Er8Ulxl2jXpeTJdm83hVZvp2rMPl8mT2MKtnWeTrf4hPqaJbbac3ml9cZLf3k%2BwWynSPxeB8nlm8UZSJhsJWWLURcgNMEEE4WMf%2BipMEFjj2WbxKYk7hw8XYFbBaiPTIihCGBY5chJ23vwrJGn8kBAAAiuWYfte%2F6L8RToQDWACwu8oiqo2viM9ZGzA4YsgGpTk%3D
+38. Fix the copy functionality
 Nice to haves:
 10. Create tests for QA

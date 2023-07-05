@@ -60,8 +60,6 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     }
 
     return () => {
-      setError(null);
-      setResult(null);
       ignore = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
