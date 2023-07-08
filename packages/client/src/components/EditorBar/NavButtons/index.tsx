@@ -1,19 +1,20 @@
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Box, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from '@mui/material';
+import { Box, BoxProps, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
-type NavButtonsProps = {
+interface NavButtonsProps extends BoxProps {
   steps: any;
   step: number;
   configuration: any;
-};
+}
 
-export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
+export const NavButtons = (props: NavButtonsProps) => {
+  const { steps, step, configuration, ...other } = props;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, resetOnDeckInfo } = onDeckActions;
@@ -64,16 +65,16 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
   };
 
   return (
-    <Box>
+    <Box {...other}>
       <Stack direction="row" justifyContent="space-between" spacing={1}>
         {step === stepsLength - 1 && (
           <IconButton
-            sx={{ py: 0 }}
+            id="reset-button"
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AutorenewIcon sx={{ fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }} />
+            <AutorenewIcon id="reset-button-icon" />
           </IconButton>
         )}
         <Dialog
@@ -105,33 +106,29 @@ export const NavButtons = ({ steps, step, configuration }: NavButtonsProps) => {
             </Button>
           </DialogActions>
         </Dialog>
-        <Box>
+        <Box id="desktop-nav">
           {step !== 0 && (
-            <Button
-              sx={{ bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } }}
-              variant="outlined"
-              onClick={handleBack}
-            >
+            <Button id="back-button" variant="outlined" onClick={handleBack}>
               Back
             </Button>
           )}
           {step !== stepsLength - 1 && (
-            <Button sx={{ ml: 0.5 }} variant="contained" onClick={handleNext}>
+            <Button id="next-button" variant="contained" onClick={handleNext}>
               Next
             </Button>
           )}
           {step === stepsLength - 1 && (
-            <Button sx={{ ml: 0.5, bgcolor: 'rgb(10, 191, 83)', '&:hover': { bgcolor: '#026440' } }} variant="contained" onClick={exportToJson}>
+            <Button id="export-button" variant="contained" onClick={exportToJson}>
               Export
             </Button>
           )}
         </Box>
       </Stack>
-      <Box sx={{ position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } }}>
-        <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleBack}>
+      <Box id="mobile-nav">
+        <IconButton id="mobile-nav-buttons" onClick={handleBack}>
           <NavigateBeforeIcon />
         </IconButton>
-        <IconButton sx={{ bgcolor: 'secondary.gray' }} onClick={handleNext}>
+        <IconButton id="mobile-nav-buttons" onClick={handleNext}>
           <NavigateNextIcon />
         </IconButton>
       </Box>

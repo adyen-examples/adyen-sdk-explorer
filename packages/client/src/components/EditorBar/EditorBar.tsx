@@ -16,12 +16,11 @@ interface EditorDimensions {
 
 interface EditorWrapperProps {
   dimensions: EditorDimensions;
-  steps: any;
 }
 
-export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
+export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
-  const { txVariant, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
+  const { txVariant, checkout, local, sessions, activeStep, steps, adyenState } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { txVariant, checkout, local, sessions };
 
   let step = steps[activeStep];
@@ -50,13 +49,38 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     }
   };
 
+  let iconStyle = {
+    color: 'success.main'
+  };
+
+  let navButtonSyle = {
+    '#desktop-nav': {
+      display: {
+        xs: 'none',
+        sm: 'none',
+        md: 'block',
+        lg: 'block',
+        xl: 'block'
+      }
+    },
+    '#reset-button': { py: 0 },
+    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
+    '#next-button': { ml: 0.5 },
+    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } },
+    '#mobile-nav-buttons': {
+      bgcolor: 'secondary.gray'
+    },
+    '#mobile-nav': { position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } },
+    '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
+  };
+
   const handleEdit = () => {
     setViewOnly(!viewOnly);
   };
 
   return (
-    <Box>
-      <Box sx={style}>
+    <Box sx={style}>
+      <Box>
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
           <SingleTab viewOnly={viewOnly} step={step} txVariant={txVariant} checkout={checkout} local={local} sessions={sessions} />
         )}
@@ -65,20 +89,13 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
       <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
         {step !== 'review' && (
           <Grid item xs={1}>
-            <IconButton
-              onClick={handleEdit}
-              sx={{
-                bgcolor: 'primary.light',
-                color: 'rgb(10, 191, 83)',
-                elevation: 0
-              }}
-            >
+            <IconButton onClick={handleEdit} sx={iconStyle}>
               {viewOnly ? <LockIcon /> : <LockOpenIcon />}
             </IconButton>
           </Grid>
         )}
         <Grid item xs={step === 'review' ? 12 : false}>
-          <NavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
+          <NavButtons sx={navButtonSyle} steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
         </Grid>
       </Grid>
     </Box>

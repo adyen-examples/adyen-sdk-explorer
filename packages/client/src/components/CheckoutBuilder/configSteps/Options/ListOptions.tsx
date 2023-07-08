@@ -1,13 +1,13 @@
-import { ChangeEvent, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box, Fab } from '@mui/material';
-import { OptionWrapper } from './OptionWrapper';
+import { ChangeEvent, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useIsInViewPort } from '../../../../hooks';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
 import { ObjectOption } from './OptionTypes';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useIsInViewPort } from '../../../../hooks';
+import { OptionWrapper } from './OptionWrapper';
 
 interface ListOptionsProps {
   name: string;
@@ -47,7 +47,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
-        <ObjectOption content="No configurations found. Use editor pane for custom fields." />
+        <ObjectOption styleType="warning" content="No configurations found. Use editor pane for custom fields." />
       </Box>
     );
   }
@@ -55,7 +55,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   return (
     <Grid container>
       {!isInViewport && (
-        <Box sx={{ position: 'fixed', bottom: 10, left: '43%', textAlign: 'center', zIndex: 2 }}>
+        <Box sx={{ position: 'fixed', bottom: 10, left: { sm: '37%',md: '25%',lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
           <Fab
             variant="extended"
             size="medium"

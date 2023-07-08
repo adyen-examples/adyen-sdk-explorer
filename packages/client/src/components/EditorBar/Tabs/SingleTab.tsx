@@ -2,7 +2,7 @@ import { Box, Collapse } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import { Alerts } from '../../CheckoutBuilder/Alerts';
+import { ObjectOption } from '../../CheckoutBuilder/configSteps/Options/OptionTypes';
 import { SingleAPITab } from './APITab/SingleAPITab';
 import { SingleCodeTab } from './CodeTab/SingleCodeTab';
 import { SingleTabHeader } from './Header/SingleTabHeader';
@@ -61,12 +61,9 @@ checkout.create('${txVariant}',`,
   const showMessages = () => {
     return (
       <Collapse orientation="vertical" in={!viewOnly} timeout={700}>
-        <Alerts
-          sx={{ width: '100%', textAlign: 'center', fontWeight: 'light', my: 0 }}
-          spacing={0}
-          severityType={'warning'}
-          message={'Warning! You can directly edit the parameters.'}
-        />
+        <Box mx={2} mt={2}>
+          <ObjectOption styleType={'warning'} content={'Warning! You can directly edit the parameters.'} />
+        </Box>
       </Collapse>
     );
   };

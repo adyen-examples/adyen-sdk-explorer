@@ -4,20 +4,40 @@ import { useScrollToTop } from '../../../../hooks';
 
 export const ComponentContent = () => {
   const { txVariant } = useSelector((state: any) => state.onDeck);
+  const contentContainerStyle = {
+    px: 7,
+    mt: 2,
+    a: { color: 'primary.main', textDecoration: 'none' },
+    '.content-link-style': { bgcolor: 'secondary.light', px: 0.6, py: 0.5, borderRadius: 1, color: 'primary.main' },
+    '.sample-container': { mt: 3, border: 1, borderRadius: 1, borderColor: 'primary.border' },
+    '.sample-title': { borderBottom: 1, p: 2, borderColor: 'primary.border' },
+    '.sample-code': {
+      maxHeight: '25vh',
+      overflow: 'scroll',
+      fontSize: '0.8rem',
+      lineHeight: 1.7,
+      px: 3,
+      py: 1,
+      bgcolor: 'secondary.light',
+      color: 'background.grey'
+    }
+  };
   useScrollToTop('#main-content');
   return (
     <Box>
-      <Grid mt={2} container px={7} sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
+      <Grid container sx={contentContainerStyle}>
         <Grid item xs={12}>
           <Typography component={'span'} mt={2} mb={2} variant="h3">
             Step 3: Initialize the payment session
           </Typography>
         </Grid>
         <Grid item xs={12} mt={2}>
-          <Typography component={'span'} variant="h5" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
+          <Typography component={'span'} variant="h5">
             Create a DOM element for{' '}
-            <Box component="span" sx={{ bgcolor: 'secondary.light', px: 1, py: 0.5, borderRadius: 1, color: '#00112c' }}>
-              {txVariant}
+            <Box component="span">
+              <Link href="https://docs.adyen.com/api-explorer/Checkout/70/post/sessions" className="content-link-style">
+                {txVariant}
+              </Link>
             </Box>
           </Typography>
         </Grid>
@@ -28,19 +48,8 @@ export const ComponentContent = () => {
             because it may cause issues.
           </Typography>
         </Grid>
-        <Grid item xs={12} mt={3} sx={{ border: 1, borderRadius: 1, borderColor: '#dce0e5' }}>
-          <Box
-            sx={{
-              maxHeight: '25vh',
-              overflow: 'scroll',
-              fontSize: '0.8rem',
-              lineHeight: 1.7,
-              px: 3,
-              py: 1,
-              bgcolor: 'secondary.light',
-              color: '#4C4E52'
-            }}
-          >
+        <Grid item xs={12} className="sample-container">
+          <Box className="sample-code">
             <code>&lt;div id="{txVariant}-container"&gt;&lt;/div&gt;</code>
           </Box>
         </Grid>
@@ -58,19 +67,8 @@ export const ComponentContent = () => {
         <Grid item xs={12} mt={1}>
           <Typography variant="h6">Create an object for the {txVariant} configuration of your integration.</Typography>
         </Grid>
-        <Grid item xs={12} mt={3} sx={{ border: 1, borderRadius: 1, borderColor: '#dce0e5' }}>
-          <Box
-            sx={{
-              maxHeight: '25vh',
-              overflow: 'scroll',
-              fontSize: '0.8rem',
-              lineHeight: 1.7,
-              px: 3,
-              py: 1,
-              bgcolor: 'secondary.light',
-              color: '#4C4E52'
-            }}
-          >
+        <Grid item xs={12} className="sample-container">
+          <Box className="sample-code">
             <code>const {txVariant}-Configuration = &#123;...&#125;</code>
           </Box>
         </Grid>
@@ -81,10 +79,14 @@ export const ComponentContent = () => {
         </Grid>
         <Grid item xs={12} mt={2}>
           <Typography variant="h6">
-            You must set global or component-specific configuration either on the main instance,{' '}
+            The{' '}
+            <Link href="https://docs.adyen.com/payment-methods" className="content-link-style">
+              {txVariant}
+            </Link>{' '}
+            instance only accepts parameters related to itself. You must set global or component-specific configuration either on the main instance,{' '}
             <Link
               href="https://docs.adyen.com/online-payments/build-your-integration?platform=Web&integration=Drop-in&tab=npm_recommended__1&version=5.43.0#adyencheckout-configuration"
-              sx={{ bgcolor: 'secondary.light', px: 1, py: 0.5, borderRadius: 1, color: '#4C4E52' }}
+              className="content-link-style"
             >
               AdyenCheckout
             </Link>
@@ -101,20 +103,8 @@ export const ComponentContent = () => {
             Create an instance of {txVariant} using the configuration object and mount it to the container you created.
           </Typography>
         </Grid>
-        <Grid item xs={12} mt={2} sx={{ border: 1, borderRadius: 1, borderColor: '#dce0e5' }}>
-          <Box
-            sx={{
-              maxHeight: '25vh',
-              fontSize: '0.8rem',
-              lineHeight: 1.7,
-              px: 3,
-              py: 1,
-              bgcolor: 'secondary.light',
-              color: '#4C4E52',
-              display: 'block',
-              overflowX: 'scroll'
-            }}
-          >
+        <Grid item xs={12} className="sample-container">
+          <Box className="sample-code">
             <Box>
               <code>
                 const {txVariant}Component = checkout

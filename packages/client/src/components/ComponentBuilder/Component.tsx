@@ -1,9 +1,9 @@
 import { Box, Collapse, LinearProgress } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
 import { useInitializeSession } from '../../hooks';
-import { Alerts } from '../CheckoutBuilder/Alerts';
+import { ObjectOption } from '../CheckoutBuilder/configSteps/Options/OptionTypes';
 import type { OnDeckPropType } from '../CheckoutBuilder/types';
 
 export interface ComponentConfig {
@@ -23,23 +23,11 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
 
   const showMessages = () => {
     return (
-      <Box>
+      <Box mx={7} mt={2}>
         <Collapse orientation="vertical" in={!!error || !!createError || !!result} timeout={700}>
-          {error && (
-            <Box sx={{ textAlign: 'center' }}>
-              <Alerts severityType={'error'} message={JSON.stringify(error)} />
-            </Box>
-          )}
-          {createError && (
-            <Box sx={{ textAlign: 'center' }}>
-              <Alerts severityType={'error'} message={createError} />
-            </Box>
-          )}
-          {result && (
-            <Box sx={{ textAlign: 'center' }}>
-              <Alerts severityType={result.status} message={result.resultCode} />
-            </Box>
-          )}
+          {error && <ObjectOption styleType="error" content={JSON.stringify(error)} />}
+          {createError && <ObjectOption styleType="error" content={createError} />}
+          {result && <ObjectOption styleType={result.status} content={result.resultCode} />}
         </Collapse>
         {error && (
           <Box sx={{ textAlign: 'center', mt: 2 }}>
@@ -70,9 +58,11 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
     <Box sx={configuration?.style}>
       {!checkout && !error && !result && <LinearProgress />}
       {showMessages()}
-      <Box p={3}>
-        <div id="checkout"></div>
-      </Box>
+      {!error && !result && (
+        <Box p={7}>
+          <div id="checkout"></div>
+        </Box>
+      )}
     </Box>
   );
 };

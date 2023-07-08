@@ -16,7 +16,7 @@ export const EditorPrePostFix = (props: any) => {
             </Box>
           </Box>
         )}
-        <Editor color={color} viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
+          <Editor color={color} viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
         {postfix && (
           <Box>
             <Box>
