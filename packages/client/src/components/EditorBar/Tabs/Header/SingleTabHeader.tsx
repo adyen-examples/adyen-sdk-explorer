@@ -37,7 +37,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
             color: 'secondary.main'
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '0.95rem', color: '#00112c' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#00112c' }}>
             {title}
           </Typography>
         </Box>

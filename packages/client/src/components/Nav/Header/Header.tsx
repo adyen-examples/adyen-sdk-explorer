@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 
 export const Header = ({ headerHeight }: any) => {
@@ -12,7 +12,7 @@ export const Header = ({ headerHeight }: any) => {
           </Box>
           <Box>
             <Button href="https://docs.adyen.com/" sx={{ color: '#394962', ml: 3 }} variant="text">
-              Documentation
+              <Typography variant="h6">Documentation</Typography>
             </Button>
             <Button href="https://help.adyen.com/en_US" sx={{ color: '#394962', ml: 3 }} variant="text">
               Support

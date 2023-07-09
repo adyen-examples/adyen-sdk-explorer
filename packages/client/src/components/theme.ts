@@ -34,6 +34,12 @@ export const themeOptions: any = {
       fontFamily: 'sans-serif',
       color: '#394962'
     },
+    body1: {
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '1.1rem',
+      fontWeight: 400,
+      lineHeight: 1.8
+    },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
