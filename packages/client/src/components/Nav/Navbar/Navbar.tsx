@@ -53,7 +53,10 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                   sx={{ ml: 3, borderColor: 'primary.border' }}
                   variant={`${link.title === 'Test Account' ? 'outlined' : 'text'}`}
                 >
-                  <Typography variant="h6" sx={{ textTransform: 'none', fontSize: '0.95rem', fontWeight: `${link.title === 'Test Account' ? 'bold' : 'light'}` }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ textTransform: 'none', fontSize: '0.95rem', fontWeight: `${link.title === 'Test Account' ? 'bold' : 'light'}` }}
+                  >
                     {link.title}
                   </Typography>
                 </Button>
@@ -67,8 +70,13 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
         <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
       </Box>
       <Box>
-        <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu}>
-          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
+        <Drawer
+          anchor="left"
+          open={isNavOpen}
+          onClose={handleOpenNavMenu}
+          sx={{ width: `${drawerWidth - 100}px`, '.MuiDrawer-paper': { position: 'initial' } }}
+        >
+          <Sidebar headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>

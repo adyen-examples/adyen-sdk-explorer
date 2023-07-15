@@ -1,9 +1,4 @@
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Box, BoxProps, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Box, BoxProps, Button, Stack } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
@@ -13,13 +8,11 @@ interface NavButtonsProps extends BoxProps {
   configuration: any;
 }
 
-export const NavButtons = (props: NavButtonsProps) => {
+export const DesktopNavButtons = (props: NavButtonsProps) => {
   const { steps, step, configuration, ...other } = props;
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, resetOnDeckInfo } = onDeckActions;
+  const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
-  const [open, setOpen] = useState(false);
 
   const runStepAction = () => {
     switch (steps[step]) {
@@ -67,45 +60,6 @@ export const NavButtons = (props: NavButtonsProps) => {
   return (
     <Box {...other}>
       <Stack direction="row" justifyContent="space-between" spacing={1}>
-        {step === stepsLength - 1 && (
-          <IconButton
-            id="reset-button"
-            onClick={() => {
-              setOpen(true);
-            }}
-          >
-            <AutorenewIcon id="reset-button-icon" />
-          </IconButton>
-        )}
-        <Dialog
-          open={open}
-          onClick={() => {
-            setOpen(false);
-          }}
-        >
-          <DialogContent>
-            <Typography variant="h6">Are you sure you want to reset the configuration? All changes will be lost.</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              No
-            </Button>
-            <Button
-              onClick={() => {
-                setOpen(false);
-                dispatch(resetOnDeckInfo());
-                navigate(`/${configuration.txVariant}`);
-              }}
-              autoFocus
-            >
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
         <Box id="desktop-nav">
           {step !== 0 && (
             <Button id="back-button" variant="outlined" onClick={handleBack}>
@@ -124,14 +78,6 @@ export const NavButtons = (props: NavButtonsProps) => {
           )}
         </Box>
       </Stack>
-      <Box id="mobile-nav">
-        <IconButton id="mobile-nav-buttons" onClick={handleBack}>
-          <NavigateBeforeIcon />
-        </IconButton>
-        <IconButton id="mobile-nav-buttons" onClick={handleNext}>
-          <NavigateNextIcon />
-        </IconButton>
-      </Box>
     </Box>
   );
 };
