@@ -1,6 +1,6 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { ReactComponent as AdyenPageNotFound } from '../../assets/adyen-page-not-found.svg';
-
+import { CLIENT_URL } from '../../config';
 export const NotFound = () => {
   return (
     <Box sx={{ textAlign: 'center', mt: 15 }}>
@@ -12,6 +12,13 @@ export const NotFound = () => {
         We lost sight of that page! It may have been
         <br /> deleted, moved, or merely an illusion.
       </Typography>
+      <Box mt={2}>
+        <Typography variant="caption">
+          <Link href={CLIENT_URL} underline="none">
+            Back to Home
+          </Link>
+        </Typography>
+      </Box>
     </Box>
   );
 };

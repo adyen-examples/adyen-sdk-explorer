@@ -1,10 +1,12 @@
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
-import { NavButtons } from './NavButtons';
+import { DesktopNavButtons } from './Buttons/DesktopNavButtons';
+import { MobileNavButtons } from './Buttons/MobileNavButtons';
+import { ResetButton } from './Buttons/ResetButton';
 import { MultiTab } from './Tabs/MultiTab';
 import { SingleTab } from './Tabs/SingleTab';
 
@@ -16,19 +18,16 @@ interface EditorDimensions {
 
 interface EditorWrapperProps {
   dimensions: EditorDimensions;
-  steps: any;
 }
 
-export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
+export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
-  const { txVariant, checkout, local, sessions, activeStep, adyenState } = useSelector((state: RootState) => state.onDeck);
+  const { txVariant, checkout, local, sessions, activeStep, steps, adyenState } = useSelector((state: RootState) => state.onDeck);
   const configuration: any = { txVariant, checkout, local, sessions };
-
   let step = steps[activeStep];
-
   const [viewOnly, setViewOnly] = useState(true);
 
-  let style = {
+  let desktopStyle = {
     position: 'fixed',
     overflow: 'scroll',
     top: 0,
@@ -40,20 +39,64 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
     height: `calc(100% - ${headerHeight}px)`,
     mt: `${headerHeight}px`,
     pb: `${buttonHeight}px`,
-    width: `${editorWidth}px`,
     display: {
       xs: 'none',
       sm: 'none',
       md: 'block',
       lg: 'block',
       xl: 'block'
-    }
+    },
+    width: `${editorWidth}px`,
+    '#icon-button': {
+      color: 'success.main'
+    },
+    '#desktop-button-container': {
+      position: 'fixed',
+      bottom: '1vh',
+      right: 0,
+      width: `${editorWidth}px`,
+      bgcolor: 'primary.light',
+      color: 'secondary.main',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderLeft: 2,
+      borderColor: 'secondary.light',
+      px: 1
+    },
+    '#desktop-nav': {
+      display: 'inline-block'
+    },
+    '#reset-button': {
+      py: 0,
+      display: {
+        xs: 'none',
+        sm: 'none',
+        md: 'block',
+        lg: 'block',
+        xl: 'block'
+      }
+    },
+    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
+    '#next-button': { ml: 0.5 },
+    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } },
+    '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
   };
 
-  const editJSONStyle = {
-    '#editor': {
-      border: 2
-    },
+  //      '#mobile-nav': { position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } },
+  //     '#mobile-nav-buttons': {
+  //bgcolor: 'secondary.gray'
+  //},
+
+  const mobileStyle = {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    display: { xs: 'inline-block', md: 'none' },
+    bgcolor: 'primary.light',
+    color: 'secondary.gray',
+    alignItems: 'center',
+    px: 1
   };
 
   const handleEdit = () => {
@@ -62,31 +105,24 @@ export const EditorBar = ({ dimensions, steps }: EditorWrapperProps) => {
 
   return (
     <Box>
-      <Box sx={viewOnly ? style : { ...style, ...editJSONStyle }}>
+      <Box sx={desktopStyle}>
         {(step === 'checkout' || step === 'local' || step === 'sessions') && (
           <SingleTab viewOnly={viewOnly} step={step} txVariant={txVariant} checkout={checkout} local={local} sessions={sessions} />
         )}
         {step === 'review' && <MultiTab txVariant={txVariant} checkout={checkout} local={local} adyenState={adyenState} />}
-      </Box>
-      <Grid container direction="row" justifyContent="space-between" sx={{ position: 'fixed', bottom: 0, right: 0, width: `${editorWidth}px` }} p={1}>
-        {step !== 'review' && (
-          <Grid item xs={1}>
-            <IconButton
-              onClick={handleEdit}
-              sx={{
-                bgcolor: 'primary.light',
-                color: 'rgb(10, 191, 83)',
-                elevation: 0
-              }}
-            >
+        <Box id="desktop-button-container">
+          {step !== 'review' && (
+            <IconButton id="icon-button" onClick={handleEdit}>
               {viewOnly ? <LockIcon /> : <LockOpenIcon />}
             </IconButton>
-          </Grid>
-        )}
-        <Grid item xs={step === 'review' ? 12 : false}>
-          <NavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
-        </Grid>
-      </Grid>
+          )}
+          {step === 'review' && <ResetButton steps={steps} step={activeStep} configuration={configuration} />}
+          <DesktopNavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
+        </Box>
+      </Box>
+      <Box sx={mobileStyle}>
+        <MobileNavButtons steps={steps} step={activeStep} configuration={configuration} />
+      </Box>
     </Box>
   );
 };

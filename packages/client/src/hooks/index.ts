@@ -5,6 +5,8 @@ export type { InitializationRequest, EditableCheckoutConfigFields, CheckoutConfi
 
 export { useCheckout, useInitializeSession, useRedirect } from './checkout';
 export { useMemoCompare } from './helpers/useMemoCompare';
+export { useScrollToTop } from './helpers/useScrollToTop';
+export { useIsInViewPort } from './helpers/useIsInViewPort';
 export { useApi } from './useApi';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

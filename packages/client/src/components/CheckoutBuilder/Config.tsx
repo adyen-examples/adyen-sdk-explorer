@@ -14,6 +14,7 @@ export interface ConfigPropTypes {
 
 export const Config = ({ name, configuration, action }: ConfigPropTypes) => {
   let pageContent = null;
+
   switch (name) {
     case 'sessions':
       pageContent = <SessionsContent />;
@@ -27,6 +28,7 @@ export const Config = ({ name, configuration, action }: ConfigPropTypes) => {
     default:
       console.error('No content for this page');
   }
+
   return (
     <Box>
       {pageContent}

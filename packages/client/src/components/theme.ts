@@ -1,6 +1,5 @@
 export const themeOptions: any = {
   palette: {
-    type: 'light',
     primary: {
       main: '#0066ff',
       gray: '#bdbdbd',
@@ -16,7 +15,12 @@ export const themeOptions: any = {
     background: {
       paper: '#fff',
       default: '#fff',
-      elevation: 20
+      elevation: 20,
+      grey: '#4C4E52'
+    },
+    success: {
+      main: 'rgb(10, 191, 83)',
+      dark: '#026440'
     },
     info: {
       main: '#0048b3'
@@ -29,6 +33,12 @@ export const themeOptions: any = {
       fontSize: '0.83rem',
       fontFamily: 'sans-serif',
       color: '#394962'
+    },
+    body1: {
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '1.1rem',
+      fontWeight: 400,
+      lineHeight: 1.8
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
@@ -55,8 +65,9 @@ export const themeOptions: any = {
     },
     h5: {
       fontWeight: '550',
-      fontSize: '1.1rem',
+      fontSize: '.95rem',
       fontFamily: 'sans-serif',
+      color: '#000000'
     },
     h6: {
       fontWeight: '530',

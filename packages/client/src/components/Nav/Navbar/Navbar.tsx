@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, IconButton, Drawer } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, IconButton, Drawer, Typography } from '@mui/material';
 import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -50,10 +50,15 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                 <Button
                   key={link.title}
                   href={link.url}
-                  sx={{ color: '#394962', ml: 3, borderColor: '#bdbdbd' }}
+                  sx={{ ml: 3, borderColor: 'primary.border' }}
                   variant={`${link.title === 'Test Account' ? 'outlined' : 'text'}`}
                 >
-                  {link.title}
+                  <Typography
+                    variant="h6"
+                    sx={{ textTransform: 'none', fontSize: '0.95rem', fontWeight: `${link.title === 'Test Account' ? 'bold' : 'light'}` }}
+                  >
+                    {link.title}
+                  </Typography>
                 </Button>
               ))}
               <Button sx={{ color: '#08be52', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
@@ -65,8 +70,13 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
         <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
       </Box>
       <Box>
-        <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu}>
-          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
+        <Drawer
+          anchor="left"
+          open={isNavOpen}
+          onClose={handleOpenNavMenu}
+          sx={{ width: `${drawerWidth - 100}px`, '.MuiDrawer-paper': { position: 'initial' } }}
+        >
+          <Sidebar headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>

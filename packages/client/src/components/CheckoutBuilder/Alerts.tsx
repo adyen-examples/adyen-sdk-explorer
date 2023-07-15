@@ -2,9 +2,16 @@ import * as React from 'react';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 
-export const Alerts = ({ severityType, message }: { severityType: 'error' | 'warning' | 'info' | 'success'; message: string }) => {
+export interface AlertProps {
+  severityType: 'error' | 'warning' | 'info' | 'success';
+  message: string;
+  [key: string]: any;
+}
+
+export const Alerts = (props: AlertProps) => {
+  const { severityType, message, ...other } = props;
   return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
+    <Stack {...other}>
       <Alert severity={severityType}>{message}</Alert>
     </Stack>
   );

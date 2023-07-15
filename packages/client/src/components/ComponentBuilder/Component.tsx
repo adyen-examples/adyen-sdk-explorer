@@ -1,10 +1,10 @@
+import { Box, Collapse, LinearProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useInitializeSession } from '../../hooks';
-import { Box } from '@mui/material';
-import { Alerts } from '../CheckoutBuilder/Alerts';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
+import { useInitializeSession } from '../../hooks';
+import { ObjectOption } from '../CheckoutBuilder/configSteps/Options/OptionTypes';
 import type { OnDeckPropType } from '../CheckoutBuilder/types';
-import { useEffect } from 'react';
 
 export interface ComponentConfig {
   checkout: OnDeckPropType;
@@ -19,6 +19,24 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
   const { local } = configuration;
   const pathParams = useParams();
   const product: string | undefined = pathParams.component;
+  const [createError, setCreateError] = useState<string | null>(null);
+
+  const showMessages = () => {
+    return (
+      <Box mx={7} mt={2}>
+        <Collapse orientation="vertical" in={!!error || !!createError || !!result} timeout={700}>
+          {error && <ObjectOption styleType="error" content={JSON.stringify(error)} />}
+          {createError && <ObjectOption styleType="error" content={createError} />}
+          {result && <ObjectOption styleType={result.status} content={result.resultCode} />}
+        </Collapse>
+        {error && (
+          <Box sx={{ textAlign: 'center', mt: 2 }}>
+            <AdyenIdkIcon />
+          </Box>
+        )}
+      </Box>
+    );
+  };
 
   useEffect(() => {
     if (checkout) {
@@ -29,28 +47,22 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
           })
           .mount('#checkout');
       } catch (error: any) {
-        //here need you need to send to global error handler
         console.error(error);
+        setCreateError(error.message);
       }
     }
-  }, [checkout, product, local]);
-
-  if (error) {
-    return (
-      <Box sx={{ textAlign: 'center' }}>
-        <Alerts severityType={'error'} message={JSON.stringify(error)} />
-        <Box pt={2}>
-          <AdyenIdkIcon />
-        </Box>
-      </Box>
-    );
-  } else if (result) {
-    return <Alerts severityType={result.status} message={result.resultCode} />;
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkout, local]);
 
   return (
     <Box sx={configuration?.style}>
-      <div id="checkout"></div>
+      {!checkout && !error && !result && <LinearProgress />}
+      {showMessages()}
+      {!error && !result && (
+        <Box p={7}>
+          <div id="checkout"></div>
+        </Box>
+      )}
     </Box>
   );
 };

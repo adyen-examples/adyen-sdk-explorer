@@ -28,15 +28,28 @@ Complete:
 27. (Complete) Bug when you add environment
 23. (Complete) Add 404 page
 21.(complete) Add number type options input
+5. (Complete) Add Global Error component
+4. (Complete) Add loading component
+29. (Complete) GCash bug => redirect to gcash, come back, then choose another txvariant on left hand panel
+33. (Complete) Add transitions to component and RedirectComponent
+37. (Complete) Add message when you click the lock icon, that warns that the fields can be directed edited.
+38. (Complete) Add message when you click reset on editorbar.
+26. (Complete) Add floating button that scrolls to the parameters section
+37. (Complete) Bug where gcash > redirect back > nav to home page > Choose payment method (Issue is coming from redirect component, we need to cleanup on unmount)
+32. (Complete) Fix bug where the state logs on the redirect are the css objects
+36. (Complete) Fix bug where after redirect > back step > review page, the redirect component is mounted instead of component
+37. (Complete) Bug when you redirect to an expired session. Try: http://localhost:3000/gcash?sessionId=CSD2AB9EC79C414450&redirectResult=X3XtfGC7%21H4sIAAAAAAAA%2F3VT207jMBD9lzyTYMdpLpVWqzYNlC2X0tBWSEjItd0mInWC7YAK4t93DCl0QftiyzNnLufM%2BNVRgpdKMDOlu62QZkQNdfqvDmWPLdjVgLG6leaMO30SkCgMjhzKeWnKWtLqE9yaolalFnywtei0VUpItnP6znQ8dY6gyGMrtBl0SWdiLSxAAMBHPkERCjAOEEYxQjhBOIYb2WeYRGF4kOA9PUTFSRKBmUqzLiWVrKRVrRvPlFtA0W0DkK%2BofTtpzcVnS997XtCqFfvMb%2BDvSr067Dubpw%2BoRVpgUy6E0iCI04%2FQkbNSVPKu1IZRXUAEKwR7qFuTFlRKUYFnKVZg3wrFwGQ6lcE%2BFgr4AK5i9QHgUDHN6ZpyvQY3ENgA%2F2qqm0PE6eQyvJj8uY6im9NeHvsHAv6Y3b61XGjLwdMftx24k%2BYjfzBMsjRK0gAHQQ9Z4aqqfiaj3AeAUSDEV5dn0oiNoraA97TXxInQe%2F1GUOPW0rUzgnrgWNNK%2Fy%2Fc7BrLJB1n6eRqfnOfZ3l%2BdnVpJ6OEaZWcKytjYUyj%2B3fHd8d7Hrqom0Yo1wBbj%2FKdkB6rtz%2F8X4Zu8WfvWX9vmpL%2FOp0Oe9GQnAz9DM4gixPoUosKvongQzvfg9l2Cc9rRivbspDuPLf2h1J2a9C0K%2B%2FJ92Ifh4REuNdDPRwkxEtJQvh1Er8Ulxl2jXpeTJdm83hVZvp2rMPl8mT2MKtnWeTrf4hPqaJbbac3ml9cZLf3k%2BwWynSPxeB8nlm8UZSJhsJWWLURcgNMEEE4WMf%2BipMEFjj2WbxKYk7hw8XYFbBaiPTIihCGBY5chJ23vwrJGn8kBAAAiuWYfte%2F6L8RToQDWACwu8oiqo2viM9ZGzA4YsgGpTk%3D
+35. (Complete) Update review tab with links
+34. (Complete) Ensure it is responsive
 
 Open Items:
-5. Add Global Error component
-10. Create tests for QA
-17. Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
-28. Refactor CSS
-29. GCash bug => redirect to gcash, come back, then choose another txvariant on left hand panel
-30. Unmount the adyen component
+17. (In progress) Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
+28. (In progress) Refactor CSS
+31. Validate the data in sessions matches api explorer, and review local and checkout docs.
+38. In initializeSession add steps to component config and remove dependencies from use Redirect hook
+38. Fix the copy functionality
+39. Add adyen state to redirect component config
+
 
 Nice to haves:
-26. Add floating button that scrolls to the parameters section
-4. Add loading component
+10. Create tests for QA

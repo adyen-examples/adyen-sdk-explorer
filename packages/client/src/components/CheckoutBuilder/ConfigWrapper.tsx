@@ -10,7 +10,7 @@ import { ReviewContent } from './configSteps/Content/ReviewContent';
 const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
 
 export const ConfigWrapper = () => {
-  const { profile, checkout, local, sessions, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
+  const { checkout, local, sessions, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
   useRedirect({ checkout, local, sessions });
 
   const stepMap = {

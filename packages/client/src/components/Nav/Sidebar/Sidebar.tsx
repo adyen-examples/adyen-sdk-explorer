@@ -1,10 +1,11 @@
-import { Box, Drawer, List, ListItem, ListItemButton, Typography } from '@mui/material';
+import { Box, Drawer, List, ListItem, ListItemButton, Typography, CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../../store';
 
 export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const { products } = useSelector((state: RootState) => state.onDeck);
+  const productsKeys = Object.keys(products);
   const navigate = useNavigate();
 
   const selectedButtonStyle = {
@@ -21,6 +22,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const handleClick = (txvariant: any) => {
     navigate(`/${txvariant}`);
   };
+
   return (
     <Drawer
       sx={{
@@ -40,45 +42,52 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
       variant="permanent"
       anchor="left"
     >
-      <List>
-        <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-          <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="h6">
-            Home
-          </Typography>
-        </ListItemButton>
-        <ListItem>
-          <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
-            ONLINE PAYMENTS
-          </Typography>
-        </ListItem>
-        {Object.keys(products).map((product: any, index: number) => {
-          let subcategory = null;
-          const selected = products[product].txVariant === page;
-          const buttonStyle = selected ? selectedButtonStyle : nonselectedButtonStyle;
+      {productsKeys.length === 0 && (
+        <Box sx={{ textAlign: 'center', mt: '40vh' }}>
+          <CircularProgress />
+        </Box>
+      )}
+      {productsKeys.length > 0 && (
+        <List>
+          <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
+            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="h6">
+              Home
+            </Typography>
+          </ListItemButton>
+          <ListItem>
+            <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+              ONLINE PAYMENTS
+            </Typography>
+          </ListItem>
+          {productsKeys.map((product: any, index: number) => {
+            let subcategory = null;
+            const selected = products[product].txVariant === page;
+            const buttonStyle = selected ? selectedButtonStyle : nonselectedButtonStyle;
 
-          if (product === 'Drop-in') {
-            subcategory = (
-              <ListItem>
-                <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
-                  COMPONENTS
-                </Typography>
-              </ListItem>
-            );
-          }
-          return (
-            <Box key={product}>
-              <ListItem disablePadding>
-                <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
-                  <Typography sx={{ ml: 2, color: `${selected ? 'white' : 'black'}` }} variant="h6">
-                    {product}
+            if (product === 'Drop-in') {
+              subcategory = (
+                <ListItem>
+                  <Typography variant="h6" sx={{ fontWeight: 'bolder' }}>
+                    COMPONENTS
                   </Typography>
-                </ListItemButton>
-              </ListItem>
-              {subcategory}
-            </Box>
-          );
-        })}
-      </List>
+                </ListItem>
+              );
+            }
+            return (
+              <Box key={product}>
+                <ListItem disablePadding>
+                  <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
+                    <Typography sx={{ ml: 2, color: `${selected ? 'white' : 'black'}` }} variant="h6">
+                      {product}
+                    </Typography>
+                  </ListItemButton>
+                </ListItem>
+                {subcategory}
+              </Box>
+            );
+          })}
+        </List>
+      )}
     </Drawer>
   );
 };

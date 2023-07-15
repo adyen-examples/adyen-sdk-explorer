@@ -1,11 +1,13 @@
-import { ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { Grid, Typography, FormGroup, FormControlLabel, Checkbox, Box } from '@mui/material';
-import { OptionWrapper } from './OptionWrapper';
+import { ChangeEvent, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useIsInViewPort } from '../../../../hooks';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
 import { ObjectOption } from './OptionTypes';
+import { OptionWrapper } from './OptionWrapper';
 
 interface ListOptionsProps {
   name: string;
@@ -20,6 +22,8 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     required: true,
     optional: true
   });
+  const parametersRef = useRef<any>(null);
+  const isInViewport = useIsInViewPort(parametersRef);
 
   const { required, optional } = filters;
 
@@ -43,15 +47,34 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
-        <ObjectOption content="No configurations found. Use editor pane for custom fields." />
+        <ObjectOption styleType="warning" content="No configurations found. Use editor pane for custom fields." />
       </Box>
     );
   }
 
   return (
     <Grid container>
+      {!isInViewport && (
+        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: "35%",md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
+          <Fab
+            variant="extended"
+            size="medium"
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <Typography variant="caption" sx={{ color: 'primary.light' }}>
+              {name} Parameters
+            </Typography>
+            <KeyboardArrowDownIcon />
+          </Fab>
+        </Box>
+      )}
       <Grid
         item
+        ref={parametersRef}
         px={7}
         py={1.4}
         mt={2}
@@ -66,7 +89,9 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
       >
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
-            <Typography variant="h5">{category}</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#00112c' }}>
+              {category}
+            </Typography>
           </Grid>
           <Grid item>
             <FormGroup row sx={{ '& .MuiCheckbox-root': { py: 0, px: 0.5 } }}>

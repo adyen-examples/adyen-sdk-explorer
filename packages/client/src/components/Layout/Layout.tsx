@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
 import { useAppDispatch } from '../../hooks';
 import type { RootState } from '../../store';
 import { defaultComponentStyle, defaultDropinStyle } from '../EditorBar/Tabs/StyleTab/defaultStyles';
+import { NotFound } from '../Error/NotFound';
 import { LayoutContent } from './LayoutContent';
 
 const { updateTxVariant, updateStyleInfo } = onDeckActions;
@@ -45,13 +47,13 @@ export const Layout = ({ main: Main }: any) => {
     return Object.keys(obj).length === 0;
   };
 
-  if (!isEmpty(products)) {
-    if (!pathParamInProducts(products, productParam) && !isHome) {
-      navigate('/error');
-    } else {
-      return <LayoutContent main={Main} selectedProduct={productParam} />;
-    }
+  if (!isEmpty(products) && !pathParamInProducts(products, productParam) && !isHome) {
+    navigate('/error');
   }
-
-  return null;
+  
+  return (
+    <ErrorBoundary fallback={<NotFound />}>
+      <LayoutContent main={Main} selectedProduct={productParam} />
+    </ErrorBoundary>
+  );
 };

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Collapse, LinearProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
@@ -16,7 +16,6 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   const [error, setError] = useState(null);
   const [result, setResult] = useState<any>(null);
   const dispatch = useAppDispatch();
-  const { local, txVariant } = configuration;
   const sessions = new ConfigurationSession({
     ...configuration,
     queryParameters: { redirectResult: redirectResult, sessionId: sessionId },
@@ -30,31 +29,46 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
   });
   const [checkout] = useCheckout(sessions);
 
-  useEffect(() => {
-    if (checkout && !error) {
-      checkout.submitDetails({ details: { redirectResult: redirectResult } });
-      checkout.create(txVariant, local).mount('#checkout');
-    }
-  }, [checkout, txVariant, local, redirectResult, error]);
-
-  if (error) {
-    return (
-      <Box sx={{ textAlign: 'center' }}>
-        <Alerts severityType={'error'} message={JSON.stringify(error)} />
-        <AdyenIdkIcon />
-      </Box>
-    );
-  } else if (result) {
+  const showMessages = () => {
     return (
       <Box>
-        <Alerts severityType={result?.status} message={result?.resultCode} />
+        <Collapse orientation="vertical" in={!!error || !!result} timeout={700}>
+          {error && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Alerts severityType={'error'} message={JSON.stringify(error)} />
+            </Box>
+          )}
+          {result && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Alerts severityType={result.status} message={result.resultCode} />
+            </Box>
+          )}
+        </Collapse>
+        {error && (
+          <Box sx={{ textAlign: 'center', mt: 2 }}>
+            <AdyenIdkIcon />
+          </Box>
+        )}
       </Box>
     );
-  }
+  };
+
+  useEffect(() => {
+    let ignore = false;
+    if (checkout && !error && !ignore) {
+      checkout.submitDetails({ details: { redirectResult: redirectResult } });
+    }
+
+    return () => {
+      ignore = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkout, error]);
 
   return (
     <Box sx={configuration?.style}>
-      <div id="checkout"></div>
+      {showMessages()}
+      {!error && !result && <LinearProgress />}
     </Box>
   );
 };

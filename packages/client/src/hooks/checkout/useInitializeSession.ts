@@ -23,6 +23,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
   const componentConfig = useMemoCompare(configuration);
 
   useEffect(() => {
+    let ignore = false;
     const { sessions, txVariant } = componentConfig;
     const requestOptions: RequestOptions = {
       method: 'POST',
@@ -38,7 +39,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
         if (parsedResponse.error) {
           const errorMessage = parsedResponse.error;
           setError(errorMessage);
-        } else {
+        } else if (!ignore) {
           const sessions = new ConfigurationSession({
             ...componentConfig,
             data: parsedResponse,
@@ -59,6 +60,7 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       } catch (e: any) {
         console.error('Catch error', e);
         setError(e);
+        ignore = true;
       }
     };
 

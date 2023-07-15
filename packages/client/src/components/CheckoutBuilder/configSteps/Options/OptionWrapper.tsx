@@ -74,7 +74,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
             checked={isChecked}
             onChange={handleToggle}
             inputProps={{ 'aria-label': 'controlled' }}
-            sx={{ p: 0 }}
+            sx={{ p: 0, '&:hover': { bgcolor: 'inherit' } }}
           />
         </Grid>
       )}

@@ -14,42 +14,48 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
   const isHome = selectedProduct ? false : true;
   const editorWidth = isHome ? 0 : 420;
 
+  const style = {
+    position: 'fixed',
+    top: '0',
+    bottom: '0',
+    // width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
+    width: {
+      xs: '100%',
+      sm: '100%',
+      md: `calc(100% - ${drawerWidth}px)`,
+      lg: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
+      xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`
+    },
+    maxWidth: {
+      xs: '100%',
+      md: `calc(100% - ${drawerWidth}px)`,
+      lg: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
+      xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`
+    },
+    ml: {
+      xs: 0,
+      md: 0,
+      lg: `${drawerWidth}px`,
+      xl: `${drawerWidth}px`
+    },
+    mr: {
+      xs: 0,
+      md: 0,
+      lg: `${editorWidth}px`,
+      xl: `${editorWidth}px`
+    },
+    overflow: 'scroll',
+    mt: `${headerHeight}px`
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
-      <Box
-        sx={{
-          position: 'fixed',
-          top: '0',
-          bottom: '0',
-          width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
-          maxWidth: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
-          ml: {
-            xs: 0,
-            md: 0,
-            lg: `${drawerWidth}px`,
-            xl: `${drawerWidth}px`
-          },
-          mr: {
-            xs: 0,
-            md: `${editorWidth}px`,
-            lg: `${editorWidth}px`,
-            xl: `${editorWidth}px`
-          },
-          overflow: 'scroll',
-          mt: `${headerHeight}px`
-        }}
-        component="main"
-      >
+      <Box id="main-content" sx={style} component="main">
         <Main txvariant={selectedProduct} />
       </Box>
-      {!isHome && (
-        <EditorBar
-          dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }}
-          steps={['sessions', 'checkout', 'local', 'review']}
-        />
-      )}
+      {!isHome && <EditorBar dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
     </Box>
   );
 };

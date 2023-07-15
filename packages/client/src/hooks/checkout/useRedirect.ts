@@ -4,30 +4,27 @@ import { onDeckActions } from '../../app';
 import { isConfigEmpty } from '../../helpers';
 import { useAppDispatch } from '../index';
 
-const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateAdyenStateInfo, updateActiveStep } = onDeckActions;
+const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, updateStyleInfo } = onDeckActions;
 
-export const useRedirect = (configuration: any) => {
+export const useRedirect = (currConfiguration: any) => {
   const [queryParameters] = useSearchParams();
   const redirectResult = queryParameters.get('redirectResult');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const encodedConfig: any = localStorage.getItem('componentConfig');
+    const storedConfig = encodedConfig ? JSON.parse(encodedConfig) : null;
     const encodedSDKState: any = localStorage.getItem('sdkExplorer');
+    const storedSdkExplorerState = encodedSDKState ? JSON.parse(encodedSDKState) : null;
 
-    if (redirectResult) {
-      const storedConfig = JSON.parse(encodedConfig);
-      const { checkout, local, sessions, style } = storedConfig;
-      const storedSdkExplorerState = JSON.parse(encodedSDKState);
-      const { steps} = storedSdkExplorerState;
-      if (isConfigEmpty(configuration)) {
-        dispatch(updateCheckoutInfo(checkout));
-        dispatch(updateLocalInfo(local));
-        dispatch(updateAdyenStateInfo(style));
-        dispatch(updateSessionsInfo(sessions));
-        dispatch(updateRedirectInfo(true));
-        dispatch(updateActiveStep(steps.length - 1));
-      }
+    if (redirectResult && isConfigEmpty(currConfiguration) && !isConfigEmpty(storedConfig)) {
+      const { steps } = storedSdkExplorerState;
+      dispatch(updateCheckoutInfo(storedConfig.checkout));
+      dispatch(updateLocalInfo(storedConfig.local));
+      dispatch(updateSessionsInfo(storedConfig.sessions));
+      dispatch(updateRedirectInfo(true));
+      dispatch(updateActiveStep(steps.length - 1));
+      dispatch(updateStyleInfo(storedConfig.style));
     }
-  }, [redirectResult, configuration, dispatch]);
+  }, [dispatch, currConfiguration, redirectResult]);
 };
