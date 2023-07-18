@@ -31,7 +31,7 @@ export const SingleAPITab = (props: any) => {
       >
         /sessions
       </Typography>
-      <EditorPrePostFix color="light" data={payload} handleEditorUpdate={handler} viewOnly={viewOnly} />
+      <EditorPrePostFix sx={{ minHeight: '70vh', maxHeight: '70vh' }} color="light" data={payload} handleEditorUpdate={handler} viewOnly={viewOnly} />
     </Box>
   );
 };

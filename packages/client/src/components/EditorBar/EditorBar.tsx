@@ -62,7 +62,8 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
       alignItems: 'center',
       borderLeft: 2,
       borderColor: 'secondary.light',
-      px: 1
+      pl: 1,
+      pr: 2
     },
     '#desktop-nav': {
       display: 'inline-block'

@@ -8,13 +8,23 @@ type EditorProps = {
   handleJsonEditorUpdate: (e: any) => void;
   viewOnly: boolean;
   color?: string;
+  sx?: any;
 };
 
 type HandleChange = (e: any) => void;
 
-export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color }: EditorProps) => {
+export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color, sx }: EditorProps) => {
   let editorTheme = dark_vscode_tribute;
-
+  let editorStyle = {
+    p: 1,
+    bgcolor: `${color === 'light' ? '#f3f6f9' : '#00112C'}`,
+    color: `${color === 'light' ? '#dce0e5' : 'primary.light'}`,
+    border: 1,
+    svg: { display: 'none' },
+    borderRadius: 1,
+    '[name="labels"]': { width: '35px !important' },
+    minHeight: '25vh'
+  };
   if (color && color === 'light') {
     editorTheme = light_mitsuketa_tribute;
   }
@@ -26,21 +36,10 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color 
       handleJsonEditorUpdate(jsObject);
     }
   };
+  console.log({ ...editorStyle, sx });
 
   return (
-    <Box
-      sx={{
-        p: 1,
-        bgcolor: `${color === 'light' ? '#f3f6f9' : '#00112C'}`,
-        color: `${color === 'light' ? '#dce0e5' : 'primary.light'}`,
-        border: 1,
-        svg: { display: 'none' },
-        borderRadius: 1,
-        '[name="labels"]': { width: '35px !important' },
-        minHeight: '25vh'
-      }}
-      id="editor"
-    >
+    <Box sx={{ ...editorStyle, ...sx }} id="editor">
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}
