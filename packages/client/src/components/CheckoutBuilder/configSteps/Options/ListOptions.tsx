@@ -65,7 +65,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <Typography variant="caption" sx={{ color: 'primary.light' }}>
+            <Typography variant="h6" sx={{ color: 'primary.light', textTransform: 'capitalize', fontWeight:'bold' }}>
               {name} Parameters
             </Typography>
             <KeyboardArrowDownIcon />

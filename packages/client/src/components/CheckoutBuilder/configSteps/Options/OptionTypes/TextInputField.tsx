@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
-import { Fragment } from 'react';
-import { Grid, Typography, TextField } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { ChangeEvent, Fragment } from 'react';
+import { AdyenInputTheme } from './AdyenInputTheme';
 import type { OptionPropTypes } from './types';
 
 interface TextInputFieldProps extends OptionPropTypes {
@@ -26,24 +26,26 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
   }
 
   return (
-    <Grid item xs={11}>
+    <Box>
       {additionalLabels}
       {isChecked && (
-        <TextField
+        <AdyenInputTheme
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             let value = type === 'number' ? Number(e.target.value) : e.target.value;
             onChange(e.target.name, value, current);
           }}
           value={textInputFieldValue}
-          variant="outlined"
           name={descriptor.name}
           id={descriptor.name}
-          size="small"
-          hiddenLabel
           type={type === 'number' ? 'number' : 'text'}
-          sx={{ bgcolor: 'secondary.light' }}
+          sx={{
+            width: '50%',
+            '& .MuiInputBase-input': {
+              py: 1
+            }
+          }}
         />
       )}
-    </Grid>
+    </Box>
   );
 };

@@ -1,6 +1,5 @@
-import { Grid } from '@mui/material';
-import { ArrayOption, BooleanOption, ObjectOption, NestedOption, TextInputField } from './OptionTypes';
 import type { Descriptor } from '../../types';
+import { ArrayOption, BooleanOption, NestedOption, ObjectOption, TextInputField } from './OptionTypes';
 
 interface InitializeOptionProps {
   descriptor: Descriptor;
@@ -17,7 +16,7 @@ export const InitializeOption = (props: InitializeOptionProps) => {
   if (descriptor.properties) {
     optionsDisplay = <NestedOption {...props} />;
   } else if (descriptor.type === 'string') {
-    optionsDisplay = <TextInputField {...props} type="text"/>;
+    optionsDisplay = <TextInputField {...props} type="text" />;
   } else if (descriptor.type === 'boolean' && descriptor.name) {
     optionsDisplay = <BooleanOption {...props} />;
   } else if (descriptor.type === 'array' && descriptor.name) {
@@ -28,9 +27,5 @@ export const InitializeOption = (props: InitializeOptionProps) => {
     optionsDisplay = <TextInputField {...props} type="number" />;
   }
 
-  return (
-    <Grid item xs={12}>
-      {optionsDisplay}
-    </Grid>
-  );
+  return optionsDisplay;
 };

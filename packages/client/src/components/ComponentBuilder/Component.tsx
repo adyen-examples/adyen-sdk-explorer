@@ -59,7 +59,7 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
       {!checkout && !error && !result && <LinearProgress />}
       {showMessages()}
       {!error && !result && (
-        <Box p={7}>
+        <Box px={7} py={2}>
           <div id="checkout"></div>
         </Box>
       )}

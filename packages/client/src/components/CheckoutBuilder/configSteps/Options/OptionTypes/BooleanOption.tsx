@@ -4,7 +4,7 @@ import type { OptionPropTypes } from './types';
 
 export const BooleanOption = ({ descriptor, value, onChange }: OptionPropTypes) => {
   return (
-    <FormControl sx={{ width: '25%' }} size="small">
+    <FormControl sx={{ width: '50%' }}>
       <Select
         labelId="boolean-label"
         id="boolean-select"
