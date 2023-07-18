@@ -6,11 +6,12 @@ export const AdyenInputTheme = styled(InputBase)(({ theme }) => ({
     borderRadius: 3,
     backgroundColor: theme.palette.background.paper,
     border: '1px solid',
-    fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
+    fontSize: '.90rem',
+    fontWeight: '400',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     fontFamily: theme.typography.subtitle2.fontFamily,
-    color: theme.palette.primary.main,
-    paddingLeft: '0.5rem'
+    paddingLeft: '0.5rem',
+    borderColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main
   }
 }));
