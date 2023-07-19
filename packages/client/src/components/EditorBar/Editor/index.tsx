@@ -22,8 +22,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color,
     border: 1,
     svg: { display: 'none' },
     borderRadius: 1,
-    '[name="labels"]': { width: '35px !important' },
-    minHeight: '25vh'
+    '[name="labels"]': { width: '35px !important' }
   };
   if (color && color === 'light') {
     editorTheme = light_mitsuketa_tribute;
@@ -45,8 +44,8 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color,
         placeholder={{ ...configuration }}
         colors={editorTheme}
         locale={localeEn}
-        height="100%"
         width="100%"
+        height="100%"
         viewOnly={viewOnly}
         style={{ body: { fontSize: '0.8rem' } }}
       />

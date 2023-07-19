@@ -69,7 +69,7 @@ checkout.create('${txVariant}',`,
   };
 
   return (
-    <Box {...other}>
+    <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }} {...other}>
       <SingleTabHeader
         title={singleTabData?.title}
         clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}

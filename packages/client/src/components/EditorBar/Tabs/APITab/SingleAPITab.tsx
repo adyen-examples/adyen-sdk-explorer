@@ -8,9 +8,13 @@ export const SingleAPITab = (props: any) => {
     <Box
       sx={{
         px: 2,
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
         '#editor': {
           borderTop: 0,
-          borderRadius: '0px 0px 4px 4px'
+          borderRadius: '0px 0px 4px 4px',
+          flex: 1
         }
       }}
       {...other}
@@ -21,9 +25,9 @@ export const SingleAPITab = (props: any) => {
           mt: 2,
           py: 2,
           px: 3,
-          borderColor: '#dce0e5',
+          borderColor: 'primary.border',
           fontWeight: 'bold',
-          color: '#000000',
+          color: 'secondary.main',
           fontSize: '.9rem',
           borderRadius: '4px 4px 0px 0px'
         }}
@@ -31,7 +35,13 @@ export const SingleAPITab = (props: any) => {
       >
         /sessions
       </Typography>
-      <EditorPrePostFix sx={{ minHeight: '70vh', maxHeight: '70vh' }} color="light" data={payload} handleEditorUpdate={handler} viewOnly={viewOnly} />
+      <EditorPrePostFix
+        sx={{ flex: '1', display: 'flex', flexDirection: 'column' }}
+        color="light"
+        data={payload}
+        handleEditorUpdate={handler}
+        viewOnly={viewOnly}
+      />
     </Box>
   );
 };

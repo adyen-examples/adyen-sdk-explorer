@@ -10,7 +10,7 @@ interface LayoutContentProps {
 export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProps) => {
   const drawerWidth = 380;
   const headerHeight = 64;
-  const navButtonHeight = 40;
+  const navButtonHeight = 60;
   const isHome = selectedProduct ? false : true;
   const editorWidth = isHome ? 0 : 420;
 

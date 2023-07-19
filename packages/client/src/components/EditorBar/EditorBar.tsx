@@ -42,10 +42,11 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
     display: {
       xs: 'none',
       sm: 'none',
-      md: 'block',
-      lg: 'block',
-      xl: 'block'
+      md: 'flex',
+      lg: 'flex',
+      xl: 'flex'
     },
+    flexDirection: 'column',
     width: `${editorWidth}px`,
     '#icon-button': {
       color: 'success.main'
@@ -83,11 +84,6 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
     '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } },
     '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
   };
-
-  //      '#mobile-nav': { position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } },
-  //     '#mobile-nav-buttons': {
-  //bgcolor: 'secondary.gray'
-  //},
 
   const mobileStyle = {
     position: 'fixed',
