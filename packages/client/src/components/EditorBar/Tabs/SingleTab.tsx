@@ -15,7 +15,7 @@ export const SingleTab = (props: any) => {
     dispatch(action(value));
   };
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
-
+  const style = { flex: 1, display: 'flex', flexDirection: 'column', height: 0 };
   let singleTabData = null;
   switch (step) {
     case 'checkout':
@@ -69,7 +69,7 @@ checkout.create('${txVariant}',`,
   };
 
   return (
-    <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }} {...other}>
+    <Box sx={style} {...other}>
       <SingleTabHeader
         title={singleTabData?.title}
         clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}

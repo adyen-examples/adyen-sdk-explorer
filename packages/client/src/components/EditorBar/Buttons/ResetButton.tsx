@@ -17,8 +17,22 @@ export const ResetButton = (props: ResetButtonProps) => {
   const { resetOnDeckInfo } = onDeckActions;
   const [open, setOpen] = useState(false);
 
+  const style = {
+    '#reset-button': {
+      py: 0,
+      display: {
+        xs: 'none',
+        sm: 'none',
+        md: 'block',
+        lg: 'block',
+        xl: 'block'
+      }
+    },
+    '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
+  };
+
   return (
-    <Box {...other}>
+    <Box sx={style} {...other}>
       <IconButton
         id="reset-button"
         onClick={() => {

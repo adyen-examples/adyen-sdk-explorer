@@ -18,7 +18,6 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
     position: 'fixed',
     top: '0',
     bottom: '0',
-    // width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
     width: {
       xs: '100%',
       sm: '100%',

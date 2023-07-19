@@ -43,16 +43,7 @@ export const ReviewContent = (props: BoxProps) => {
             <Box component="span" sx={{ fontWeight: 'bold' }}>
               Transactions &gt; Payments.
             </Box>{' '}
-            To debug or troubleshoot test payments, you can also use API logs in your test environment.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} mt={2}>
-          <Typography variant="h6">
-            To debug or troubleshoot test payments, you can also use
-            <Link className="content-link-style" href="https://docs.adyen.com/development-resources/logs/api-logs">
-              API logs
-            </Link>
-            in your test environment.
+            To debug or troubleshoot test payments, you can also use API logs.
           </Typography>
         </Grid>
         <Grid item xs={12} mt={2}>
@@ -67,7 +58,10 @@ export const ReviewContent = (props: BoxProps) => {
           </Typography>
         </Grid>
         <Grid item xs={12} mt={2}>
-          <ObjectOption styleType="warning" content="Some payment methods have their own unique CSS classes that aren't shown in the sample below. For a full list of classes that you can style, inspect your instance of Drop-in using your browser's developer tools." />
+          <ObjectOption
+            styleType="warning"
+            content="Some payment methods have their own unique CSS classes that aren't shown under the CSS tab. For a full list of classes that you can style, inspect this page using your browser's developer tools."
+          />
         </Grid>
       </Grid>
       <Grid id="review-component-base" item direction="row" justifyContent="space-between" container px={7} py={1.2} mt={2} xs={12}>

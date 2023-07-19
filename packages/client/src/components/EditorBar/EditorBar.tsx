@@ -29,16 +29,15 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
 
   let desktopStyle = {
     position: 'fixed',
-    overflow: 'scroll',
-    top: 0,
+    top: `${headerHeight}px`,
+    bottom: `${buttonHeight}px`,
     right: 0,
     borderLeft: 2,
     borderColor: 'secondary.light',
     bgcolor: 'primary.light',
     color: 'secondary.main',
-    height: `calc(100% - ${headerHeight}px)`,
-    mt: `${headerHeight}px`,
-    pb: `${buttonHeight}px`,
+    height: `calc(100% - ${headerHeight}px - ${buttonHeight}px)`,
+    maxHeight: `calc(100% - ${headerHeight}px - ${buttonHeight}px)`,
     display: {
       xs: 'none',
       sm: 'none',
@@ -65,24 +64,7 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
       borderColor: 'secondary.light',
       pl: 1,
       pr: 2
-    },
-    '#desktop-nav': {
-      display: 'inline-block'
-    },
-    '#reset-button': {
-      py: 0,
-      display: {
-        xs: 'none',
-        sm: 'none',
-        md: 'block',
-        lg: 'block',
-        xl: 'block'
-      }
-    },
-    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
-    '#next-button': { ml: 0.5 },
-    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } },
-    '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
+    }
   };
 
   const mobileStyle = {

@@ -14,6 +14,15 @@ export const DesktopNavButtons = (props: NavButtonsProps) => {
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep } = onDeckActions;
   const stepsLength = Object.keys(steps).length;
 
+  const style = {
+    '#desktop-nav': {
+      display: 'inline-block'
+    },
+    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
+    '#next-button': { ml: 0.5 },
+    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } }
+  };
+
   const runStepAction = () => {
     switch (steps[step]) {
       case 'checkout':
@@ -58,7 +67,7 @@ export const DesktopNavButtons = (props: NavButtonsProps) => {
   };
 
   return (
-    <Box {...other}>
+    <Box sx={style} {...other}>
       <Stack direction="row" justifyContent="space-between" spacing={1}>
         <Box id="desktop-nav">
           {step !== 0 && (
