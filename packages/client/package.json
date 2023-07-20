@@ -23,7 +23,6 @@
     "@nodelib/fs.scandir": "^2.1.5",
     "@reduxjs/toolkit": "^1.8.0",
     "dotenv": "^16.0.0",
-    "express": "^4.17.1",
     "marked": "^4.0.18",
     "process": "^0.11.10",
     "prop-types": "15.7.2",
