@@ -33,9 +33,7 @@ export const SingleTab = (props: any) => {
     case 'local':
       singleTabData = {
         title: 'JS',
-        prefix: `const checkout = await AdyenCheckout({...});
-
-        
+        prefix: `const checkout = await AdyenCheckout({...});        
 checkout.create('${txVariant}',`,
         postfix: ');',
         handler: (value: any) => {

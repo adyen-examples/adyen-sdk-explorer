@@ -3,11 +3,15 @@ import { EditorPrePostFix } from '../../EditorPrePostFix';
 
 export const SingleCodeTab = (props: any) => {
   const { prefix, payload, postfix, handler, viewOnly, ...other } = props;
+  const style = {
+    '#editor': {
+      height: '25vh'
+    }
+  };
+
   return (
-    <Box {...other}>
-      <Box sx={{ m: 2 }}>
-        <EditorPrePostFix color="light" data={payload} prefix={prefix} postfix={postfix} handleEditorUpdate={handler} viewOnly={viewOnly} />
-      </Box>
+    <Box {...other} sx={style} m={2}>
+      <EditorPrePostFix data={payload} prefix={prefix} postfix={postfix} handleEditorUpdate={handler} viewOnly={viewOnly} />
     </Box>
   );
 };

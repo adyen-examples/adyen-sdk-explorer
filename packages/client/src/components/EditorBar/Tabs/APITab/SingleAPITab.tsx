@@ -12,8 +12,7 @@ export const SingleAPITab = (props: any) => {
     '#editor': {
       borderTop: 0,
       borderRadius: '0px 0px 4px 4px',
-      flex: 1,
-      overflow: 'scroll'
+      flex: 1
     },
     '#api-header': {
       border: 1,
@@ -34,7 +33,7 @@ export const SingleAPITab = (props: any) => {
       <Typography id="api-header" variant="h6">
         /sessions
       </Typography>
-      <EditorPrePostFix color="light" data={payload} handleEditorUpdate={handler} viewOnly={viewOnly} id="editor-prefix-postfix" />
+      <EditorPrePostFix data={payload} handleEditorUpdate={handler} viewOnly={viewOnly} id="editor-prefix-postfix" />
     </Box>
   );
 };

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { Editor } from '../Editor';
 
 export const EditorPrePostFix = (props: any) => {
-  const { prefix, postfix, data, handleEditorUpdate, viewOnly, color, ...other } = props;
+  const { prefix, postfix, data, handleEditorUpdate, viewOnly, ...other } = props;
 
   return (
     <Box {...other}>
@@ -15,7 +15,7 @@ export const EditorPrePostFix = (props: any) => {
           </Box>
         </Box>
       )}
-      <Editor color={color} viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
+      <Editor viewOnly={viewOnly} configuration={data} handleJsonEditorUpdate={handleEditorUpdate} />
       {postfix && (
         <Box>
           <Box>
