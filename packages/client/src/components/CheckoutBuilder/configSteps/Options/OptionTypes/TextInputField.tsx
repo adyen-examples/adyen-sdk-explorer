@@ -1,11 +1,12 @@
 import { ChangeEvent } from 'react';
 import { Fragment } from 'react';
 import { Grid, Typography, TextField } from '@mui/material';
+import { SelectField } from './SelectField';
 import type { OptionPropTypes } from './types';
 
-interface TextInputFieldProps extends OptionPropTypes {
+export interface TextInputFieldProps extends OptionPropTypes {
   subtitles?: boolean;
-  type: 'number' | 'text' | undefined;
+  type?: 'number' | 'text' | undefined;
 }
 
 export const TextInputField = ({ descriptor, onChange, value, isChecked, current, subtitles, type }: TextInputFieldProps) => {
@@ -25,25 +26,33 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
     );
   }
 
+  let display;
+
+  if (descriptor.enum) {
+    display = <SelectField onChange={onChange} descriptor={descriptor} value={value} current={current} />;
+  } else {
+    display = (
+      <TextField
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          let value = type === 'number' ? Number(e.target.value) : e.target.value;
+          onChange(e.target.name, value, current);
+        }}
+        value={textInputFieldValue}
+        variant="outlined"
+        name={descriptor.name}
+        id={descriptor.name}
+        size="small"
+        hiddenLabel
+        type={type === 'number' ? 'number' : 'text'}
+        sx={{ bgcolor: 'secondary.light' }}
+      />
+    );
+  }
+
   return (
     <Grid item xs={11}>
       {additionalLabels}
-      {isChecked && (
-        <TextField
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            let value = type === 'number' ? Number(e.target.value) : e.target.value;
-            onChange(e.target.name, value, current);
-          }}
-          value={textInputFieldValue}
-          variant="outlined"
-          name={descriptor.name}
-          id={descriptor.name}
-          size="small"
-          hiddenLabel
-          type={type === 'number' ? 'number' : 'text'}
-          sx={{ bgcolor: 'secondary.light' }}
-        />
-      )}
+      {isChecked && display}
     </Grid>
   );
 };

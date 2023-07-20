@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface Descriptor {
   name: string;
   description: string;
+  enum?: string[];
   properties?: [];
   items?: { type: string } | [];
   type?: string;

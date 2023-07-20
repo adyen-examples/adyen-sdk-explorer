@@ -1,9 +1,10 @@
 import { Box, Grid, Link, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useScrollToTop } from '../../../../hooks';
+import type { RootState } from '../../../../store';
 
 export const SessionsContent = () => {
-  const { txVariant } = useSelector((state: any) => state.onDeck);
+  const { txVariant } = useSelector((state: RootState) => state.onDeck);
   const contentContainerStyle = {
     px: 7,
     mt: 2,
