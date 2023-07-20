@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { Client, CheckoutAPI, Management } from '@adyen/api-library';
+import { Client, CheckoutAPI } from '@adyen/api-library';
 import { ADYEN_API_KEY, ADYEN_MERCHANT_ACCOUNT } from '../../config';
+import { getPaymentMethodIds, combinePaymentMethodDetails } from './helpers';
 import { checkoutProps, paymentMethodProps, sessionsProps } from '../../models';
 
 import type { InitializationRequest, PaymentMethodProps, PaymentMethodPropsList } from './types';
@@ -8,21 +9,20 @@ import type { InitializationRequest, PaymentMethodProps, PaymentMethodPropsList 
 const client = new Client({ apiKey: ADYEN_API_KEY, environment: 'TEST' });
 
 const checkoutApi = new CheckoutAPI(client);
-const managementApi = new Management(client);
 
 const router = Router();
 
 router.get('/paymentMethods', async (req: Request, res: Response) => {
   try {
-    const response = await managementApi.PaymentMethodsMerchantLevelApi.getAllPaymentMethods(ADYEN_MERCHANT_ACCOUNT);
+    const { paymentMethods } = await checkoutApi.paymentMethods({ merchantAccount: ADYEN_MERCHANT_ACCOUNT });
+    const paymentMethodIds = await getPaymentMethodIds();
 
-    // const products: { [key: string]: any } = {
-    //   'Drop-in': { txVariant: 'dropin' },
-    //   ...paymentMethods?.reduce((acc, { name, type }) => {
-    //     return name ? { ...acc, [name]: { txVariant: type } } : { ...acc };
-    //   }, {})
-    // };
-    return res.status(201).json(response);
+    let products: { [key: string]: any } = { message: 'No Payment Methods available' };
+    if (paymentMethods && paymentMethodIds) {
+      products = combinePaymentMethodDetails(paymentMethods, paymentMethodIds);
+    }
+
+    return res.status(201).json(products);
   } catch (err: any) {
     res.status(err.statusCode).json({ error: err.message });
   }
