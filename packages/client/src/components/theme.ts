@@ -4,7 +4,8 @@ export const themeOptions: any = {
       main: '#0066ff',
       gray: '#bdbdbd',
       border: '#dce0e5',
-      light: '#FFFFFF'
+      light: '#FFFFFF',
+      shadow: 'rgba(0,17,44,.08)'
     },
     secondary: {
       main: '#00112C',

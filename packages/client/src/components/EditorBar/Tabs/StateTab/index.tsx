@@ -8,16 +8,14 @@ export const StateTab = (props: any) => {
     <Box {...other}>
       {adyenComponent && (
         <Box p={2}>
-          <Box>
-            <EditorPrePostFix
-              data={adyenComponent}
-              handleEditorUpdate={(value: any) => {
-                console.log(value);
-              }}
-              viewOnly={true}
-              color="light"
-            />
-          </Box>
+          <EditorPrePostFix
+            data={adyenComponent}
+            handleEditorUpdate={(value: any) => {
+              console.log(value);
+            }}
+            viewOnly={true}
+            color="light"
+          />
         </Box>
       )}
     </Box>

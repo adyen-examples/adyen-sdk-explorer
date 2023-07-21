@@ -5,6 +5,7 @@ export const SingleAPITab = (props: any) => {
   const { viewOnly, payload, handler, ...other } = props;
   const style = {
     px: 2,
+    pb: 2,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',

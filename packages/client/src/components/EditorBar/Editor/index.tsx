@@ -18,6 +18,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
     p: 1,
     color: 'primary.border',
     border: 1,
+    bgcolor: 'secondary.light',
     svg: { display: 'none' },
     borderRadius: 1,
     overflow: 'scroll',

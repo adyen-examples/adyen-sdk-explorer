@@ -52,7 +52,8 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
     },
     '#desktop-button-container': {
       position: 'fixed',
-      bottom: '1vh',
+      height: `${buttonHeight}px`,
+      bottom: 0,
       right: 0,
       width: `${editorWidth}px`,
       bgcolor: 'primary.light',
@@ -61,6 +62,7 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       borderLeft: 2,
+      borderTop: 2,
       borderColor: 'secondary.light',
       pl: 1,
       pr: 2

@@ -10,26 +10,29 @@ export const MultiTab: any = (props: any) => {
   const [tab, setTab] = useState(0);
   const { checkout, local, txVariant, adyenState, ...other } = props;
   const MultiTabStyle = {
-    bgcolor: 'secondary.light',
-    pt: 1,
-    boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
-    borderColor: 'primary.light',
-    '.MuiTabs-indicator': { display: 'none' },
-    '.MuiButtonBase-root': {
+    overflow: 'scroll',
+    '#multi-tab-header .MuiTabs-indicator': { display: 'none' },
+    '#multi-tab-header .MuiButtonBase-root': {
       minHeight: '0px',
       height: '35px'
     },
-    '.MuiTabs-root': {
+    '#multi-tab-header .MuiTabs-root': {
       minHeight: '0px'
     },
-    '.MuiTab-root.Mui-selected': {
-      color: '#00112C',
+    '#multi-tab-header .MuiTab-root.Mui-selected': {
+      color: 'secondary.main',
       borderBottom: 1,
-      borderColor: '#00112C',
+      borderColor: 'secondary.main',
       borderTopLeftRadius: 5,
       borderTopRightRadius: 5,
       width: '80px',
       fontWeight: 'bold'
+    },
+    '#multi-tab-header': {
+      bgcolor: 'secondary.light',
+      pt: 1,
+      boxShadow: '0 2px 4px primary.shadow',
+      borderColor: 'primary.light'
     }
   };
 
@@ -38,8 +41,8 @@ export const MultiTab: any = (props: any) => {
   };
 
   return (
-    <Box {...other}>
-      <Box sx={MultiTabStyle}>
+    <Box sx={MultiTabStyle} {...other}>
+      <Box id="multi-tab-header">
         <Tabs onChange={handleChange} value={tab} centered>
           <Tab
             label={
