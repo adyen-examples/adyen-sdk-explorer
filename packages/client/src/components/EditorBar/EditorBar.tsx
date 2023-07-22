@@ -56,7 +56,7 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
       bottom: 0,
       right: 0,
       width: `${editorWidth}px`,
-      bgcolor: 'primary.light',
+      bgcolor: 'background.default',
       color: 'secondary.main',
       display: 'flex',
       justifyContent: 'space-between',

@@ -10,6 +10,7 @@ export const SingleAPITab = (props: any) => {
     flex: 1,
     flexDirection: 'column',
     height: 0,
+    bgcolor: 'background.default',
     '#editor': {
       borderTop: 0,
       borderRadius: '0px 0px 4px 4px',

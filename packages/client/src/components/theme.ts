@@ -27,7 +27,7 @@ export const lightThemeOptions: any = {
     },
     info: {
       main: '#0048b3',
-      required: 'ff9800'
+      required: '#ff9800'
     }
   },
   typography: {
@@ -121,10 +121,11 @@ export const darkThemeOptions: any = {
       gray: '#bdbdbd',
       border: '#dce0e5',
       light: '#FFFFFF',
-      shadow: 'rgba(0,17,44,.08)'
+      shadow: 'rgba(0,17,44,.08)',
+      dark: '#FFFFFF'
     },
     secondary: {
-      main: '#00112C',
+      main: '#FFFFFF',
       gray: '#F2F6F9',
       light: '#0c1c38'
     },
@@ -132,14 +133,15 @@ export const darkThemeOptions: any = {
       paper: '#00112C',
       default: '#00112C',
       elevation: 20,
-      grey: '#4C4E52'
+      grey: '#FFFFFF'
     },
     success: {
       main: 'rgb(10, 191, 83)',
-      dark: '#026440'
+      dark: '#FFFFFF'
     },
     info: {
-      main: '#0048b3'
+      main: '#0048b3',
+      required: '#ff9800'
     }
   },
   typography: {
@@ -148,20 +150,21 @@ export const darkThemeOptions: any = {
       fontWeight: 500,
       fontSize: '0.83rem',
       fontFamily: 'sans-serif',
-      color: '#394962'
+      color: '#FFFFFF'
     },
     body1: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '1.1rem',
       fontWeight: 400,
-      lineHeight: 1.8
+      lineHeight: 1.8,
+      color: '#FFFFFF'
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
       fontSize: '0.9rem',
       fontWeight: 400,
       lineHeight: 1.8,
-      color: '#9ba9bd'
+      color: '#FFFFFF'
     },
     h2: {
       fontWeight: 600,
@@ -171,7 +174,8 @@ export const darkThemeOptions: any = {
     h3: {
       fontWeight: 600,
       fontSize: '1.4rem',
-      fontFamily: 'Poppins, sans-serif'
+      fontFamily: 'Poppins, sans-serif',
+      color: '#FFFFFF'
     },
     h4: {
       fontWeight: 'bold',
@@ -189,21 +193,23 @@ export const darkThemeOptions: any = {
       fontWeight: '530',
       fontSize: '0.85rem',
       fontFamily: 'sans-serif',
-      color: '#9ba9bd'
+      color: '#FFFFFF'
     },
     caption: {
-      color: '#9ba9bd',
+      color: '#FFFFFF',
       fontSize: '0.8rem'
     },
     subtitle1: {
       fontWeight: 500,
       fontSize: '1.1rem',
-      fontFamily: 'Roboto, sans-serif'
+      fontFamily: 'Roboto, sans-serif',
+      color: '#FFFFFF'
     },
     subtitle2: {
       fontWeight: 400,
       fontSize: '.95rem',
-      fontFamily: 'Roboto, sans-serif'
+      fontFamily: 'Roboto, sans-serif',
+      color: '#FFFFFF'
     }
   },
   props: {

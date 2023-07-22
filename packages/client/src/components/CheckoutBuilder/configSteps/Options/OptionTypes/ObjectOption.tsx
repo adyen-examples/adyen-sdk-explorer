@@ -18,7 +18,7 @@ export const ObjectOption = (props: ObjectOptionProps) => {
     alignItems: 'center',
     bgcolor: '#cce0ff',
     '#info-icon': { bgcolor: '#cce0ff', px: 1, color: 'primary.main' },
-    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'primary.light' }
+    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const warningStyle = {
     border: '3px solid',
@@ -27,7 +27,7 @@ export const ObjectOption = (props: ObjectOptionProps) => {
     alignItems: 'center',
     bgcolor: 'rgb(255, 234, 204)',
     '#info-icon': { bgcolor: 'rgb(255, 234, 204)', px: 1, color: 'rgb(255, 149, 0)' },
-    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'primary.light' }
+    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const errorStyle = {
     border: '3px solid',
@@ -36,7 +36,7 @@ export const ObjectOption = (props: ObjectOptionProps) => {
     alignItems: 'center',
     bgcolor: '#ff7e82',
     '#info-icon': { bgcolor: '#ff7e82', px: 1, color: '#d32f2f' },
-    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'primary.light' }
+    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const successStyle = {
     border: '3px solid',
@@ -45,7 +45,7 @@ export const ObjectOption = (props: ObjectOptionProps) => {
     alignItems: 'center',
     bgcolor: '#d4f8d4',
     '#info-icon': { bgcolor: '#d4f8d4', px: 1, color: '#2ade2a' },
-    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'primary.light' }
+    '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
 
   let notifyStyle = null;

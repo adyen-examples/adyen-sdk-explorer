@@ -48,6 +48,7 @@ Open Items:
 28. (In progress) Refactor CSS
 38. Fix the copy functionality
 39. Add adyen state to redirect component config
+41. Add theme changer
 
 
 

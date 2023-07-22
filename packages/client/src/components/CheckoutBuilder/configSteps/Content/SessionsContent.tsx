@@ -19,7 +19,8 @@ export const SessionsContent = () => {
       px: 3,
       py: 1,
       bgcolor: 'secondary.light',
-      color: 'background.grey'
+      color: 'background.grey',
+      borderRadius: 1
     }
   };
   useScrollToTop('#main-content');

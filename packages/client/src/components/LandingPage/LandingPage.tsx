@@ -170,9 +170,9 @@ export const LandingPage = () => {
           sx={{ mt: 6, mb: 2, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
         >
           <Typography variant="h2">
-            Welcome to Adyen's
+            Welcome to
             <br />
-            web SDK Explorer
+            Adyen's SDK Explorer
           </Typography>
           <Typography component={'span'} sx={{ mt: 3 }} variant="body2">
             With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, and customizations. You can

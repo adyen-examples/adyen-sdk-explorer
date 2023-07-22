@@ -27,10 +27,10 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
     <Box>
       <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
         <Box
-          bgcolor="primary.light"
+          bgcolor="background.default"
           sx={{
             borderBottom: 1,
-            borderColor: 'primary.border',
+            borderColor: 'secondary.light',
             boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
             px: 2,
             '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } }

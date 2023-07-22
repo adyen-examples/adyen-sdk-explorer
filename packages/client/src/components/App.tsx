@@ -7,7 +7,7 @@ import type { RequestOptions } from '../hooks/types';
 import ApplicationRouter from './AppRouter';
 import { darkThemeOptions, lightThemeOptions } from './theme';
 
-const theme = createTheme(lightThemeOptions);
+const theme = createTheme(darkThemeOptions);
 const { updateProductsInfo } = onDeckActions;
 
 const Application = () => {

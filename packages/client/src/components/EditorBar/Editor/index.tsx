@@ -13,7 +13,7 @@ type EditorProps = {
 type HandleChange = (e: any) => void;
 
 export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
-  let editorTheme = light_mitsuketa_tribute;
+  let editorTheme = dark_vscode_tribute;
   let editorStyle = {
     p: 1,
     color: 'primary.border',

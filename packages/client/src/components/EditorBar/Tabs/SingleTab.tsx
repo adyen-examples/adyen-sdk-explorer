@@ -15,7 +15,7 @@ export const SingleTab = (props: any) => {
     dispatch(action(value));
   };
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
-  const style = { flex: 1, display: 'flex', flexDirection: 'column', height: 0 };
+  const style = { flex: 1, display: 'flex', flexDirection: 'column', height: 0, bgcolor: 'background.default' };
   let singleTabData = null;
   switch (step) {
     case 'checkout':

@@ -49,7 +49,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
             setOpen(true);
           }}
         >
-          <AutorenewIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          <AutorenewIcon sx={{ fontSize: '17px', fontWeight: 'bold', color: 'secondary.main' }} />
         </IconButton>
         <Dialog
           open={open}
@@ -85,7 +85,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
             navigator.clipboard.writeText(clipboardText);
           }}
         >
-          <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold', color: 'secondary.main' }} />
         </IconButton>
       </Grid>
     </Grid>

@@ -48,7 +48,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
       {productsKeys.length > 0 && (
         <List>
           <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-            <Typography sx={{ color: `${!page ? 'white' : 'black'}` }} variant="h6">
+            <Typography sx={{ color: `${!page ? 'primary.light' : 'primary.dark'}` }} variant="h6">
               Home
             </Typography>
           </ListItemButton>
@@ -75,7 +75,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
               <Box key={product}>
                 <ListItem disablePadding>
                   <ListItemButton disabled={selected} sx={buttonStyle} onClick={(e: any) => handleClick(products[product].txVariant)}>
-                    <Typography sx={{ ml: 2, color: `${selected ? 'white' : 'black'}` }} variant="h6">
+                    <Typography sx={{ ml: 2, color: `${selected ? 'primary.light' : 'primary.dark'}` }} variant="h6">
                       {product}
                     </Typography>
                   </ListItemButton>

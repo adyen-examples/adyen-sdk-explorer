@@ -15,6 +15,7 @@ export const MultiTab: any = (props: any) => {
     flexDirection: 'column',
     height: 0,
     flex: 1,
+    bgcolor: 'background.default',
     '#state-tab': {
       display: 'flex',
       flexDirection: 'column',
@@ -98,7 +99,7 @@ export const MultiTab: any = (props: any) => {
       </Box>
       <TabPanel value={tab} index={0}>
         <Fade timeout={500} in={tab === 0}>
-          <Box>
+          <Box sx={{ bgcolor: 'background.default' }}>
             <CodeTab checkout={checkout} local={local} txVariant={txVariant} />
           </Box>
         </Fade>

@@ -19,8 +19,8 @@ export const DesktopNavButtons = (props: NavButtonsProps) => {
       display: 'inline-block'
     },
     '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
-    '#next-button': { ml: 0.5 },
-    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } }
+    '#next-button': { ml: 0.5, '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
+    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'primary.light', color: 'success.main' } }
   };
 
   const runStepAction = () => {
