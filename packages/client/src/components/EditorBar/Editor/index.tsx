@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import JSONInput from 'react-json-editor-ajrm';
 import { dark_vscode_tribute, light_mitsuketa_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../../CheckoutBuilder/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 type EditorProps = {
   configuration: OnDeckPropType;
@@ -13,7 +15,8 @@ type EditorProps = {
 type HandleChange = (e: any) => void;
 
 export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
-  let editorTheme = dark_vscode_tribute;
+  const { theme } = useSelector((state: RootState) => state.onDeck);
+  let editorTheme = theme === 'dark' ? dark_vscode_tribute : light_mitsuketa_tribute;
   let editorStyle = {
     p: 1,
     color: 'primary.border',

@@ -27,7 +27,9 @@ export const lightThemeOptions: any = {
     },
     info: {
       main: '#0048b3',
-      required: '#ff9800'
+      required: '#ff9800',
+      icon: '#0abf53',
+      text: '#09ae4c'
     }
   },
   typography: {

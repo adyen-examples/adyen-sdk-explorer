@@ -1,11 +1,15 @@
 import { AppBar, Box, Button, Toolbar, IconButton, Drawer, Typography } from '@mui/material';
-import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
+import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
+import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { theme } = useSelector((state: RootState) => state.onDeck);
 
   const links = [
     { title: 'Documentation', url: 'https://docs.adyen.com/' },
@@ -42,9 +46,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                 <MenuIcon />
               </IconButton>
             </Box>
-            <Box sx={{ flexGrow: 1 }}>
-              <AdyenLogo />
-            </Box>
+            <Box sx={{ flexGrow: 1 }}>{theme === 'dark' ? <AdyenLogoDark /> : <AdyenLogoLight />}</Box>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {links.map((link: any) => (
                 <Button
@@ -76,7 +78,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
           onClose={handleOpenNavMenu}
           sx={{ width: `${drawerWidth - 100}px`, '.MuiDrawer-paper': { position: 'initial' } }}
         >
-          <Sidebar headerHeight={'-5'} page={page} />
+          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>

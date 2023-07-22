@@ -51,11 +51,13 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
-      <Box id="main-content" sx={style} component="main">
-        <Main txvariant={selectedProduct} />
+      <Box>
+        <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
+        <Box id="main-content" sx={style} component="main">
+          <Main txvariant={selectedProduct} />
+        </Box>
+        {!isHome && <EditorBar dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
       </Box>
-      {!isHome && <EditorBar dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
     </Box>
   );
 };

@@ -2,7 +2,7 @@ import { Grid, Typography, Box, Link } from '@mui/material';
 
 export const LinksGrid = ({ links }: any) => {
   return (
-    <Grid container justifyContent="space-around" sx={{ py: 6 }}>
+    <Grid container justifyContent="space-around" sx={{ py: 3, px: 3 }}>
       {links.map((category: any) => (
         <Grid key={category.title} item xs={12} md={5}>
           <Typography variant="h4">{category.title}</Typography>

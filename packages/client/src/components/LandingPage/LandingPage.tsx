@@ -208,7 +208,7 @@ export const LandingPage = () => {
       <LogosGrid
         logos={logos}
         sx={{
-          bgcolor: 'primary.light',
+          bgcolor: 'background.default',
           px: 2,
           color: 'primary.light',
           '#logo': { color: 'rgb(10, 191, 83)' },
