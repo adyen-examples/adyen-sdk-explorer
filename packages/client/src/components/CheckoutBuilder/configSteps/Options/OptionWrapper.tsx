@@ -40,7 +40,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
   const isChecked = value !== undefined;
 
   return (
-    <Grid direction="column" container sx={{ a: { color: '#06f', textDecoration: 'none' } }}>
+    <Grid direction="column" container sx={{ a: { color: 'primary.main', textDecoration: 'none' } }}>
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ display: 'inline-block' }} variant="subtitle2">
@@ -52,7 +52,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
             </Typography>
           )}
           {descriptor.required && (
-            <Typography ml={1} sx={{ display: 'inline-block', fontSize: '0.75rem', color: '#ff9800' }} variant="caption">
+            <Typography ml={1} sx={{ display: 'inline-block', fontSize: '0.75rem', color: 'info.required' }} variant="caption">
               Required
             </Typography>
           )}
@@ -68,7 +68,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
       {descriptor.configure !== false && (
         <Grid item xs={12}>
           <Checkbox
-            icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: '#06f' }}>Add parameter</Typography>}
+            icon={<Typography sx={{ fontSize: '0.75rem', p: 0, color: 'primary.main' }}>Add parameter</Typography>}
             checkedIcon={<Typography sx={{ fontSize: '0.75rem' }}>Remove</Typography>}
             name={descriptor.name}
             checked={isChecked}

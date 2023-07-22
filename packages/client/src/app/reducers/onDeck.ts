@@ -66,7 +66,7 @@ const onDeckSlice = createSlice({
       state.sessionsResponse = action.payload;
     },
     updateStyleInfo: (state, action: PayloadAction<any>) => {
-      state.style = { ...state.style, ...action.payload };
+      state.style = action.payload;
     },
     updateAdyenStateInfo: (state, action: PayloadAction<any>) => {
       state.adyenState = action.payload;
@@ -77,6 +77,7 @@ const onDeckSlice = createSlice({
     resetOnDeckInfo: state => {
       const { products, txVariant } = state;
       const style = txVariant === 'dropin' ? defaultDropinStyle : defaultComponentStyle;
+      console.log('Calling reset onDeckInfo and passing this style', style);
       return { ...initialState, style, products, txVariant };
     },
     clearOnDeckInfo: state => {

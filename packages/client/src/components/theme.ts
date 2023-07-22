@@ -1,29 +1,33 @@
-export const themeOptions: any = {
+export const lightThemeOptions: any = {
   palette: {
     primary: {
       main: '#0066ff',
       gray: '#bdbdbd',
       border: '#dce0e5',
       light: '#FFFFFF',
-      shadow: 'rgba(0,17,44,.08)'
+      shadow: 'rgba(0,17,44,.08)',
+      dark: '#000000'
     },
     secondary: {
       main: '#00112C',
       gray: '#F2F6F9',
-      light: '#f3f6f9'
+      light: '#f3f6f9',
+      shadow: 'rgba(0, 102, 255, 0.12)'
     },
     background: {
       paper: '#fff',
       default: '#fff',
       elevation: 20,
-      grey: '#4C4E52'
+      grey: '#4C4E52',
+      shadow: 'rgba(0,17,44,.04)'
     },
     success: {
       main: 'rgb(10, 191, 83)',
       dark: '#026440'
     },
     info: {
-      main: '#0048b3'
+      main: '#0048b3',
+      required: 'ff9800'
     }
   },
   typography: {
@@ -77,6 +81,118 @@ export const themeOptions: any = {
     },
     caption: {
       color: '#69778C',
+      fontSize: '0.8rem'
+    },
+    subtitle1: {
+      fontWeight: 500,
+      fontSize: '1.1rem',
+      fontFamily: 'Roboto, sans-serif'
+    },
+    subtitle2: {
+      fontWeight: 400,
+      fontSize: '.95rem',
+      fontFamily: 'Roboto, sans-serif'
+    }
+  },
+  props: {
+    MuiAppBar: {
+      color: 'default'
+    },
+    MuiList: {
+      dense: true
+    },
+    MuiMenuItem: {
+      dense: true
+    },
+    MuiTable: {
+      size: 'small'
+    }
+  },
+  spacing: 8,
+  shape: {
+    borderRadius: 4
+  }
+};
+
+export const darkThemeOptions: any = {
+  palette: {
+    primary: {
+      main: '#0066ff',
+      gray: '#bdbdbd',
+      border: '#dce0e5',
+      light: '#FFFFFF',
+      shadow: 'rgba(0,17,44,.08)'
+    },
+    secondary: {
+      main: '#00112C',
+      gray: '#F2F6F9',
+      light: '#0c1c38'
+    },
+    background: {
+      paper: '#00112C',
+      default: '#00112C',
+      elevation: 20,
+      grey: '#4C4E52'
+    },
+    success: {
+      main: 'rgb(10, 191, 83)',
+      dark: '#026440'
+    },
+    info: {
+      main: '#0048b3'
+    }
+  },
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+    p: {
+      fontWeight: 500,
+      fontSize: '0.83rem',
+      fontFamily: 'sans-serif',
+      color: '#394962'
+    },
+    body1: {
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '1.1rem',
+      fontWeight: 400,
+      lineHeight: 1.8
+    },
+    body2: {
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '0.9rem',
+      fontWeight: 400,
+      lineHeight: 1.8,
+      color: '#9ba9bd'
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '2.4rem',
+      fontFamily: 'Poppins, sans-serif'
+    },
+    h3: {
+      fontWeight: 600,
+      fontSize: '1.4rem',
+      fontFamily: 'Poppins, sans-serif'
+    },
+    h4: {
+      fontWeight: 'bold',
+      fontSize: '1.1rem',
+      fontFamily: 'sans-serif',
+      color: '#FFFFFF'
+    },
+    h5: {
+      fontWeight: '550',
+      fontSize: '.95rem',
+      fontFamily: 'sans-serif',
+      color: '#FFFFFF'
+    },
+    h6: {
+      fontWeight: '530',
+      fontSize: '0.85rem',
+      fontFamily: 'sans-serif',
+      color: '#9ba9bd'
+    },
+    caption: {
+      color: '#9ba9bd',
       fontSize: '0.8rem'
     },
     subtitle1: {

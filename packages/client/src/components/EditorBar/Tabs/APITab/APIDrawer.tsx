@@ -25,45 +25,45 @@ export const APIDrawer = (props: any) => {
   };
   return (
     <Box {...other}>
-      <Box sx={{ borderBottom: 1, borderColor: '#00112C', bgcolor: 'primary.light' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'secondary.main', bgcolor: 'primary.light' }}>
         <Button sx={{ width: '100%', justifyContent: 'space-between', px: 2, bgcolor: 'secondary.light' }} onClick={handleClick}>
-          <Typography noWrap={true} sx={{ fontSize: '.7rem', color: '#00112C' }} variant="caption">
+          <Typography noWrap={true} sx={{ fontSize: '.7rem', color: 'secondary.main' }} variant="caption">
             {path}
           </Typography>
-          <Box sx={{ color: 'black' }}>
-            {open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
-            {!open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: '#00112C' }} />}
+          <Box sx={{ color: 'primary.dark' }}>
+            {open && <KeyboardArrowUpIcon sx={{ fontSize: '1rem', color: 'secondary.main' }} />}
+            {!open && <KeyboardArrowDownIcon sx={{ fontSize: '1rem', color: 'secondary.main' }} />}
           </Box>
         </Button>
         <Collapse orientation="vertical" in={open} timeout={300}>
           <Box pb={3}>
             {request?.method && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main' }} variant="caption">
                   {`METHOD: ${request.method}`}
                 </Typography>
               </Box>
             )}
             {status && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main' }} variant="caption">
                   {`STATUS: ${'' + status}`}
                 </Typography>
               </Box>
             )}
             {queryParameters && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C', display: 'block' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main', display: 'block' }} variant="caption">
                   {'QUERY PARAMETERS:'}
                 </Typography>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main' }} variant="caption">
                   {queryParameters}
                 </Typography>
               </Box>
             )}
             {request?.body && (
               <Box>
-                <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
+                <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main' }} variant="caption">
                   {`REQUEST: `}
                 </Typography>
               </Box>
@@ -83,7 +83,7 @@ export const APIDrawer = (props: any) => {
               </Box>
             )}
             <Box>
-              <Typography sx={{ fontSize: '.7rem', px: 2, color: '#00112C' }} variant="caption">
+              <Typography sx={{ fontSize: '.7rem', px: 2, color: 'secondary.main' }} variant="caption">
                 {`RESPONSE:`}
               </Typography>
             </Box>

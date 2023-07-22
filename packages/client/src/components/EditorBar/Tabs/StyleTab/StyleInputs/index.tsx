@@ -4,7 +4,7 @@ import { onDeckActions } from '../../../../../app';
 import { useAppDispatch } from '../../../../../hooks';
 
 export const StyleInputs = (props: any) => {
-  const { style, targetClass, ...other } = props;
+  const { style, classStyle, targetClass, ...other } = props;
   const { updateStyleInfo } = onDeckActions;
   const dispatch = useAppDispatch();
 
@@ -35,17 +35,17 @@ export const StyleInputs = (props: any) => {
 
   return (
     <Box {...other}>
-      {Object.keys(style).map((cssProperty: any, i) => {
+      {Object.keys(classStyle).map((cssProperty: any, i) => {
         let styleType = null;
         switch (styleTypes[cssProperty].type) {
           case 'color':
             styleType = (
               <Box>
                 <HuePicker
-                  color={style[cssProperty]}
+                  color={classStyle[cssProperty]}
                   width={'100%'}
                   onChangeComplete={e => {
-                    dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: e.hex } }));
+                    dispatch(updateStyleInfo({ ...style, [targetClass]: { ...classStyle, [cssProperty]: e.hex } }));
                   }}
                 />
               </Box>
@@ -57,7 +57,7 @@ export const StyleInputs = (props: any) => {
                 <Slider
                   aria-label="font size"
                   onChange={(e, value) => {
-                    dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: value } }));
+                    dispatch(updateStyleInfo({ ...style, [targetClass]: { ...classStyle, [cssProperty]: value } }));
                   }}
                   max={40}
                 />
@@ -70,11 +70,11 @@ export const StyleInputs = (props: any) => {
                 <FormControl focused fullWidth size="small" variant="standard">
                   <Select
                     labelId="select-font"
-                    value={style[cssProperty]}
+                    value={classStyle[cssProperty]}
                     label="Font"
                     defaultValue="Roboto, Helvetica, Arial, sans-serif"
                     onChange={e => {
-                      dispatch(updateStyleInfo({ [targetClass]: { ...style, [cssProperty]: e.target.value } }));
+                      dispatch(updateStyleInfo({ ...style, [targetClass]: { ...classStyle, [cssProperty]: e.target.value } }));
                     }}
                   >
                     {styleTypes[cssProperty].values.map((value: any, i: any) => {
@@ -95,13 +95,13 @@ export const StyleInputs = (props: any) => {
 
         return (
           <Box key={i}>
-            <Typography sx={{ fontSize: '.65rem', color: '#00112C' }} variant="caption">
+            <Typography sx={{ fontSize: '.65rem', color: 'secondary.main' }} variant="caption">
               {cssProperty}
             </Typography>
             <Box
               sx={{
                 color: 'primary.light !important',
-                '.MuiInput-root': { fontSize: '.9rem', color: '#00112C', svg: { color: 'primary.light' } }
+                '.MuiInput-root': { fontSize: '.9rem', color: 'secondary.main', svg: { color: 'primary.light' } }
               }}
             >
               {styleType}

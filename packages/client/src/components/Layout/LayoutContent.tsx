@@ -18,6 +18,7 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
     position: 'fixed',
     top: '0',
     bottom: '0',
+    bgcolor: 'background.default',
     width: {
       xs: '100%',
       sm: '100%',

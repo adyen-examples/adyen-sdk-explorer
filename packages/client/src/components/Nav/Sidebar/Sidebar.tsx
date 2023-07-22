@@ -11,12 +11,10 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const selectedButtonStyle = {
     bgcolor: 'primary.main',
     borderRadius: 1,
-    color: '#FFFFFF',
     opacity: '1 !important'
   };
   const nonselectedButtonStyle = {
-    '&:hover': { bgcolor: 'rgba(0, 102, 255, 0.12)', borderRadius: 1 },
-    color: '#000000'
+    '&:hover': { bgcolor: 'secondary.shadow', borderRadius: 1 },
   };
 
   const handleClick = (txvariant: any) => {

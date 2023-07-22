@@ -27,7 +27,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
     <Box>
       <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
         <Box
-          bgcolor="white"
+          bgcolor="primary.light"
           sx={{
             borderBottom: 1,
             borderColor: 'primary.border',
@@ -61,7 +61,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                   </Typography>
                 </Button>
               ))}
-              <Button sx={{ color: '#08be52', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
+              <Button sx={{ color: 'success.main', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
             </Box>
           </Toolbar>
         </Box>

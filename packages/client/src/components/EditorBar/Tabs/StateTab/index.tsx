@@ -1,23 +1,25 @@
-import { Box } from '@mui/material';
 import { EditorPrePostFix } from '../../EditorPrePostFix';
 
 export const StateTab = (props: any) => {
   const { adyenComponent, ...other } = props;
+  const style = {
+    '#json-editor-outer-box': {
+      height: 'auto !important'
+    },
+    '#json-editor-labels': { display: 'none !important' }
+  };
 
   return (
-    <Box {...other}>
-      {adyenComponent && (
-        <Box p={2}>
-          <EditorPrePostFix
-            data={adyenComponent}
-            handleEditorUpdate={(value: any) => {
-              console.log(value);
-            }}
-            viewOnly={true}
-            color="light"
-          />
-        </Box>
-      )}
-    </Box>
+    <EditorPrePostFix
+      {...other}
+      sx={style}
+      p={2}
+      data={adyenComponent}
+      handleEditorUpdate={(value: any) => {
+        console.log(value);
+      }}
+      viewOnly={true}
+      color="light"
+    />
   );
 };

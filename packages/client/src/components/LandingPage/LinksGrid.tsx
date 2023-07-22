@@ -13,7 +13,7 @@ export const LinksGrid = ({ links }: any) => {
               </Typography>
               {subcategory.links.map((link: any) => (
                 <Box key={link.title} sx={{ pt: 2 }}>
-                  <Typography variant="subtitle2" sx={{ color: '#69778C' }}>
+                  <Typography variant="subtitle2" sx={{ color: 'caption.color' }}>
                     <Link underline="none" href={link.url}>
                       {link.title}
                     </Link>

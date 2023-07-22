@@ -212,8 +212,8 @@ export const LandingPage = () => {
           px: 2,
           color: 'primary.light',
           '#logo': { color: 'rgb(10, 191, 83)' },
-          '#step-title': { color: '#00112C' },
-          '#step-description': { color: '#00112C' }
+          '#step-title': { color: 'secondary.main' },
+          '#step-description': { color: 'secondary.main' }
         }}
       />
       <Divider />

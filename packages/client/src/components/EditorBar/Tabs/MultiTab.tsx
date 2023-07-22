@@ -11,6 +11,28 @@ export const MultiTab: any = (props: any) => {
   const { checkout, local, txVariant, adyenState, ...other } = props;
   const MultiTabStyle = {
     overflow: 'scroll',
+    display: 'flex',
+    flexDirection: 'column',
+    height: 0,
+    flex: 1,
+    '#state-tab': {
+      display: 'flex',
+      flexDirection: 'column',
+      height: 0,
+      flex: 1
+    },
+    '#state-tab .MuiBox-root': {
+      display: 'flex',
+      flexDirection: 'column',
+      height: 0,
+      flex: 1
+    },
+    '#state-tab #fade-container': {
+      display: 'flex',
+      flexDirection: 'column',
+      height: 0,
+      flex: 1
+    },
     '#multi-tab-header .MuiTabs-indicator': { display: 'none' },
     '#multi-tab-header .MuiButtonBase-root': {
       minHeight: '0px',
@@ -41,8 +63,8 @@ export const MultiTab: any = (props: any) => {
   };
 
   return (
-    <Box sx={MultiTabStyle} {...other}>
-      <Box id="multi-tab-header">
+    <Box sx={MultiTabStyle} {...other} id="multi-tab">
+      <Box id="multi-tab-header" sx={{ color: 'secondary.main' }}>
         <Tabs onChange={handleChange} value={tab} centered>
           <Tab
             label={
@@ -50,7 +72,6 @@ export const MultiTab: any = (props: any) => {
                 js
               </Typography>
             }
-            sx={{ color: '#00112C' }}
           />
           <Tab
             label={
@@ -58,7 +79,6 @@ export const MultiTab: any = (props: any) => {
                 css
               </Typography>
             }
-            sx={{ color: '#00112C' }}
           />
           <Tab
             label={
@@ -66,7 +86,6 @@ export const MultiTab: any = (props: any) => {
                 api
               </Typography>
             }
-            sx={{ color: '#00112C' }}
           />
           <Tab
             label={
@@ -74,7 +93,6 @@ export const MultiTab: any = (props: any) => {
                 logs
               </Typography>
             }
-            sx={{ color: '#00112C' }}
           />
         </Tabs>
       </Box>
@@ -99,8 +117,8 @@ export const MultiTab: any = (props: any) => {
           </Box>
         </Fade>
       </TabPanel>
-      <TabPanel value={tab} index={3}>
-        <Fade timeout={500} in={tab === 3}>
+      <TabPanel id="state-tab" value={tab} index={3}>
+        <Fade className="fade-container" timeout={500} in={tab === 3}>
           <Box>
             <StateTab adyenComponent={adyenState} />
           </Box>

@@ -37,7 +37,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
     <Grid justifyContent="space-between" alignItems="flex-start" sx={style} container>
       <Grid item xs={6}>
         <Box id="single-tab-header">
-          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#00112c' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'secondary.main' }}>
             {title}
           </Typography>
         </Box>

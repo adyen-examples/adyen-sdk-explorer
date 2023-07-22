@@ -8,7 +8,7 @@ export const ReviewContent = (props: BoxProps) => {
   const { ...other } = props;
   const reviewContentStyle = {
     '.content-link-style': { bgcolor: 'secondary.light', px: 0.6, py: 0.5, borderRadius: 1, color: 'primary.main' },
-    '#review-content': { a: { color: '#06f', textDecoration: 'none' } },
+    '#review-content': { a: { color: 'primary.main', textDecoration: 'none' } },
     '#review-component-base': {
       backgroundColor: 'secondary.light',
       boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',

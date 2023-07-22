@@ -10,7 +10,7 @@ export const StyleEditor = (props: any) => {
       maxHeight: '50vh'
     }
   };
-
+  
   return (
     <Box sx={editorStyle}>
       <Box p={2}>

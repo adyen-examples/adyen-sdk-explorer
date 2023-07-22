@@ -5,9 +5,9 @@ import { API_URL } from '../config';
 import { useAppDispatch } from '../hooks';
 import type { RequestOptions } from '../hooks/types';
 import ApplicationRouter from './AppRouter';
-import { themeOptions } from './theme';
+import { darkThemeOptions, lightThemeOptions } from './theme';
 
-const theme = createTheme(themeOptions);
+const theme = createTheme(lightThemeOptions);
 const { updateProductsInfo } = onDeckActions;
 
 const Application = () => {
