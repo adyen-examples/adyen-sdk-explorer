@@ -49,6 +49,7 @@ Open Items:
 38. Fix the copy functionality
 39. Add adyen state to redirect component config
 41. Add theme changer
+42. Bug if you add a parameter then switch themes, it doesnt change the json editor
 
 
 

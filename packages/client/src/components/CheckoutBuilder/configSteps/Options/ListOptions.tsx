@@ -55,7 +55,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   return (
     <Grid container>
       {!isInViewport && (
-        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: "35%",md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
+        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
           <Fab
             variant="extended"
             size="medium"
@@ -65,7 +65,10 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <Typography variant="h6" sx={{ color: 'primary.light', textTransform: 'capitalize', fontWeight:'bold' }}>
+            <Typography
+              variant="h6"
+              sx={{ color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }}
+            >
               {name} Parameters
             </Typography>
             <KeyboardArrowDownIcon />

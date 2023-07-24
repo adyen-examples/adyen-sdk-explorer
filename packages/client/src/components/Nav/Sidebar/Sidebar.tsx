@@ -1,9 +1,9 @@
-import { Box, Drawer, List, ListItem, ListItemButton, Typography, CircularProgress, Switch } from '@mui/material';
+import { Box, CircularProgress, Drawer, List, ListItem, ListItemButton, Switch, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../../store';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
+import { RootState } from '../../../store';
 
 const { updateTheme } = onDeckActions;
 
@@ -46,6 +46,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
         }}
         variant="permanent"
         anchor="left"
+        id="sidebar-nav"
       >
         {productsKeys.length === 0 && (
           <Box sx={{ textAlign: 'center', mt: '40vh' }}>
@@ -115,7 +116,6 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
           onChange={e => {
             dispatch(updateTheme(e.target.value === 'dark' ? 'light' : 'dark'));
           }}
-          size="small"
           defaultChecked
           value={theme}
         />
