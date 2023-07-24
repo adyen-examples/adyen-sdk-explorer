@@ -10,7 +10,7 @@ interface LayoutContentProps {
 export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProps) => {
   const drawerWidth = 380;
   const headerHeight = 64;
-  const navButtonHeight = 40;
+  const navButtonHeight = 60;
   const isHome = selectedProduct ? false : true;
   const editorWidth = isHome ? 0 : 420;
 
@@ -18,7 +18,7 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
     position: 'fixed',
     top: '0',
     bottom: '0',
-    // width: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
+    bgcolor: 'background.default',
     width: {
       xs: '100%',
       sm: '100%',
@@ -51,11 +51,13 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
-      <Box id="main-content" sx={style} component="main">
-        <Main txvariant={selectedProduct} />
+      <Box>
+        <Navbar drawerWidth={drawerWidth} headerHeight={headerHeight} page={selectedProduct} />
+        <Box id="main-content" sx={style} component="main">
+          <Main txvariant={selectedProduct} />
+        </Box>
+        {!isHome && <EditorBar dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
       </Box>
-      {!isHome && <EditorBar dimensions={{ buttonHeight: navButtonHeight, headerHeight: headerHeight, editorWidth: editorWidth }} />}
     </Box>
   );
 };

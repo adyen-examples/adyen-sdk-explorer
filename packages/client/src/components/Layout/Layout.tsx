@@ -50,7 +50,7 @@ export const Layout = ({ main: Main }: any) => {
   if (!isEmpty(products) && !pathParamInProducts(products, productParam) && !isHome) {
     navigate('/error');
   }
-  
+
   return (
     <ErrorBoundary fallback={<NotFound />}>
       <LayoutContent main={Main} selectedProduct={productParam} />

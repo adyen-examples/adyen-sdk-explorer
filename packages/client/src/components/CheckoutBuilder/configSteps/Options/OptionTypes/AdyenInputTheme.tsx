@@ -3,20 +3,15 @@ import { styled } from '@mui/material/styles';
 
 export const AdyenInputTheme = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
-    borderRadius: 0,
-    position: 'relative',
+    borderRadius: 3,
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #0066ff',
-    fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
-    padding: '1px 1px 1px 1px',
+    border: '1px solid',
+    fontSize: '.90rem',
+    fontWeight: '400',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     fontFamily: theme.typography.subtitle2.fontFamily,
-    color: theme.palette.primary.main,
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
-    }
+    paddingLeft: '0.5rem',
+    borderColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main
   }
 }));

@@ -5,13 +5,18 @@ import { API_URL } from '../config';
 import { useAppDispatch } from '../hooks';
 import type { RequestOptions } from '../hooks/types';
 import ApplicationRouter from './AppRouter';
-import { themeOptions } from './theme';
+import { darkThemeOptions, lightThemeOptions } from './theme';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
-const theme = createTheme(themeOptions);
+const theme = createTheme(darkThemeOptions);
 const { updateProductsInfo } = onDeckActions;
 
 const Application = () => {
   const dispatch = useAppDispatch();
+  const { theme } = useSelector((state: RootState) => state.onDeck);
+  const appTheme = theme === 'dark' ? createTheme(darkThemeOptions) : createTheme(lightThemeOptions);
+
   useEffect(() => {
     const requestOptions: RequestOptions = {
       method: 'GET',
@@ -37,7 +42,7 @@ const Application = () => {
 
   return (
     <div id="app">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={appTheme}>
         <ApplicationRouter />
       </ThemeProvider>
     </div>

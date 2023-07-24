@@ -19,6 +19,7 @@ export interface OnDeckState {
   style: OnDeckPropType | {};
   adyenState: OnDeckPropType | {};
   txvariant?: string;
+  theme?: string;
   steps: StepsType[];
   [key: string]: any;
 }
@@ -34,7 +35,8 @@ const initialState: OnDeckState = {
   activeStep: 0,
   isRedirect: false,
   style: {},
-  adyenState: {}
+  adyenState: {},
+  theme: localStorage.getItem('style') || 'dark'
 };
 
 const onDeckSlice = createSlice({
@@ -66,7 +68,7 @@ const onDeckSlice = createSlice({
       state.sessionsResponse = action.payload;
     },
     updateStyleInfo: (state, action: PayloadAction<any>) => {
-      state.style = { ...state.style, ...action.payload };
+      state.style = action.payload;
     },
     updateAdyenStateInfo: (state, action: PayloadAction<any>) => {
       state.adyenState = action.payload;
@@ -74,10 +76,14 @@ const onDeckSlice = createSlice({
     updateProductsInfo: (state, action: PayloadAction<any>) => {
       state.products = action.payload;
     },
+    updateTheme: (state, action: PayloadAction<any>) => {
+      localStorage.setItem('style', action.payload);
+      state.theme = action.payload;
+    },
     resetOnDeckInfo: state => {
-      const { products, txVariant } = state;
+      const { products, txVariant, theme } = state;
       const style = txVariant === 'dropin' ? defaultDropinStyle : defaultComponentStyle;
-      return { ...initialState, style, products, txVariant };
+      return { ...initialState, theme, style, products, txVariant };
     },
     clearOnDeckInfo: state => {
       let { products } = state;

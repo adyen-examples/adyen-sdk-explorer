@@ -15,7 +15,7 @@ export const SingleTab = (props: any) => {
     dispatch(action(value));
   };
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckActions;
-
+  const style = { flex: 1, display: 'flex', flexDirection: 'column', height: 0, bgcolor: 'background.default' };
   let singleTabData = null;
   switch (step) {
     case 'checkout':
@@ -33,9 +33,8 @@ export const SingleTab = (props: any) => {
     case 'local':
       singleTabData = {
         title: 'JS',
-        prefix: `const checkout = await AdyenCheckout({...});
+        prefix: `const checkout = await AdyenCheckout({...});        
 
-        
 checkout.create('${txVariant}',`,
         postfix: ');',
         handler: (value: any) => {
@@ -69,7 +68,7 @@ checkout.create('${txVariant}',`,
   };
 
   return (
-    <Box {...other}>
+    <Box sx={style} {...other}>
       <SingleTabHeader
         title={singleTabData?.title}
         clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}

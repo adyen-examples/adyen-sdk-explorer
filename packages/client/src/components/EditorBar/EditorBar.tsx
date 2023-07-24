@@ -29,64 +29,45 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
 
   let desktopStyle = {
     position: 'fixed',
-    overflow: 'scroll',
-    top: 0,
+    top: `${headerHeight}px`,
+    bottom: `${buttonHeight}px`,
     right: 0,
     borderLeft: 2,
     borderColor: 'secondary.light',
     bgcolor: 'primary.light',
     color: 'secondary.main',
-    height: `calc(100% - ${headerHeight}px)`,
-    mt: `${headerHeight}px`,
-    pb: `${buttonHeight}px`,
+    height: `calc(100% - ${headerHeight}px - ${buttonHeight}px)`,
+    maxHeight: `calc(100% - ${headerHeight}px - ${buttonHeight}px)`,
     display: {
       xs: 'none',
       sm: 'none',
-      md: 'block',
-      lg: 'block',
-      xl: 'block'
+      md: 'flex',
+      lg: 'flex',
+      xl: 'flex'
     },
+    flexDirection: 'column',
     width: `${editorWidth}px`,
     '#icon-button': {
       color: 'success.main'
     },
     '#desktop-button-container': {
       position: 'fixed',
-      bottom: '1vh',
+      height: `${buttonHeight}px`,
+      bottom: 0,
       right: 0,
       width: `${editorWidth}px`,
-      bgcolor: 'primary.light',
+      bgcolor: 'background.default',
       color: 'secondary.main',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       borderLeft: 2,
+      borderTop: 2,
       borderColor: 'secondary.light',
-      px: 1
-    },
-    '#desktop-nav': {
-      display: 'inline-block'
-    },
-    '#reset-button': {
-      py: 0,
-      display: {
-        xs: 'none',
-        sm: 'none',
-        md: 'block',
-        lg: 'block',
-        xl: 'block'
-      }
-    },
-    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
-    '#next-button': { ml: 0.5 },
-    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'success.dark' } },
-    '#reset-button-icon': { fontSize: '25px', fontWeight: 'bolder', color: 'primary.main' }
+      pl: 1,
+      pr: 2
+    }
   };
-
-  //      '#mobile-nav': { position: 'fixed', bottom: 20, right: 30, display: { xs: 'inline-block', md: 'none' } },
-  //     '#mobile-nav-buttons': {
-  //bgcolor: 'secondary.gray'
-  //},
 
   const mobileStyle = {
     position: 'fixed',

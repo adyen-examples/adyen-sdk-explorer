@@ -1,23 +1,32 @@
 import { Box } from '@mui/material';
 import JSONInput from 'react-json-editor-ajrm';
-import { light_mitsuketa_tribute, dark_vscode_tribute, localeEn } from '../../../helpers/jsonEditor';
+import { dark_vscode_tribute, light_mitsuketa_tribute, localeEn } from '../../../helpers/jsonEditor';
 import type { OnDeckPropType } from '../../CheckoutBuilder/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 type EditorProps = {
   configuration: OnDeckPropType;
   handleJsonEditorUpdate: (e: any) => void;
   viewOnly: boolean;
-  color?: string;
+  sx?: any;
 };
 
 type HandleChange = (e: any) => void;
 
-export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color }: EditorProps) => {
-  let editorTheme = dark_vscode_tribute;
-
-  if (color && color === 'light') {
-    editorTheme = light_mitsuketa_tribute;
-  }
+export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: EditorProps) => {
+  const { theme } = useSelector((state: RootState) => state.onDeck);
+  let editorTheme = theme === 'dark' ? dark_vscode_tribute : light_mitsuketa_tribute;
+  let editorStyle = {
+    p: 1,
+    color: 'primary.border',
+    border: 1,
+    bgcolor: 'secondary.light',
+    svg: { display: 'none' },
+    borderRadius: 1,
+    overflow: 'scroll',
+    '[name="labels"]': { width: '35px !important' }
+  };
 
   const handleChange: HandleChange = e => {
     const { error, jsObject } = e;
@@ -28,28 +37,17 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate, color 
   };
 
   return (
-    <Box
-      sx={{
-        p: 1,
-        bgcolor: `${color === 'light' ? '#f3f6f9' : '#00112C'}`,
-        color: `${color === 'light' ? '#dce0e5' : 'primary.light'}`,
-        border: 1,
-        svg: { display: 'none' },
-        borderRadius: 1,
-        '[name="labels"]': { width: '35px !important' },
-        minHeight: '25vh'
-      }}
-      id="editor"
-    >
+    <Box sx={{ ...editorStyle }} id="editor">
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}
         colors={editorTheme}
         locale={localeEn}
-        height="100%"
         width="100%"
+        height="100%"
         viewOnly={viewOnly}
         style={{ body: { fontSize: '0.8rem' } }}
+        id="json-editor"
       />
     </Box>
   );

@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
-  color: theme.palette.grey[700],
+  color: theme.palette.grey[400],
   zIndex: 1,
   height: 50,
   display: 'flex',

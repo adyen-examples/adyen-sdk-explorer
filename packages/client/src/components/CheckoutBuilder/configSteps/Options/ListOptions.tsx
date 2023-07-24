@@ -55,7 +55,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   return (
     <Grid container>
       {!isInViewport && (
-        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: "35%",md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
+        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
           <Fab
             variant="extended"
             size="medium"
@@ -65,7 +65,10 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <Typography variant="caption" sx={{ color: 'primary.light' }}>
+            <Typography
+              variant="h6"
+              sx={{ color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }}
+            >
               {name} Parameters
             </Typography>
             <KeyboardArrowDownIcon />
@@ -81,7 +84,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
         xs={12}
         sx={{
           backgroundColor: 'secondary.light',
-          boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+          boxShadow: '0 8px 8px background.shadow, 0 2px 4px primary.shadow',
           position: 'sticky',
           top: 0,
           zIndex: 1
@@ -89,7 +92,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
       >
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#00112c' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'secondary.main' }}>
               {category}
             </Typography>
           </Grid>
@@ -108,7 +111,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: '#00112c', fontWeight: '300' }} variant="caption">
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' }} variant="caption">
                     Required
                   </Typography>
                 }
@@ -126,7 +129,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: '#00112c', fontWeight: '300' }} variant="caption">
+                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' }} variant="caption">
                     Optional
                   </Typography>
                 }

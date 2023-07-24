@@ -17,27 +17,27 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const style = {
+    bgcolor: 'secondary.light',
+    px: 4,
+    pt: 0.8,
+    boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+    '#single-tab-header': {
+      bgcolor: 'secondary.light',
+      px: 1,
+      py: 1,
+      display: 'inline-block',
+      width: '80px',
+      textAlign: 'left',
+      color: 'secondary.main'
+    }
+  };
 
   return (
-    <Grid
-      justifyContent="space-between"
-      alignItems="flex-start"
-      sx={{ bgcolor: 'secondary.light', px: 4, pt: 0.8, boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)' }}
-      container
-    >
+    <Grid justifyContent="space-between" alignItems="flex-start" sx={style} container>
       <Grid item xs={6}>
-        <Box
-          sx={{
-            bgcolor: 'secondary.light',
-            px: 1,
-            py: 1,
-            display: 'inline-block',
-            width: '80px',
-            textAlign: 'left',
-            color: 'secondary.main'
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#00112c' }}>
+        <Box id="single-tab-header">
+          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'secondary.main' }}>
             {title}
           </Typography>
         </Box>
@@ -49,7 +49,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
             setOpen(true);
           }}
         >
-          <AutorenewIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          <AutorenewIcon sx={{ fontSize: '17px', fontWeight: 'bold', color: 'secondary.main' }} />
         </IconButton>
         <Dialog
           open={open}
@@ -85,7 +85,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
             navigator.clipboard.writeText(clipboardText);
           }}
         >
-          <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold' }} />
+          <ContentCopyIcon sx={{ fontSize: '17px', fontWeight: 'bold', color: 'secondary.main' }} />
         </IconButton>
       </Grid>
     </Grid>

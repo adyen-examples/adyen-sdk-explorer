@@ -1,11 +1,15 @@
 import { AppBar, Box, Button, Toolbar, IconButton, Drawer, Typography } from '@mui/material';
-import { ReactComponent as AdyenLogo } from '../../../assets/adyen-logo.svg';
+import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
+import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { theme } = useSelector((state: RootState) => state.onDeck);
 
   const links = [
     { title: 'Documentation', url: 'https://docs.adyen.com/' },
@@ -27,10 +31,10 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
     <Box>
       <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
         <Box
-          bgcolor="white"
+          bgcolor="background.default"
           sx={{
             borderBottom: 1,
-            borderColor: 'primary.border',
+            borderColor: 'secondary.light',
             boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
             px: 2,
             '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } }
@@ -42,9 +46,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                 <MenuIcon />
               </IconButton>
             </Box>
-            <Box sx={{ flexGrow: 1 }}>
-              <AdyenLogo />
-            </Box>
+            <Box sx={{ flexGrow: 1 }}>{theme === 'dark' ? <AdyenLogoDark /> : <AdyenLogoLight />}</Box>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {links.map((link: any) => (
                 <Button
@@ -61,7 +63,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                   </Typography>
                 </Button>
               ))}
-              <Button sx={{ color: '#08be52', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
+              <Button sx={{ color: 'success.main', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
             </Box>
           </Toolbar>
         </Box>
@@ -76,7 +78,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
           onClose={handleOpenNavMenu}
           sx={{ width: `${drawerWidth - 100}px`, '.MuiDrawer-paper': { position: 'initial' } }}
         >
-          <Sidebar headerHeight={'-5'} page={page} />
+          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>
