@@ -44,6 +44,26 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
 
   let emptyDisplay;
 
+  const style = {
+    '#list-parameters': {
+      backgroundColor: 'secondary.light',
+      boxShadow: '0 8px 8px background.shadow, 0 2px 4px primary.shadow',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1
+    },
+    '#floating-button': {
+      position: 'fixed',
+      bottom: 10,
+      left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' },
+      textAlign: 'center',
+      zIndex: 2,
+      '&:hover': { color: 'primary.main' }
+    },
+    '.required-label': { display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' },
+    '#parameter-title': { color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }
+  };
+
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
@@ -53,43 +73,27 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   }
 
   return (
-    <Grid container>
+    <Grid sx={style} container>
       {!isInViewport && (
-        <Box sx={{ position: 'fixed', bottom: 10, left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' }, textAlign: 'center', zIndex: 2 }}>
+        <Box id="floating-button">
           <Fab
             variant="extended"
             size="medium"
             color="primary"
             aria-label="add"
+            sx={{ '&:hover': { color: 'primary.main' } }}
             onClick={() => {
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{ color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }}
-            >
+            <Typography variant="h6" id="parameter-title">
               {name} Parameters
             </Typography>
             <KeyboardArrowDownIcon />
           </Fab>
         </Box>
       )}
-      <Grid
-        item
-        ref={parametersRef}
-        px={7}
-        py={1.4}
-        mt={2}
-        xs={12}
-        sx={{
-          backgroundColor: 'secondary.light',
-          boxShadow: '0 8px 8px background.shadow, 0 2px 4px primary.shadow',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1
-        }}
-      >
+      <Grid item ref={parametersRef} px={7} py={1.4} mt={2} xs={12} id="list-parameters">
         <Grid direction="row" justifyContent="space-between" container>
           <Grid item>
             <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'secondary.main' }}>
@@ -111,7 +115,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' }} variant="caption">
+                  <Typography className="required-label" variant="caption">
                     Required
                   </Typography>
                 }
@@ -129,7 +133,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   />
                 }
                 label={
-                  <Typography sx={{ display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' }} variant="caption">
+                  <Typography className="required-label" variant="caption">
                     Optional
                   </Typography>
                 }

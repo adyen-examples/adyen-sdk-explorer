@@ -42,15 +42,15 @@ Complete:
 35. (Complete) Update review tab with links
 34. (Complete) Ensure it is responsive
 40. (Complete) Fix the CSS component so that it consistently starts with the correct CSS
+38. (Complete) Fix the copy functionality
+41. (Complete) Add theme changer
+28. (Complete) Refactor CSS
 
 Open Items:
 17. (In progress) Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
-28. (In progress) Refactor CSS
-38. Fix the copy functionality
 39. Add adyen state to redirect component config
-41. Add theme changer
 42. Bug if you add a parameter then switch themes, it doesnt change the json editor
-
+43. Fix component page css on wide monitor
 
 
 Nice to haves:

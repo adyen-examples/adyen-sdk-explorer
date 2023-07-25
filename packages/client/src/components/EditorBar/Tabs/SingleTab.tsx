@@ -69,11 +69,7 @@ checkout.create('${txVariant}',`,
 
   return (
     <Box sx={style} {...other}>
-      <SingleTabHeader
-        title={singleTabData?.title}
-        clipboardText={`${singleTabData?.prefix + JSON.stringify(singleTabData?.payload) + singleTabData?.postfix}`}
-        txVariant={txVariant}
-      />
+      <SingleTabHeader title={singleTabData?.title} clipboardText={JSON.stringify(singleTabData?.payload)} txVariant={txVariant} />
       {showMessages()}
       {(step === 'checkout' || step === 'local') && <SingleCodeTab {...singleTabData} viewOnly={viewOnly} />}
       {step === 'sessions' && <SingleAPITab {...singleTabData} viewOnly={viewOnly} />}

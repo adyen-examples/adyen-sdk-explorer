@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { onDeckActions } from '../../app';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
 import { useAppDispatch, useCheckout } from '../../hooks';
-import { Alerts } from '../CheckoutBuilder/Alerts';
+import { ObjectOption } from '../CheckoutBuilder/configSteps/Options/OptionTypes';
 import { ConfigurationSession } from './ConfigurationSession';
 
 const { updateAdyenStateInfo } = onDeckActions;
@@ -31,18 +31,10 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
 
   const showMessages = () => {
     return (
-      <Box>
+      <Box mx={7} mt={2}>
         <Collapse orientation="vertical" in={!!error || !!result} timeout={700}>
-          {error && (
-            <Box sx={{ textAlign: 'center' }}>
-              <Alerts severityType={'error'} message={JSON.stringify(error)} />
-            </Box>
-          )}
-          {result && (
-            <Box sx={{ textAlign: 'center' }}>
-              <Alerts severityType={result.status} message={result.resultCode} />
-            </Box>
-          )}
+          {error && <ObjectOption styleType="error" content={JSON.stringify(error)} />}
+          {result && <ObjectOption styleType={result.status} content={result.resultCode} />}
         </Collapse>
         {error && (
           <Box sx={{ textAlign: 'center', mt: 2 }}>

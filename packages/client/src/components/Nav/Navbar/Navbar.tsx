@@ -27,21 +27,32 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const style = {
+    '#app-bar': { width: '100%', maxHeight: `${headerHeight}px` },
+    '#toolbar-container': {
+      borderBottom: 1,
+      bgcolor: 'background.default',
+      borderColor: 'secondary.light',
+      boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
+      px: { md: 0, lg: 2 },
+      '#MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } },
+      Toolbar: { justifyContent: { xs: 'start', md: 'start', lg: 'space-between', xl: 'space-between' } }
+    },
+    '#desktop-side-nav': { flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' } },
+    '#mobile-side-nav': { width: `${drawerWidth}px`, '.MuiDrawer-paper': { position: 'initial' } },
+    '#icon-button': {
+      display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' },
+      svg: { color: 'primary.light', verticalAlign: 'top' },
+      button: { pr: 2, pt: 0 }
+    }
+  };
+
   return (
-    <Box>
-      <AppBar elevation={0} position="fixed" sx={{ width: '100%', maxHeight: `${headerHeight}px` }}>
-        <Box
-          bgcolor="background.default"
-          sx={{
-            borderBottom: 1,
-            borderColor: 'secondary.light',
-            boxShadow: '0 8px 8px rgba(0,17,44,.04), 0 2px 4px rgba(0,17,44,.08)',
-            px: 2,
-            '.MuiToolbar-root': { pl: { xs: 0, md: 0, lg: 2 } }
-          }}
-        >
-          <Toolbar sx={{ justifyContent: { xs: 'start', md: 'start', lg: 'space-between', xl: 'space-between' } }}>
-            <Box sx={{ color: 'secondary.gray', display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' } }}>
+    <Box sx={style}>
+      <AppBar elevation={0} position="fixed" id="app-bar">
+        <Box id="toolbar-container">
+          <Toolbar>
+            <Box id="icon-button">
               <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu}>
                 <MenuIcon />
               </IconButton>
@@ -57,6 +68,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                 >
                   <Typography
                     variant="h6"
+                    className="nav-link"
                     sx={{ textTransform: 'none', fontSize: '0.95rem', fontWeight: `${link.title === 'Test Account' ? 'bold' : 'light'}` }}
                   >
                     {link.title}
@@ -68,16 +80,11 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
           </Toolbar>
         </Box>
       </AppBar>
-      <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' } }}>
+      <Box id="desktop-side-nav">
         <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
       </Box>
       <Box>
-        <Drawer
-          anchor="left"
-          open={isNavOpen}
-          onClose={handleOpenNavMenu}
-          sx={{ width: `${drawerWidth - 100}px`, '.MuiDrawer-paper': { position: 'initial' } }}
-        >
+        <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu} id="mobile-side-nav">
           <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>

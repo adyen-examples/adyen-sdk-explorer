@@ -34,7 +34,7 @@ export const SessionsContent = () => {
       <Grid item xs={12} mt={2}>
         <Typography variant="h6">
           Create a payment session for your{' '}
-          <Link href="https://docs.adyen.com/api-explorer/Checkout/70/post/sessions" className="content-link-style">
+          <Link href="https://docs.adyen.com/api-explorer/Checkout/70/post/sessions" className="content-link-style" id="variant-link">
             {txVariant ? txVariant : '...'}
           </Link>{' '}
           integration.
