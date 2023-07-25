@@ -16,7 +16,8 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const selectedButtonStyle = {
     bgcolor: 'primary.main',
     borderRadius: 1,
-    opacity: '1 !important'
+    opacity: '1 !important',
+    '&:hover': { bgcolor: 'primary.main' }
   };
   const nonselectedButtonStyle = {
     '&:hover': { bgcolor: 'secondary.shadow', borderRadius: 1 }
@@ -26,37 +27,49 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
     navigate(`/${txvariant}`);
   };
 
+  const style = {
+    '#sidebar-nav': {
+      flexShrink: 0,
+      '& .MuiDrawer-paper': {
+        borderRight: 2,
+        borderColor: 'secondary.light',
+        width: drawerWidth,
+        boxSizing: 'border-box',
+        bgcolor: 'background.paper',
+        mt: `calc(${headerHeight}px + 2px)`,
+        pb: `calc(${headerHeight}px + 2px)`,
+        height: `calc(100% - ${headerHeight}px)`,
+        pt: 2,
+        px: 3
+      },
+      '#loading-icon': { textAlign: 'center', mt: '40vh' }
+    },
+    '#theme-switcher': {
+      borderTop: 2,
+      position: 'fixed',
+      bottom: 0,
+      p: 1,
+      bgcolor: 'secondary.light',
+      color: 'secondary.light',
+      zIndex: '1200',
+      display: 'block',
+      textAlign: 'center',
+      width: `calc(${drawerWidth}px - 2px)`
+    }
+  };
+
   return (
-    <Box>
-      <Drawer
-        sx={{
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            borderRight: 2,
-            borderColor: 'secondary.light',
-            width: drawerWidth,
-            boxSizing: 'border-box',
-            bgcolor: 'background.paper',
-            mt: `calc(${headerHeight}px + 2px)`,
-            pb: `calc(${headerHeight}px + 2px)`,
-            height: `calc(100% - ${headerHeight}px)`,
-            pt: 2,
-            px: 3
-          }
-        }}
-        variant="permanent"
-        anchor="left"
-        id="sidebar-nav"
-      >
+    <Box sx={style}>
+      <Drawer variant="permanent" anchor="left" id="sidebar-nav">
         {productsKeys.length === 0 && (
-          <Box sx={{ textAlign: 'center', mt: '40vh' }}>
+          <Box id="loading-icon">
             <CircularProgress />
           </Box>
         )}
         {productsKeys.length > 0 && (
           <List>
             <ListItemButton onClick={(e: any) => handleClick('')} sx={!page ? selectedButtonStyle : nonselectedButtonStyle}>
-              <Typography sx={{ color: `${!page ? 'primary.light' : 'primary.dark'}` }} variant="h6">
+              <Typography pl={2} sx={{ color: `${!page ? 'primary.light' : 'primary.dark'}` }} variant="h6">
                 Home
               </Typography>
             </ListItemButton>
@@ -95,20 +108,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
           </List>
         )}
       </Drawer>
-      <Box
-        sx={{
-          borderTop: 2,
-          position: 'fixed',
-          bottom: 0,
-          p: 1,
-          bgcolor: 'secondary.light',
-          color: 'secondary.light',
-          zIndex: '1200',
-          display: 'block',
-          textAlign: 'center',
-          width: `calc(${drawerWidth}px - 2px)`
-        }}
-      >
+      <Box id="theme-switcher">
         <Typography variant="caption" sx={{ display: 'inline-block', textTransform: 'capitalize' }}>
           {theme} Theme
         </Typography>

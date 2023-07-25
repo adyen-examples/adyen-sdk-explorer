@@ -22,13 +22,13 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
     width: {
       xs: '100%',
       sm: '100%',
-      md: `calc(100% - ${drawerWidth}px)`,
+      md: `calc(100% - ${isHome ? 0 : drawerWidth}px)`,
       lg: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
       xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`
     },
     maxWidth: {
       xs: '100%',
-      md: `calc(100% - ${drawerWidth}px)`,
+      md: `calc(100% - ${isHome ? 0 : drawerWidth}px)`,
       lg: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
       xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`
     },

@@ -1,15 +1,14 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { onDeckActions } from '../app';
 import { API_URL } from '../config';
 import { useAppDispatch } from '../hooks';
 import type { RequestOptions } from '../hooks/types';
+import { RootState } from '../store';
 import ApplicationRouter from './AppRouter';
 import { darkThemeOptions, lightThemeOptions } from './theme';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
 
-const theme = createTheme(darkThemeOptions);
 const { updateProductsInfo } = onDeckActions;
 
 const Application = () => {

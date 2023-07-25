@@ -162,28 +162,43 @@ export const LandingPage = () => {
     }
   ];
 
+  const style = {
+    '#landing-page-about': { display: 'flex', flexWrap: 'wrap-reverse', justifyContent: 'space-between' },
+    '#landing-page-about-text': { mt: 6, mb: 2, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } },
+    '#landing-page-about-image': {
+      alignItems: 'flex-end',
+      alignSelf: 'flex-start',
+      width: '50%',
+      flex: 1,
+      display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' }
+    },
+    '#logos-grid': {
+      bgcolor: 'background.default',
+      px: 2,
+      color: 'primary.light',
+      '#logo': { color: 'rgb(10, 191, 83)' },
+      '#step-title': { color: 'secondary.main' },
+      '#step-description': { color: 'secondary.main' }
+    }
+  };
+
   return (
-    <Box>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap-reverse', justifyContent: 'space-between' }}>
-        <Box
-          component="div"
-          sx={{ mt: 6, mb: 2, ml: 8, mr: { xs: 8, sm: 8, md: 8, lg: 0 }, width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' } }}
-        >
+    <Box sx={style}>
+      <Box id="landing-page-about">
+        <Box component="div" id="landing-page-about-text">
           <Typography variant="h2">
-            Welcome to
+            Welcome to the
             <br />
-            Adyen's SDK Explorer
+            Adyen SDK Explorer
           </Typography>
           <Typography component={'span'} sx={{ mt: 3 }} variant="body2">
-            With Adyen's SDK, you can implement and manage a powerful payments solution with a wide range of features, and customizations. You can
-            pass an optional configuration to satisfy your business needs in the following implementation checkpoints:
+            Configure our components to satisfy your business needs. Pass a parameter in the following implementation checkpoints:
             <ul>
-              <li>Checkout Configuration</li>
-              <li>Component Configuration</li>
-              <li>API Configuration</li>
+              <li>Checkout</li>
+              <li>Component</li>
+              <li>API</li>
             </ul>
-            This application will guide you in passing an optional configuration throughout the implementation checkpoints. Our SDK Explorer enables
-            you to:
+            This application will guide you in passing a configuration throughout the implementation checkpoints. Our SDK Explorer enables you to:
             <ul>
               <li>Quickly configure and construct an Adyen component to your specifications.</li>
               <li>Get up to speed on all of Adyen SDK's optional configurations.</li>
@@ -197,25 +212,12 @@ export const LandingPage = () => {
             </Link>
           </Typography>
         </Box>
-        <Box
-          component="div"
-          sx={{ alignItems: 'flex-end', alignSelf: 'flex-start', width: '50%', flex: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' } }}
-        >
+        <Box component="div" id="landing-page-about-image">
           <img src="https://adyen.getbynder.com/m/be33b14ac185e59/original/help-collections-hero.svg" alt="A girl picking books from a bookshelf." />
         </Box>
       </Box>
       <Divider />
-      <LogosGrid
-        logos={logos}
-        sx={{
-          bgcolor: 'background.default',
-          px: 2,
-          color: 'primary.light',
-          '#logo': { color: 'rgb(10, 191, 83)' },
-          '#step-title': { color: 'secondary.main' },
-          '#step-description': { color: 'secondary.main' }
-        }}
-      />
+      <LogosGrid logos={logos} id="logos-grid" />
       <Divider />
       <LinksGrid links={links} />
     </Box>
