@@ -53,8 +53,8 @@ export const MobileNavButtons = (props: NavButtonsProps) => {
         ariaLabel="Mobile navigation buttons"
         sx={{
           position: 'absolute',
-          bottom: '1.3vh',
-          right: '1vh',
+          bottom: '2vh',
+          right: '0',
           'button.MuiSpeedDial-fab': {
             width: '40px',
             height: '40px',

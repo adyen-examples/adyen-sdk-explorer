@@ -85,7 +85,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
       </Box>
       <Box>
         <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu} id="mobile-side-nav">
-          <Sidebar drawerWidth={drawerWidth} headerHeight={'-5'} page={page} />
+          <Sidebar drawerWidth={drawerWidth - 100} headerHeight={'-5'} page={page} />
         </Drawer>
       </Box>
     </Box>
