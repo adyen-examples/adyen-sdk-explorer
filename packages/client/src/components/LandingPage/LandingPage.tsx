@@ -187,9 +187,9 @@ export const LandingPage = () => {
       <Box id="landing-page-about">
         <Box component="div" id="landing-page-about-text">
           <Typography variant="h2">
-            Welcome to
+            Welcome to the
             <br />
-            Adyen's SDK Explorer
+            Adyen SDK Explorer
           </Typography>
           <Typography component={'span'} sx={{ mt: 3 }} variant="body2">
             Configure our components to satisfy your business needs. Pass a parameter in the following implementation checkpoints:
