@@ -56,11 +56,14 @@ Open Items:
 43. Eventually I need a way to fetch next 100 country currency combination when there are more than 100 pay methods in BO.
 44. In order to launch fast we are going to assume we know the order of the descriptors so that we can extract the dynamic values.
 45. Add select component for descriptors with descriptor with values
-46. Update npm packages and remove vulnerabilities
 47. Record change on adyen checkout library
+48. Set defaultProps onDeck when we fetch paymethod specific configuration, then on reset we set the default values.
+31. Validate the data in sessions matches api explorer, and review local and checkout docs.
+49. Add the merchant account and api key that was created for this project.
 
 Nice to haves:
 10. Create tests for QA
-31. Validate the data in sessions matches api explorer, and review local and checkout docs.
+
 38. In initializeSession add steps to component config and remove dependencies from use Redirect hook
+46. Update npm packages and remove vulnerabilities
 
