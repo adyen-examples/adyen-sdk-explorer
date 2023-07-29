@@ -17,7 +17,7 @@ export const ConfigWrapper = () => {
     checkout: <Config name="checkout" configuration={checkout} action={updateCheckoutInfo} />,
     local: <Config name="local" configuration={local} action={updateLocalInfo} />,
     sessions: <Config name="sessions" configuration={sessions} action={updateSessionsInfo} />,
-    review: <ReviewContent/>
+    review: <ReviewContent />
   };
 
   const displayStep: any = stepMap[steps[activeStep]];

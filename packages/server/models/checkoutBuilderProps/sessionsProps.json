@@ -1,26 +1,5 @@
 [
   {
-    "description": "The amount of the payment.",
-    "properties": [
-      {
-        "description": "The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).",
-        "maxLength": 3,
-        "minLength": 3,
-        "type": "string",
-        "name": "currency"
-      },
-      {
-        "description": "The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).",
-        "format": "int64",
-        "type": "integer",
-        "name": "value"
-      }
-    ],
-    "name": "amount",
-    "required": true,
-    "type": "object"
-  },
-  {
     "description": "Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).",
     "properties": [
       {
@@ -110,11 +89,6 @@
     "name": "channel"
   },
   {
-    "description": "The shopper's two-letter country code.",
-    "type": "string",
-    "name": "countryCode"
-  },
-  {
     "description": "The shopper's date of birth.\n\nFormat [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD",
     "format": "date-time",
     "type": "string",
@@ -165,12 +139,6 @@
     "format": "date-time",
     "type": "string",
     "name": "expiresAt"
-  },
-  {
-    "description": "The merchant account identifier, with which you want to process the transaction.",
-    "type": "string",
-    "name": "merchantAccount",
-    "required": true
   },
   {
     "additionalProperties": {

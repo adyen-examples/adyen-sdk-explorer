@@ -12,7 +12,8 @@ export const lightThemeOptions: any = {
       main: '#00112C',
       gray: '#F2F6F9',
       light: '#f3f6f9',
-      shadow: 'rgba(0, 102, 255, 0.12)'
+      shadow: 'rgba(0, 102, 255, 0.12)',
+      dark:'#f3f6f9'
     },
     background: {
       paper: '#fff',
@@ -129,7 +130,8 @@ export const darkThemeOptions: any = {
     secondary: {
       main: '#FFFFFF',
       gray: '#F2F6F9',
-      light: '#0c1c38'
+      light: '#0c1c38',
+      dark:'#f3f6f9'
     },
     background: {
       paper: '#00112C',

@@ -1,11 +1,11 @@
-import { AppBar, Box, Button, Toolbar, IconButton, Drawer, Typography } from '@mui/material';
-import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
-import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Sidebar } from '../Sidebar/Sidebar';
+import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
+import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
 import { RootState } from '../../../store';
+import { Sidebar } from '../Sidebar/Sidebar';
 
 export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -75,7 +75,6 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                   </Typography>
                 </Button>
               ))}
-              <Button sx={{ color: 'success.main', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
             </Box>
           </Toolbar>
         </Box>

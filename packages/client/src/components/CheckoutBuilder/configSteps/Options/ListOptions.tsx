@@ -107,6 +107,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   <Checkbox
                     size="small"
                     name="Required"
+                    className="checkbox"
                     checked={required}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       handleToggle(e.target.name);
@@ -125,6 +126,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   <Checkbox
                     size="small"
                     name="Optional"
+                    className="checkbox"
                     checked={optional}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       handleToggle(e.target.name);
