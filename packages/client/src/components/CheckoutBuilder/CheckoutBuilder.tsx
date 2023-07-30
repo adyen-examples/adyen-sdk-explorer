@@ -25,7 +25,7 @@ const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
 
       defaultSessionProps = {
         amount: {
-          value: '900',
+          value: 9000,
           currency: currency.length > 0 ? currency[0] : 'USD'
         },
         merchantAccount: merchantAccount,

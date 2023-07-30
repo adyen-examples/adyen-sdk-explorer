@@ -9,7 +9,7 @@ const { updateTheme } = onDeckActions;
 
 export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const dispatch = useAppDispatch();
-  const { products, theme, defaultSessionProps } = useSelector((state: RootState) => state.onDeck);
+  const { products, theme } = useSelector((state: RootState) => state.onDeck);
   const productsKeys = Object.keys(products);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   const nonselectedButtonStyle = {
     '&:hover': { bgcolor: 'secondary.shadow', borderRadius: 1 }
   };
-  console.log('Sidebar:  defaultSessionProps', defaultSessionProps);
+
   const handleClick = (txvariant: any) => {
     navigate(`/${txvariant}`);
   };

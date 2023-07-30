@@ -1,5 +1,5 @@
 import type { Descriptor } from '../../types';
-import { ArrayOption, BooleanOption, NestedOption, ObjectOption, TextInputField } from './OptionTypes';
+import { ArrayOption, BooleanOption, NestedOption, ObjectOption, TextInputField, SelectOption } from './OptionTypes';
 
 interface InitializeOptionProps {
   descriptor: Descriptor;
@@ -25,6 +25,8 @@ export const InitializeOption = (props: InitializeOptionProps) => {
     optionsDisplay = <ObjectOption styleType="info" content="Custom configuration use case. Use the JSON Editor pane." />;
   } else if (descriptor.type === 'integer') {
     optionsDisplay = <TextInputField {...props} type="number" />;
+  } else if (descriptor.type === 'select') {
+    optionsDisplay = <SelectOption {...props} values={descriptor.values} />;
   }
 
   return optionsDisplay;

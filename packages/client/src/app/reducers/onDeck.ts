@@ -55,7 +55,6 @@ const onDeckSlice = createSlice({
       state.sessions = action.payload;
     },
     updateDefaultSessionProps: (state, action: PayloadAction<OnDeckPropType>) => {
-      console.log('updateDefaultSessionProps', action.payload);
       state.defaultSessionProps = action.payload;
     },
     updateRedirectInfo: (state, action: PayloadAction<any>) => {

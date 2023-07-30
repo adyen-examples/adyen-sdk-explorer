@@ -50,20 +50,17 @@ Complete:
 44. (Complete) Bug: Ideal > Pending Issuer > Redirect back > Navigate to home > Navigate to dropin
 42. (Complete) Bug if you add a parameter then switch themes, it doesnt change the json editor
 17. (Complete) Add default values or config, and explain potential errors if you misconfigure.. The country should be a select component like in checkout create to avoid issue where there is no payment method, same with currency
+48. (Complete) Set defaultProps onDeck when we fetch paymethod specific configuration, then on reset we set the default values.
 
 Open Items:
-
-43. Eventually I need a way to fetch next 100 country currency combination when there are more than 100 pay methods in BO.
-44. In order to launch fast we are going to assume we know the order of the descriptors so that we can extract the dynamic values.
-45. Add select component for descriptors with descriptor with values
 47. Record change on adyen checkout library
-48. Set defaultProps onDeck when we fetch paymethod specific configuration, then on reset we set the default values.
 31. Validate the data in sessions matches api explorer, and review local and checkout docs.
 49. Add the merchant account and api key that was created for this project.
 
 Nice to haves:
 10. Create tests for QA
-
 38. In initializeSession add steps to component config and remove dependencies from use Redirect hook
 46. Update npm packages and remove vulnerabilities
-
+45. Add select component for descriptors with descriptor with values
+44. In order to launch fast we are going to assume we know the order of the descriptors so that we can extract the dynamic values.
+43. Eventually I need a way to fetch next 100 country currency combination when there are more than 100 pay methods in BO.
