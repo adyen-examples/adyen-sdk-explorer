@@ -1,12 +1,13 @@
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-
 import { Box, BoxProps, Button, Dialog, DialogActions, DialogContent, SpeedDial, SpeedDialAction, SpeedDialIcon, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
+import { RootState } from '../../../store';
 
 interface NavButtonsProps extends BoxProps {
   steps: any;
@@ -15,6 +16,7 @@ interface NavButtonsProps extends BoxProps {
 }
 
 export const MobileNavButtons = (props: NavButtonsProps) => {
+  const { defaultSessionProps } = useSelector((state: RootState) => state.onDeck);
   const { steps, step, configuration, ...other } = props;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -100,6 +102,7 @@ export const MobileNavButtons = (props: NavButtonsProps) => {
             onClick={() => {
               setOpen(false);
               dispatch(resetOnDeckInfo());
+              dispatch(updateSessionsInfo(defaultSessionProps));
               navigate(`/${configuration.txVariant}`);
             }}
             autoFocus

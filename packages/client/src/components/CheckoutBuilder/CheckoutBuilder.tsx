@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import { CLIENT_URL } from '../../config';
 
 const { updateDescriptors } = descriptorsActions;
-const { resetOnDeckInfo, updateSessionsInfo } = onDeckActions;
+const { resetOnDeckInfo, updateSessionsInfo, updateDefaultSessionProps } = onDeckActions;
 
 const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
   const dispatch = useAppDispatch();
@@ -16,14 +16,14 @@ const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
   const { data } = useApi(`api/checkout/paymentMethods/${txvariant}`, 'GET');
 
   useEffect(() => {
-    let dynamicSessionProps: any = null;
+    let defaultSessionProps: any = null;
 
     if (data) {
       const currency = data.sessionsConfig[0].properties[0].values;
       const merchantAccount = data.sessionsConfig[1].values;
       const countryCode = data.sessionsConfig[2].values;
 
-      dynamicSessionProps = {
+      defaultSessionProps = {
         amount: {
           value: '900',
           currency: currency.length > 0 ? currency[0] : 'USD'
@@ -34,14 +34,14 @@ const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
       };
 
       if (countryCode.length > 0) {
-        dynamicSessionProps.countryCode = countryCode[0];
+        defaultSessionProps.countryCode = countryCode[0];
       }
-
+      dispatch(updateDefaultSessionProps(defaultSessionProps));
       dispatch(updateDescriptors(data));
     }
     if (!redirectResult) {
       dispatch(resetOnDeckInfo());
-      dynamicSessionProps && dispatch(updateSessionsInfo(dynamicSessionProps));
+      dispatch(updateSessionsInfo(defaultSessionProps));
     }
     return () => {
       dispatch(resetOnDeckInfo());
