@@ -12,7 +12,6 @@ const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo } = onDeckAction
 export const ConfigWrapper = () => {
   const { checkout, local, sessions, steps, activeStep } = useSelector((state: RootState) => state.onDeck);
   useRedirect({ checkout, local, sessions });
-
   const stepMap = {
     checkout: <Config name="checkout" configuration={checkout} action={updateCheckoutInfo} />,
     local: <Config name="local" configuration={local} action={updateLocalInfo} />,

@@ -41,7 +41,7 @@ const CheckoutBuilder = ({ txvariant }: { txvariant: string }) => {
     }
     if (!redirectResult) {
       dispatch(resetOnDeckInfo());
-      dispatch(updateSessionsInfo(defaultSessionProps));
+      defaultSessionProps && dispatch(updateSessionsInfo(defaultSessionProps));
     }
     return () => {
       dispatch(resetOnDeckInfo());

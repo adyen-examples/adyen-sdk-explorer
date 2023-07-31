@@ -8,9 +8,9 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build --workspace=adyen-demo-client && npm run start --workspace=adyen-demo-server",
-    "dev": "npm run start --workspace=adyen-demo-server && npm run start --workspace=adyen-demo-client",
-    "build": "next build && next export --workspace=adyen-demo-server"
+    "start": "npm run build -w ./packages/client && npm run start -w ./packages/server",
+    "dev": "npm run start -w ./packages/server && npm run start -w ./packages/client",
+    "build": "npm run build -w ./packages/client && npm run start -w ./packages/server"
   },
   "repository": {
     "type": "git",
