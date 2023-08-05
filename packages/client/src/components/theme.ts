@@ -163,7 +163,7 @@ export const darkThemeOptions: any = {
       info: '#082756',
       warning: '#764100',
       error: '#610000',
-      success: '#d4f8d4'
+      success: '#013220'
     }
   },
   typography: {

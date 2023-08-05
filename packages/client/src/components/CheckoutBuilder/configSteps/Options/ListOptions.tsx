@@ -55,7 +55,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     '#floating-button': {
       position: 'fixed',
       bottom: 10,
-      left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' },
+      left: { xs: '28%', sm: '35%', md: '25%', lg: '45%' },
       textAlign: 'center',
       zIndex: 2,
       borderRadius: '100px',

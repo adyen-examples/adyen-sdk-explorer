@@ -102,7 +102,7 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
         </Box>
       </Box>
       <Box sx={mobileStyle}>
-        <MobileNavButtons steps={steps} step={activeStep} configuration={configuration} />
+        <MobileNavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
       </Box>
     </Box>
   );

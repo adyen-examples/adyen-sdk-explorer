@@ -56,7 +56,6 @@ export const RedirectComponent = ({ configuration }: { configuration: any }) => 
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkout, error]);
-  console.log('RedirectComponent');
   return (
     <Box sx={configuration?.style}>
       {showMessages()}
