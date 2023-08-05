@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../../hooks';
 import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
 import type { Descriptor } from '../../types';
 import { InitializeOption } from './InitializeOption';
+import { ObjectOption } from './OptionTypes';
 
 export interface OptionWrapperPropTypes {
   descriptor: Descriptor;
@@ -32,8 +33,18 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
     dispatch(action(toUpdate));
   };
 
-  const createMarkup = (description: string) => {
-    return { __html: description };
+  const createHtmlFromMarkup = (description: string) => {
+    const tokens = marked.lexer(description);
+    let blockQuote: any = tokens?.length > 0 && tokens[tokens.length - 1].type === 'blockquote' ? tokens.pop() : null;
+    let blockQuoteText: any = blockQuote ? blockQuote.text : null;
+    let html = marked.parser(tokens);
+
+    return (
+      <Box>
+        <Typography variant="h6" className="markup" dangerouslySetInnerHTML={{ __html: html }}></Typography>
+        {blockQuoteText && <ObjectOption styleType="info" content={blockQuoteText} mb={2} />}
+      </Box>
+    );
   };
 
   const value = configuration[descriptor.name];
@@ -59,11 +70,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <Typography
-          variant="h6"
-          sx={{ '> p': { mb: '0.3rem', mt: '0.3rem' } }}
-          dangerouslySetInnerHTML={descriptor?.description ? createMarkup(marked.parse(descriptor.description)) : undefined}
-        ></Typography>
+        {descriptor?.description && createHtmlFromMarkup(descriptor.description)}
       </Grid>
       {descriptor.configure !== false && (
         <Grid item xs={12}>

@@ -1,6 +1,7 @@
-import { ChangeEvent, Fragment, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FormControl, Grid, IconButton, List, ListItem, ListItemText, TextField } from '@mui/material';
+import { Box, FormControl, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import { ChangeEvent, useState } from 'react';
+import { AdyenInputTheme } from './AdyenInputTheme';
 
 export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }: any) => {
   const [input, setInput] = useState('');
@@ -30,12 +31,12 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
           <ListItem
             key={item}
             secondaryAction={
-              <IconButton sx={{ color: 'rgb(255, 87, 34)' }} edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
+              <IconButton sx={{ color: 'error.main' }} edge="end" aria-label="delete" onClick={() => deleteItem(item)}>
                 <DeleteIcon />
               </IconButton>
             }
           >
-            <ListItemText primary={item} />
+            <ListItemText primaryTypographyProps={{ fontSize: '0.9rem' }} primary={item} />
           </ListItem>
         ))}
       </List>
@@ -43,27 +44,26 @@ export const ArrayOption = ({ descriptor, onChange, value, isChecked, current }:
   }
 
   return (
-    <Fragment>
+    <Box>
       <form onSubmit={(e: any) => handleSubmit(e)}>
-        <FormControl size="small">
-          <Grid item xs={11}>
-            {isChecked && (
-              <TextField
-                name={descriptor.name}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                id={descriptor.name}
-                value={input}
-                fullWidth
-                variant="filled"
-                sx={{ py: 0 }}
-                size="small"
-                hiddenLabel
-              />
-            )}
-          </Grid>
+        <FormControl sx={{ width: '100%' }}>
+          {isChecked && (
+            <AdyenInputTheme
+              name={descriptor.name}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              id={descriptor.name}
+              value={input}
+              sx={{
+                width: '50%',
+                '& .MuiInputBase-input': {
+                  py: 1
+                }
+              }}
+            />
+          )}
         </FormControl>
       </form>
       {showListItems}
-    </Fragment>
+    </Box>
   );
 };

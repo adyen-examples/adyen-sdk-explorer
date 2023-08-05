@@ -75,7 +75,7 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
                   </Typography>
                 </Button>
               ))}
-              <Button sx={{ color: 'success.main', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>BETA</Button>
+              <Button sx={{ color: 'success.main', ml: 3, pointerEvents: 'none', cursor: 'not-allowed' }}>DEMO</Button>
             </Box>
           </Toolbar>
         </Box>

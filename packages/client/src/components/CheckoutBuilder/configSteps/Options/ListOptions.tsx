@@ -1,5 +1,5 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
+import { Box, Checkbox, CssBaseline, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -58,10 +58,11 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
       left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' },
       textAlign: 'center',
       zIndex: 2,
-      '&:hover': { color: 'primary.main' }
+      borderRadius: '100px',
+      button: { '&:hover': { bgcolor: 'alert.info', color: 'primary.light' } }
     },
     '.required-label': { display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' },
-    '#parameter-title': { color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }
+    '#parameter-title': { color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold' }
   };
 
   if (!displayDescriptors || !displayDescriptors.length) {
@@ -76,12 +77,12 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     <Grid sx={style} container>
       {!isInViewport && (
         <Box id="floating-button">
+          <CssBaseline />
           <Fab
             variant="extended"
             size="medium"
             color="primary"
             aria-label="add"
-            sx={{ '&:hover': { color: 'primary.main' } }}
             onClick={() => {
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}

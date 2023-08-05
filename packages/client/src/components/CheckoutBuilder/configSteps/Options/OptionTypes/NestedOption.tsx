@@ -5,6 +5,8 @@ import type { Descriptor } from '../../../types';
 import { ObjectOption } from './ObjectOption';
 import { TextInputField } from './TextInputField';
 import type { OptionPropTypes } from './types';
+import { BooleanOption } from './BooleanOption';
+import { ArrayOption } from './ArrayOption';
 
 export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) => {
   const createHtmlFromMarkup = (description: string) => {
@@ -53,17 +55,31 @@ export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) =
               <Grid item xs={12} sx={{ 'h6 p': { mt: 0, mb: 1 } }}>
                 {prop?.description && createHtmlFromMarkup(prop.description)}
               </Grid>
-              <Grid item xs={12}>
-                <TextInputField
-                  current={descriptor.name}
-                  descriptor={prop}
-                  onChange={onChange}
-                  value={value[prop.name]}
-                  subtitles={false}
-                  isChecked={value !== undefined}
-                  type={prop.type === 'integer' ? 'number' : 'text'}
-                />
-              </Grid>
+              {(prop?.type === 'string' || prop.type === 'integer') && (
+                <Grid item xs={12}>
+                  <TextInputField
+                    current={descriptor.name}
+                    descriptor={prop}
+                    onChange={onChange}
+                    value={value[prop.name]}
+                    subtitles={false}
+                    isChecked={value !== undefined}
+                    type={prop.type === 'integer' ? 'number' : 'text'}
+                  />
+                </Grid>
+              )}
+              {prop?.type === 'boolean' && <BooleanOption descriptor={prop} onChange={onChange} value={value[prop.name]} />}
+              {prop?.type === 'array' && descriptor.name && (
+                <Grid item xs={12}>
+                  <ArrayOption
+                    descriptor={prop}
+                    onChange={onChange}
+                    value={value[prop.name] ? value[prop.name] : []}
+                    isChecked={value !== undefined}
+                    current={descriptor.name}
+                  />
+                </Grid>
+              )}
               {i !== arr.length - 1 && (
                 <Grid item xs={12} key={prop.name}>
                   <Box sx={{ my: 1, borderBottom: 1, borderColor: 'primary.border', pb: 1 }}></Box>

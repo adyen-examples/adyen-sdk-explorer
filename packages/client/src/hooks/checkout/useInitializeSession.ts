@@ -32,8 +32,12 @@ export const useInitializeSession = ({ configuration, endpoint }: { configuratio
       },
       body: JSON.stringify({ ...sessions, returnUrl: `${CLIENT_URL}/${txVariant}` })
     };
+    const payloadSize = new TextEncoder().encode(requestOptions.body).length;
     const initialize: () => void = async () => {
       try {
+        if (payloadSize > 100) {
+          throw 'Error: Max payload size for /sessionStart is 2 mb. Please reduce the size of the payload.';
+        }
         const response = await fetch(`${API_URL}/api/checkout/sessionStart`, requestOptions);
         const parsedResponse = await response.json();
         if (parsedResponse.error) {
