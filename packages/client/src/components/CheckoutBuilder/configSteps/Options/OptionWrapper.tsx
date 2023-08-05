@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../../../hooks';
 import { addOrRemoveProp, handleUpdateConfig } from '../../helpers';
 import type { Descriptor } from '../../types';
 import { InitializeOption } from './InitializeOption';
-import { ObjectOption } from './OptionTypes';
+import { AdyenAlert } from './OptionTypes';
 
 export interface OptionWrapperPropTypes {
   descriptor: Descriptor;
@@ -42,7 +42,7 @@ export const OptionWrapper = ({ descriptor, configuration, action }: OptionWrapp
     return (
       <Box>
         <Typography variant="h6" className="markup" dangerouslySetInnerHTML={{ __html: html }}></Typography>
-        {blockQuoteText && <ObjectOption styleType="info" content={blockQuoteText} mb={2} />}
+        {blockQuoteText && <AdyenAlert styleType="info" content={blockQuoteText} mb={2} />}
       </Box>
     );
   };

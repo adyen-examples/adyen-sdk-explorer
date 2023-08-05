@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useIsInViewPort } from '../../../../hooks';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
-import { ObjectOption } from './OptionTypes';
+import { AdyenAlert } from './OptionTypes';
 import { OptionWrapper } from './OptionWrapper';
 
 interface ListOptionsProps {
@@ -68,7 +68,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
-        <ObjectOption styleType="warning" content="No configurations found. Use editor pane for custom fields." />
+        <AdyenAlert styleType="warning" content="No configurations found. Use editor pane for custom fields." />
       </Box>
     );
   }

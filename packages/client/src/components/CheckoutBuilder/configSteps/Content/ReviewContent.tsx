@@ -1,7 +1,7 @@
 import { Box, Typography, Grid, Link, BoxProps } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { ComponentBase } from '../../../ComponentBuilder';
-import { ObjectOption } from '../Options/OptionTypes';
+import { AdyenAlert } from '../Options/OptionTypes';
 
 export const ReviewContent = (props: BoxProps) => {
   const { txVariant } = useSelector((state: any) => state.onDeck);
@@ -58,7 +58,7 @@ export const ReviewContent = (props: BoxProps) => {
           </Typography>
         </Grid>
         <Grid item xs={12} mt={2}>
-          <ObjectOption
+          <AdyenAlert
             styleType="warning"
             content="Some payment methods have their own unique CSS classes that aren't shown under the CSS tab. For a full list of classes that you can style, inspect this page using your browser's developer tools."
           />

@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { marked } from 'marked';
 import { Fragment } from 'react';
 import type { Descriptor } from '../../../types';
-import { ObjectOption } from './ObjectOption';
+import { AdyenAlert } from './AdyenAlert';
 import { TextInputField } from './TextInputField';
 import type { OptionPropTypes } from './types';
 import { BooleanOption } from './BooleanOption';
@@ -18,7 +18,7 @@ export const NestedOption = ({ descriptor, onChange, value }: OptionPropTypes) =
     return (
       <Box>
         <Typography variant="h6" className="markup" dangerouslySetInnerHTML={{ __html: html }}></Typography>
-        {blockQuoteText && <ObjectOption styleType="info" content={blockQuoteText} mb={2} />}
+        {blockQuoteText && <AdyenAlert styleType="info" content={blockQuoteText} mb={2} />}
       </Box>
     );
   };

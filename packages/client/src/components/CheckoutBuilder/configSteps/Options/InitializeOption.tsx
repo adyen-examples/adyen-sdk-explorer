@@ -1,5 +1,5 @@
 import type { Descriptor } from '../../types';
-import { ArrayOption, BooleanOption, NestedOption, ObjectOption, TextInputField, SelectOption } from './OptionTypes';
+import { ArrayOption, BooleanOption, NestedOption, AdyenAlert, TextInputField, SelectOption } from './OptionTypes';
 
 interface InitializeOptionProps {
   descriptor: Descriptor;
@@ -20,11 +20,11 @@ export const InitializeOption = (props: InitializeOptionProps) => {
   } else if (descriptor.type === 'boolean' && descriptor.name) {
     optionsDisplay = <BooleanOption {...props} />;
   } else if (descriptor.type === 'array' && !descriptor.items) {
-    optionsDisplay = <ObjectOption styleType="info" content="Custom configuration use case. Use the JSON Editor pane." />;
+    optionsDisplay = <AdyenAlert styleType="info" content="Custom configuration use case. Use the JSON Editor pane." />;
   } else if (descriptor.type === 'array' && descriptor.name) {
     optionsDisplay = <ArrayOption {...props} />;
   } else if (descriptor.type === 'object' && !descriptor.properties) {
-    optionsDisplay = <ObjectOption styleType="info" content="Custom configuration use case. Use the JSON Editor pane." />;
+    optionsDisplay = <AdyenAlert styleType="info" content="Custom configuration use case. Use the JSON Editor pane." />;
   } else if (descriptor.type === 'integer') {
     optionsDisplay = <TextInputField {...props} type="number" />;
   } else if (descriptor.type === 'select') {

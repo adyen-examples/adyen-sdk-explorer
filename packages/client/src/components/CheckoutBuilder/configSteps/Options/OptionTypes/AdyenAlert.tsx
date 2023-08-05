@@ -9,7 +9,7 @@ interface ObjectOptionProps extends BoxProps {
   styleType: 'info' | 'warning' | 'error' | 'success';
 }
 
-export const ObjectOption = (props: ObjectOptionProps) => {
+export const AdyenAlert = (props: ObjectOptionProps) => {
   const { content, styleType, ...other } = props;
   const infoStyle = {
     border: '3px solid',
@@ -26,7 +26,7 @@ export const ObjectOption = (props: ObjectOptionProps) => {
     display: 'flex',
     alignItems: 'center',
     bgcolor: 'alert.warning',
-    '#info-icon': { bgcolor: 'alert.warning', px: 1, color: 'warning.main' },
+    '#info-icon': { bgcolor: 'info.warning', px: 1, color: 'warning.main' },
     '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const errorStyle = {
