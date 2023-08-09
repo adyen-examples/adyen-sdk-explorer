@@ -22,7 +22,6 @@ export const Layout = ({ main: Main }: any) => {
   useEffect(() => {
     if (!isEmpty(products) && pathParamInProducts(products, productParam) && !isHome) {
       dispatch(updateTxVariant(productParam as string));
-
       if (productParam === 'dropin') {
         dispatch(updateStyleInfo(defaultDropinStyle));
       } else {

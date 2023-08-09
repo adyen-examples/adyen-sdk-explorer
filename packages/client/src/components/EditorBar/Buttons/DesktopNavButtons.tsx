@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, Stack } from '@mui/material';
+import { Box, BoxProps, Button, Stack, CssBaseline } from '@mui/material';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
 
@@ -18,9 +18,9 @@ export const DesktopNavButtons = (props: NavButtonsProps) => {
     '#desktop-nav': {
       display: 'inline-block'
     },
-    '#back-button': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
+    '#back-button': { bgcolor: 'background.paper', '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
     '#next-button': { ml: 0.5, '&:hover': { bgcolor: 'primary.main', color: 'primary.light' } },
-    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'primary.light', color: 'success.main' } }
+    '#export-button': { ml: 0.5, bgcolor: 'success.main', '&:hover': { bgcolor: 'background.paper', color: 'success.main', border: 1 } }
   };
 
   const runStepAction = () => {
@@ -69,6 +69,7 @@ export const DesktopNavButtons = (props: NavButtonsProps) => {
   return (
     <Box sx={style} {...other}>
       <Stack direction="row" justifyContent="space-between" spacing={1}>
+        <CssBaseline />
         <Box id="desktop-nav">
           {step !== 0 && (
             <Button id="back-button" variant="outlined" onClick={handleBack}>

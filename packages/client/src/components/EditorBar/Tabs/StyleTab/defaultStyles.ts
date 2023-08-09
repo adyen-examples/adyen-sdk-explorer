@@ -13,21 +13,26 @@ export const defaultDropinStyle = {
     color: '#000',
     fontSize: '1rem',
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif'
+  },
+  '.adyen-checkout__button--pay': {
+    backgroundColor: '#00112C'
   }
 };
 
 export const defaultComponentStyle = {
   '[class^="adyen-checkout__"]': {
-    backgroundColor: '#f3f6f9',
-    color: '#00112C',
-    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-    fontSize: '1rem',
-    padding: '0.2rem'
+    fontSize: '0.8rem',
+    padding: '0.1rem'
   },
   '[class^="adyen-checkout__input"] input': {
     backgroundColor: '#FFFFFF'
   },
-  '.adyen-checkout__button': {
-    backgroundColor: '#00112C'
+  '.adyen-checkout__label__text': {
+    color: '#FFFFFF',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif'
+  },
+  '.adyen-checkout__button--pay': {
+    backgroundColor: '#00112C',
+    color: '#FFFFFF'
   }
 };

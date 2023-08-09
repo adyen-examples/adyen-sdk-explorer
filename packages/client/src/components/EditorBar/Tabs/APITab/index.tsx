@@ -15,7 +15,7 @@ export const APITab = (props: any) => {
     let apiStack = window?.data?.apiStack ? window?.data?.apiStack : null;
     let updateAPIStack = () => {
       const currentAPIStack = window?.data?.apiStack ? window?.data?.apiStack : [];
-      console.log('calling setApiLogs');
+
       setApiLogs([...currentAPIStack]);
     };
 

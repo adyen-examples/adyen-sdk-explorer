@@ -2,7 +2,7 @@ import { Box, Collapse } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { onDeckActions } from '../../../app';
 import { useAppDispatch } from '../../../hooks';
-import { ObjectOption } from '../../CheckoutBuilder/configSteps/Options/OptionTypes';
+import { AdyenAlert } from '../../CheckoutBuilder/configSteps/Options/OptionTypes';
 import { SingleAPITab } from './APITab/SingleAPITab';
 import { SingleCodeTab } from './CodeTab/SingleCodeTab';
 import { SingleTabHeader } from './Header/SingleTabHeader';
@@ -61,7 +61,7 @@ checkout.create('${txVariant}',`,
     return (
       <Collapse orientation="vertical" in={!viewOnly} timeout={700}>
         <Box mx={2} mt={2}>
-          <ObjectOption styleType={'warning'} content={'Warning! You can directly edit the parameters.'} />
+          <AdyenAlert styleType={'warning'} content={'Warning! You can directly edit the parameters.'} />
         </Box>
       </Collapse>
     );

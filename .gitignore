@@ -2,3 +2,4 @@ node_modules
 *.env
 todo.txt
 ./server/ignore
+*.DS_Store

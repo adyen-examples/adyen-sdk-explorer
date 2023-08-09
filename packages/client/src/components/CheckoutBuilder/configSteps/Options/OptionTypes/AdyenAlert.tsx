@@ -9,42 +9,42 @@ interface ObjectOptionProps extends BoxProps {
   styleType: 'info' | 'warning' | 'error' | 'success';
 }
 
-export const ObjectOption = (props: ObjectOptionProps) => {
+export const AdyenAlert = (props: ObjectOptionProps) => {
   const { content, styleType, ...other } = props;
   const infoStyle = {
     border: '3px solid',
-    borderColor: '#cce0ff',
+    borderColor: 'alert.info',
     display: 'flex',
     alignItems: 'center',
-    bgcolor: '#cce0ff',
-    '#info-icon': { bgcolor: '#cce0ff', px: 1, color: 'primary.main' },
+    bgcolor: 'alert.info',
+    '#info-icon': { bgcolor: 'alert.info', px: 1, color: 'primary.main' },
     '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const warningStyle = {
     border: '3px solid',
-    borderColor: 'rgb(255, 234, 204)',
+    borderColor: 'alert.warning',
     display: 'flex',
     alignItems: 'center',
-    bgcolor: 'rgb(255, 234, 204)',
-    '#info-icon': { bgcolor: 'rgb(255, 234, 204)', px: 1, color: 'rgb(255, 149, 0)' },
+    bgcolor: 'alert.warning',
+    '#info-icon': { bgcolor: 'info.warning', px: 1, color: 'warning.main' },
     '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const errorStyle = {
     border: '3px solid',
-    borderColor: '#ff7e82',
+    borderColor: 'alert.error',
     display: 'flex',
     alignItems: 'center',
-    bgcolor: '#ff7e82',
-    '#info-icon': { bgcolor: '#ff7e82', px: 1, color: '#d32f2f' },
+    bgcolor: 'alert.error',
+    '#info-icon': { bgcolor: 'alert.error', px: 1, color: 'error.main' },
     '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
   const successStyle = {
     border: '3px solid',
-    borderColor: '#d4f8d4',
+    borderColor: 'alert.success',
     display: 'flex',
     alignItems: 'center',
-    bgcolor: '#d4f8d4',
-    '#info-icon': { bgcolor: '#d4f8d4', px: 1, color: '#2ade2a' },
+    bgcolor: 'alert.success',
+    '#info-icon': { bgcolor: 'alert.success', px: 1, color: 'success.light' },
     '#info-text': { display: 'inline-block', px: 1, py: 2, flexGrow: 1, bgcolor: 'background.default' }
   };
 

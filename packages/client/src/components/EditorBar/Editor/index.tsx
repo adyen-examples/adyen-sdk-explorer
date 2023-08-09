@@ -37,7 +37,7 @@ export const Editor = ({ viewOnly, configuration, handleJsonEditorUpdate }: Edit
   };
 
   return (
-    <Box sx={{ ...editorStyle }} id="editor">
+    <Box key={theme} sx={{ ...editorStyle }} id="editor">
       <JSONInput
         onChange={(e: any) => handleChange(e)}
         placeholder={{ ...configuration }}

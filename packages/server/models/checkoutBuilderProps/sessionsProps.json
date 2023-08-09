@@ -1,61 +1,183 @@
 [
   {
-    "description": "The amount of the payment.",
-    "properties": [
-      {
-        "description": "The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).",
-        "maxLength": 3,
-        "minLength": 3,
-        "type": "string",
-        "name": "currency"
-      },
-      {
-        "description": "The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).",
-        "format": "int64",
-        "type": "integer",
-        "name": "value"
-      }
-    ],
-    "name": "amount",
-    "required": true,
-    "type": "object"
-  },
-  {
     "description": "Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).",
     "properties": [
       {
         "description": "Adyen-developed software, such as libraries and plugins, used to interact with the Adyen API. For example, Magento plugin, Java API library, etc.",
         "$ref": "#/components/schemas/CommonField",
-        "name": "adyenLibrary"
+        "name": "adyenLibrary",
+        "type": "string"
       },
       {
         "description": "Adyen-developed software to get payment details. For example, Checkout SDK, Secured Fields SDK, etc.",
         "$ref": "#/components/schemas/CommonField",
-        "name": "adyenPaymentSource"
+        "name": "adyenPaymentSource",
+        "type": "string"
       },
       {
         "description": "Third-party developed platform used to initiate payment requests. For example, Magento, Zuora, etc.",
         "$ref": "#/components/schemas/ExternalPlatform",
-        "name": "externalPlatform"
+        "name": "externalPlatform",
+        "type": "string"
       },
       {
         "description": "Merchant developed software, such as cashier application, used to interact with the Adyen API.",
         "$ref": "#/components/schemas/CommonField",
-        "name": "merchantApplication"
+        "name": "merchantApplication",
+        "type": "string"
       },
       {
         "description": "Merchant device information.",
         "$ref": "#/components/schemas/MerchantDevice",
-        "name": "merchantDevice"
+        "name": "merchantDevice",
+        "type": "string"
       },
       {
         "description": "Shopper interaction device, such as terminal, mobile device or web browser, to initiate payment requests.",
         "$ref": "#/components/schemas/ShopperInteractionDevice",
-        "name": "shopperInteractionDevice"
+        "name": "shopperInteractionDevice",
+        "type": "string"
       }
     ],
     "name": "applicationInfo",
     "type": "object"
+  },
+  {
+    "description": "Shopper account information for 3D Secure 2.\n> For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.",
+    "properties": [
+      {
+        "description": "Indicator for the length of time since this shopper account was created in the merchant's environment.\nAllowed values:\n* notApplicable\n* thisTransaction\n* lessThan30Days\n* from30To60Days\n* moreThan60Days",
+        "enum": ["notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"],
+        "type": "string",
+        "name": "accountAgeIndicator"
+      },
+      {
+        "description": "Date when the shopper's account was last changed.",
+        "format": "date-time",
+        "type": "string",
+        "name": "accountChangeDate"
+      },
+      {
+        "description": "Indicator for the length of time since the shopper's account was last updated.\nAllowed values:\n* thisTransaction\n* lessThan30Days\n* from30To60Days\n* moreThan60Days",
+        "enum": ["thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"],
+        "type": "string",
+        "name": "accountChangeIndicator"
+      },
+      {
+        "description": "Date when the shopper's account was created.",
+        "format": "date-time",
+        "type": "string",
+        "name": "accountCreationDate"
+      },
+      {
+        "x-addedInVersion": "50",
+        "description": "Indicates the type of account. For example, for a multi-account card product.\nAllowed values:\n* notApplicable\n* credit\n* debit",
+        "enum": ["notApplicable", "credit", "debit"],
+        "type": "string",
+        "name": "accountType"
+      },
+      {
+        "description": "Number of attempts the shopper tried to add a card to their account in the last day.",
+        "format": "int32",
+        "type": "integer",
+        "name": "addCardAttemptsDay"
+      },
+      {
+        "description": "Date the selected delivery address was first used.",
+        "format": "date-time",
+        "type": "string",
+        "name": "deliveryAddressUsageDate"
+      },
+      {
+        "description": "Indicator for the length of time since this delivery address was first used.\nAllowed values:\n* thisTransaction\n* lessThan30Days\n* from30To60Days\n* moreThan60Days",
+        "enum": ["thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"],
+        "type": "string",
+        "name": "deliveryAddressUsageIndicator"
+      },
+      {
+        "deprecated": true,
+        "x-deprecatedInVersion": "68",
+        "x-deprecatedMessage": "Use `ThreeDS2RequestData.homePhone` instead.",
+        "description": "Shopper's home phone number (including the country code).",
+        "type": "string",
+        "name": "homePhone"
+      },
+      {
+        "deprecated": true,
+        "x-deprecatedInVersion": "68",
+        "x-deprecatedMessage": "Use `ThreeDS2RequestData.mobilePhone` instead.",
+        "description": "Shopper's mobile phone number (including the country code).",
+        "type": "string",
+        "name": "mobilePhone"
+      },
+      {
+        "description": "Date when the shopper last changed their password.",
+        "format": "date-time",
+        "type": "string",
+        "name": "passwordChangeDate"
+      },
+      {
+        "description": "Indicator when the shopper has changed their password.\nAllowed values:\n* notApplicable\n* thisTransaction\n* lessThan30Days\n* from30To60Days\n* moreThan60Days",
+        "enum": ["notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"],
+        "type": "string",
+        "name": "passwordChangeIndicator"
+      },
+      {
+        "description": "Number of all transactions (successful and abandoned) from this shopper in the past 24 hours.",
+        "format": "int32",
+        "type": "integer",
+        "name": "pastTransactionsDay"
+      },
+      {
+        "description": "Number of all transactions (successful and abandoned) from this shopper in the past year.",
+        "format": "int32",
+        "type": "integer",
+        "name": "pastTransactionsYear"
+      },
+      {
+        "description": "Date this payment method was added to the shopper's account.",
+        "format": "date-time",
+        "type": "string",
+        "name": "paymentAccountAge"
+      },
+      {
+        "description": "Indicator for the length of time since this payment method was added to this shopper's account.\nAllowed values:\n* notApplicable\n* thisTransaction\n* lessThan30Days\n* from30To60Days\n* moreThan60Days",
+        "enum": ["notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"],
+        "type": "string",
+        "name": "paymentAccountIndicator"
+      },
+      {
+        "description": "Number of successful purchases in the last six months.",
+        "format": "int32",
+        "type": "integer",
+        "name": "purchasesLast6Months"
+      },
+      {
+        "description": "Whether suspicious activity was recorded on this account.",
+        "type": "boolean",
+        "name": "suspiciousActivity"
+      },
+      {
+        "description": "Shopper's work phone number (including the country code).",
+        "type": "string",
+        "name": "workPhone"
+      }
+    ],
+    "type": "object",
+    "name": "accountInfo"
+  },
+  {
+    "description": "This field contains additional data, which may be required for a particular payment request.",
+    "type": "object",
+    "name": "additionalData"
+  },
+  {
+    "description": "List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).\n\nExample: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`",
+    "items": {
+      "type": "string"
+    },
+    "type": "array",
+    "name": "allowedPaymentMethods"
   },
   {
     "description": "The address where to send the invoice.",
@@ -110,9 +232,33 @@
     "name": "channel"
   },
   {
-    "description": "The shopper's two-letter country code.",
-    "type": "string",
-    "name": "countryCode"
+    "name": "company",
+    "description": "Information regarding the company.",
+    "properties": [
+      {
+        "name": "homepage",
+        "description": "The company website's home page.",
+        "type": "string"
+      },
+      { "name": "name", "description": "The company name.", "type": "string" },
+      {
+        "name": "registrationNumber",
+        "description": "Registration number of the company.",
+        "type": "string"
+      },
+      {
+        "name": "registryLocation",
+        "description": "Registry location of the company.",
+        "type": "string"
+      },
+      {
+        "name": "taxId",
+        "description": "Tax ID of the company.",
+        "type": "string"
+      },
+      { "name": "type", "description": "The company type.", "type": "string" }
+    ],
+    "type": "object"
   },
   {
     "description": "The shopper's date of birth.\n\nFormat [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD",
@@ -161,25 +307,258 @@
     "type": "object"
   },
   {
+    "name": "enableOneClick",
+    "type": "boolean",
+    "description": "When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments."
+  },
+  {
+    "name": "enablePayOut",
+    "type": "boolean",
+    "description": "When true and `shopperReference` is provided, the payment details will be tokenized for payouts."
+  },
+  {
+    "name": "enableRecurring",
+    "type": "boolean",
+    "description": "When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments."
+  },
+  {
     "description": "The date the session expires in [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.",
     "format": "date-time",
     "type": "string",
     "name": "expiresAt"
   },
   {
-    "description": "The merchant account identifier, with which you want to process the transaction.",
-    "type": "string",
-    "name": "merchantAccount",
-    "required": true
+    "name": "fundOrigin",
+    "type": "object",
+    "description": "The person or entity funding the money.",
+    "properties": [
+      {
+        "name": "billingAddress",
+        "description": "The address where to send the invoice.",
+        "type": "object"
+      },
+      {
+        "name": "shopperName",
+        "description": "The name of the person",
+        "type": "string"
+      }
+    ]
   },
   {
-    "additionalProperties": {
-      "type": "string"
-    },
+    "name": "fundRecipient",
+    "type": "object",
+    "description": "The person or entity receiving the money.",
+    "properties": [
+      {
+        "name": "billingAddress",
+        "description": "The address where to send the invoice.",
+        "type": "object"
+      },
+      {
+        "name": "paymentMethod",
+        "description": "the used paymentMetohd",
+        "type": "object"
+      },
+      {
+        "name": "shopperEmail",
+        "description": "the email address of the person",
+        "type": "string"
+      },
+      {
+        "name": "shopperName",
+        "description": "the name of the person",
+        "type": "object"
+      },
+      {
+        "name": "shopperReference",
+        "type": "string",
+        "description": "Required for recurring payments. \nYour reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.\n> Your reference must not include personally identifiable information (PII), for example name or email address."
+      },
+      {
+        "name": "storedPaymentMethodId",
+        "description": "This is the `recurringDetailReference` returned in the response when you created the token.",
+        "type": "string"
+      },
+      {
+        "name": "subMerchant",
+        "description": "Required for Back-to-Back/ purchase driven load in Wallet transactions.\nContains the final merchant who will be receiving the money, also known as subMerchant, information.",
+        "type": "object"
+      },
+      {
+        "name": "telephoneNumber",
+        "description": "the telephone number of the person",
+        "type": "string"
+      },
+      {
+        "name": "walletIdentifier",
+        "description": "indicates where the money is going",
+        "type": "string"
+      },
+      {
+        "name": "walletOwnerTaxId",
+        "description": "indicates the tax identifier of the fund recepient",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "installmentOptions",
+    "type": "object",
+    "description": "A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options."
+  },
+  {
+    "description": "Price and product information about the purchased items, to be included on the invoice sent to the shopper.\nThis parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.",
+    "type": "array",
+    "name": "lineItems"
+  },
+  {
+    "name": "mandate",
+    "type": "object",
+    "description": "The mandate details to initiate recurring transaction.",
+    "properties": [
+      { "name": "amount", "description": "The billing amount (in minor units) of the recurring transactions.", "type": "string" },
+      {
+        "name": "amountRule",
+        "description": "The limitation rule of the billing amount.\n\nPossible values:\n * **max**: The transaction amount can not exceed the `amount`.\n\n * **exact**: The transaction amount should be the same as the `amount`.\n\n",
+        "enum": ["max", "exact"],
+        "type": "string"
+      },
+      {
+        "name": "billingAttemptsRule",
+        "description": "The rule to specify the period, within which the recurring debit can happen, relative to the mandate recurring date.\n\nPossible values:\n\n * **on**: On a specific date.\n\n * **before**:  Before and on a specific date.\n\n * **after**: On and after a specific date.\n\n",
+        "enum": ["on", "before", "after"],
+        "type": "string"
+      },
+      {
+        "name": "billingDay",
+        "description": "The number of the day, on which the recurring debit can happen. Should be within the same calendar month as the mandate recurring date.\n\nPossible values: 1-31 based on the `frequency`.",
+        "type": "string"
+      },
+      { "name": "endsAt", "description": "End date of the billing plan, in YYYY-MM-DD format.", "type": "string" },
+      {
+        "name": "frequency",
+        "description": "The frequency with which a shopper should be charged.\n\nPossible values: **daily**, **weekly**, **biWeekly**, **monthly**, **quarterly**, **halfYearly**, **yearly**.",
+        "enum": ["adhoc", "daily", "weekly", "biWeekly", "monthly", "quarterly", "halfYearly", "yearly"],
+        "type": "string"
+      },
+      { "name": "remarks", "description": "The message shown by UPI to the shopper on the approval screen.", "type": "string" },
+      {
+        "name": "startsAt",
+        "description": "Start date of the billing plan, in YYYY-MM-DD format. By default, the transaction date.",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "mcc",
+    "type": "string",
+    "description": "The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant."
+  },
+  {
+    "name": "merchantOrderReference",
+    "type": "string",
+    "description": "This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.\nThe same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.\n> We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`."
+  },
+  {
     "description": "Metadata consists of entries, each of which includes a key and a value.\nLimits:\n* Maximum 20 key-value pairs per request.\n* Maximum 20 characters per key.\n* Maximum 80 characters per value. ",
     "type": "object",
     "name": "metadata"
   },
+  {
+    "name": "mpiData",
+    "type": "object",
+    "description": "Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).",
+    "properties": [
+      {
+        "name": "authenticationResponse",
+        "description": "In 3D Secure 1, the authentication response if the shopper was redirected.\n\nIn 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.",
+        "enum": ["Y", "N", "U", "A"],
+        "type": "string"
+      },
+      {
+        "name": "cavv",
+        "description": "The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).",
+        "format": "byte",
+        "type": "string"
+      },
+      { "name": "cavvAlgorithm", "description": "The CAVV algorithm used. Include this only for 3D Secure 1.", "type": "string" },
+      {
+        "name": "challengeCancel",
+        "x-addedInVersion": "67",
+        "description": "Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).",
+        "enum": ["01", "02", "03", "04", "05", "06", "07"],
+        "type": "string"
+      },
+      {
+        "name": "directoryResponse",
+        "description": "In 3D Secure 1, this is the enrollment response from the 3D directory server.\n\nIn 3D Secure 2, this is the `transStatus` from the `ARes`.",
+        "enum": ["A", "C", "D", "I", "N", "R", "U", "Y"],
+        "type": "string"
+      },
+      {
+        "name": "dsTransID",
+        "x-addedInVersion": "40",
+        "description": "Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.",
+        "type": "string"
+      },
+      { "name": "eci", "description": "The electronic commerce indicator.", "type": "string" },
+      {
+        "name": "riskScore",
+        "x-addedInVersion": "67",
+        "description": "Risk score calculated by Directory Server (DS). Required for Cartes Bancaires integrations.",
+        "type": "string"
+      },
+      { "name": "threeDSVersion", "x-addedInVersion": "40", "description": "The version of the 3D Secure protocol.", "type": "string" },
+      {
+        "name": "tokenAuthenticationVerificationValue",
+        "x-addedInVersion": "68",
+        "description": "Network token authentication verification value (TAVV). The network token cryptogram.",
+        "format": "byte",
+        "type": "string"
+      },
+      {
+        "name": "transStatusReason",
+        "x-addedInVersion": "67",
+        "description": "Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).",
+        "type": "string"
+      },
+      {
+        "name": "xid",
+        "description": "Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).",
+        "format": "byte",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "platformChargebackLogic",
+    "type": "object",
+    "description": "Defines the behavior to be applied in case of a chargeback.",
+    "properties": [
+      {
+        "name": "behavior",
+        "description": "The method of handling the chargeback.",
+        "enum": ["deductAccordingToSplitRatio", "deductFromLiableAccount", "deductFromOneBalanceAccount"],
+        "type": "string"
+      },
+      {
+        "name": "costAllocationAccount",
+        "type": "string",
+        "description": "The unique identifier of the balance account to which the chargeback fees are booked. By default, the chargeback fees are booked to your liable balance account."
+      },
+      {
+        "name": "targetAccount",
+        "type": "string",
+        "description": "The unique identifier of the balance account against which the disputed amount is booked."
+      }
+    ]
+  },
+  {
+    "name": "recurringExpiry",
+    "type": "string",
+    "description": "Date after which no further authorisations shall be performed. Only for 3D Secure 2."
+  },
+  { "name": "recurringFrequency", "type": "string", "description": "Minimum number of days between authorisations. Only for 3D Secure 2." },
   {
     "description": "Defines a recurring payment type.\nAllowed values:\n* `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.\n* `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.\n* `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.\n",
     "enum": ["CardOnFile", "Subscription", "UnscheduledCardOnFile"],
@@ -242,6 +621,66 @@
     "name": "shopperReference"
   },
   {
+    "name": "redirectFromIssuerMethod",
+    "type": "string",
+    "description": "Specifies the redirect method (GET or POST) when redirecting back from the issuer."
+  },
+  {
+    "name": "redirectToIssuerMethod",
+    "type": "string",
+    "description": "Specifies the redirect method (GET or POST) when redirecting to the issuer."
+  },
+  {
+    "name": "riskData",
+    "type": "object",
+    "description": "Any risk-related settings to apply to the payment.",
+    "properties": [
+      {
+        "name": "clientData",
+        "description": "Contains client-side data, like the device fingerprint, cookies, and specific browser settings.",
+        "type": "string"
+      },
+      {
+        "name": "customFields",
+        "additionalProperties": { "type": "string" },
+        "description": "Any custom fields used as part of the input to configured risk rules.",
+        "type": "object"
+      },
+      {
+        "name": "fraudOffset",
+        "description": "An integer value that is added to the normal fraud score. The value can be either positive or negative.",
+        "format": "int32",
+        "type": "integer"
+      },
+      {
+        "name": "profileReference",
+        "description": "The risk profile to assign to this payment. When left empty, the merchant-level account's default risk profile will be applied.",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "shopperIP",
+    "type": "string",
+    "description": "The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).\n> For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations.\nThis field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new)."
+  },
+  {
+    "name": "shopperStatement",
+    "type": "string",
+    "description": "The text to be shown on the shopper's bank statement.\n We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.\n Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**."
+  },
+  { "name": "socialSecurityNumber", "type": "string", "description": "The shopper's social security number." },
+  {
+    "name": "splitCardFundingSources",
+    "type": "boolean",
+    "description": "Boolean value indicating whether the card payment method should be split into separate debit and credit options."
+  },
+  {
+    "name": "splits",
+    "type": "array",
+    "description": "An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split)."
+  },
+  {
     "description": "The ecommerce or point-of-sale store that is processing the payment.",
     "type": "string",
     "name": "store"
@@ -252,10 +691,16 @@
     "name": "storePaymentMethod"
   },
   {
+    "name": "storePaymentMethodMode",
+    "type": "string",
+    "description": "Indicates if the details of the payment method will be stored for the shopper. Possible values:\n* **disabled** – No details will be stored (default).\n* **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored.\n* **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent."
+  },
+  {
     "description": "The shopper's telephone number.",
     "type": "string",
     "name": "telephoneNumber"
   },
+  { "name": "trustedShopper", "type": "boolean", "description": "Set to true if the payment should be routed to a trusted MID." },
   {
     "default": false,
     "description": "If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.",

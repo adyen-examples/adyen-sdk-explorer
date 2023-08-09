@@ -11,6 +11,7 @@ export interface OnDeckState {
   checkout: OnDeckPropType | {};
   local: OnDeckPropType | {};
   sessions: OnDeckPropType | {};
+  defaultSessionProps: OnDeckPropType | {};
   sessionsResponse: OnDeckPropType | {};
   products: { [key: string]: { txVariant: string } };
   txVariant: string;
@@ -28,6 +29,7 @@ const initialState: OnDeckState = {
   checkout: {},
   local: {},
   sessions: {},
+  defaultSessionProps: {},
   sessionsResponse: {},
   products: {},
   txVariant: '',
@@ -51,6 +53,9 @@ const onDeckSlice = createSlice({
     },
     updateSessionsInfo: (state, action: PayloadAction<OnDeckPropType>) => {
       state.sessions = action.payload;
+    },
+    updateDefaultSessionProps: (state, action: PayloadAction<OnDeckPropType>) => {
+      state.defaultSessionProps = action.payload;
     },
     updateRedirectInfo: (state, action: PayloadAction<any>) => {
       state.isRedirect = action.payload;
@@ -81,9 +86,11 @@ const onDeckSlice = createSlice({
       state.theme = action.payload;
     },
     resetOnDeckInfo: state => {
-      const { products, txVariant, theme } = state;
+      const { defaultSessionProps, products, txVariant, theme } = state;
       const style = txVariant === 'dropin' ? defaultDropinStyle : defaultComponentStyle;
-      return { ...initialState, theme, style, products, txVariant };
+      // console.log('resetOnDeckInfo', state.defaultSessionProps);
+      // state.sessions = { sessions: defaultSessionProps };
+      return { ...initialState, defaultSessionProps, theme, style, products, txVariant };
     },
     clearOnDeckInfo: state => {
       let { products } = state;

@@ -12,7 +12,8 @@ export const lightThemeOptions: any = {
       main: '#00112C',
       gray: '#F2F6F9',
       light: '#f3f6f9',
-      shadow: 'rgba(0, 102, 255, 0.12)'
+      shadow: 'rgba(0, 102, 255, 0.12)',
+      dark: '#f3f6f9'
     },
     background: {
       paper: '#fff',
@@ -23,13 +24,22 @@ export const lightThemeOptions: any = {
     },
     success: {
       main: 'rgb(10, 191, 83)',
-      dark: '#026440'
+      dark: '#026440',
+      light: '#2ade2a'
     },
+    error: { main: '#d32f2f' },
+    warning: { main: 'rgb(255, 149, 0)' },
     info: {
       main: '#0048b3',
       required: '#ff9800',
       icon: '#0abf53',
       text: '#09ae4c'
+    },
+    alert: {
+      info: '#cce0ff',
+      warning: 'rgb(255, 234, 204)',
+      error: '#ff7e82',
+      success: '#d4f8d4'
     }
   },
   typography: {
@@ -70,13 +80,13 @@ export const lightThemeOptions: any = {
       color: '#394962'
     },
     h5: {
-      fontWeight: '550',
+      fontWeight: '500',
       fontSize: '.95rem',
       fontFamily: 'sans-serif',
       color: '#000000'
     },
     h6: {
-      fontWeight: '530',
+      fontWeight: '400',
       fontSize: '0.85rem',
       fontFamily: 'sans-serif',
       color: '#394962'
@@ -129,7 +139,8 @@ export const darkThemeOptions: any = {
     secondary: {
       main: '#FFFFFF',
       gray: '#F2F6F9',
-      light: '#0c1c38'
+      light: '#0c1c38',
+      dark: '#f3f6f9'
     },
     background: {
       paper: '#00112C',
@@ -139,11 +150,20 @@ export const darkThemeOptions: any = {
     },
     success: {
       main: 'rgb(10, 191, 83)',
-      dark: '#FFFFFF'
+      dark: '#FFFFFF',
+      light: '#2ade2a'
     },
+    error: { main: '#d32f2f' },
+    warning: { main: 'rgb(255, 149, 0)' },
     info: {
       main: '#0048b3',
       required: '#ff9800'
+    },
+    alert: {
+      info: '#082756',
+      warning: '#764100',
+      error: '#610000',
+      success: '#013220'
     }
   },
   typography: {
@@ -186,16 +206,16 @@ export const darkThemeOptions: any = {
       color: '#FFFFFF'
     },
     h5: {
-      fontWeight: '550',
+      fontWeight: '500',
       fontSize: '.95rem',
       fontFamily: 'sans-serif',
       color: '#FFFFFF'
     },
     h6: {
-      fontWeight: '530',
+      fontWeight: '400',
       fontSize: '0.85rem',
       fontFamily: 'sans-serif',
-      color: '#FFFFFF'
+      color: '#9ba9bd'
     },
     caption: {
       color: '#FFFFFF',

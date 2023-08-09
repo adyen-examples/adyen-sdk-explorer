@@ -1,9 +1,9 @@
-import { Box, Collapse, LinearProgress } from '@mui/material';
+import { Box, Collapse, LinearProgress, CssBaseline } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as AdyenIdkIcon } from '../../assets/adyen-idk-icon.svg';
 import { useInitializeSession } from '../../hooks';
-import { ObjectOption } from '../CheckoutBuilder/configSteps/Options/OptionTypes';
+import { AdyenAlert } from '../CheckoutBuilder/configSteps/Options/OptionTypes';
 import type { OnDeckPropType } from '../CheckoutBuilder/types';
 
 export interface ComponentConfig {
@@ -25,9 +25,9 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
     return (
       <Box mx={7} mt={2}>
         <Collapse orientation="vertical" in={!!error || !!createError || !!result} timeout={700}>
-          {error && <ObjectOption styleType="error" content={JSON.stringify(error)} />}
-          {createError && <ObjectOption styleType="error" content={createError} />}
-          {result && <ObjectOption styleType={result.status} content={result.resultCode} />}
+          {error && <AdyenAlert styleType="error" content={JSON.stringify(error)} />}
+          {createError && <AdyenAlert styleType="error" content={createError} />}
+          {result && <AdyenAlert styleType={result.status} content={result.resultCode} />}
         </Collapse>
         {error && (
           <Box sx={{ textAlign: 'center', mt: 2 }}>
@@ -58,8 +58,9 @@ export const Component = ({ configuration }: { configuration: ComponentConfig })
     <Box sx={configuration?.style}>
       {!checkout && !error && !result && <LinearProgress />}
       {showMessages()}
-      {!error && !result && (
-        <Box mx={7} my={2} px={1} py={1}sx={{ borderRadius: 3, bgcolor:'secondary.light' }}>
+      {!error && !result && checkout && (
+        <Box mx={7} my={2} px={1} py={1} sx={{ borderRadius: 3, bgcolor: 'secondary.light', border: 1, borderColor: 'primary.light' }}>
+          <CssBaseline />
           <div id="checkout"></div>
         </Box>
       )}

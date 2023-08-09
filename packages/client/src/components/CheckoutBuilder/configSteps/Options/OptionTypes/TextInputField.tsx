@@ -24,7 +24,7 @@ export const TextInputField = ({ descriptor, onChange, value, isChecked, current
       </Fragment>
     );
   }
-
+  
   return (
     <Box>
       {additionalLabels}

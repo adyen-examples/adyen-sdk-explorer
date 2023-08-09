@@ -1,12 +1,12 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
+import { Box, Checkbox, CssBaseline, Fab, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useIsInViewPort } from '../../../../hooks';
 import type { RootState } from '../../../../store';
 import type { Descriptor } from '../../types';
-import { ObjectOption } from './OptionTypes';
+import { AdyenAlert } from './OptionTypes';
 import { OptionWrapper } from './OptionWrapper';
 
 interface ListOptionsProps {
@@ -55,19 +55,20 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     '#floating-button': {
       position: 'fixed',
       bottom: 10,
-      left: { xs: '25%', sm: '35%', md: '25%', lg: '45%' },
+      left: { xs: '28%', sm: '35%', md: '25%', lg: '45%' },
       textAlign: 'center',
       zIndex: 2,
-      '&:hover': { color: 'primary.main' }
+      borderRadius: '100px',
+      button: { '&:hover': { bgcolor: 'alert.info', color: 'primary.light' } }
     },
     '.required-label': { display: 'inline-block', fontSize: '0.67rem', color: 'secondary.main', fontWeight: '300' },
-    '#parameter-title': { color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold', '&:hover': { color: 'primary.main' } }
+    '#parameter-title': { color: 'primary.light', textTransform: 'capitalize', fontWeight: 'bold' }
   };
 
   if (!displayDescriptors || !displayDescriptors.length) {
     emptyDisplay = (
       <Box mb={1} mt={4} px={6} sx={{ width: '100%' }}>
-        <ObjectOption styleType="warning" content="No configurations found. Use editor pane for custom fields." />
+        <AdyenAlert styleType="warning" content="No configurations found. Use editor pane for custom fields." />
       </Box>
     );
   }
@@ -76,12 +77,12 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
     <Grid sx={style} container>
       {!isInViewport && (
         <Box id="floating-button">
+          <CssBaseline />
           <Fab
             variant="extended"
             size="medium"
             color="primary"
             aria-label="add"
-            sx={{ '&:hover': { color: 'primary.main' } }}
             onClick={() => {
               parametersRef?.current?.scrollIntoView({ behavior: 'smooth' });
             }}
@@ -107,6 +108,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   <Checkbox
                     size="small"
                     name="Required"
+                    className="checkbox"
                     checked={required}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       handleToggle(e.target.name);
@@ -125,6 +127,7 @@ export const ListOptions = ({ name, configuration, category, action }: ListOptio
                   <Checkbox
                     size="small"
                     name="Optional"
+                    className="checkbox"
                     checked={optional}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       handleToggle(e.target.name);

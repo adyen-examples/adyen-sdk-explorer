@@ -5,14 +5,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../../app';
 import { useAppDispatch } from '../../../../hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
-const { resetOnDeckInfo } = onDeckActions;
+const { resetOnDeckInfo, updateSessionsInfo } = onDeckActions;
 export interface SingleTabHeaderProps {
   title?: string;
   clipboardText: string;
   txVariant: string;
 }
 export const SingleTabHeader = (props: SingleTabHeaderProps) => {
+  const { defaultSessionProps } = useSelector((state: RootState) => state.onDeck);
   const { title, clipboardText, txVariant } = props;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -72,6 +75,7 @@ export const SingleTabHeader = (props: SingleTabHeaderProps) => {
               onClick={() => {
                 setOpen(false);
                 dispatch(resetOnDeckInfo());
+                dispatch(updateSessionsInfo(defaultSessionProps));
                 navigate(`/${txVariant}`);
               }}
               autoFocus

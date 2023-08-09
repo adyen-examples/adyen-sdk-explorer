@@ -1,8 +1,7 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { AdyenInputTheme } from './AdyenInputTheme';
-import type { OptionPropTypes } from './types';
 
-export const BooleanOption = ({ descriptor, value, onChange }: OptionPropTypes) => {
+export const SelectOption = ({ descriptor, value, onChange, values }: any) => {
   return (
     <FormControl sx={{ width: '50%' }}>
       <Select
@@ -12,12 +11,10 @@ export const BooleanOption = ({ descriptor, value, onChange }: OptionPropTypes) 
         value={value}
         onChange={(e: any) => onChange(e.target.name, e.target.value)}
         input={<AdyenInputTheme />}
-        sx={{ svg: { color: 'primary.dark' } }}
       >
-        <MenuItem sx={{ fontSize: 'subtitle2.fontSize' }} value={true as any}>
-          true
-        </MenuItem>
-        <MenuItem value={false as any}>false</MenuItem>
+        {values.map((propValue: string) => {
+          return <MenuItem value={propValue}>{propValue}</MenuItem>;
+        })}
       </Select>
     </FormControl>
   );
