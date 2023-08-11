@@ -13,11 +13,12 @@ interface NavButtonsProps extends BoxProps {
   steps: any;
   step: number;
   configuration: any;
+  txVariant: string;
 }
 
 export const MobileNavButtons = (props: NavButtonsProps) => {
   const { defaultSessionProps } = useSelector((state: RootState) => state.onDeck);
-  const { steps, step, configuration, ...other } = props;
+  const { steps, step, configuration, txVariant, ...other } = props;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { updateCheckoutInfo, updateLocalInfo, updateSessionsInfo, updateRedirectInfo, updateActiveStep, resetOnDeckInfo } = onDeckActions;
@@ -70,8 +71,8 @@ export const MobileNavButtons = (props: NavButtonsProps) => {
         }}
         icon={<SpeedDialIcon />}
       >
-        {step !== 0 && <SpeedDialAction key="Back" icon={<NavigateBeforeIcon />} tooltipTitle="Back" onClick={handleBack} />}
         {step !== stepsLength - 1 && <SpeedDialAction key="Next" icon={<NavigateNextIcon />} tooltipTitle="Next" onClick={handleNext} />}
+        {step !== 0 && <SpeedDialAction key="Back" icon={<NavigateBeforeIcon />} tooltipTitle="Back" onClick={handleBack} />}
         <SpeedDialAction
           key="Reset"
           icon={<AutorenewIcon />}
@@ -103,7 +104,7 @@ export const MobileNavButtons = (props: NavButtonsProps) => {
               setOpen(false);
               dispatch(resetOnDeckInfo());
               dispatch(updateSessionsInfo(defaultSessionProps));
-              navigate(`/${configuration.txVariant}`);
+              navigate(`/${txVariant}`);
             }}
             autoFocus
           >

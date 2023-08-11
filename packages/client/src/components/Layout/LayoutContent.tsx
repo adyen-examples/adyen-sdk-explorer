@@ -27,7 +27,8 @@ export const LayoutContent = ({ main: Main, selectedProduct }: LayoutContentProp
       xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`
     },
     maxWidth: {
-      xs: '100%',
+      xs: '100vw',
+      sm: '100vw',
       md: `calc(100% - ${isHome ? 0 : drawerWidth}px)`,
       lg: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`,
       xl: `calc(100% - ${drawerWidth}px - ${editorWidth}px)`

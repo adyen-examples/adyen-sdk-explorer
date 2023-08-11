@@ -2,14 +2,21 @@ import { Request, Response, Router } from 'express';
 import { Client, CheckoutAPI, Management } from '@adyen/api-library';
 import { ADYEN_API_KEY, ADYEN_MERCHANT_ACCOUNT } from '../../config';
 import { checkoutProps, paymentMethodProps, sessionsProps } from '../../models';
+import axios from 'axios';
 
 import type { InitializationRequest, PaymentMethodProps, PaymentMethodPropsList } from './types';
 
 const client = new Client({ apiKey: ADYEN_API_KEY, environment: 'TEST' });
 const checkoutApi = new CheckoutAPI(client);
 const management = new Management(client);
-
 const router = Router();
+
+const managmentClient = axios.create({
+  baseURL: 'https://management-test.adyen.com/v1',
+  headers: {
+    'X-API-Key': ADYEN_API_KEY
+  }
+});
 
 router.get('/paymentMethods', async (req: Request, res: Response) => {
   try {
@@ -29,9 +36,16 @@ router.get('/paymentMethods', async (req: Request, res: Response) => {
 
 router.get('/paymentMethods/:txvariant', async (req, res) => {
   try {
-    const managePaymentMethodsList = await management.MerchantPaymentMethods.listPaymentMethodSettings(ADYEN_MERCHANT_ACCOUNT, {
-      params: 'pageSize=100'
+    // const managePaymentMethodsList = await management.MerchantPaymentMethods.listPaymentMethodSettings(ADYEN_MERCHANT_ACCOUNT, {
+    //   params: 'pageSize=100'
+    // });
+
+    const { data } = await managmentClient.get(`/merchants/${ADYEN_MERCHANT_ACCOUNT}/paymentMethodSettings`, {
+      params: {
+        pageSize: 100
+      }
     });
+    const managePaymentMethodsList = data;
     const local: PaymentMethodPropsList = paymentMethodProps;
     const componentConfig: PaymentMethodProps[] = local[req.params.txvariant];
 
@@ -95,7 +109,6 @@ router.get('/paymentMethods/:txvariant', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 
 router.post('/makePayment', async (req: Request, res: Response) => {
   const { payload } = req.body;
