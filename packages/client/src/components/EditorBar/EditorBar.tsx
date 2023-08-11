@@ -23,7 +23,7 @@ interface EditorWrapperProps {
 export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
   const { buttonHeight, headerHeight, editorWidth } = dimensions;
   const { txVariant, checkout, local, sessions, activeStep, steps, adyenState } = useSelector((state: RootState) => state.onDeck);
-  const configuration: any = { txVariant, checkout, local, sessions };
+  const configuration: any = { checkout, local, sessions };
   let step = steps[activeStep];
   const [viewOnly, setViewOnly] = useState(true);
 
@@ -97,12 +97,17 @@ export const EditorBar = ({ dimensions }: EditorWrapperProps) => {
               {viewOnly ? <LockIcon /> : <LockOpenIcon />}
             </IconButton>
           )}
-          {step === 'review' && <ResetButton steps={steps} step={activeStep} configuration={configuration} />}
+          {step === 'review' && <ResetButton steps={steps} step={activeStep} configuration={configuration} txVariant={txVariant} />}
           <DesktopNavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
         </Box>
       </Box>
       <Box sx={mobileStyle}>
-        <MobileNavButtons steps={steps} step={activeStep} configuration={step === 'review' ? configuration : configuration[step]} />
+        <MobileNavButtons
+          steps={steps}
+          txVariant={txVariant}
+          step={activeStep}
+          configuration={step === 'review' ? configuration : configuration[step]}
+        />
       </Box>
     </Box>
   );

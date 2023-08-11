@@ -1,4 +1,4 @@
-import { Grid, Step, StepLabel, Stepper } from '@mui/material';
+import { Box, Step, StepLabel, Stepper } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { onDeckActions } from '../../app';
 import { useRedirect } from '../../hooks';
@@ -21,8 +21,8 @@ export const ConfigWrapper = () => {
 
   const displayStep: any = stepMap[steps[activeStep]];
   return (
-    <Grid container direction="column" justifyContent="flex-start" alignItems="center" mb={1} mt={4}>
-      <Grid item xs={1} sx={{ width: '65%' }}>
+    <Box>
+      <Box sx={{ px: { xs: '15vw', sm: '20vw', md: '10vw', lg: '10vw', xl: '10vw' }, pt: 5 }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label: any) => (
             <Step key={label}>
@@ -37,10 +37,8 @@ export const ConfigWrapper = () => {
             </Step>
           ))}
         </Stepper>
-      </Grid>
-      <Grid item xs={11}>
-        {displayStep}
-      </Grid>
-    </Grid>
+      </Box>
+      <Box>{displayStep}</Box>
+    </Box>
   );
 };

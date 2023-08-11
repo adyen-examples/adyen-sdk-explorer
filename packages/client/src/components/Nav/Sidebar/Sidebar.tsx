@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Drawer, List, ListItem, ListItemButton, Switch, Typography } from '@mui/material';
+import { Box, CircularProgress, Drawer, List, ListItem, ListItemButton, Switch, Typography, Slide } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { onDeckActions } from '../../../app';
@@ -7,7 +7,7 @@ import { RootState } from '../../../store';
 
 const { updateTheme } = onDeckActions;
 
-export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
+export const Sidebar = ({ page, drawerWidth, headerHeight, variant, open, onClose }: any) => {
   const dispatch = useAppDispatch();
   const { products, theme } = useSelector((state: RootState) => state.onDeck);
   const productsKeys = Object.keys(products);
@@ -28,39 +28,25 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
   };
 
   const style = {
-    '#sidebar-nav': {
-      flexShrink: 0,
-      '& .MuiDrawer-paper': {
-        borderRight: 2,
-        borderColor: 'secondary.light',
-        width: drawerWidth,
-        boxSizing: 'border-box',
-        bgcolor: 'background.paper',
-        mt: `calc(${headerHeight}px + 2px)`,
-        pb: `calc(${headerHeight}px + 2px)`,
-        height: `calc(100% - ${headerHeight}px)`,
-        pt: 2,
-        px: 3
-      },
-      '#loading-icon': { textAlign: 'center', mt: '40vh' }
+    flexShrink: 0,
+    '& .MuiDrawer-paper': {
+      borderRight: 2,
+      borderColor: 'secondary.light',
+      width: drawerWidth,
+      boxSizing: 'border-box',
+      bgcolor: 'background.paper',
+      mt: `calc(${headerHeight}px + 2px)`,
+      pb: `calc(${headerHeight}px + 2px)`,
+      height: `calc(100% - ${headerHeight}px)`,
+      pt: 2,
+      px: 3
     },
-    '#theme-switcher': {
-      borderTop: 2,
-      position: 'fixed',
-      bottom: 0,
-      p: 1,
-      bgcolor: 'secondary.light',
-      color: 'secondary.light',
-      zIndex: '1200',
-      display: 'block',
-      textAlign: 'center',
-      width: `calc(${drawerWidth}px - 2px)`
-    }
+    '#loading-icon': { textAlign: 'center', mt: '40vh' }
   };
 
   return (
-    <Box sx={style}>
-      <Drawer variant="permanent" anchor="left" id="sidebar-nav">
+    <Box>
+      <Drawer sx={style} variant={variant} open={open} onClose={onClose} anchor="left">
         {productsKeys.length === 0 && (
           <Box id="loading-icon">
             <CircularProgress />
@@ -108,18 +94,37 @@ export const Sidebar = ({ page, drawerWidth, headerHeight }: any) => {
           </List>
         )}
       </Drawer>
-      <Box id="theme-switcher">
-        <Typography variant="caption" sx={{ display: 'inline-block', textTransform: 'capitalize' }}>
-          {theme} Theme
-        </Typography>
-        <Switch
-          onChange={e => {
-            dispatch(updateTheme(e.target.value === 'dark' ? 'light' : 'dark'));
-          }}
-          defaultChecked
-          value={theme}
-        />
-      </Box>
+      {open && (
+        <Slide direction="right" in={open} mountOnEnter unmountOnExit>
+          <Box
+            id="theme-switcher"
+            sx={{
+              borderTop: 2,
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              p: 1,
+              bgcolor: 'secondary.light',
+              color: 'secondary.light',
+              zIndex: '1300',
+              display: 'block',
+              textAlign: 'center',
+              width: `${drawerWidth}px`
+            }}
+          >
+            <Typography variant="caption" sx={{ display: 'inline-block', textTransform: 'capitalize' }}>
+              {theme} Theme
+            </Typography>
+            <Switch
+              onChange={e => {
+                dispatch(updateTheme(e.target.value === 'dark' ? 'light' : 'dark'));
+              }}
+              defaultChecked
+              value={theme}
+            />
+          </Box>
+        </Slide>
+      )}
     </Box>
   );
 };

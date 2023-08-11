@@ -1,11 +1,11 @@
-import { AppBar, Box, Button, Toolbar, IconButton, Drawer, Typography } from '@mui/material';
-import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
-import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Sidebar } from '../Sidebar/Sidebar';
+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { ReactComponent as AdyenLogoDark } from '../../../assets/adyen-logo-dark.svg';
+import { ReactComponent as AdyenLogoLight } from '../../../assets/adyen-logo-light.svg';
 import { RootState } from '../../../store';
+import { Sidebar } from '../Sidebar/Sidebar';
 
 export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -39,10 +39,9 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
       Toolbar: { justifyContent: { xs: 'start', md: 'start', lg: 'space-between', xl: 'space-between' } }
     },
     '#desktop-side-nav': { flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' } },
-    '#mobile-side-nav': { width: `${drawerWidth}px`, '.MuiDrawer-paper': { position: 'initial' } },
     '#icon-button': {
       display: { xs: 'inline-block', md: 'inline-block', lg: 'none', xl: 'none' },
-      svg: { color: 'primary.light', verticalAlign: 'top' },
+      svg: { color: 'primary.dark', verticalAlign: 'top' },
       button: { pr: 2, pt: 0 }
     }
   };
@@ -81,12 +80,10 @@ export const Navbar = ({ drawerWidth, headerHeight, page }: any) => {
         </Box>
       </AppBar>
       <Box id="desktop-side-nav">
-        <Sidebar drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
+        <Sidebar variant="permanent" open={true} drawerWidth={drawerWidth} headerHeight={headerHeight} page={page} />
       </Box>
-      <Box>
-        <Drawer anchor="left" open={isNavOpen} onClose={handleOpenNavMenu} id="mobile-side-nav">
-          <Sidebar drawerWidth={drawerWidth - 100} headerHeight={'-5'} page={page} />
-        </Drawer>
+      <Box id="mobile-side-nav">
+          <Sidebar variant="temporary" open={isNavOpen} onClose={handleOpenNavMenu} drawerWidth={drawerWidth - 100} headerHeight={'-5'} page={page} />
       </Box>
     </Box>
   );

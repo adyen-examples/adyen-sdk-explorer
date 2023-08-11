@@ -66,7 +66,9 @@ export const ReviewContent = (props: BoxProps) => {
       </Grid>
       <Grid id="review-component-base" item direction="row" justifyContent="space-between" container px={7} py={1.2} mt={2} xs={12}>
         <Grid item>
-          <Typography variant="h5">Review & Export</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'secondary.main' }}>
+            Review & Export
+          </Typography>
         </Grid>
       </Grid>
       <Box>
